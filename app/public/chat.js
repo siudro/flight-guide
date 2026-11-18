@@ -15,6 +15,8 @@
 
   var $ = function (sel) { return document.querySelector(sel); };
   var messagesEl = $('#messages');
+  // false until the passenger sends their first message.
+  var anyTurn = false;
   var inputEl = $('#input');
   var formEl = $('#composer');
   var profilesEl = $('#profiles');
@@ -202,6 +204,7 @@
 
   // ------------------------------------------------------------------ chat
   function send(message) {
+    anyTurn = true;
     if (state.busy) return;
     message = String(message || '').trim();
     if (!message) {
@@ -304,9 +307,20 @@
 
   document.querySelectorAll('.seg-btn').forEach(function (b) {
     b.addEventListener('click', function () {
-      state.lang = b.getAttribute('data-lang');
+      var next = b.getAttribute('data-lang');
+      if (next === state.lang) return;
+      state.lang = next;
       localStorage.setItem('fg.lang', state.lang);
       applyLanguage();
+      // The greeting is written once at boot in one language. If the traveller
+      // switches before saying anything, rewrite it rather than leaving the
+      // conversation in a language they cannot read. Once a real exchange has
+      // started we leave history alone — silently translating a transcript the
+      // traveller already read is more confusing than helpful.
+      if (!anyTurn) {
+        if (messagesEl) messagesEl.innerHTML = '';
+        addBubble(t('greeting'), 'bot');
+      }
     });
   });
 

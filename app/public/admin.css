@@ -44,18 +44,18 @@
 code {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
   font-size: 11px;
-  background: #0f151c;
+  background: var(--panel-2);
   border: 1px solid var(--line);
   border-radius: 5px;
   padding: 1px 5px;
-  color: #9ec1ff;
+  color: var(--accent);
 }
 
 .inline { display: flex; align-items: center; gap: 8px; }
 .inline .unit { font-size: 12px; color: var(--ink-faint); }
 
 input[type="number"], input[type="text"] {
-  background: #0f151c;
+  background: var(--panel-2);
   border: 1px solid var(--line);
   border-radius: 9px;
   color: var(--ink);
@@ -67,7 +67,7 @@ input[type="number"], input[type="text"] {
 input[type="number"]:focus, input[type="text"]:focus, textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(59,130,246,.16);
+  box-shadow: 0 0 0 3px rgba(15,107,99,.16);
 }
 
 .switch-row {
@@ -81,9 +81,9 @@ input[type="number"]:focus, input[type="text"]:focus, textarea:focus {
 input[type="checkbox"] {
   appearance: none;
   width: 17px; height: 17px;
-  border: 1.5px solid #3c4854;
+  border: 1.5px solid var(--line);
   border-radius: 5px;
-  background: #0f151c;
+  background: var(--panel-2);
   cursor: pointer;
   flex: 0 0 auto;
   position: relative;
@@ -128,7 +128,7 @@ input[type="checkbox"]:checked::after {
   align-items: center;
   gap: 10px;
   padding: 10px 14px;
-  background: #18212b;
+  background: var(--panel-2);
   border-bottom: 1px solid var(--line);
   cursor: pointer;
   user-select: none;
@@ -137,8 +137,8 @@ input[type="checkbox"]:checked::after {
   display: grid; place-items: center;
   width: 22px; height: 22px;
   border-radius: 6px;
-  background: rgba(59,130,246,.16);
-  color: #8ab6ff;
+  background: var(--accent-lo);
+  color: var(--accent);
   font-size: 11.5px;
   font-weight: 700;
   flex: 0 0 auto;
@@ -172,7 +172,7 @@ textarea {
   width: 100%;
   min-height: 108px;
   resize: vertical;
-  background: #0f151c;
+  background: var(--panel-2);
   border: 1px solid var(--line);
   border-radius: 9px;
   color: var(--ink);
@@ -206,15 +206,15 @@ textarea[dir="rtl"] { text-align: right; font-size: 14px; line-height: 1.8; }
 .chip {
   padding: 1px 7px;
   border-radius: 20px;
-  background: #0f151c;
+  background: var(--panel-2);
   border: 1px solid var(--line);
   font-size: 10px;
   letter-spacing: .3px;
 }
-.chip.warn { color: #ffb4b1; border-color: rgba(239,83,80,.4); background: rgba(239,83,80,.1); }
-.chip.ok { color: #8fe9c6; border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.08); }
+.chip.warn { color: #8c1d18; border-color: rgba(179,38,30,.35); background: rgba(179,38,30,.08); }
+.chip.ok { color: #145c39; border-color: rgba(31,122,77,.35); background: rgba(31,122,77,.08); }
 
-.turn .q { color: #cdd8e3; }
+.turn .q { color: var(--ink); }
 .turn .q::before { content: "› "; color: var(--accent); }
 .turn .a {
   color: var(--ink-faint);
@@ -243,8 +243,8 @@ textarea[dir="rtl"] { text-align: right; font-size: 14px; line-height: 1.8; }
 .primary-btn:hover { background: var(--accent-2); }
 .primary-btn:disabled { opacity: .5; cursor: default; }
 
-.ghost-btn.danger { color: #ff9a97; border-color: rgba(239,83,80,.35); }
-.ghost-btn.danger:hover { background: rgba(239,83,80,.12); color: #ffc0be; }
+.ghost-btn.danger { color: #8c1d18; border-color: rgba(179,38,30,.35); }
+.ghost-btn.danger:hover { background: rgba(179,38,30,.08); color: #8c1d18; }
 .ghost-btn:disabled { opacity: .45; cursor: default; }
 
 .savebar {
@@ -256,16 +256,16 @@ textarea[dir="rtl"] { text-align: right; font-size: 14px; line-height: 1.8; }
   justify-content: space-between;
   gap: 14px;
   padding: 12px max(20px, calc((100vw - 1100px) / 2 + 20px));
-  background: rgba(16,22,29,.94);
+  background: rgba(255,252,247,.95);
   border-top: 1px solid var(--line);
   backdrop-filter: blur(10px);
   z-index: 40;
   flex-wrap: wrap;
 }
 .save-state { font-size: 12px; color: var(--ink-faint); }
-.save-state.dirty { color: #ffc46b; }
-.save-state.saved { color: #7fe3bd; }
-.save-state.err { color: #ff9a97; }
+.save-state.dirty { color: #8a5300; }
+.save-state.saved { color: #145c39; }
+.save-state.err { color: #8c1d18; }
 
 .toast {
   position: fixed;
@@ -274,7 +274,7 @@ textarea[dir="rtl"] { text-align: right; font-size: 14px; line-height: 1.8; }
   z-index: 90;
   padding: 10px 16px;
   border-radius: 10px;
-  background: #1d2833;
+  background: var(--panel);
   border: 1px solid var(--line);
   font-size: 13px;
   box-shadow: var(--shadow);
