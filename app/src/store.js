@@ -1,1 +1,230 @@
-J3VzZSBzdHJpY3QnOwoKLyoqCiAqIFBlcnNpc3RlZCBvcGVyYXRvciBzZXR0aW5ncy4KICoKICogT3ZlcnJpZGVzIGxpdmUgaW4gYSBzaW5nbGUgSlNPTiBmaWxlIG9uIGEgdm9sdW1lIHNvIGAvYWRtaW5gIGVkaXRzIHN1cnZpdmUgYQogKiBjb250YWluZXIgcmVzdGFydC4gT25seSAqb3ZlcnJpZGVzKiBhcmUgc3RvcmVkIOKAlCBhbnl0aGluZyBub3Qgd3JpdHRlbiBoZXJlCiAqIHN0aWxsIGNvbWVzIGZyb20gY29uZmlnL2RlZmF1bHRzLmpzLCBzbyBhIG5ldyBpbWFnZSBjYW4gc2hpcCBpbXByb3ZlZAogKiBkZWZhdWx0cyBmb3Igc2V0dGluZ3MgdGhlIG9wZXJhdG9yIG5ldmVyIHRvdWNoZWQuCiAqCiAqIFdyaXRlcyBhcmUgYXRvbWljOiB3cml0ZSBhIHRlbXAgZmlsZSBpbiB0aGUgc2FtZSBkaXJlY3RvcnksIHRoZW4gcmVuYW1lLgogKiBBIGNvcnJ1cHQgZmlsZSBvbiBib290IGlzIG1vdmVkIGFzaWRlIHJhdGhlciB0aGFuIGNyYXNoaW5nIHRoZSBjb250YWluZXIuCiAqLwoKY29uc3QgZnMgPSByZXF1aXJlKCdmcycpOwpjb25zdCBwYXRoID0gcmVxdWlyZSgncGF0aCcpOwpjb25zdCBERUZBVUxUUyA9IHJlcXVpcmUoJy4uL2NvbmZpZy9kZWZhdWx0cycpOwoKLy8gV2hlcmUgc2V0dGluZ3MuanNvbiBhbmQgY29udmVyc2F0aW9ucy5qc29uIGxpdmUuCi8vCi8vIEZHX0RBVEFfRElSIHdpbnMgKERvY2tlciBzZXRzIGl0IHRvIC9kYXRhLCB0aGUgbW91bnRlZCB2b2x1bWUpLiBXaXRob3V0IGl0Ci8vIHdlIG11c3QgTk9UIGRlZmF1bHQgdG8gL2RhdGE6IGEgbm9ybWFsIHVzZXIgcnVubmluZyBgbm9kZSBzcmMvc2VydmVyLmpzYAovLyBoYXMgbm8gcGVybWlzc2lvbiB0byB3cml0ZSB0aGVyZSwgYW5kIHRoZSBhcHAgd291bGQgb25seSBmYWlsIGxhdGVyLCB3aGVuCi8vIHRoZXkgZmlyc3QgcHJlc3NlZCBTYXZlIGluIC9hZG1pbi4gRmFsbCBiYWNrIHRvIGEgZm9sZGVyIGJlc2lkZSB0aGUgY29kZS4KY29uc3QgREFUQV9ESVIgPSBwcm9jZXNzLmVudi5GR19EQVRBX0RJUiB8fCBwYXRoLmpvaW4oX19kaXJuYW1lLCAnLi4nLCAnLmRhdGEnKTsKY29uc3QgU0VUVElOR1NfRklMRSA9IHBhdGguam9pbihEQVRBX0RJUiwgJ3NldHRpbmdzLmpzb24nKTsKY29uc3QgQ09OVkVSU0FUSU9OU19GSUxFID0gcGF0aC5qb2luKERBVEFfRElSLCAnY29udmVyc2F0aW9ucy5qc29uJyk7CmNvbnN0IE1BWF9DT05WRVJTQVRJT05TID0gTnVtYmVyKHByb2Nlc3MuZW52LkZHX01BWF9DT05WRVJTQVRJT05TIHx8IDIwMCk7CgpmdW5jdGlvbiBlbnN1cmVEaXIoKSB7CiAgdHJ5IHsKICAgIGZzLm1rZGlyU3luYyhEQVRBX0RJUiwgeyByZWN1cnNpdmU6IHRydWUgfSk7CiAgfSBjYXRjaCAoZXJyKSB7CiAgICBpZiAoZXJyLmNvZGUgIT09ICdFRVhJU1QnKSB0aHJvdyBlcnI7CiAgfQp9CgpmdW5jdGlvbiByZWFkSnNvbihmaWxlLCBmYWxsYmFjaykgewogIHRyeSB7CiAgICByZXR1cm4gSlNPTi5wYXJzZShmcy5yZWFkRmlsZVN5bmMoZmlsZSwgJ3V0ZjgnKSk7CiAgfSBjYXRjaCAoZXJyKSB7CiAgICBpZiAoZXJyLmNvZGUgPT09ICdFTk9FTlQnKSByZXR1cm4gZmFsbGJhY2s7CiAgICAvLyBDb3JydXB0IChvciB1bnJlYWRhYmxlKSBzdG9yZToga2VlcCB0aGUgZXZpZGVuY2UsIHN0YXJ0IGNsZWFuLgogICAgdHJ5IHsKICAgICAgZnMucmVuYW1lU3luYyhmaWxlLCBgJHtmaWxlfS5jb3JydXB0LSR7RGF0ZS5ub3coKX1gKTsKICAgIH0gY2F0Y2ggKF8pIHsgLyogYmVzdCBlZmZvcnQgKi8gfQogICAgY29uc29sZS53YXJuKGBbc3RvcmVdICR7cGF0aC5iYXNlbmFtZShmaWxlKX0gdW5yZWFkYWJsZSAoJHtlcnIubWVzc2FnZX0pIOKAlCBzdGFydGluZyBmcm9tIGRlZmF1bHRzYCk7CiAgICByZXR1cm4gZmFsbGJhY2s7CiAgfQp9CgpmdW5jdGlvbiB3cml0ZUpzb25BdG9taWMoZmlsZSwgdmFsdWUpIHsKICBlbnN1cmVEaXIoKTsKICBjb25zdCB0bXAgPSBwYXRoLmpvaW4oREFUQV9ESVIsIGAuJHtwYXRoLmJhc2VuYW1lKGZpbGUpfS4ke3Byb2Nlc3MucGlkfS50bXBgKTsKICBmcy53cml0ZUZpbGVTeW5jKHRtcCwgSlNPTi5zdHJpbmdpZnkodmFsdWUsIG51bGwsIDIpLCAndXRmOCcpOwogIGZzLnJlbmFtZVN5bmModG1wLCBmaWxlKTsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNldHRpbmdzCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLyoqCiAqIFR1cm4gYSByYXcgcGVyc2lzdGFibGUgYmxvYiBpbnRvIHRoZSBlZmZlY3RpdmUgc2V0dGluZ3Mgb2JqZWN0IHVzZWQgYnkgdGhlCiAqIGVuZ2luZS4gTWlzc2luZyBvciBibGFuayB2YWx1ZXMgZmFsbCBiYWNrIHRvIGNvbmZpZy9kZWZhdWx0cy5qcywgc28gdGhpcyBpcwogKiBib3RoIHRoZSBib290IHBhdGggYW5kIHRoZSB3cml0ZS12YWxpZGF0aW9uIHBhdGguCiAqLwpmdW5jdGlvbiBzYW5pdGl6ZShvdmVycmlkZXMpIHsKICBjb25zdCBvID0gb3ZlcnJpZGVzICYmIHR5cGVvZiBvdmVycmlkZXMgPT09ICdvYmplY3QnID8gb3ZlcnJpZGVzIDoge307CgogIC8vIFN0YWdlczogcGVyLXN0YWdlIGd1aWRhbmNlIHBlciBsYW5ndWFnZSwgc2VlZGVkIGZyb20gZGVmYXVsdHMuCiAgLy8gVHdvIG9uLWRpc2sgc2hhcGVzIGFyZSBhY2NlcHRlZCBzbyB0aGUgZmlsZSBzdGF5cyByZWFkYWJsZSB3aGlsZSB0aGUgQVBJCiAgLy8gYW5kIHRoZSBhZG1pbiBwYW5lbCBjYW4gc3BlYWsgZWl0aGVyOgogIC8vICAgZmxhdCAgIHsgZ3VpZGFuY2VfZW4sIGd1aWRhbmNlX2FyLCBlbmFibGVkIH0gICAgICAod2hhdCB3ZSBwZXJzaXN0KQogIC8vICAgbmVzdGVkIHsgZ3VpZGFuY2U6IHsgZW4sIGFyIH0sIGVuYWJsZWQgfSAgICAgICAgICAod2hhdCBkZWZhdWx0cyB1c2UpCiAgY29uc3Qgc3RhZ2VzID0gREVGQVVMVFMuU1RBR0VTLm1hcCgoZGVmKSA9PiB7CiAgICBjb25zdCBzYXZlZCA9IChvLnN0YWdlcyAmJiBvLnN0YWdlc1tkZWYua2V5XSkgfHwge307CiAgICBjb25zdCBuZXN0ZWQgPSBzYXZlZC5ndWlkYW5jZSB8fCB7fTsKICAgIGNvbnN0IHBpY2sgPSAobmVzdGVkVmFsLCBmbGF0VmFsKSA9PiB7CiAgICAgIGlmICh0eXBlb2YgbmVzdGVkVmFsID09PSAnc3RyaW5nJyAmJiBuZXN0ZWRWYWwudHJpbSgpKSByZXR1cm4gbmVzdGVkVmFsLnRyaW0oKTsKICAgICAgaWYgKHR5cGVvZiBmbGF0VmFsID09PSAnc3RyaW5nJyAmJiBmbGF0VmFsLnRyaW0oKSkgcmV0dXJuIGZsYXRWYWwudHJpbSgpOwogICAgICByZXR1cm4gbnVsbDsKICAgIH07CiAgICBjb25zdCBlbiA9IHBpY2sobmVzdGVkLmVuLCBzYXZlZC5ndWlkYW5jZV9lbik7CiAgICBjb25zdCBhciA9IHBpY2sobmVzdGVkLmFyLCBzYXZlZC5ndWlkYW5jZV9hcik7CiAgICBjb25zdCBndWlkYW5jZSA9IHsgZW46IGVuIHx8IGRlZi5ndWlkYW5jZS5lbiwgYXI6IGFyIHx8IGRlZi5ndWlkYW5jZS5hciB9OwogICAgY29uc3QgZW5hYmxlZCA9IHNhdmVkLmVuYWJsZWQgPT09IHVuZGVmaW5lZCA/IHRydWUgOiAhIXNhdmVkLmVuYWJsZWQ7CiAgICByZXR1cm4geyBrZXk6IGRlZi5rZXksIGxhYmVsOiBkZWYubGFiZWwsIGd1aWRhbmNlLCBlbmFibGVkIH07CiAgfSk7CgogIGNvbnN0IGJ5S2V5ID0ge307CiAgZm9yIChjb25zdCBzIG9mIHN0YWdlcykgYnlLZXlbcy5rZXldID0gcy5lbmFibGVkID8gcyA6IG51bGw7CgogIC8vIFByb2ZpbGVzLgogIGNvbnN0IHNhdmVkUHJvZmlsZXMgPSAobyAmJiBvLnByb2ZpbGVzRW5hYmxlZCkgfHwge307CiAgY29uc3QgcHJvZmlsZXNFbmFibGVkID0ge307CiAgZm9yIChjb25zdCBwIG9mIERFRkFVTFRTLlBST0ZJTEVTKSB7CiAgICBwcm9maWxlc0VuYWJsZWRbcC5rZXldID0gc2F2ZWRQcm9maWxlc1twLmtleV0gPT09IHVuZGVmaW5lZCA/IHAuZW5hYmxlZCA6ICEhc2F2ZWRQcm9maWxlc1twLmtleV07CiAgfQoKICAvLyBFc2NhbGF0aW9uIHRocmVzaG9sZCDigJQgY2xhbXAgdG8gc29tZXRoaW5nIHNhbmUuCiAgbGV0IGVzY2FsYXRlTWludXRlcyA9IE51bWJlcihvLmVzY2FsYXRlTWludXRlcyk7CiAgaWYgKCFOdW1iZXIuaXNGaW5pdGUoZXNjYWxhdGVNaW51dGVzKSkgZXNjYWxhdGVNaW51dGVzID0gNjA7CiAgZXNjYWxhdGVNaW51dGVzID0gTWF0aC5tYXgoNSwgTWF0aC5taW4oNjAwLCBNYXRoLnJvdW5kKGVzY2FsYXRlTWludXRlcykpKTsKCiAgLy8gTWFwIHZpc2liaWxpdHkuCiAgY29uc3QgbWFwVmlzaWJsZSA9IG8ubWFwVmlzaWJsZSA9PT0gdW5kZWZpbmVkID8gdHJ1ZSA6ICEhby5tYXBWaXNpYmxlOwoKICAvLyBFbmFibGVkIGFpcnBvcnRzLgogIGxldCBhaXJwb3J0cyA9IEFycmF5LmlzQXJyYXkoby5haXJwb3J0cykgJiYgby5haXJwb3J0cy5sZW5ndGgKICAgID8gby5haXJwb3J0cy5maWx0ZXIoKGspID0+IERFRkFVTFRTLkFJUlBPUlRTW2tdKQogICAgOiBPYmplY3Qua2V5cyhERUZBVUxUUy5BSVJQT1JUUyk7CiAgaWYgKCFhaXJwb3J0cy5sZW5ndGgpIGFpcnBvcnRzID0gT2JqZWN0LmtleXMoREVGQVVMVFMuQUlSUE9SVFMpOwoKICByZXR1cm4geyBzdGFnZXMsIGJ5S2V5LCBwcm9maWxlc0VuYWJsZWQsIGVzY2FsYXRlTWludXRlcywgbWFwVmlzaWJsZSwgYWlycG9ydHMgfTsKfQoKZnVuY3Rpb24gbG9hZFNldHRpbmdzKCkgewogIGNvbnN0IG92ZXJyaWRlcyA9IHJlYWRKc29uKFNFVFRJTkdTX0ZJTEUsIHt9KTsKICByZXR1cm4gc2FuaXRpemUob3ZlcnJpZGVzKTsKfQoKLyoqCiAqIFBlcnNpc3QgYSBwYXJ0aWFsIHVwZGF0ZS4gVW5rbm93biBrZXlzIGFyZSBpZ25vcmVkOyBlYWNoIGtub3duIGtleSBpcwogKiBzYW5pdGl6ZWQgdGhyb3VnaCB0aGUgc2FtZSBwYXRoIHNvIGEgYmFkIGFkbWluIHBheWxvYWQgY2Fubm90IGJyZWFrIGJvb3QuCiAqLwpmdW5jdGlvbiBzYXZlU2V0dGluZ3MocGF0Y2gpIHsKICBjb25zdCBjdXJyZW50ID0gcmVhZEpzb24oU0VUVElOR1NfRklMRSwge30pOwogIGNvbnN0IG5leHQgPSBPYmplY3QuYXNzaWduKHt9LCBjdXJyZW50KTsKCiAgaWYgKHBhdGNoLnN0YWdlcyAmJiB0eXBlb2YgcGF0Y2guc3RhZ2VzID09PSAnb2JqZWN0JykgewogICAgY29uc3Qgc3RhZ2VzID0ge307CiAgICBmb3IgKGNvbnN0IGRlZiBvZiBERUZBVUxUUy5TVEFHRVMpIHsKICAgICAgY29uc3QgaW5jb21pbmcgPSBwYXRjaC5zdGFnZXNbZGVmLmtleV07CiAgICAgIGNvbnN0IHByZXZpb3VzID0gKGN1cnJlbnQuc3RhZ2VzICYmIGN1cnJlbnQuc3RhZ2VzW2RlZi5rZXldKSB8fCB7fTsKICAgICAgaWYgKCFpbmNvbWluZykgewogICAgICAgIGlmIChwcmV2aW91cyAmJiBPYmplY3Qua2V5cyhwcmV2aW91cykubGVuZ3RoKSBzdGFnZXNbZGVmLmtleV0gPSBwcmV2aW91czsKICAgICAgICBjb250aW51ZTsKICAgICAgfQogICAgICAvLyBBY2NlcHQgZmxhdCAoZ3VpZGFuY2VfZW4pIG9yIG5lc3RlZCAoZ3VpZGFuY2UuZW4pIG9uIHRoZSB3YXkgaW4uCiAgICAgIGNvbnN0IG5lc3RlZCA9IGluY29taW5nLmd1aWRhbmNlIHx8IHt9OwogICAgICBjb25zdCBwaWNrID0gKG5lc3RlZFZhbCwgZmxhdFZhbCwgcHJldk5lc3RlZCwgcHJldkZsYXQpID0+IHsKICAgICAgICBpZiAodHlwZW9mIG5lc3RlZFZhbCA9PT0gJ3N0cmluZycpIHJldHVybiBuZXN0ZWRWYWwuc2xpY2UoMCwgNDAwMCk7CiAgICAgICAgaWYgKHR5cGVvZiBmbGF0VmFsID09PSAnc3RyaW5nJykgcmV0dXJuIGZsYXRWYWwuc2xpY2UoMCwgNDAwMCk7CiAgICAgICAgaWYgKHR5cGVvZiBwcmV2TmVzdGVkID09PSAnc3RyaW5nJykgcmV0dXJuIHByZXZOZXN0ZWQ7CiAgICAgICAgaWYgKHR5cGVvZiBwcmV2RmxhdCA9PT0gJ3N0cmluZycpIHJldHVybiBwcmV2RmxhdDsKICAgICAgICByZXR1cm4gdW5kZWZpbmVkOwogICAgICB9OwogICAgICBjb25zdCBwcmV2TmVzdGVkID0gcHJldmlvdXMuZ3VpZGFuY2UgfHwge307CiAgICAgIGNvbnN0IGVudHJ5ID0gewogICAgICAgIGd1aWRhbmNlX2VuOiBwaWNrKG5lc3RlZC5lbiwgaW5jb21pbmcuZ3VpZGFuY2VfZW4sIHByZXZOZXN0ZWQuZW4sIHByZXZpb3VzLmd1aWRhbmNlX2VuKSwKICAgICAgICBndWlkYW5jZV9hcjogcGljayhuZXN0ZWQuYXIsIGluY29taW5nLmd1aWRhbmNlX2FyLCBwcmV2TmVzdGVkLmFyLCBwcmV2aW91cy5ndWlkYW5jZV9hciksCiAgICAgICAgZW5hYmxlZDogaW5jb21pbmcuZW5hYmxlZCA9PT0gdW5kZWZpbmVkID8gcHJldmlvdXMuZW5hYmxlZCA6ICEhaW5jb21pbmcuZW5hYmxlZAogICAgICB9OwogICAgICAvLyBLZWVwIHRoZSBmaWxlIHRpZHk6IGRvIG5vdCB3cml0ZSBrZXlzIHdlIGRvIG5vdCBhY3R1YWxseSBoYXZlLgogICAgICBmb3IgKGNvbnN0IGsgb2YgT2JqZWN0LmtleXMoZW50cnkpKSB7CiAgICAgICAgaWYgKGVudHJ5W2tdID09PSB1bmRlZmluZWQpIGRlbGV0ZSBlbnRyeVtrXTsKICAgICAgfQogICAgICBpZiAoT2JqZWN0LmtleXMoZW50cnkpLmxlbmd0aCkgc3RhZ2VzW2RlZi5rZXldID0gZW50cnk7CiAgICB9CiAgICBuZXh0LnN0YWdlcyA9IHN0YWdlczsKICB9CgogIGlmIChwYXRjaC5wcm9maWxlc0VuYWJsZWQgJiYgdHlwZW9mIHBhdGNoLnByb2ZpbGVzRW5hYmxlZCA9PT0gJ29iamVjdCcpIHsKICAgIG5leHQucHJvZmlsZXNFbmFibGVkID0gT2JqZWN0LmFzc2lnbih7fSwgY3VycmVudC5wcm9maWxlc0VuYWJsZWQgfHwge30pOwogICAgZm9yIChjb25zdCBwIG9mIERFRkFVTFRTLlBST0ZJTEVTKSB7CiAgICAgIGlmIChwYXRjaC5wcm9maWxlc0VuYWJsZWRbcC5rZXldICE9PSB1bmRlZmluZWQpIHsKICAgICAgICBuZXh0LnByb2ZpbGVzRW5hYmxlZFtwLmtleV0gPSAhIXBhdGNoLnByb2ZpbGVzRW5hYmxlZFtwLmtleV07CiAgICAgIH0KICAgIH0KICB9CgogIGlmIChwYXRjaC5lc2NhbGF0ZU1pbnV0ZXMgIT09IHVuZGVmaW5lZCkgewogICAgY29uc3QgbiA9IE51bWJlcihwYXRjaC5lc2NhbGF0ZU1pbnV0ZXMpOwogICAgaWYgKE51bWJlci5pc0Zpbml0ZShuKSkgbmV4dC5lc2NhbGF0ZU1pbnV0ZXMgPSBNYXRoLm1heCg1LCBNYXRoLm1pbig2MDAsIE1hdGgucm91bmQobikpKTsKICB9CgogIGlmIChwYXRjaC5tYXBWaXNpYmxlICE9PSB1bmRlZmluZWQpIG5leHQubWFwVmlzaWJsZSA9ICEhcGF0Y2gubWFwVmlzaWJsZTsKCiAgaWYgKEFycmF5LmlzQXJyYXkocGF0Y2guYWlycG9ydHMpKSB7CiAgICBjb25zdCB2YWxpZCA9IHBhdGNoLmFpcnBvcnRzLmZpbHRlcigoaykgPT4gREVGQVVMVFMuQUlSUE9SVFNba10pOwogICAgaWYgKHZhbGlkLmxlbmd0aCkgbmV4dC5haXJwb3J0cyA9IHZhbGlkOwogIH0KCiAgd3JpdGVKc29uQXRvbWljKFNFVFRJTkdTX0ZJTEUsIG5leHQpOwogIHJldHVybiBzYW5pdGl6ZShuZXh0KTsKfQoKZnVuY3Rpb24gcmVzZXRTZXR0aW5ncygpIHsKICB0cnkgeyBmcy51bmxpbmtTeW5jKFNFVFRJTkdTX0ZJTEUpOyB9IGNhdGNoIChfKSB7IC8qIGFscmVhZHkgZ29uZSAqLyB9CiAgcmV0dXJuIGxvYWRTZXR0aW5ncygpOwp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gQ29udmVyc2F0aW9uIGxvZyAoYm91bmRlZCwgaW4gdGhlIHNhbWUgdm9sdW1lKQovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmZ1bmN0aW9uIGxvYWRDb252ZXJzYXRpb25zKCkgewogIGNvbnN0IGxpc3QgPSByZWFkSnNvbihDT05WRVJTQVRJT05TX0ZJTEUsIFtdKTsKICByZXR1cm4gQXJyYXkuaXNBcnJheShsaXN0KSA/IGxpc3QgOiBbXTsKfQoKZnVuY3Rpb24gYXBwZW5kQ29udmVyc2F0aW9uKGVudHJ5KSB7CiAgY29uc3QgbGlzdCA9IGxvYWRDb252ZXJzYXRpb25zKCk7CiAgbGlzdC5wdXNoKGVudHJ5KTsKICBjb25zdCB0cmltbWVkID0gbGlzdC5zbGljZSgtTUFYX0NPTlZFUlNBVElPTlMpOwogIHRyeSB7CiAgICB3cml0ZUpzb25BdG9taWMoQ09OVkVSU0FUSU9OU19GSUxFLCB0cmltbWVkKTsKICB9IGNhdGNoIChlcnIpIHsKICAgIGNvbnNvbGUud2FybihgW3N0b3JlXSBjb3VsZCBub3QgcGVyc2lzdCBjb252ZXJzYXRpb246ICR7ZXJyLm1lc3NhZ2V9YCk7CiAgfQogIHJldHVybiB0cmltbWVkOwp9CgpmdW5jdGlvbiBjbGVhckNvbnZlcnNhdGlvbnMoKSB7CiAgdHJ5IHsgd3JpdGVKc29uQXRvbWljKENPTlZFUlNBVElPTlNfRklMRSwgW10pOyB9IGNhdGNoIChfKSB7IC8qIGJlc3QgZWZmb3J0ICovIH0KfQoKbW9kdWxlLmV4cG9ydHMgPSB7CiAgREFUQV9ESVIsCiAgU0VUVElOR1NfRklMRSwKICBNQVhfQ09OVkVSU0FUSU9OUywKICBsb2FkU2V0dGluZ3MsCiAgc2F2ZVNldHRpbmdzLAogIHJlc2V0U2V0dGluZ3MsCiAgc2FuaXRpemUsCiAgbG9hZENvbnZlcnNhdGlvbnMsCiAgYXBwZW5kQ29udmVyc2F0aW9uLAogIGNsZWFyQ29udmVyc2F0aW9ucwp9Owo=
+'use strict';
+
+/**
+ * Persisted operator settings.
+ *
+ * Overrides live in a single JSON file on a volume so `/admin` edits survive a
+ * container restart. Only *overrides* are stored — anything not written here
+ * still comes from config/defaults.js, so a new image can ship improved
+ * defaults for settings the operator never touched.
+ *
+ * Writes are atomic: write a temp file in the same directory, then rename.
+ * A corrupt file on boot is moved aside rather than crashing the container.
+ */
+
+const fs = require('fs');
+const path = require('path');
+const DEFAULTS = require('../config/defaults');
+
+// Where settings.json and conversations.json live.
+//
+// FG_DATA_DIR wins (Docker sets it to /data, the mounted volume). Without it
+// we must NOT default to /data: a normal user running `node src/server.js`
+// has no permission to write there, and the app would only fail later, when
+// they first pressed Save in /admin. Fall back to a folder beside the code.
+const DATA_DIR = process.env.FG_DATA_DIR || path.join(__dirname, '..', '.data');
+const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+const CONVERSATIONS_FILE = path.join(DATA_DIR, 'conversations.json');
+const MAX_CONVERSATIONS = Number(process.env.FG_MAX_CONVERSATIONS || 200);
+
+function ensureDir() {
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  } catch (err) {
+    if (err.code !== 'EEXIST') throw err;
+  }
+}
+
+function readJson(file, fallback) {
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (err) {
+    if (err.code === 'ENOENT') return fallback;
+    // Corrupt (or unreadable) store: keep the evidence, start clean.
+    try {
+      fs.renameSync(file, `${file}.corrupt-${Date.now()}`);
+    } catch (_) { /* best effort */ }
+    console.warn(`[store] ${path.basename(file)} unreadable (${err.message}) — starting from defaults`);
+    return fallback;
+  }
+}
+
+function writeJsonAtomic(file, value) {
+  ensureDir();
+  const tmp = path.join(DATA_DIR, `.${path.basename(file)}.${process.pid}.tmp`);
+  fs.writeFileSync(tmp, JSON.stringify(value, null, 2), 'utf8');
+  fs.renameSync(tmp, file);
+}
+
+// ---------------------------------------------------------------------------
+// Settings
+// ---------------------------------------------------------------------------
+
+/**
+ * Turn a raw persistable blob into the effective settings object used by the
+ * engine. Missing or blank values fall back to config/defaults.js, so this is
+ * both the boot path and the write-validation path.
+ */
+function sanitize(overrides) {
+  const o = overrides && typeof overrides === 'object' ? overrides : {};
+
+  // Stages: per-stage guidance per language, seeded from defaults.
+  // Two on-disk shapes are accepted so the file stays readable while the API
+  // and the admin panel can speak either:
+  //   flat   { guidance_en, guidance_ar, enabled }      (what we persist)
+  //   nested { guidance: { en, ar }, enabled }          (what defaults use)
+  const stages = DEFAULTS.STAGES.map((def) => {
+    const saved = (o.stages && o.stages[def.key]) || {};
+    const nested = saved.guidance || {};
+    const pick = (nestedVal, flatVal) => {
+      if (typeof nestedVal === 'string' && nestedVal.trim()) return nestedVal.trim();
+      if (typeof flatVal === 'string' && flatVal.trim()) return flatVal.trim();
+      return null;
+    };
+    const en = pick(nested.en, saved.guidance_en);
+    const ar = pick(nested.ar, saved.guidance_ar);
+    const guidance = { en: en || def.guidance.en, ar: ar || def.guidance.ar };
+    const enabled = saved.enabled === undefined ? true : !!saved.enabled;
+    return { key: def.key, label: def.label, guidance, enabled };
+  });
+
+  const byKey = {};
+  for (const s of stages) byKey[s.key] = s.enabled ? s : null;
+
+  // Profiles.
+  const savedProfiles = (o && o.profilesEnabled) || {};
+  const profilesEnabled = {};
+  for (const p of DEFAULTS.PROFILES) {
+    profilesEnabled[p.key] = savedProfiles[p.key] === undefined ? p.enabled : !!savedProfiles[p.key];
+  }
+
+  // Escalation threshold — clamp to something sane.
+  let escalateMinutes = Number(o.escalateMinutes);
+  if (!Number.isFinite(escalateMinutes)) escalateMinutes = 60;
+  escalateMinutes = Math.max(5, Math.min(600, Math.round(escalateMinutes)));
+
+  // Map visibility.
+  const mapVisible = o.mapVisible === undefined ? true : !!o.mapVisible;
+
+  // Enabled airports.
+  let airports = Array.isArray(o.airports) && o.airports.length
+    ? o.airports.filter((k) => DEFAULTS.AIRPORTS[k])
+    : Object.keys(DEFAULTS.AIRPORTS);
+  if (!airports.length) airports = Object.keys(DEFAULTS.AIRPORTS);
+
+  return { stages, byKey, profilesEnabled, escalateMinutes, mapVisible, airports };
+}
+
+function loadSettings() {
+  const overrides = readJson(SETTINGS_FILE, {});
+  return sanitize(overrides);
+}
+
+/**
+ * Persist a partial update. Unknown keys are ignored; each known key is
+ * sanitized through the same path so a bad admin payload cannot break boot.
+ */
+function saveSettings(patch) {
+  const current = readJson(SETTINGS_FILE, {});
+  const next = Object.assign({}, current);
+
+  if (patch.stages && typeof patch.stages === 'object') {
+    const stages = {};
+    for (const def of DEFAULTS.STAGES) {
+      const incoming = patch.stages[def.key];
+      const previous = (current.stages && current.stages[def.key]) || {};
+      if (!incoming) {
+        if (previous && Object.keys(previous).length) stages[def.key] = previous;
+        continue;
+      }
+      // Accept flat (guidance_en) or nested (guidance.en) on the way in.
+      const nested = incoming.guidance || {};
+      const pick = (nestedVal, flatVal, prevNested, prevFlat) => {
+        if (typeof nestedVal === 'string') return nestedVal.slice(0, 4000);
+        if (typeof flatVal === 'string') return flatVal.slice(0, 4000);
+        if (typeof prevNested === 'string') return prevNested;
+        if (typeof prevFlat === 'string') return prevFlat;
+        return undefined;
+      };
+      const prevNested = previous.guidance || {};
+      const entry = {
+        guidance_en: pick(nested.en, incoming.guidance_en, prevNested.en, previous.guidance_en),
+        guidance_ar: pick(nested.ar, incoming.guidance_ar, prevNested.ar, previous.guidance_ar),
+        enabled: incoming.enabled === undefined ? previous.enabled : !!incoming.enabled
+      };
+      // Keep the file tidy: do not write keys we do not actually have.
+      for (const k of Object.keys(entry)) {
+        if (entry[k] === undefined) delete entry[k];
+      }
+      if (Object.keys(entry).length) stages[def.key] = entry;
+    }
+    next.stages = stages;
+  }
+
+  if (patch.profilesEnabled && typeof patch.profilesEnabled === 'object') {
+    next.profilesEnabled = Object.assign({}, current.profilesEnabled || {});
+    for (const p of DEFAULTS.PROFILES) {
+      if (patch.profilesEnabled[p.key] !== undefined) {
+        next.profilesEnabled[p.key] = !!patch.profilesEnabled[p.key];
+      }
+    }
+  }
+
+  if (patch.escalateMinutes !== undefined) {
+    const n = Number(patch.escalateMinutes);
+    if (Number.isFinite(n)) next.escalateMinutes = Math.max(5, Math.min(600, Math.round(n)));
+  }
+
+  if (patch.mapVisible !== undefined) next.mapVisible = !!patch.mapVisible;
+
+  if (Array.isArray(patch.airports)) {
+    const valid = patch.airports.filter((k) => DEFAULTS.AIRPORTS[k]);
+    if (valid.length) next.airports = valid;
+  }
+
+  writeJsonAtomic(SETTINGS_FILE, next);
+  return sanitize(next);
+}
+
+function resetSettings() {
+  try { fs.unlinkSync(SETTINGS_FILE); } catch (_) { /* already gone */ }
+  return loadSettings();
+}
+
+// ---------------------------------------------------------------------------
+// Conversation log (bounded, in the same volume)
+// ---------------------------------------------------------------------------
+
+function loadConversations() {
+  const list = readJson(CONVERSATIONS_FILE, []);
+  return Array.isArray(list) ? list : [];
+}
+
+function appendConversation(entry) {
+  const list = loadConversations();
+  list.push(entry);
+  const trimmed = list.slice(-MAX_CONVERSATIONS);
+  try {
+    writeJsonAtomic(CONVERSATIONS_FILE, trimmed);
+  } catch (err) {
+    console.warn(`[store] could not persist conversation: ${err.message}`);
+  }
+  return trimmed;
+}
+
+function clearConversations() {
+  try { writeJsonAtomic(CONVERSATIONS_FILE, []); } catch (_) { /* best effort */ }
+}
+
+module.exports = {
+  DATA_DIR,
+  SETTINGS_FILE,
+  MAX_CONVERSATIONS,
+  loadSettings,
+  saveSettings,
+  resetSettings,
+  sanitize,
+  loadConversations,
+  appendConversation,
+  clearConversations
+};

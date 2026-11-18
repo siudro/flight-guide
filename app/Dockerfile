@@ -1,1 +1,70 @@
-IyBzeW50YXg9ZG9ja2VyL2RvY2tlcmZpbGU6MQoKIyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQojIEZsaWdodCBHdWlkZSDigJQgbXVsdGktc3RhZ2UgYnVpbGQKIwojIFN0YWdlIDEgKGBkZXBzYCkgZXhpc3RzIHRvIHJ1biBgbnBtIGNpYCBmb3IgYSBmdXR1cmUgdmVyc2lvbiBvZiB0aGUgYXBwIHRoYXQKIyBncm93cyBkZXBlbmRlbmNpZXMuIFRvZGF5IHRoZSBhcHAgaGFzIG5vbmUsIHNvIGl0IGFsc28gdmFsaWRhdGVzIHBhY2thZ2UuanNvbgojIGFuZCBmYWlscyB0aGUgYnVpbGQgZWFybHkgaWYgdGhlIG1hbmlmZXN0IGlzIG1hbGZvcm1lZC4gS2VlcGluZyB0aGUgc3RhZ2UgbWVhbnMKIyBhZGRpbmcgYSBkZXBlbmRlbmN5IGxhdGVyIGlzIGEgcGFja2FnZS5qc29uIGNoYW5nZSwgbm90IGEgRG9ja2VyZmlsZSByZXdyaXRlLgojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgpGUk9NIG5vZGU6MjItYWxwaW5lIEFTIGRlcHMKV09SS0RJUiAvYXBwCgojIE9ubHkgdGhlIG1hbmlmZXN0IGlzIGNvcGllZCBzbyB0aGlzIGxheWVyIGNhY2hlcyBvbiBkZXBlbmRlbmN5IGNoYW5nZXMgYWxvbmUuCkNPUFkgcGFja2FnZS5qc29uIC4vCgojIEZhaWwgdGhlIGJ1aWxkIGVhcmx5IG9uIGEgbWFsZm9ybWVkIG1hbmlmZXN0LiBUaGUgYXBwIGN1cnJlbnRseSBzaGlwcyB3aXRoCiMgemVybyBydW50aW1lIGRlcGVuZGVuY2llcywgc28gdGhlcmUgaXMgbm90aGluZyB0byBpbnN0YWxsLiBXaGVuIGEgZGVwZW5kZW5jeQojIGlzIGFkZGVkLCByZXBsYWNlIHRoaXMgbGluZSB3aXRoOiAgUlVOIG5wbSBjaSAtLW9taXQ9ZGV2IC0tbm8tYXVkaXQgLS1uby1mdW5kClJVTiBta2RpciAtcCBub2RlX21vZHVsZXMgXAogJiYgbm9kZSAtZSAiY29uc3QgcD1yZXF1aXJlKCcuL3BhY2thZ2UuanNvbicpO2NvbnN0IGQ9T2JqZWN0LmtleXMocC5kZXBlbmRlbmNpZXN8fHt9KTtjb25zb2xlLmxvZyhkLmxlbmd0aD8nZGVwczogJytkLmpvaW4oJywgJyk6J25vIHJ1bnRpbWUgZGVwZW5kZW5jaWVzIOKAlCBub3RoaW5nIHRvIGluc3RhbGwnKSIKCgojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiMgU3RhZ2UgMiAoYHJ1bnRpbWVgKSDigJQgdGhlIG9ubHkgc3RhZ2UgdGhhdCBzaGlwcy4KIyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoKRlJPTSBub2RlOjIyLWFscGluZSBBUyBydW50aW1lCgojIGB0aW5pYCByZWFwcyB0aGUgTm9kZSBwcm9jZXNzIHNvIFNJR1RFUk0gcmVhY2hlcyBpdCBvbiBgZG9ja2VyIHN0b3BgLgpSVU4gYXBrIGFkZCAtLW5vLWNhY2hlIHRpbmkKCkVOViBOT0RFX0VOVj1wcm9kdWN0aW9uIFwKICAgIFBPUlQ9ODA4MCBcCiAgICBIT1NUPTAuMC4wLjAgXAogICAgRkdfREFUQV9ESVI9L2RhdGEKCldPUktESVIgL2FwcAoKIyBBcHBsaWNhdGlvbiBjb2RlLCBvd25lZCBieSByb290IGFuZCByZWFkLW9ubHkgdG8gdGhlIGFwcCB1c2VyLgpDT1BZIC0tY2hvd249cm9vdDpyb290IHBhY2thZ2UuanNvbiAuLwpDT1BZIC0tY2hvd249cm9vdDpyb290IHNyYy8gLi9zcmMvCkNPUFkgLS1jaG93bj1yb290OnJvb3QgY29uZmlnLyAuL2NvbmZpZy8KQ09QWSAtLWNob3duPXJvb3Q6cm9vdCBwdWJsaWMvIC4vcHVibGljLwpDT1BZIC0tY2hvd249cm9vdDpyb290IG1hcC8gLi9tYXAvCgojIG5vZGVfbW9kdWxlcyBpcyBjcmVhdGVkIGVtcHR5IGluIHRoZSBkZXBzIHN0YWdlIChzZWUgYWJvdmUpIHNvIHRoaXMgQ09QWQojIGFsd2F5cyBzdWNjZWVkcy4gQWRkIGEgZGVwZW5kZW5jeSBhbmQgdGhlIHNhbWUgcGF0aCBzdGFydHMgY2FycnlpbmcgaXQuCkNPUFkgLS1mcm9tPWRlcHMgLS1jaG93bj1yb290OnJvb3QgLS1wYXJlbnRzIC9hcHAvbm9kZV9tb2R1bGVzIC4vCgojIE1ha2UgdGhlIHJlYWQtb25seSB0cmVlIHdvcmxkLXJlYWRhYmxlIHJlZ2FyZGxlc3Mgb2YgaG93IHRoZSBidWlsZCBjb250ZXh0CiMgc3RvcmVkIGl0cyBwZXJtaXNzaW9ucywgc28gdWlkIDEwMDAgY2FuIGFsd2F5cyByZWFkIHRoZSBhcHAuClJVTiBjaG1vZCAtUiBhK3JYIC9hcHAKCiMgVGhlIG9uZSB3cml0YWJsZSBwYXRoOiBwZXJzaXN0ZWQgc2V0dGluZ3MgKyBjb252ZXJzYXRpb24gbG9nLgpSVU4gbWtkaXIgLXAgL2RhdGEgXAogJiYgY2hvd24gLVIgbm9kZTpub2RlIC9kYXRhIFwKICYmIGNobW9kIDc1NSAvZGF0YQoKIyBTaGlwIGFzIHRoZSBpbWFnZSdzIGJ1aWx0LWluIHVucHJpdmlsZWdlZCB1c2VyICh1aWQgMTAwMCksIG5ldmVyIHJvb3QuClVTRVIgbm9kZQoKRVhQT1NFIDgwODAKCkhFQUxUSENIRUNLIC0taW50ZXJ2YWw9MzBzIC0tdGltZW91dD0zcyAtLXN0YXJ0LXBlcmlvZD01cyAtLXJldHJpZXM9MyBcCiAgQ01EIG5vZGUgLWUgInJlcXVpcmUoJ2h0dHAnKS5nZXQoJ2h0dHA6Ly8xMjcuMC4wLjE6JysocHJvY2Vzcy5lbnYuUE9SVHx8ODA4MCkrJy9oZWFsdGh6JyxyPT5wcm9jZXNzLmV4aXQoci5zdGF0dXNDb2RlPT09MjAwPzA6MSkpLm9uKCdlcnJvcicsKCk9PnByb2Nlc3MuZXhpdCgxKSkiCgpFTlRSWVBPSU5UIFsiL3NiaW4vdGluaSIsICItLSJdCkNNRCBbIm5vZGUiLCAic3JjL3NlcnZlci5qcyJdCg==
+# syntax=docker/dockerfile:1
+
+# =============================================================================
+# Flight Guide — multi-stage build
+#
+# Stage 1 (`deps`) exists to run `npm ci` for a future version of the app that
+# grows dependencies. Today the app has none, so it also validates package.json
+# and fails the build early if the manifest is malformed. Keeping the stage means
+# adding a dependency later is a package.json change, not a Dockerfile rewrite.
+# =============================================================================
+
+FROM node:22-alpine AS deps
+WORKDIR /app
+
+# Only the manifest is copied so this layer caches on dependency changes alone.
+COPY package.json ./
+
+# Fail the build early on a malformed manifest. The app currently ships with
+# zero runtime dependencies, so there is nothing to install. When a dependency
+# is added, replace this line with:  RUN npm ci --omit=dev --no-audit --no-fund
+RUN mkdir -p node_modules \
+ && node -e "const p=require('./package.json');const d=Object.keys(p.dependencies||{});console.log(d.length?'deps: '+d.join(', '):'no runtime dependencies — nothing to install')"
+
+
+# =============================================================================
+# Stage 2 (`runtime`) — the only stage that ships.
+# =============================================================================
+
+FROM node:22-alpine AS runtime
+
+# `tini` reaps the Node process so SIGTERM reaches it on `docker stop`.
+RUN apk add --no-cache tini
+
+ENV NODE_ENV=production \
+    PORT=8080 \
+    HOST=0.0.0.0 \
+    FG_DATA_DIR=/data
+
+WORKDIR /app
+
+# Application code, owned by root and read-only to the app user.
+COPY --chown=root:root package.json ./
+COPY --chown=root:root src/ ./src/
+COPY --chown=root:root config/ ./config/
+COPY --chown=root:root public/ ./public/
+COPY --chown=root:root map/ ./map/
+
+# node_modules is created empty in the deps stage (see above) so this COPY
+# always succeeds. Add a dependency and the same path starts carrying it.
+COPY --from=deps --chown=root:root --parents /app/node_modules ./
+
+# Make the read-only tree world-readable regardless of how the build context
+# stored its permissions, so uid 1000 can always read the app.
+RUN chmod -R a+rX /app
+
+# The one writable path: persisted settings + conversation log.
+RUN mkdir -p /data \
+ && chown -R node:node /data \
+ && chmod 755 /data
+
+# Ship as the image's built-in unprivileged user (uid 1000), never root.
+USER node
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node -e "require('http').get('http://127.0.0.1:'+(process.env.PORT||8080)+'/healthz',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"
+
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["node", "src/server.js"]

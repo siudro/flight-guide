@@ -1,1 +1,167 @@
-J3VzZSBzdHJpY3QnOwoKLyoqCiAqIERlZmF1bHQgKHNoaXBwZWQpIHNldHRpbmdzLiBUaGVzZSBhcmUgdGhlIHZhbHVlcyB1c2VkIG9uIGZpcnN0IGJvb3QgYW5kIGFyZQogKiBuZXZlciB3cml0dGVuIHRvIGRpc2sg4oCUIHRoZSBwZXJzaXN0ZWQgZmlsZSBvbmx5IGhvbGRzIG9wZXJhdG9yIG92ZXJyaWRlcywgc28KICogdXBncmFkaW5nIHRoZSBpbWFnZSBjYW4gc3RpbGwgc2hpcCBuZXcgZGVmYXVsdHMgZm9yIGFueXRoaW5nIHVudG91Y2hlZC4KICoKICogU3RhZ2UgZ3VpZGFuY2UgaXMgYmlsaW5ndWFsIGJlY2F1c2UgdGhlIGFkbWluIHBhbmVsIGVkaXRzIG9uZSBib3ggcGVyCiAqIGxhbmd1YWdlIHBlciBzdGFnZS4gYHthaXJwb3J0fWAgYHt0ZXJtaW5hbH1gIGB7ZmxpZ2h0fWAgYHtnYXRlfWAgcGxhY2Vob2xkZXJzCiAqIGFyZSBzdWJzdGl0dXRlZCBieSBzcmMvZW5naW5lLmpzLgogKi8KCmNvbnN0IFNUQUdFUyA9IFsKICB7CiAgICBrZXk6ICdjaGVja2luJywKICAgIGxhYmVsOiB7IGVuOiAnQ2hlY2staW4gJiBiYWcgZHJvcCcsIGFyOiAn2KrYs9is2YrZhCDYp9mE2YjYtdmI2YQg2YjYqtiz2YTZitmFINin2YTYrdmC2KfYptioJyB9LAogICAgZ3VpZGFuY2U6IHsKICAgICAgZW46ICdHbyB0byB0aGUgZGVwYXJ0dXJlcyBoYWxsIGFuZCBmaW5kIHRoZSBjb3VudGVyIGZvciB7YWlybGluZX0uIFNob3cgeW91ciBwYXNzcG9ydCBhbmQgYm9hcmRpbmcgcGFzcy4gUHV0IHlvdXIgY2hlY2tlZCBiYWcgb24gdGhlIGJlbHQgYW5kIGtlZXAgdGhlIHJlY2VpcHQuIENoZWNrIHRoYXQgdGhlIGZsaWdodCBudW1iZXIgb24gdGhlIHNjcmVlbiBtYXRjaGVzIHRoZSBvbmUgb24geW91ciB0aWNrZXQgYmVmb3JlIHlvdSBxdWV1ZS4nLAogICAgICBhcjogJ9iq2YjYrNmR2Ycg2KXZhNmJINi12KfZhNipINin2YTZhdi62KfYr9ix2Kkg2YjYp9io2K3YqyDYudmGINmD2KfZiNmG2KrYsSB7YWlybGluZX0uINij2LjZh9ixINis2YjYp9iyINin2YTYs9mB2LEg2YjYqNi32KfZgtipINin2YTYtdi52YjYry4g2LbYuSDYrdmC2YrYqNiq2YMg2KfZhNmF2LPYrNmR2YTYqSDYudmE2Ykg2KfZhNit2LLYp9mFINmI2KfYrdiq2YHYuCDYqNin2YTYpdmK2LXYp9mELiDYqtij2YPZkdivINmF2YYg2KPZhiDYsdmC2YUg2KfZhNix2K3ZhNipINi52YTZiSDYp9mE2LTYp9i02Kkg2YrYt9in2KjZgiDYp9mE2LHZgtmFINin2YTZhdmD2KrZiNioINi52YTZiSDYqtiw2YPYsdiq2YMg2YLYqNmEINin2YTZiNmC2YjZgSDZgdmKINin2YTYt9in2KjZiNixLicKICAgIH0KICB9LAogIHsKICAgIGtleTogJ3NlY3VyaXR5JywKICAgIGxhYmVsOiB7IGVuOiAnU2VjdXJpdHkgc2NyZWVuaW5nJywgYXI6ICfZgdit2LUg2KfZhNij2YXZhicgfSwKICAgIGd1aWRhbmNlOiB7CiAgICAgIGVuOiAnVGFrZSBsYXB0b3BzIGFuZCBsaXF1aWRzIG91dCBvZiB5b3VyIGJhZyBhbmQgcHV0IHRoZW0gaW4gdGhlIHRyYXkuIExpcXVpZHMgb3ZlciAxMDAgbWwgYXJlIG5vdCBhbGxvd2VkIGluIGhhbmQgYmFnZ2FnZS4gV2FsayB0aHJvdWdoIHRoZSBkZXRlY3Rvci4gSWYgaXQgYmVlcHMsIHN0YWZmIHdpbGwgcmUtY2hlY2sgeW91IOKAlCB0aGF0IGlzIG5vcm1hbCwgbm90aGluZyBpcyB3cm9uZy4nLAogICAgICBhcjogJ9ij2K7YsdisINin2YTYrdin2LPZiNioINin2YTZhdit2YXZiNmEINmI2KfZhNiz2YjYp9im2YQg2YXZhiDYrdmC2YrYqNiq2YMg2YjYtti52YfYpyDZgdmKINin2YTYtdmK2YbZitipLiDYp9mE2LPZiNin2KbZhCDYp9mE2KrZiiDYqtiy2YrYryDYudmE2YkgMTAwINmF2YQg2LrZitixINmF2LPZhdmI2K0g2KjZh9inINmB2Yog2KfZhNit2YLZitio2Kkg2KfZhNmK2K/ZiNmK2KkuINin2LnYqNixINin2YTYqNmI2KfYqNipINin2YTZg9in2LTZgdipLiDYpdiw2Kcg2KPYt9mE2YIg2KzZh9in2LIg2KfZhNil2YbYsNin2LEg2YHYs9mK2LnZitivINin2YTZhdmI2LjZgdmI2YYg2YHYrdi12YPYjCDZiNmH2LDYpyDYo9mF2LEg2LfYqNmK2LnZiiDZiNmE2Kcg2YrYudmG2Yog2YjYrNmI2K8g2YXYtNmD2YTYqS4nCiAgICB9CiAgfSwKICB7CiAgICBrZXk6ICdwYXNzcG9ydCcsCiAgICBsYWJlbDogeyBlbjogJ1Bhc3Nwb3J0IGNvbnRyb2wnLCBhcjogJ9mF2LHYp9mC2KjYqSDYp9mE2KzZiNin2LLYp9iqJyB9LAogICAgZ3VpZGFuY2U6IHsKICAgICAgZW46ICdIb2xkIHlvdXIgcGFzc3BvcnQgYW5kIGJvYXJkaW5nIHBhc3MgaW4geW91ciBoYW5kIOKAlCBub3QgaW4gdGhlIGJhZy4gVGhlIG9mZmljZXIgd2lsbCBjaGVjayB0aGVtIGFuZCBtYXkgdGFrZSBhIGZpbmdlcnByaW50IG9yIGEgcGhvdG8uIFRha2UgdGhlIGRlcGFydHVyZXMgcXVldWUsIG5vdCB0aGUgYXJyaXZhbHMgcXVldWUuJywKICAgICAgYXI6ICfYo9mF2LPZgyDYrNmI2KfYsiDYp9mE2LPZgdixINmI2KjYt9in2YLYqSDYp9mE2LXYudmI2K8g2YHZiiDZitiv2YPYjCDZhNinINiv2KfYrtmEINin2YTYrdmC2YrYqNipLiDYs9mK2KrYrdmC2YIg2KfZhNmF2YjYuNmBINmF2YbZh9mF2Kcg2YjYsdio2YXYpyDZitij2K7YsCDYqNi12YXYqSDYo9mIINi12YjYsdipLiDYp9iv2K7ZhCDZgdmKINi32KfYqNmI2LEg2KfZhNmF2LrYp9iv2LHYqSDZiNmE2YrYsyDYt9in2KjZiNixINin2YTZiNi12YjZhC4nCiAgICB9CiAgfSwKICB7CiAgICBrZXk6ICdjdXN0b21zJywKICAgIGxhYmVsOiB7IGVuOiAnQ3VzdG9tcycsIGFyOiAn2KfZhNis2YXYp9ix2YMnIH0sCiAgICBndWlkYW5jZTogewogICAgICBlbjogJ1RoZXJlIGFyZSB0d28gbGFuZXM6IGdyZWVuIGlmIHlvdSBoYXZlIG5vdGhpbmcgdG8gZGVjbGFyZSwgcmVkIGlmIHlvdSBhcmUgY2FycnlpbmcgZ29vZHMgdGhhdCBtdXN0IGJlIGRlY2xhcmVkLiBDaG9vc2UgdGhlIGxhbmUgdGhhdCBtYXRjaGVzIHdoYXQgaXMgaW4geW91ciBiYWcuIElmIHlvdSBhcmUgdW5zdXJlLCBhc2sgYSBjdXN0b21zIG9mZmljZXIgYmVmb3JlIHlvdSB3YWxrIHRocm91Z2guJywKICAgICAgYXI6ICfZh9mG2KfZgyDZhdiz2KfYsdmO2KfZhjog2KfZhNmF2LPYp9ixINin2YTYo9iu2LbYsSDYpdiw2Kcg2YTZhSDZitmD2YYg2YXYudmDINmF2Kcg2YrYs9iq2YjYrNioINin2YTYqti12LHZitit2Iwg2YjYp9mE2YXYs9in2LEg2KfZhNij2K3ZhdixINil2LDYpyDZg9in2YYg2YXYudmDINio2LbYp9im2Lkg2YrYrNioINin2YTYqti12LHZititINi52YbZh9inLiDYp9iu2KrYsSDYp9mE2YXYs9in2LEg2KfZhNiw2Yog2YrYt9in2KjZgiDZhdinINmB2Yog2K3ZgtmK2KjYqtmDLiDYpdmGINmE2YUg2KrZg9mGINmF2KrYo9mD2K/Zi9inINmB2KfYs9ij2YQg2YXZiNi42YEg2KfZhNis2YXYp9ix2YMg2YLYqNmEINin2YTZhdix2YjYsS4nCiAgICB9CiAgfSwKICB7CiAgICBrZXk6ICdnYXRlJywKICAgIGxhYmVsOiB7IGVuOiAnRmluZCB0aGUgZ2F0ZScsIGFyOiAn2KXZitis2KfYryDYp9mE2KjZiNin2KjYqScgfSwKICAgIGd1aWRhbmNlOiB7CiAgICAgIGVuOiAnWW91ciBnYXRlIG51bWJlciBpcyBvbiB0aGUgYm9hcmRpbmcgcGFzcyBhbmQgcmVwZWF0ZWQgb24gdGhlIGRlcGFydHVyZSBzY3JlZW5zLiBGb2xsb3cgdGhlIGdhdGUgc2lnbmFnZSDigJQgdGhlIGdhdGUgbnVtYmVyIGlzIG9uIHRoZSBvdmVyaGVhZCBzaWducy4gTG9vayBhdCB0aGUgc2NyZWVucyBvbmNlIG1vcmUgYWZ0ZXIgc2VjdXJpdHksIGJlY2F1c2UgdGhlIGdhdGUgY2FuIGNoYW5nZS4nLAogICAgICBhcjogJ9ix2YLZhSDYqNmI2KfYqNiq2YMg2YXZg9iq2YjYqCDYudmE2Ykg2KjYt9in2YLYqSDYp9mE2LXYudmI2K8g2YjZhdmD2LHZkdixINi52YTZiSDYtNin2LTYp9iqINin2YTZhdi62KfYr9ix2KkuINin2KrYqNi5INmE2YjYrdin2Kog2KXYsdi02KfYryDYp9mE2KjZiNin2KjYp9iq2Iwg2YHYsdmC2YUg2KfZhNio2YjYp9io2Kkg2YXZg9iq2YjYqCDYudmE2Ykg2KfZhNmE2YjYrdin2Kog2KfZhNi52YTZiNmK2KkuINin2YbYuNixINil2YTZiSDYp9mE2LTYp9i02KfYqiDZhdix2Kkg2KPYrtix2Ykg2KjYudivINin2YTYo9mF2YbYjCDZgdmC2K8g2KrYqti62YrYsSDYp9mE2KjZiNin2KjYqS4nCiAgICB9CiAgfSwKICB7CiAgICBrZXk6ICdib2FyZGluZycsCiAgICBsYWJlbDogeyBlbjogJ0dhdGUgJiBib2FyZGluZycsIGFyOiAn2KfZhNio2YjYp9io2Kkg2YjYp9mE2LXYudmI2K8nIH0sCiAgICBndWlkYW5jZTogewogICAgICBlbjogJ1dhaXQgYXQgdGhlIGdhdGUgYW5kIGxpc3RlbiBmb3IgdGhlIGJvYXJkaW5nIGFubm91bmNlbWVudC4gQm9hcmRpbmcgdXN1YWxseSBjbG9zZXMgMjDigJMzMCBtaW51dGVzIGJlZm9yZSBkZXBhcnR1cmUg4oCUIGRvIG5vdCBsZWF2ZSB0aGUgZ2F0ZSBhcmVhIGluIHRoZSBsYXN0IGhhbGYgaG91ciwgZXZlbiB0byBidXkgc29tZXRoaW5nLicsCiAgICAgIGFyOiAn2KfZhtiq2LjYsSDYudmG2K8g2KfZhNio2YjYp9io2Kkg2YjYo9mG2LXYqiDZhNil2LnZhNin2YYg2KfZhNi12LnZiNivLiDYudin2K/YqdmLINmK2Y/YutmE2YIg2KfZhNi12LnZiNivINmC2KjZhCDYp9mE2KXZgtmE2KfYuSDYqNmAIDIw4oCTMzAg2K/ZgtmK2YLYqdiMINmB2YTYpyDYqtio2KrYudivINi52YYg2YXZhti32YLYqSDYp9mE2KjZiNin2KjYqSDZgdmKINin2YTZhti12YEg2LPYp9i52Kkg2KfZhNij2K7Zitix2KnYjCDZiNmE2Kcg2K3YqtmJINmE2YTYtNix2KfYoS4nCiAgICB9CiAgfSwKICB7CiAgICBrZXk6ICdnYXRlY2hhbmdlJywKICAgIGxhYmVsOiB7IGVuOiAnR2F0ZSBjaGFuZ2UnLCBhcjogJ9iq2LrZitmK2LEg2KfZhNio2YjYp9io2KknIH0sCiAgICBndWlkYW5jZTogewogICAgICBlbjogJ1lvdXIgZ2F0ZSBoYXMgY2hhbmdlZCB0byB7Z2F0ZX0uIFJlYWQgaXQgYWdhaW4gb24gdGhlIG5lYXJlc3QgZGVwYXJ0dXJlIHNjcmVlbiB0byBiZSBzdXJlLCB0aGVuIGdvIHN0cmFpZ2h0IHRoZXJlIOKAlCBkbyBub3Qgc3RvcCB0byBhc2sgZGlyZWN0aW9ucyBvbiB0aGUgd2F5LiBJZiB0aGUgbmV3IGdhdGUgaXMgZmFyIGF3YXkgb3IgYm9hcmRpbmcgaGFzIGFscmVhZHkgc3RhcnRlZCwgc3BlYWsgdG8gYWlybGluZSBzdGFmZiBpbW1lZGlhdGVseS4nLAogICAgICBhcjogJ9iq2LrZitmR2LHYqiDYqNmI2KfYqNiq2YMg2KXZhNmJIHtnYXRlfS4g2KrYrdmC2ZHZgiDZhdmG2YfYpyDZhdix2Kkg2KPYrtix2Ykg2LnZhNmJINij2YLYsdioINi02KfYtNipINmF2LrYp9iv2LHYqdiMINir2YUg2KfYsNmH2Kgg2KXZhNmK2YfYpyDZhdio2KfYtNix2Kkg2K/ZiNmGINin2YTYqtmI2YLZgSDZhNiz2KTYp9mEINij2K3YryDYudmGINin2YTYt9ix2YrZgi4g2KXYsNinINmD2KfZhtiqINin2YTYqNmI2KfYqNipINin2YTYrNiv2YrYr9ipINio2LnZitiv2Kkg2KPZiCDYqNiv2KMg2KfZhNi12LnZiNivINio2KfZhNmB2LnZhCDZgdiq2K3Yr9mR2Ksg2KXZhNmJINmF2YjYuNmB2Yog2LTYsdmD2Kkg2KfZhNi32YrYsdin2YYg2YHZiNix2YvYpy4nCiAgICB9CiAgfQpdOwoKY29uc3QgUFJPRklMRVMgPSBbCiAgewogICAga2V5OiAnbmVydm91cycsCiAgICBlbmFibGVkOiB0cnVlLAogICAgbGFiZWw6IHsgZW46ICdOZXJ2b3VzIGZpcnN0LXRpbWVyJywgYXI6ICfYp9mE2YXYs9in2YHYsSDYp9mE2YXYqNiq2K/YpiDYp9mE2YLZhNmCJyB9LAogICAgdG9uZTogewogICAgICBlbjogJ3dhcm0sIHJlYXNzdXJpbmcsIG9uZSBzdGVwIGF0IGEgdGltZScsCiAgICAgIGFyOiAn2K/Yp9mB2KYg2YjZhdi32YXYptmGINmI2K7Yt9mI2Kkg2YjYp9it2K/YqSDZgdmKINmD2YQg2YXYsdipJwogICAgfQogIH0sCiAgewogICAga2V5OiAnYWR1bHQnLAogICAgZW5hYmxlZDogdHJ1ZSwKICAgIGxhYmVsOiB7IGVuOiAnQWR1bHQsIGZpcnN0IGludGVybmF0aW9uYWwgZmxpZ2h0JywgYXI6ICfYqNin2YTYuiDZgdmKINij2YjZhCDYsdit2YTYqSDYr9mI2YTZitipJyB9LAogICAgdG9uZTogewogICAgICBlbjogJ2VmZmljaWVudCwgcmVzcGVjdGZ1bCwgZnVsbCBkZXRhaWwnLAogICAgICBhcjogJ9mB2LnZkdin2YQg2YjZhdit2KrYsdmFINmI2KjZg9mEINin2YTYqtmB2KfYtdmK2YQnCiAgICB9CiAgfSwKICB7CiAgICBrZXk6ICdodXJyaWVkJywKICAgIGVuYWJsZWQ6IHRydWUsCiAgICBsYWJlbDogeyBlbjogJ0V4cGVyaWVuY2VkIC8gaHVycmllZCcsIGFyOiAn2K7YqNmK2LEgLyDZhdiz2KrYudis2YQnIH0sCiAgICB0b25lOiB7CiAgICAgIGVuOiAnZmFzdCwgZGlyZWN0LCBuZXh0IGFjdGlvbiBvbmx5JywKICAgICAgYXI6ICfYs9ix2YrYuSDZiNmF2KjYp9i02LEg2YjYp9mE2KXYrNix2KfYoSDYp9mE2KrYp9mE2Yog2YHZgti3JwogICAgfQogIH0KXTsKCmNvbnN0IEFJUlBPUlRTID0gewogIGRtbTogewogICAgbmFtZTogeyBlbjogJ0tpbmcgRmFoZCBJbnRlcm5hdGlvbmFsIEFpcnBvcnQgKERhbW1hbSknLCBhcjogJ9mF2LfYp9ixINin2YTZhdmE2YMg2YHZh9ivINin2YTYr9mI2YTZiiAo2KfZhNiv2YXYp9mFKScgfSwKICAgIHNob3J0OiB7IGVuOiAnRGFtbWFtJywgYXI6ICfYp9mE2K/Zhdin2YUnIH0sCiAgICBjb2RlOiAnRE1NJywKICAgIHZlcmlmaWVkOiAnZnVsbCcsCiAgICAvLyBEYW1tYW0gaXMgdGhlIGNhc2UgdmVyaWZpZWQgZW5kIHRvIGVuZC4KICAgIHNwZWNpZmljczogewogICAgICBlbjogJ0RhbW1hbSBpcyB0aGUgYWlycG9ydCBGbGlnaHQgR3VpZGUgaGFzIHZlcmlmaWVkIGVuZCB0byBlbmQuJywKICAgICAgYXI6ICfYp9mE2K/Zhdin2YUg2YfZiiDYp9mE2YXYt9in2LEg2KfZhNiw2Yog2KrYrdmC2ZHZgtiqINmF2YbZhyBGbGlnaHQgR3VpZGUg2YXZhiDYp9mE2KjYr9in2YrYqSDYpdmE2Ykg2KfZhNmG2YfYp9mK2KkuJwogICAgfSwKICAgIHVudmVyaWZpZWROb3RlOiBudWxsCiAgfSwKICBydWg6IHsKICAgIG5hbWU6IHsgZW46ICdLaW5nIEtoYWxpZCBJbnRlcm5hdGlvbmFsIEFpcnBvcnQgKFJpeWFkaCknLCBhcjogJ9mF2LfYp9ixINin2YTZhdmE2YMg2K7Yp9mE2K8g2KfZhNiv2YjZhNmKICjYp9mE2LHZitin2LYpJyB9LAogICAgc2hvcnQ6IHsgZW46ICdSaXlhZGgnLCBhcjogJ9in2YTYsdmK2KfYticgfSwKICAgIGNvZGU6ICdSVUgnLAogICAgdmVyaWZpZWQ6ICdwYXJ0aWFsJywKICAgIHNwZWNpZmljczogewogICAgICBlbjogJ0F0IFJpeWFkaCwgcGFzc3BvcnQgY29udHJvbCBhbmQgZS1nYXRlcyBhcmUgb24gTGV2ZWwgRyBhbmQgTGV2ZWwgLTEsIFNhdWRpIEN1c3RvbXMgaXMgb24gTGV2ZWwgRywgYW5kIHNlY3VyaXR5IHNjcmVlbmluZyBpcyBvbiBMZXZlbHMgRywgMSBhbmQgMiDigJQgZmluZCB0aGUgcG9pbnQgb24geW91ciBvd24gbGV2ZWwuIFRlcm1pbmFscyAx4oCTNCB1c2UgdGhlIGxldmVscyBTLCBBLCBJLCBELCBNOyBUZXJtaW5hbCA1IHVzZXMgLTEsIEcsIDEuJywKICAgICAgYXI6ICfZgdmKINin2YTYsdmK2KfYttiMINmF2LHYp9mC2KjYqSDYp9mE2KzZiNin2LLYp9iqINmI2KfZhNio2YjYp9io2KfYqiDYp9mE2KXZhNmD2KrYsdmI2YbZitipINmB2Yog2KfZhNmF2LPYqtmI2YkgRyDZiNin2YTZhdiz2KrZiNmJIC0x2Iwg2YjYp9mE2KzZhdin2LHZgyDYp9mE2LPYudmI2K/ZitipINmB2Yog2KfZhNmF2LPYqtmI2YkgR9iMINmI2KfZhNiq2YHYqtmK2LQg2KfZhNij2YXZhtmKINmB2Yog2KfZhNmF2LPYqtmI2YrYp9iqIEcg2YgxINmIMtiMINmB2KfYqNit2Ksg2LnZhiDZhtmC2LfYqSDYp9mE2KrZgdiq2YrYtCDZgdmKINmF2LPYqtmI2KfZgy4g2KfZhNi12KfZhNin2KogMeKAkzQg2KrYs9iq2K7Yr9mFINin2YTZhdiz2KrZiNmK2KfYqiBTINmIQSDZiEkg2YhEINmITdiMINmI2KfZhNi12KfZhNipIDUg2KrYs9iq2K7Yr9mFIC0xINmIRyDZiDEuJwogICAgfSwKICAgIHVudmVyaWZpZWROb3RlOiB7CiAgICAgIGVuOiAnUml5YWRoIGRldGFpbHMgYXJlIHBhcnRpYWxseSB2ZXJpZmllZCBmcm9tIHRoZSBhaXJwb3J0XHUyMDE5cyBpbmRvb3IgbWFwIOKAlCBjb25maXJtIG9uIHRoZSBzaWducyBvbiB0aGUgc3BvdC4nLAogICAgICBhcjogJ9iq2YHYp9i12YrZhCDYp9mE2LHZitin2LYg2YXZj9iq2K3ZgtmO2ZHZgiDZhdmG2YfYpyDYrNiy2KbZitmL2Kcg2YXZhiDYrtix2YrYt9ipINin2YTZhdi32KfYsSDYp9mE2K/Yp9iu2YTZitip2Iwg2YHYqtij2YPZkdivINmF2YYg2KfZhNmE2YjYrdin2Kog2YHZiiDYp9mE2YXZg9in2YYuJwogICAgfQogIH0sCiAgamVkOiB7CiAgICBuYW1lOiB7IGVuOiAnS2luZyBBYmR1bGF6aXogSW50ZXJuYXRpb25hbCBBaXJwb3J0IChKZWRkYWgpJywgYXI6ICfZhdi32KfYsSDYp9mE2YXZhNmDINi52KjYr9in2YTYudiy2YrYsiDYp9mE2K/ZiNmE2YogKNis2K/YqSknIH0sCiAgICBzaG9ydDogeyBlbjogJ0plZGRhaCcsIGFyOiAn2KzYr9ipJyB9LAogICAgY29kZTogJ0pFRCcsCiAgICB2ZXJpZmllZDogJ25vbmUnLAogICAgc3BlY2lmaWNzOiBudWxsLAogICAgdW52ZXJpZmllZE5vdGU6IHsKICAgICAgZW46ICdKZWRkYWggaXMgbm90IHZlcmlmaWVkIOKAlCBJIGhhdmUgdGhlIGdlbmVyYWwgcHJvY2VkdXJlIG9ubHkuIEZvciB0aGUgZXhhY3QgZGVzaywgZ2F0ZSBvciBmbG9vciwgY2hlY2sgdGhlIHNpZ25zIG9yIGFzayBhIHN0YWZmIG1lbWJlciBhdCB0aGUgYWlycG9ydC4nLAogICAgICBhcjogJ9is2K/YqSDYutmK2LEg2YXZj9iq2K3ZgtmO2ZHZgiDZhdmG2YfYp9iMINmB2YTYr9mK2ZEg2KfZhNil2KzYsdin2KEg2KfZhNi52KfZhSDZgdmC2LcuINmE2YXYudix2YHYqSDYp9mE2YXZg9iq2Kgg2KPZiCDYp9mE2KjZiNin2KjYqSDYo9mIINin2YTYt9in2KjZgiDYqNiv2YLYqdiMINix2KfYrNi5INin2YTZhNmI2K3Yp9iqINij2Ygg2KfYs9ij2YQg2KPYrdivINmF2YjYuNmB2Yog2KfZhNmF2LfYp9ixLicKICAgIH0KICB9Cn07Cgpjb25zdCBURVhUID0gewogIGVuOiB7CiAgICBhc2tBaXJwb3J0OiAnRmlyc3QsIHdoaWNoIGFpcnBvcnQgYXJlIHlvdSBmbHlpbmcgZnJvbSDigJQgRGFtbWFtLCBSaXlhZGgsIG9yIEplZGRhaD8nLAogICAgYXNrVGVybWluYWw6ICdXaGljaCB0ZXJtaW5hbCBpcyBvbiB5b3VyIHRpY2tldD8nLAogICAgYXNrVGltZTogJ0hvdyBsb25nIGlzIGl0IHVudGlsIGJvYXJkaW5nPycsCiAgICBhc2tCYWdzOiAnRG8geW91IGhhdmUgYSBiYWcgdG8gY2hlY2sgaW4sIG9yIGNhcnJ5LW9uIG9ubHk/JywKICAgIGFza0NvbmNlcm46ICdXaGF0IHdvcnJpZXMgeW91IG1vc3QgcmlnaHQgbm93PycsCiAgICBlc2NhbGF0ZTogJ1lvdXIgYm9hcmRpbmcgaXMgY2xvc2UuIFN0b3AgZm9sbG93aW5nIHRoaXMgcm91dGUgYW5kIGdvIHN0cmFpZ2h0IHRvIGFuIGFpcmxpbmUgb3IgYWlycG9ydCBzdGFmZiBtZW1iZXIg4oCUIHRoZXkgY2FuIG1vdmUgeW91IHRocm91Z2ggZmFzdGVyIHRoYW4gYW55IGFwcC4nLAogICAgaHVycnk6ICdZb3Ugc291bmQgcnVzaGVkLiBIZXJlIGlzIHRoZSBpbW1lZGlhdGUgbmV4dCBzdGVwOicsCiAgICBnYXRlQ2hhbmdlOiAnR2F0ZSBjaGFuZ2UnLAogICAgdG9vRmFzdDogJ1lvdSBoYXZlIGFza2VkIGZvciBhIGxvdCBhdCBvbmNlLiBMZXRcdTIwMTlzIGRvIHRoaXMgb25lIHN0ZXAgYXQgYSB0aW1lIOKAlCB0aGF0IGlzIGZhc3RlciB0aGFuIGdldHRpbmcgbG9zdC4nCiAgfSwKICBhcjogewogICAgYXNrQWlycG9ydDogJ9ij2YjZhNmL2KfYjCDZhdmGINij2Yog2YXYt9in2LEg2KrYs9in2YHYsSDigJQg2KfZhNiv2YXYp9mFINij2YUg2KfZhNix2YrYp9i2INij2YUg2KzYr9ip2J8nLAogICAgYXNrVGVybWluYWw6ICfZhdinINix2YLZhSDYp9mE2LXYp9mE2Kkg2KfZhNmF2YPYqtmI2Kgg2LnZhNmJINiq2LDZg9ix2KrZg9ifJywKICAgIGFza1RpbWU6ICfZg9mFINio2YLZiiDYrdiq2Ykg2KfZhNi12LnZiNivINil2YTZiSDYp9mE2LfYp9im2LHYqdifJywKICAgIGFza0JhZ3M6ICfZh9mEINmE2K/ZitmDINit2YLZitio2Kkg2KrYsdmK2K8g2KrYs9is2YrZhNmH2KfYjCDYo9mFINiz2YHYsSDYqNmE2Kcg2K3Zgtin2KbYqCDZhdiz2KzZkdmE2KnYnycsCiAgICBhc2tDb25jZXJuOiAn2YXYpyDYo9mD2KvYsSDZhdinINmK2YLZhNmC2YMg2KfZhNii2YbYnycsCiAgICBlc2NhbGF0ZTogJ9mF2YjYudivINin2YTYtdi52YjYryDZgtix2YrYqC4g2KrZiNmC2ZHZgSDYudmGINin2KrYqNin2Lkg2YfYsNinINin2YTZhdiz2KfYsSDZiNiq2YjYrNmR2Ycg2YXYqNin2LTYsdipINil2YTZiSDZhdmI2LjZgSDYtNix2YPYqSDYp9mE2LfZitix2KfZhiDYo9mIINmF2YjYuNmBINin2YTZhdi32KfYsdiMINmB2KjYpdmF2YPYp9mG2Ycg2KrYs9ix2YrYuSDYpdis2LHYp9ih2KfYqtmDINij2YPYq9ixINmF2YYg2KPZiiDYqti32KjZitmCLicsCiAgICBodXJyeTogJ9mK2KjYr9mIINij2YbZgyDZhdiz2KrYudis2YQuINmH2LDYpyDZh9mIINin2YTYpdis2LHYp9ihINin2YTYqtin2YTZiiDZgdmI2LHZi9inOicsCiAgICBnYXRlQ2hhbmdlOiAn2KrYutmK2YrYsSDYp9mE2KjZiNin2KjYqScsCiAgICB0b29GYXN0OiAn2YTZgtivINi32YTYqNiqINin2YTZg9ir2YrYsSDZgdmKINix2LPYp9mE2Kkg2YjYp9it2K/YqS4g2YTZhtmG2YHZkdiwINiw2YTZgyDYrti32YjYqSDYqNiu2LfZiNip2Iwg2YHZh9iw2Kcg2KPYs9ix2Lkg2YXZhiDYp9mE2LbZitin2LkuJwogIH0KfTsKCm1vZHVsZS5leHBvcnRzID0geyBTVEFHRVMsIFBST0ZJTEVTLCBBSVJQT1JUUywgVEVYVCB9Owo=
+'use strict';
+
+/**
+ * Default (shipped) settings. These are the values used on first boot and are
+ * never written to disk — the persisted file only holds operator overrides, so
+ * upgrading the image can still ship new defaults for anything untouched.
+ *
+ * Stage guidance is bilingual because the admin panel edits one box per
+ * language per stage. `{airport}` `{terminal}` `{flight}` `{gate}` placeholders
+ * are substituted by src/engine.js.
+ */
+
+const STAGES = [
+  {
+    key: 'checkin',
+    label: { en: 'Check-in & bag drop', ar: 'تسجيل الوصول وتسليم الحقائب' },
+    guidance: {
+      en: 'Go to the departures hall and find the counter for {airline}. Show your passport and boarding pass. Put your checked bag on the belt and keep the receipt. Check that the flight number on the screen matches the one on your ticket before you queue.',
+      ar: 'توجّه إلى صالة المغادرة وابحث عن كاونتر {airline}. أظهر جواز السفر وبطاقة الصعود. ضع حقيبتك المسجّلة على الحزام واحتفظ بالإيصال. تأكّد من أن رقم الرحلة على الشاشة يطابق الرقم المكتوب على تذكرتك قبل الوقوف في الطابور.'
+    }
+  },
+  {
+    key: 'security',
+    label: { en: 'Security screening', ar: 'فحص الأمن' },
+    guidance: {
+      en: 'Take laptops and liquids out of your bag and put them in the tray. Liquids over 100 ml are not allowed in hand baggage. Walk through the detector. If it beeps, staff will re-check you — that is normal, nothing is wrong.',
+      ar: 'أخرج الحاسوب المحمول والسوائل من حقيبتك وضعها في الصينية. السوائل التي تزيد على 100 مل غير مسموح بها في الحقيبة اليدوية. اعبر البوابة الكاشفة. إذا أطلق جهاز الإنذار فسيعيد الموظفون فحصك، وهذا أمر طبيعي ولا يعني وجود مشكلة.'
+    }
+  },
+  {
+    key: 'passport',
+    label: { en: 'Passport control', ar: 'مراقبة الجوازات' },
+    guidance: {
+      en: 'Hold your passport and boarding pass in your hand — not in the bag. The officer will check them and may take a fingerprint or a photo. Take the departures queue, not the arrivals queue.',
+      ar: 'أمسك جواز السفر وبطاقة الصعود في يدك، لا داخل الحقيبة. سيتحقق الموظف منهما وربما يأخذ بصمة أو صورة. ادخل في طابور المغادرة وليس طابور الوصول.'
+    }
+  },
+  {
+    key: 'customs',
+    label: { en: 'Customs', ar: 'الجمارك' },
+    guidance: {
+      en: 'There are two lanes: green if you have nothing to declare, red if you are carrying goods that must be declared. Choose the lane that matches what is in your bag. If you are unsure, ask a customs officer before you walk through.',
+      ar: 'هناك مسارَان: المسار الأخضر إذا لم يكن معك ما يستوجب التصريح، والمسار الأحمر إذا كان معك بضائع يجب التصريح عنها. اختر المسار الذي يطابق ما في حقيبتك. إن لم تكن متأكدًا فاسأل موظف الجمارك قبل المرور.'
+    }
+  },
+  {
+    key: 'gate',
+    label: { en: 'Find the gate', ar: 'إيجاد البوابة' },
+    guidance: {
+      en: 'Your gate number is on the boarding pass and repeated on the departure screens. Follow the gate signage — the gate number is on the overhead signs. Look at the screens once more after security, because the gate can change.',
+      ar: 'رقم بوابتك مكتوب على بطاقة الصعود ومكرّر على شاشات المغادرة. اتبع لوحات إرشاد البوابات، فرقم البوابة مكتوب على اللوحات العلوية. انظر إلى الشاشات مرة أخرى بعد الأمن، فقد تتغير البوابة.'
+    }
+  },
+  {
+    key: 'boarding',
+    label: { en: 'Gate & boarding', ar: 'البوابة والصعود' },
+    guidance: {
+      en: 'Wait at the gate and listen for the boarding announcement. Boarding usually closes 20–30 minutes before departure — do not leave the gate area in the last half hour, even to buy something.',
+      ar: 'انتظر عند البوابة وأنصت لإعلان الصعود. عادةً يُغلق الصعود قبل الإقلاع بـ 20–30 دقيقة، فلا تبتعد عن منطقة البوابة في النصف ساعة الأخيرة، ولا حتى للشراء.'
+    }
+  },
+  {
+    key: 'gatechange',
+    label: { en: 'Gate change', ar: 'تغيير البوابة' },
+    guidance: {
+      en: 'Your gate has changed to {gate}. Read it again on the nearest departure screen to be sure, then go straight there — do not stop to ask directions on the way. If the new gate is far away or boarding has already started, speak to airline staff immediately.',
+      ar: 'تغيّرت بوابتك إلى {gate}. تحقّق منها مرة أخرى على أقرب شاشة مغادرة، ثم اذهب إليها مباشرة دون التوقف لسؤال أحد عن الطريق. إذا كانت البوابة الجديدة بعيدة أو بدأ الصعود بالفعل فتحدّث إلى موظفي شركة الطيران فورًا.'
+    }
+  }
+];
+
+const PROFILES = [
+  {
+    key: 'nervous',
+    enabled: true,
+    label: { en: 'Nervous first-timer', ar: 'المسافر المبتدئ القلق' },
+    tone: {
+      en: 'warm, reassuring, one step at a time',
+      ar: 'دافئ ومطمئن وخطوة واحدة في كل مرة'
+    }
+  },
+  {
+    key: 'adult',
+    enabled: true,
+    label: { en: 'Adult, first international flight', ar: 'بالغ في أول رحلة دولية' },
+    tone: {
+      en: 'efficient, respectful, full detail',
+      ar: 'فعّال ومحترم وبكل التفاصيل'
+    }
+  },
+  {
+    key: 'hurried',
+    enabled: true,
+    label: { en: 'Experienced / hurried', ar: 'خبير / مستعجل' },
+    tone: {
+      en: 'fast, direct, next action only',
+      ar: 'سريع ومباشر والإجراء التالي فقط'
+    }
+  }
+];
+
+const AIRPORTS = {
+  dmm: {
+    name: { en: 'King Fahd International Airport (Dammam)', ar: 'مطار الملك فهد الدولي (الدمام)' },
+    short: { en: 'Dammam', ar: 'الدمام' },
+    code: 'DMM',
+    verified: 'full',
+    // Dammam is the case verified end to end.
+    specifics: {
+      en: 'Dammam is the airport Flight Guide has verified end to end.',
+      ar: 'الدمام هي المطار الذي تحقّقت منه Flight Guide من البداية إلى النهاية.'
+    },
+    unverifiedNote: null
+  },
+  ruh: {
+    name: { en: 'King Khalid International Airport (Riyadh)', ar: 'مطار الملك خالد الدولي (الرياض)' },
+    short: { en: 'Riyadh', ar: 'الرياض' },
+    code: 'RUH',
+    verified: 'partial',
+    specifics: {
+      en: 'At Riyadh, passport control and e-gates are on Level G and Level -1, Saudi Customs is on Level G, and security screening is on Levels G, 1 and 2 — find the point on your own level. Terminals 1–4 use the levels S, A, I, D, M; Terminal 5 uses -1, G, 1.',
+      ar: 'في الرياض، مراقبة الجوازات والبوابات الإلكترونية في المستوى G والمستوى -1، والجمارك السعودية في المستوى G، والتفتيش الأمني في المستويات G و1 و2، فابحث عن نقطة التفتيش في مستواك. الصالات 1–4 تستخدم المستويات S وA وI وD وM، والصالة 5 تستخدم -1 وG و1.'
+    },
+    unverifiedNote: {
+      en: 'Riyadh details are partially verified from the airport\u2019s indoor map — confirm on the signs on the spot.',
+      ar: 'تفاصيل الرياض مُتحقَّق منها جزئيًا من خريطة المطار الداخلية، فتأكّد من اللوحات في المكان.'
+    }
+  },
+  jed: {
+    name: { en: 'King Abdulaziz International Airport (Jeddah)', ar: 'مطار الملك عبدالعزيز الدولي (جدة)' },
+    short: { en: 'Jeddah', ar: 'جدة' },
+    code: 'JED',
+    verified: 'none',
+    specifics: null,
+    unverifiedNote: {
+      en: 'Jeddah is not verified — I have the general procedure only. For the exact desk, gate or floor, check the signs or ask a staff member at the airport.',
+      ar: 'جدة غير مُتحقَّق منها، فلديّ الإجراء العام فقط. لمعرفة المكتب أو البوابة أو الطابق بدقة، راجع اللوحات أو اسأل أحد موظفي المطار.'
+    }
+  }
+};
+
+const TEXT = {
+  en: {
+    askAirport: 'First, which airport are you flying from — Dammam, Riyadh, or Jeddah?',
+    askTerminal: 'Which terminal is on your ticket?',
+    askTime: 'How long is it until boarding?',
+    askBags: 'Do you have a bag to check in, or carry-on only?',
+    askConcern: 'What worries you most right now?',
+    escalate: 'Your boarding is close. Stop following this route and go straight to an airline or airport staff member — they can move you through faster than any app.',
+    hurry: 'You sound rushed. Here is the immediate next step:',
+    gateChange: 'Gate change',
+    tooFast: 'You have asked for a lot at once. Let\u2019s do this one step at a time — that is faster than getting lost.'
+  },
+  ar: {
+    askAirport: 'أولًا، من أي مطار تسافر — الدمام أم الرياض أم جدة؟',
+    askTerminal: 'ما رقم الصالة المكتوب على تذكرتك؟',
+    askTime: 'كم بقي حتى الصعود إلى الطائرة؟',
+    askBags: 'هل لديك حقيبة تريد تسجيلها، أم سفر بلا حقائب مسجّلة؟',
+    askConcern: 'ما أكثر ما يقلقك الآن؟',
+    escalate: 'موعد الصعود قريب. توقّف عن اتباع هذا المسار وتوجّه مباشرة إلى موظف شركة الطيران أو موظف المطار، فبإمكانه تسريع إجراءاتك أكثر من أي تطبيق.',
+    hurry: 'يبدو أنك مستعجل. هذا هو الإجراء التالي فورًا:',
+    gateChange: 'تغيير البوابة',
+    tooFast: 'لقد طلبت الكثير في رسالة واحدة. لننفّذ ذلك خطوة بخطوة، فهذا أسرع من الضياع.'
+  }
+};
+
+module.exports = { STAGES, PROFILES, AIRPORTS, TEXT };

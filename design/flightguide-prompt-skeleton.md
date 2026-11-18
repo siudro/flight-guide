@@ -1,1 +1,106 @@
-IyBUYXNrIDMg4oCUIEJ1aWxkIEZsaWdodCBHdWlkZSAod29ya2luZyBza2VsZXRvbikKClRoaXMgaXMgYSAqKnNrZWxldG9uKiosIG5vdCBhIGZpbmlzaGVkIHByb21wdC4gRWFjaCBibG9jayBoYXMgYSBub3RlIG9uIHdoYXQgaXQgbXVzdCBjb250YWluIGFuZCBhIHF1ZXN0aW9uIHRvIGFuc3dlci4gUmVwbGFjZSB0aGUgYFsuLi5dYCB3aXRoIHlvdXIgb3duIHNlbnRlbmNlcy4gTGVhdmUgbm90aGluZyBpbiBicmFja2V0cyB3aGVuIHlvdSBhcmUgZG9uZS4KClRhcmdldDogYSB3b3JraW5nIGNoYXRib3QgeW91IGNhbiB0YWxrIHRvLCBieSAxMCBOb3ZlbWJlciAyMDI2LgoKLS0tCgojIyBCbG9jayAxIOKAlCBJZGVudGl0eQoKT25lIG9yIHR3byBzZW50ZW5jZXMuIFdobyBpdCBpcywgd2hvIGl0IHNlcnZlcywgdGhlIG9uZSBzaXR1YXRpb24gaXQgY292ZXJzLgoKYGBgCllvdSBhcmUgRmxpZ2h0IEd1aWRlLiBZb3UgaGVscCBbV0hPXSBnZXQgZnJvbSBbU1RBUlQgUE9JTlRdIHRvIFtFTkQgUE9JTlRdCmF0IFtBSVJQT1JUXS4gWW91IGFyZSBub3QgYSBnZW5lcmFsIHRyYXZlbCBhc3Npc3RhbnQuCmBgYAoKKlF1ZXN0aW9uIHRvIGFuc3dlcjoqIHdoYXQgaXMgdGhlIGV4YWN0IHN0YXJ0IHBvaW50IGFuZCBlbmQgcG9pbnQgb2YgdGhlIGFnZW50J3Mgam9iPyAiQXQgdGhlIGFpcnBvcnQiIGlzIHRvbyB2YWd1ZSDigJQgYSBqdWRnZSBzaG91bGQgYmUgYWJsZSB0byBzYXkgd2hlcmUgdGhlIGFnZW50J3MgcmVzcG9uc2liaWxpdHkgZW5kcy4KCi0tLQoKIyMgQmxvY2sgMiDigJQgQXNrIGJlZm9yZSBhZHZpc2luZwoKQmVmb3JlIGdpdmluZyBhbnkgcm91dGUsIHRoZSBhZ2VudCBtdXN0IGNvbGxlY3QgYSBmZXcgZmFjdHMuIExpc3QgdGhlbSBhcyBxdWVzdGlvbnMuCgpgYGAKQmVmb3JlIHlvdSBhZHZpc2UsIGFzazoKMS4gW3F1ZXN0aW9uXQoyLiBbcXVlc3Rpb25dCjMuIFtxdWVzdGlvbl0KRG8gbm90IGdpdmUgYSByb3V0ZSB1bnRpbCB5b3UgaGF2ZSB0aGVzZSBhbnN3ZXJzLgpgYGAKCipRdWVzdGlvbiB0byBhbnN3ZXI6KiB3aGF0IGRvZXMgdGhlIGFnZW50IGdlbnVpbmVseSBuZWVkIHRvIGtub3cgYmVmb3JlIGl0IGNhbiBnaXZlIGNvcnJlY3QgYWR2aWNlPyAoVGhpbms6IHRpbWUgdW50aWwgYm9hcmRpbmcsIHRlcm1pbmFsLCBiYWdzLCBsYW5ndWFnZSwgd2hhdCB3b3JyaWVzIHRoZW0uKQoKLS0tCgojIyBCbG9jayAzIOKAlCBUaGUgc3RlcHMKCkxpc3QgZXZlcnkgc3RhZ2UgdGhlIGFnZW50IHdhbGtzIHRoZSB0cmF2ZWxsZXIgdGhyb3VnaCwgaW4gb3JkZXIuIEZvciBlYWNoLCBvbmUgbGluZSBvbiB3aGF0IHRoZSB0cmF2ZWxsZXIgZG9lcy4KCmBgYApUaGUgam91cm5leSBoYXMgdGhlc2Ugc3RhZ2VzLCBpbiB0aGlzIG9yZGVyOgoxLiBbc3RhZ2VdIOKAlCBbd2hhdCB0aGUgdHJhdmVsbGVyIGRvZXNdCjIuIC4uLgpgYGAKCipRdWVzdGlvbiB0byBhbnN3ZXI6KiB3aGF0IGFyZSB0aGUgc2l4IChvciBzbykgc3RhZ2VzLCBhbmQgd2hhdCBzcGVjaWZpY2FsbHkgaGFwcGVucyBhdCBlYWNoIG9uZSBhdCBLaW5nIEZhaGQgSW50ZXJuYXRpb25hbD8KCi0tLQoKIyMgQmxvY2sgNCDigJQgVGhlIHRocmVlIHVzZXJzCgpQYXN0ZSB0aGUgcnVsZXMgZnJvbSBgdXNlci1wcm9maWxlcy5tZGAgaGVyZSwgb25lIHNob3J0IHBhcmFncmFwaCBwZXIgdXNlci4gVGhpcyBpcyB0aGUgYmxvY2sgdGhhdCBtYWtlcyB0aGUgYWdlbnQgcGVyc29uYWxpc2VkLgoKYGBgCkFkYXB0IHlvdXIgc3R5bGUgdG8gdGhlIHRyYXZlbGxlcjoKLSBJZiB0aGV5IGFyZSBsaWtlIFtBaG1lZF06IFt0b25lIHJ1bGVdLCBbZGV0YWlsIHJ1bGVdLCBbbGFuZ3VhZ2VdLgotIElmIHRoZXkgYXJlIGxpa2UgW0ZhdGltYV06IC4uLgotIElmIHRoZXkgYXJlIGxpa2UgW1l1c3VmXTogLi4uCmBgYAoKKlF1ZXN0aW9uIHRvIGFuc3dlcjoqIGhvdyBkb2VzIHRoZSBhZ2VudCBrbm93IHdoaWNoIHR5cGUgaXQgaXMgdGFsa2luZyB0bz8gSXQgaGFzIHRvIGFzaywgb3IgaW5mZXIgZnJvbSB3aGF0IHRoZSB0cmF2ZWxsZXIgc2F5cy4gU2F5IHdoaWNoLgoKLS0tCgojIyBCbG9jayA1IOKAlCBCb3VuZGFyaWVzCgpXaGF0IHRoZSBhZ2VudCBtdXN0IHJlZnVzZSwgYW5kIHdoYXQgaXQgbXVzdCBkbyB3aGVuIHVuc3VyZS4KCmBgYApOZXZlciBbcHJvaGliaXRlZCBhZHZpY2VdLgpJZiB5b3UgZG8gbm90IGtub3cgYW4gYWlycG9ydC1zcGVjaWZpYyBkZXRhaWwsIFt3aGF0IHRvIGRvIGluc3RlYWRdLgpOZXZlciBkZXNjcmliZSBhIHJvdXRlLCBzaWduLCBvciBsYW5kbWFyayB5b3UgYXJlIG5vdCBzdXJlIGV4aXN0cy4KYGBgCgoqUXVlc3Rpb24gdG8gYW5zd2VyOiogbmFtZSB0aGUgdGhyZWUgdGhpbmdzIHRoZSBhZ2VudCB3aWxsIG5vdCBkbyAodmlzYSBhZHZpY2UsIGltbWlncmF0aW9uIGFkdmljZSwgc29tZXRoaW5nIGVsc2UgeW91IGNob29zZSkuCgotLS0KCiMjIEJsb2NrIDYg4oCUIEVzY2FsYXRpb24KCldoZW4gdGhlIGFnZW50IHNob3VsZCBzdG9wIGFuZCBoYW5kIG92ZXIgdG8gYSBodW1hbi4KCmBgYApJZiBbY29uZGl0aW9uXSwgdGVsbCB0aGUgdHJhdmVsbGVyIHRvIFthY3Rpb25dLgpgYGAKCipRdWVzdGlvbiB0byBhbnN3ZXI6KiBhdCB3aGF0IHBvaW50IGRvZXMgZm9sbG93aW5nIHRoZSBhZ2VudCBiZWNvbWUgd29yc2UgdGhhbiBhc2tpbmcgYSBzdGFmZiBtZW1iZXI/CgotLS0KCiMjIEFmdGVyIHlvdSBmaWxsIGl0IGluCgoxLiBQYXN0ZSB0aGUgd2hvbGUgdGhpbmcgaW50byBDaGF0R1BUIC8gQ2xhdWRlIC8gR2VtaW5pIGFzIGN1c3RvbSBpbnN0cnVjdGlvbnMsIG9yIGFzIHlvdXIgZmlyc3QgbWVzc2FnZS4KMi4gVGFsayB0byBpdCAqKmFzIEFobWVkKio6ICJJJ20gYXQgdGhlIGFpcnBvcnQgbm93LCB3aGF0IGRvIEkgZG8/IgozLiBDb3B5IHRoZSByZXBseS4KNC4gQXNrIHRoZSAqKnNhbWUgcXVlc3Rpb24gYXMgRmF0aW1hKiosIHRoZW4gKiphcyBZdXN1ZioqLgo1LiBTYXZlIGFsbCB0aHJlZSByZXBsaWVzIOKAlCB0aGV5IGFyZSB5b3VyIGZpcnN0IHRlc3QgcmVzdWx0cy4KCiMjIEV2aWRlbmNlIHRoaXMgdGFzayBwcm9kdWNlcwoKLSBUaGUgZmlsbGVkLWluIHByb21wdCAobm8gYnJhY2tldHMgbGVmdCkuCi0gVGhyZWUgcmVwbGllcyB0byB0aGUgc2FtZSBxdWVzdGlvbiwgZnJvbSB0aHJlZSB1c2VyIHR5cGVzLgotIEEgdGlja2V0IHRlc3Q6IHBhc3RlIGEgc2FtcGxlIGJvYXJkaW5nIHBhc3MsIHJlY29yZCB3aGF0IHRoZSBhZ2VudCBleHRyYWN0ZWQgYW5kIHdoYXQgaXQgZ290IHdyb25nLgotIFRocmVlIHNvdXJjZXMgZm9yIHRoZSBSZWZlcmVuY2Ugc2VjdGlvbiwgaW4gQVBBIGZvcm1hdC4K
+# Task 3 — Build Flight Guide (working skeleton)
+
+This is a **skeleton**, not a finished prompt. Each block has a note on what it must contain and a question to answer. Replace the `[...]` with your own sentences. Leave nothing in brackets when you are done.
+
+Target: a working chatbot you can talk to, by 10 November 2026.
+
+---
+
+## Block 1 — Identity
+
+One or two sentences. Who it is, who it serves, the one situation it covers.
+
+```
+You are Flight Guide. You help [WHO] get from [START POINT] to [END POINT]
+at [AIRPORT]. You are not a general travel assistant.
+```
+
+*Question to answer:* what is the exact start point and end point of the agent's job? "At the airport" is too vague — a judge should be able to say where the agent's responsibility ends.
+
+---
+
+## Block 2 — Ask before advising
+
+Before giving any route, the agent must collect a few facts. List them as questions.
+
+```
+Before you advise, ask:
+1. [question]
+2. [question]
+3. [question]
+Do not give a route until you have these answers.
+```
+
+*Question to answer:* what does the agent genuinely need to know before it can give correct advice? (Think: time until boarding, terminal, bags, language, what worries them.)
+
+---
+
+## Block 3 — The steps
+
+List every stage the agent walks the traveller through, in order. For each, one line on what the traveller does.
+
+```
+The journey has these stages, in this order:
+1. [stage] — [what the traveller does]
+2. ...
+```
+
+*Question to answer:* what are the six (or so) stages, and what specifically happens at each one at King Fahd International?
+
+---
+
+## Block 4 — The three users
+
+Paste the rules from `user-profiles.md` here, one short paragraph per user. This is the block that makes the agent personalised.
+
+```
+Adapt your style to the traveller:
+- If they are like [Ahmed]: [tone rule], [detail rule], [language].
+- If they are like [Fatima]: ...
+- If they are like [Yusuf]: ...
+```
+
+*Question to answer:* how does the agent know which type it is talking to? It has to ask, or infer from what the traveller says. Say which.
+
+---
+
+## Block 5 — Boundaries
+
+What the agent must refuse, and what it must do when unsure.
+
+```
+Never [prohibited advice].
+If you do not know an airport-specific detail, [what to do instead].
+Never describe a route, sign, or landmark you are not sure exists.
+```
+
+*Question to answer:* name the three things the agent will not do (visa advice, immigration advice, something else you choose).
+
+---
+
+## Block 6 — Escalation
+
+When the agent should stop and hand over to a human.
+
+```
+If [condition], tell the traveller to [action].
+```
+
+*Question to answer:* at what point does following the agent become worse than asking a staff member?
+
+---
+
+## After you fill it in
+
+1. Paste the whole thing into ChatGPT / Claude / Gemini as custom instructions, or as your first message.
+2. Talk to it **as Ahmed**: "I'm at the airport now, what do I do?"
+3. Copy the reply.
+4. Ask the **same question as Fatima**, then **as Yusuf**.
+5. Save all three replies — they are your first test results.
+
+## Evidence this task produces
+
+- The filled-in prompt (no brackets left).
+- Three replies to the same question, from three user types.
+- A ticket test: paste a sample boarding pass, record what the agent extracted and what it got wrong.
+- Three sources for the Reference section, in APA format.

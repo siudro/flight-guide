@@ -1,1 +1,48 @@
-IyBGbGlnaHQgR3VpZGUg4oCUIFNraWxsOiBKZWRkYWggKEtpbmcgQWJkdWxheml6IEludGVybmF0aW9uYWwgQWlycG9ydCkKCioqU3RhdHVzOioqIOKdjCBOT1QgVkVSSUZJRUQg4oCUIHRoZSBkZXBhcnR1cmVzIHBhZ2UgKGBrYWlhLnNhYCkgcmV0dXJucyA0MDMgdG8gYXV0b21hdGVkIGFjY2Vzcy4gVGhpcyBmaWxlIGNvbnRhaW5zIHRoZSBnZW5lcmFsIHByb2NlZHVyZSBvbmx5LiBObyBnYXRlIG51bWJlcnMsIGZsb29yIGxvY2F0aW9ucywgb3IgdGVybWluYWwgZGV0YWlscyBoYXZlIGJlZW4gY29uZmlybWVkLgoKKipJQVRBOioqIEpFRCDCtyAqKlNpdGU6KiogYGthaWEuc2FgIMK3ICoqTGFuZ3VhZ2VzOioqIEFyYWJpYywgRW5nbGlzaAoKLS0tCgojIyBXaGF0IHRoaXMgc2tpbGwgbWF5IHNheQoKVGhlIHNpeCBzdGFnZXMgYXJlIHRoZSBzYW1lIGFzIGF0IGFueSBpbnRlcm5hdGlvbmFsIFNhdWRpIGFpcnBvcnQ6CgoxLiAqKkNoZWNrLWluIGFuZCBiYWcgZHJvcCoqIOKAlCB0aGUgYWlybGluZSdzIGNvdW50ZXIgaW4gdGhlIGRlcGFydHVyZXMgaGFsbDsgcGFzc3BvcnQgYW5kIGJvYXJkaW5nIHBhc3MuCjIuICoqU2VjdXJpdHkgc2NyZWVuaW5nKiog4oCUIHRyYXlzLCBsYXB0b3BzIGFuZCBsaXF1aWRzIG91dCwgd2FsayB0aHJvdWdoIHRoZSBkZXRlY3Rvci4KMy4gKipQYXNzcG9ydCBjb250cm9sKiog4oCUIG9mZmljZXIgY2hlY2tzIHBhc3Nwb3J0IGFuZCBib2FyZGluZyBwYXNzOyBoYXZlIGJvdGggaW4gaGFuZC4KNC4gKipDdXN0b21zKiog4oCUIGdyZWVuIGxhbmUgaWYgbm90aGluZyB0byBkZWNsYXJlOyByZWQgbGFuZSBvdGhlcndpc2UuCjUuICoqRmluZCB0aGUgZ2F0ZSoqIOKAlCBnYXRlIG51bWJlciBvbiB0aGUgYm9hcmRpbmcgcGFzcywgY29uZmlybWVkIG9uIHRoZSBkZXBhcnR1cmUgc2NyZWVucy4KNi4gKipHYXRlIGFuZCBib2FyZGluZyoqIOKAlCBib2FyZCB3aGVuIGNhbGxlZDsgYm9hcmRpbmcgdXN1YWxseSBjbG9zZXMgMjDigJMzMCBtaW51dGVzIGJlZm9yZSBkZXBhcnR1cmUuCgotLS0KCiMjIOKaoO+4jyBXaGF0IHRoaXMgc2tpbGwgbXVzdCBOT1QgZG8KCkl0IG11c3QgKipub3QgaW52ZW50KiogYW55IG9mIHRoZSBmb2xsb3dpbmcgZm9yIEplZGRhaDoKCi0gVGVybWluYWwgbnVtYmVycyBvciBuYW1lcwotIEdhdGUgbnVtYmVycyBvciBnYXRlIHJhbmdlcwotIFdoaWNoIGZsb29yIHBhc3Nwb3J0IGNvbnRyb2wgb3IgY3VzdG9tcyBpcyBvbgotIFdhbGtpbmcgdGltZXMKLSBXaGljaCBhaXJsaW5lIHVzZXMgd2hpY2ggdGVybWluYWwgb3IgZ2F0ZQotIExpdmUgZmxpZ2h0IHN0YXR1cywgZ2F0ZSBjaGFuZ2VzLCBvciBjYW5jZWxsYXRpb25zCgoqKlRoaXMgaXMgdGhlIGhvbmVzdCBsaW1pdGF0aW9uIG9mIHRoZSBhaXJwb3J0IGNvdmVyYWdlLioqIEplZGRhaCBpcyBkZXNjcmliZWQgYXQgdGhlIGxldmVsIG9mIGdlbmVyYWwgcHJvY2VkdXJlLiBBbnl0aGluZyBzcGVjaWZpYyB0byB0aGUgYWlycG9ydCBtdXN0IGJlIHByZXNlbnRlZCBhcyBzb21ldGhpbmcgdGhlIHRyYXZlbGxlciBjb25maXJtcyBvbiB0aGUgc3BvdC4KCi0tLQoKIyMgSG93IHRvIGFuc3dlcgoKV2hlbiBhc2tlZCBzb21ldGhpbmcgdGhlIHNraWxsIGNhbm5vdCB2ZXJpZnk6Cgo+ICJJIGRvbid0IGhhdmUgdmVyaWZpZWQgZGV0YWlscyBmb3IgSmVkZGFoIGFpcnBvcnQuIFRoZSBwcm9jZWR1cmUgaXMgdGhlIHNhbWUgYXMgSSd2ZSBkZXNjcmliZWQg4oCUIGJ1dCBmb3IgdGhlIGV4YWN0IGRlc2ssIGdhdGUgb3IgZmxvb3IsIHBsZWFzZSBjaGVjayB0aGUgc2lnbnMgb3IgYXNrIGEgc3RhZmYgbWVtYmVyIGF0IHRoZSBhaXJwb3J0LiBUaGV5J2xsIGtub3cgdGhlIGN1cnJlbnQgbGF5b3V0LiIKClRoYXQgYW5zd2VyIGlzICoqY29ycmVjdCBiZWhhdmlvdXIqKiwgbm90IGEgZmFpbHVyZS4gQSBndWlkZSB0aGF0IGFkbWl0cyB3aGF0IGl0IGRvZXMgbm90IGtub3cgaXMgbW9yZSB0cnVzdHdvcnRoeSB0aGFuIG9uZSB0aGF0IGd1ZXNzZXMuCgotLS0KCiMjIFNvdXJjZXMKLSBga2FpYS5zYWAg4oCUIGFpcnBvcnQgc2l0ZSAoZGVwYXJ0dXJlcyBwYWdlIGJvdC1wcm90ZWN0ZWQ7IG5vdCBtYWNoaW5lLXJlYWRhYmxlIGF0IHRpbWUgb2Ygd3JpdGluZykK
+# Flight Guide — Skill: Jeddah (King Abdulaziz International Airport)
+
+**Status:** ❌ NOT VERIFIED — the departures page (`kaia.sa`) returns 403 to automated access. This file contains the general procedure only. No gate numbers, floor locations, or terminal details have been confirmed.
+
+**IATA:** JED · **Site:** `kaia.sa` · **Languages:** Arabic, English
+
+---
+
+## What this skill may say
+
+The six stages are the same as at any international Saudi airport:
+
+1. **Check-in and bag drop** — the airline's counter in the departures hall; passport and boarding pass.
+2. **Security screening** — trays, laptops and liquids out, walk through the detector.
+3. **Passport control** — officer checks passport and boarding pass; have both in hand.
+4. **Customs** — green lane if nothing to declare; red lane otherwise.
+5. **Find the gate** — gate number on the boarding pass, confirmed on the departure screens.
+6. **Gate and boarding** — board when called; boarding usually closes 20–30 minutes before departure.
+
+---
+
+## ⚠️ What this skill must NOT do
+
+It must **not invent** any of the following for Jeddah:
+
+- Terminal numbers or names
+- Gate numbers or gate ranges
+- Which floor passport control or customs is on
+- Walking times
+- Which airline uses which terminal or gate
+- Live flight status, gate changes, or cancellations
+
+**This is the honest limitation of the airport coverage.** Jeddah is described at the level of general procedure. Anything specific to the airport must be presented as something the traveller confirms on the spot.
+
+---
+
+## How to answer
+
+When asked something the skill cannot verify:
+
+> "I don't have verified details for Jeddah airport. The procedure is the same as I've described — but for the exact desk, gate or floor, please check the signs or ask a staff member at the airport. They'll know the current layout."
+
+That answer is **correct behaviour**, not a failure. A guide that admits what it does not know is more trustworthy than one that guesses.
+
+---
+
+## Sources
+- `kaia.sa` — airport site (departures page bot-protected; not machine-readable at time of writing)

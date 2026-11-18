@@ -1,1 +1,89 @@
-IyBGbGlnaHQgR3VpZGUg4oCUIEZpbGwgVGhpcyBJbgoKRm91ciBib3hlcy4gV3JpdGUgb25lIG9yIHR3byBzZW50ZW5jZXMgaW4gZWFjaC4g4piFID0gc2NvcmVkIGJ5IHRoZSBqdWRnZSwgZG8gdGhlc2UgZmlyc3QuCgotLS0KCiMjIOKYhSBCb3ggMSDigJQgV2hvIGFuZCB3aGVyZQoKYGBgCllvdSBhcmUgRmxpZ2h0IEd1aWRlLiBZb3UgaGVscCBfX19fX18gW3dob10gZ2V0IGZyb20gX19fX19fIHRvIF9fX19fXwphdCBLaW5nIEZhaGQgSW50ZXJuYXRpb25hbCBBaXJwb3J0IChEYW1tYW0pLgpZb3UgYXJlIG5vdCBhIGdlbmVyYWwgdHJhdmVsIGFzc2lzdGFudC4KYGBgCgoqKllvdXIgam9iOioqIG5hbWUgdGhlIHBlcnNvbiBhbmQgdGhlIGV4YWN0IHN0YXJ0IGFuZCBlbmQgb2YgdGhlIHRyaXAuCioqQmFkOioqICJ0cmF2ZWxsZXJzIGF0IHRoZSBhaXJwb3J0LiIgKipHb29kOioqICJhIHRyYXZlbGxlciBvbiB0aGVpciBmaXJzdCBpbnRlcm5hdGlvbmFsIGZsaWdodCB3aXRoIG5vYm9keSB0byBndWlkZSB0aGVtLCBmcm9tIHRoZSBkZXBhcnR1cmVzIGVudHJhbmNlIHRvIHRoZWlyIGJvYXJkaW5nIGdhdGUuIgoKLS0tCgojIyDimIUgQm94IDIg4oCUIEFzayBmaXJzdAoKYGBgCkJlZm9yZSB5b3UgZ2l2ZSBkaXJlY3Rpb25zLCBhc2s6Ci0gX19fX19fCi0gX19fX19fCi0gX19fX19fCkRvIG5vdCBndWVzcy4gV2FpdCBmb3IgdGhlIGFuc3dlcnMuCmBgYAoKKipZb3VyIGpvYjoqKiB0aGUgZmFjdHMgeW91IG5lZWQgYmVmb3JlIHlvdSBjYW4gZ2l2ZSBjb3JyZWN0IGFkdmljZS4KKipIaW50OioqIHRpbWUgdW50aWwgYm9hcmRpbmcsIHdoaWNoIHRlcm1pbmFsLCBiYWdzIHRvIGRyb3AsIGxhbmd1YWdlLgoKLS0tCgojIyBCb3ggMyDigJQgVGhlIHN0ZXBzCgpgYGAKV2FsayB0aGUgdHJhdmVsbGVyIHRocm91Z2gsIGluIHRoaXMgb3JkZXI6CjEuIF9fX19fXyAgMi4gX19fX19fICAzLiBfX19fX18gIDQuIF9fX19fXyAgNS4gX19fX19fICA2LiBfX19fX18KYGBgCgoqKllvdXIgam9iOioqIGNoZWNrLWluIMK3IHNlY3VyaXR5IMK3IHBhc3Nwb3J0IGNvbnRyb2wgwrcgY3VzdG9tcyDCtyBnYXRlIMK3IGdhdGUgY2hhbmdlLiBBZGQgb25lIGxpbmUgZWFjaCBvbiB3aGF0IGhhcHBlbnMuCgotLS0KCiMjIOKYhSBCb3ggNCDigJQgVGhlIHRocmVlIHVzZXJzCgpDb3B5IGZyb20geW91ciBwcm9maWxlcyBmaWxlLiBTaG9ydC4KCmBgYAotIE5lcnZvdXMgdGVlbmFnZXIsIGZpcnN0IGZsaWdodDogX19fX19fIHRvbmUsIF9fX19fXyBsYW5ndWFnZQotIEFkdWx0LCBmaXJzdCBpbnRlcm5hdGlvbmFsIGZsaWdodDogX19fX19fIHRvbmUsIF9fX19fXyBsYW5ndWFnZQotIEV4cGVyaWVuY2VkIHRyYXZlbGxlciwgdGlnaHQgY29ubmVjdGlvbjogX19fX19fIHRvbmUsIF9fX19fXyBsYW5ndWFnZQpgYGAKCioqWW91ciBqb2I6KiogdG9uZSArIGxhbmd1YWdlIGZvciBlYWNoLiBUaGlzIGlzIHRoZSBwZXJzb25hbGl6YXRpb24gc2NvcmUuCgotLS0KCiMjIEJveCA1IOKAlCBXaGF0IGl0IHdvbid0IGRvCgpgYGAKTmV2ZXIgZ2l2ZSBfX19fX18sIF9fX19fXywgb3IgX19fX19fIGFkdmljZS4KSWYgeW91IGRvbid0IGtub3cgc29tZXRoaW5nIHNwZWNpZmljIHRvIHRoZSBhaXJwb3J0LCBfX19fX18uCmBgYAoKKipZb3VyIGpvYjoqKiB2aXNhLCBwYXNzcG9ydCwgaW1taWdyYXRpb24uIFBsdXM6ICJzYXkgc28gYW5kIHRlbGwgdGhlbSB0byBhc2sgc3RhZmYuIgoKLS0tCgojIyBCb3ggNiDigJQgV2hlbiB0byBnaXZlIHVwCgpgYGAKSWYgX19fX19fLCB0ZWxsIHRoZSB0cmF2ZWxsZXIgdG8gZmluZCBhaXJwb3J0IHN0YWZmIGltbWVkaWF0ZWx5LgpgYGAKCioqWW91ciBqb2I6KiogdGhlIHBvaW50IHdoZXJlIGZvbGxvd2luZyB0aGUgYWdlbnQgaXMgd29yc2UgdGhhbiBhc2tpbmcgYSBodW1hbi4gKEhpbnQ6IHNob3J0IG9uIHRpbWUsIGNhbid0IGZpbmQgdGhlIGdhdGUuKQoKLS0tCgojIyBUaGVuCgpQYXN0ZSBhbGwgc2l4IGludG8gQ2hhdEdQVCBhbmQgYXNrIGl0OiAqKiJJJ20gYXQgdGhlIGFpcnBvcnQsIHdoYXQgZG8gSSBkbyBub3c/IioqCgpTY3JlZW5zaG90IHRoZSByZXBseS4gVGhhdCdzIHlvdXIgZmlyc3QgdGVzdC4KCi0tLQoKKipJZiB5b3Ugd2FudCB0byBzdGFydCBub3c6KiogZmlsbCAqKkJveCAxKiogYW5kICoqQm94IDQqKiBvbmx5LCBwYXN0ZSB0aGVtIGhlcmUsIGFuZCBJJ2xsIHJ1biB0aGUgdGVzdCB3aXRoIHlvdSBpbW1lZGlhdGVseS4K
+# Flight Guide — Fill This In
+
+Four boxes. Write one or two sentences in each. ★ = scored by the judge, do these first.
+
+---
+
+## ★ Box 1 — Who and where
+
+```
+You are Flight Guide. You help ______ [who] get from ______ to ______
+at King Fahd International Airport (Dammam).
+You are not a general travel assistant.
+```
+
+**Your job:** name the person and the exact start and end of the trip.
+**Bad:** "travellers at the airport." **Good:** "a traveller on their first international flight with nobody to guide them, from the departures entrance to their boarding gate."
+
+---
+
+## ★ Box 2 — Ask first
+
+```
+Before you give directions, ask:
+- ______
+- ______
+- ______
+Do not guess. Wait for the answers.
+```
+
+**Your job:** the facts you need before you can give correct advice.
+**Hint:** time until boarding, which terminal, bags to drop, language.
+
+---
+
+## Box 3 — The steps
+
+```
+Walk the traveller through, in this order:
+1. ______  2. ______  3. ______  4. ______  5. ______  6. ______
+```
+
+**Your job:** check-in · security · passport control · customs · gate · gate change. Add one line each on what happens.
+
+---
+
+## ★ Box 4 — The three users
+
+Copy from your profiles file. Short.
+
+```
+- Nervous teenager, first flight: ______ tone, ______ language
+- Adult, first international flight: ______ tone, ______ language
+- Experienced traveller, tight connection: ______ tone, ______ language
+```
+
+**Your job:** tone + language for each. This is the personalization score.
+
+---
+
+## Box 5 — What it won't do
+
+```
+Never give ______, ______, or ______ advice.
+If you don't know something specific to the airport, ______.
+```
+
+**Your job:** visa, passport, immigration. Plus: "say so and tell them to ask staff."
+
+---
+
+## Box 6 — When to give up
+
+```
+If ______, tell the traveller to find airport staff immediately.
+```
+
+**Your job:** the point where following the agent is worse than asking a human. (Hint: short on time, can't find the gate.)
+
+---
+
+## Then
+
+Paste all six into ChatGPT and ask it: **"I'm at the airport, what do I do now?"**
+
+Screenshot the reply. That's your first test.
+
+---
+
+**If you want to start now:** fill **Box 1** and **Box 4** only, paste them here, and I'll run the test with you immediately.

@@ -1,1 +1,85 @@
-IyBGbGlnaHQgR3VpZGUg4pyI77iPCgpBIGNvbnRhaW5lcmlzZWQgcHJvdG90eXBlIHRoYXQgd2Fsa3MgYSBmaXJzdC10aW1lIGludGVybmF0aW9uYWwgdHJhdmVsbGVyIOKAlCBhbG9uZSwgcG9zc2libHkgbm90IHJlYWRpbmcgdGhlIHNpZ25zIOKAlCB0aHJvdWdoIGNoZWNrLWluLCBzZWN1cml0eSwgcGFzc3BvcnQgY29udHJvbCBhbmQgY3VzdG9tcyB0byB0aGUgYm9hcmRpbmcgZ2F0ZSBhdCAqKkRhbW1hbSAoS0ZJQSkqKiwgKipSaXlhZGggKEtLSUEpKiogb3IgKipKZWRkYWggKEtBSUEpKiouIEFyYWJpYyBhbmQgRW5nbGlzaC4KClRoaXMgaXMgdGhlICoqdGVzdGFibGUgcHJvdG90eXBlKio6IHRoZSByZXBseSBlbmdpbmUgaXMgcnVsZS1iYXNlZCBhbmQgZGV0ZXJtaW5pc3RpYywgd2l0aCBubyBBSSBwcm92aWRlciBrZXkgcmVxdWlyZWQuIGBzcmMvZW5naW5lLmpzYCBpcyB0aGUgc2luZ2xlIHN3YXAgcG9pbnQgZm9yIGEgZnV0dXJlIExMTS4KCiMjIFRyeSBpdCBmYXN0ZXN0IChubyBEb2NrZXIgbmVlZGVkKQoKSWYgeW91IGp1c3Qgd2FudCB0byBvcGVuIHRoZSBhcHAgYW5kIGNsaWNrIHRocm91Z2ggaXQsIHlvdSBvbmx5IG5lZWQgTm9kZS5qczoKCmBgYGJhc2gKY2QgZmxpZ2h0LWd1aWRlLWFwcCAgICAgIyB0aGUgZm9sZGVyIHdpdGggdGhpcyBSRUFETUUgaW5zaWRlIGl0Cm5wbSBzdGFydApgYGAKCk9wZW4gKipodHRwOi8vbG9jYWxob3N0OjgwODAqKi4gTGVhdmUgdGhlIHRlcm1pbmFsIHdpbmRvdyBvcGVuOyBwcmVzcyBgQ3RybCtDYCB0byBzdG9wLgpTZXR0aW5ncyBhcmUgc2F2ZWQgdG8gYSBgLmRhdGEvYCBmb2xkZXIgYmVzaWRlIHRoZSBjb2RlLgoKVGhpcyBuZWVkcyBubyBEb2NrZXIsIG5vIGJ1aWxkIHN0ZXAgYW5kIG5vIGludGVybmV0LiBUaGUgYXBwIGhhcyB6ZXJvCmRlcGVuZGVuY2llcywgc28gdGhlcmUgaXMgbm90aGluZyB0byBgbnBtIGluc3RhbGxgIGZpcnN0LgoKIyMgRGVwbG95IChEb2NrZXIpCgpgYGBiYXNoCmNwIC5lbnYuZXhhbXBsZSAuZW52ICAgICAgICAgICAgIyBvcHRpb25hbCDigJQgZGVmYXVsdHMgd29yayBhcy1pcwpkb2NrZXIgY29tcG9zZSB1cCAtLWJ1aWxkIC1kCm9wZW4gaHR0cDovL2xvY2FsaG9zdDo4MDgwICAgICAgIyBjaGF0IMK3IC9tYXAgwrcgL2FkbWluIMK3IC9oZWFsdGh6CmBgYAoKV2l0aG91dCBjb21wb3NlOgoKYGBgYmFzaApkb2NrZXIgYnVpbGQgLXQgZmxpZ2h0LWd1aWRlIC4KZG9ja2VyIHJ1biAtZCAtcCA4MDgwOjgwODAgLXYgZmxpZ2h0LWd1aWRlLWRhdGE6L2RhdGEgLS1uYW1lIGZsaWdodC1ndWlkZSBmbGlnaHQtZ3VpZGUKb3BlbiBodHRwOi8vbG9jYWxob3N0OjgwODAKYGBgCgpTdG9wIHdpdGggYGRvY2tlciBjb21wb3NlIGRvd25gIChrZWVwcyBzZXR0aW5ncykgb3IgYGRvY2tlciBjb21wb3NlIGRvd24gLXZgIChyZXNldHMgdGhlbSkuCgojIyBXaGF0IHlvdSBnZXQKCnwgUm91dGUgfCBXaGF0IGl0IGlzIHwKfC0tLXwtLS18CnwgYC9gIHwgVGhlIGNoYXQuIEFza3MgZm91ciBvbmJvYXJkaW5nIHF1ZXN0aW9ucyAoYWlycG9ydCwgdGVybWluYWwsIHRpbWUgdG8gYm9hcmRpbmcsIGJhZ3MpIGJlZm9yZSBnaXZpbmcgYW55IGRpcmVjdGlvbnMsIHRoZW4gd2Fsa3MgdGhlIHNpeCBzdGFnZXMgb25lIGF0IGEgdGltZS4gfAp8IGAvbWFwYCB8IFRoZSBpbnRlcmFjdGl2ZSBhaXJwb3J0IG1hcCDigJQgNDA0IHJlYWwgbG9jYXRpb25zLCAzNSBSaXlhZGggYm9hcmRpbmcgZ2F0ZXMsIEFyYWJpYyBhbmQgRW5nbGlzaCBuYW1lcywgZmxvb3IgbGV2ZWxzLCBjYXRlZ29yeSBmaWx0ZXJzLCBzb3VyY2VzIHBhbmVsLiB8CnwgYC9hZG1pbmAgfCBDb250cm9sIHBhbmVsOiBlZGl0IGd1aWRhbmNlIHRleHQgcGVyIHN0YWdlIHBlciBsYW5ndWFnZSwgZW5hYmxlL2Rpc2FibGUgcHJvZmlsZXMsIHNldCB0aGUgZXNjYWxhdGlvbiB0aHJlc2hvbGQsIHNob3cvaGlkZSB0aGUgbWFwLCByZWFkIHRoZSBjb252ZXJzYXRpb24gbG9nLiB8CnwgYC9oZWFsdGh6YCB8IGAyMDBgICsgSlNPTi4gVXNlZCBieSB0aGUgRG9ja2VyIGBIRUFMVEhDSEVDS2AuIHwKCioqUHJvZmlsZXMqKiBjaGFuZ2UgdGhlIHdvcmRpbmcsIG5vdCB0aGUgZmFjdHM6IG5lcnZvdXMgZmlyc3QtdGltZXIgKHJlYXNzdXJpbmcsIG9uZSBzdGVwKSwgYWR1bHQgZmlyc3QgaW50ZXJuYXRpb25hbCBmbGlnaHQgKGVmZmljaWVudCwgZnVsbCBkZXRhaWwpLCBleHBlcmllbmNlZC9odXJyaWVkIChuZXh0IGFjdGlvbiBvbmx5LCBwbHVzIHRoZSBvbmUgYWZ0ZXIpLgoKKipFc2NhbGF0aW9uKio6IHdoZW4gdGhlIHRyYXZlbGxlciBoYXMg4omkIDYwIG1pbnV0ZXMgdG8gYm9hcmRpbmcgKGFkanVzdGFibGUgaW4gYC9hZG1pbmApLCB0aGUgcmVwbHkgbGVhZHMgd2l0aCAqZmluZCBhaXJwb3J0IHN0YWZmIGltbWVkaWF0ZWx5Ki4gU2FmZSBmaXJzdCwgbmF2aWdhdGVkIHNlY29uZC4KCioqSG9uZXN0eSoqOiBEYW1tYW0gaXMgdmVyaWZpZWQgZW5kIHRvIGVuZC4gUml5YWRoIGlzIHBhcnRpYWxseSB2ZXJpZmllZCBmcm9tIHRoZSBhaXJwb3J0J3Mgb3duIGluZG9vciBtYXAuIEplZGRhaCBpcyBwcm9jZWR1cmUgb25seSDigJQgdGhlIGFwcCBzYXlzIHNvLCBldmVyeSB0aW1lLCBvbiBldmVyeSBwcm9maWxlLiBJdCBuZXZlciBpbnZlbnRzIGEgZ2F0ZSwgYSBmbG9vciBvciBsaXZlIGZsaWdodCBzdGF0dXMuCgojIyBMYXlvdXQKCmBgYArilJzilIDilIAgRG9ja2VyZmlsZSAgICAgICAgICAgICAgbXVsdGktc3RhZ2UsIG5vZGU6MjItYWxwaW5lLCBydW5zIGFzIHVpZCAxMDAwCuKUnOKUgOKUgCBkb2NrZXItY29tcG9zZS55bWwgICAgICBvbmUgc2VydmljZSwgcG9ydCA4MDgwLCBuYW1lZCB2b2x1bWUgZm9yIC9kYXRhCuKUnOKUgOKUgCAuZW52LmV4YW1wbGUgICAgICAgICAgICBldmVyeSB2YXJpYWJsZSwgZG9jdW1lbnRlZCwgbm8gc2VjcmV0cwrilJzilIDilIAgY29uZmlnL2RlZmF1bHRzLmpzICAgICAgc2hpcHBlZCBzdGFnZSB0ZXh0LCBwcm9maWxlcywgYWlycG9ydHMK4pSc4pSA4pSAIHNyYy8K4pSCICAg4pSc4pSA4pSAIHNlcnZlci5qcyAgICAgICAgICAgSFRUUCBsYXllciwgemVybyBkZXBlbmRlbmNpZXMK4pSCICAg4pSc4pSA4pSAIGVuZ2luZS5qcyAgICAgICAgICAg4piFIHJ1bGUtYmFzZWQgcmVwbHkgZW5naW5lIOKAlCB0aGUgQUkgc3dhcCBwb2ludArilIIgICDilJTilIDilIAgc3RvcmUuanMgICAgICAgICAgICBwZXJzaXN0ZWQgc2V0dGluZ3MgKyBib3VuZGVkIGNvbnZlcnNhdGlvbiBsb2cK4pSc4pSA4pSAIHB1YmxpYy8gICAgICAgICAgICAgICAgIGNoYXQgVUksIC9hZG1pbiwgc2hhcmVkIENTUwrilJzilIDilIAgbWFwLyAgICAgICAgICAgICAgICAgICAgZXhpc3RpbmcgbWFwIGFzc2V0LCBzZXJ2ZWQgYXQgL21hcArilJTilIDilIAgdGVzdC9ydW4uanMgICAgICAgICAgICAgZW5naW5lIHRlc3RzIOKAlCBub2RlIHRlc3QvcnVuLmpzCmBgYAoKIyMgU2V0dGluZ3MgcGVyc2lzdGVuY2UKCmAvYWRtaW5gIHdyaXRlcyB0byBgc2V0dGluZ3MuanNvbmAgaW5zaWRlIHRoZSB2b2x1bWUuIE9ubHkgdmFsdWVzIHRoZSBvcGVyYXRvciBjaGFuZ2VkIGFyZSBzdG9yZWQsIHNvIGEgbmV3IGltYWdlIGNhbiBzdGlsbCBpbXByb3ZlIGRlZmF1bHRzIG5vYm9keSB0b3VjaGVkLiBXcml0ZXMgYXJlIGF0b21pYzsgYSBjb3JydXB0IGZpbGUgaXMgbW92ZWQgYXNpZGUgb24gYm9vdCBpbnN0ZWFkIG9mIGNyYXNoaW5nIHRoZSBjb250YWluZXIuCgojIyBUZXN0cwoKYGBgYmFzaApub2RlIHRlc3QvcnVuLmpzICAgICAjIG9yOiBucG0gdGVzdApgYGAKCkNvdmVycyBvbmJvYXJkaW5nLWJlZm9yZS1hZHZpY2UsIHRoZSBzaXgtc3RhZ2Ugb3JkZXIsIHBlci1wcm9maWxlIHdvcmRpbmcsIEFyYWJpYyBvdXRwdXQsIHRoZSBlc2NhbGF0aW9uIHRocmVzaG9sZCwgYWlycG9ydCBob25lc3R5LCBhZG1pbi1lZGl0ZWQgdGV4dCwgZGlzYWJsZWQgc3RhZ2VzIGFuZCBkZXRlcm1pbmlzbS4KCiMjIFNjb3BlIGJvdW5kYXJ5CgpOb3QgaGFuZGxlZCwgYnkgZGVzaWduOiByZWJvb2tpbmcsIHJlZnVuZHMsIGJhZ2dhZ2UgY2xhaW1zLCBwcmljaW5nLCB2aXNhIG9yIGltbWlncmF0aW9uIGFkdmljZSwgdG91cmlzbSByZWNvbW1lbmRhdGlvbnMuIEZsaWdodCBzdGF0dXMgaXMgKipzaW11bGF0ZWQqKiDigJQgdGhlIG1hcCBpcyBub3QgbGl2ZSBpbmRvb3IgR1BTLCBhbmQgdGhlIHRyYXZlbGxlciBpcyBhbHdheXMgdG9sZCB0byBjb25maXJtIHRoZSBnYXRlIG9uIHRoZSBkZXBhcnR1cmUgc2NyZWVucy4K
+# Flight Guide ✈️
+
+A containerised prototype that walks a first-time international traveller — alone, possibly not reading the signs — through check-in, security, passport control and customs to the boarding gate at **Dammam (KFIA)**, **Riyadh (KKIA)** or **Jeddah (KAIA)**. Arabic and English.
+
+This is the **testable prototype**: the reply engine is rule-based and deterministic, with no AI provider key required. `src/engine.js` is the single swap point for a future LLM.
+
+## Try it fastest (no Docker needed)
+
+If you just want to open the app and click through it, you only need Node.js:
+
+```bash
+cd flight-guide-app     # the folder with this README inside it
+npm start
+```
+
+Open **http://localhost:8080**. Leave the terminal window open; press `Ctrl+C` to stop.
+Settings are saved to a `.data/` folder beside the code.
+
+This needs no Docker, no build step and no internet. The app has zero
+dependencies, so there is nothing to `npm install` first.
+
+## Deploy (Docker)
+
+```bash
+cp .env.example .env            # optional — defaults work as-is
+docker compose up --build -d
+open http://localhost:8080      # chat · /map · /admin · /healthz
+```
+
+Without compose:
+
+```bash
+docker build -t flight-guide .
+docker run -d -p 8080:8080 -v flight-guide-data:/data --name flight-guide flight-guide
+open http://localhost:8080
+```
+
+Stop with `docker compose down` (keeps settings) or `docker compose down -v` (resets them).
+
+## What you get
+
+| Route | What it is |
+|---|---|
+| `/` | The chat. Asks four onboarding questions (airport, terminal, time to boarding, bags) before giving any directions, then walks the six stages one at a time. |
+| `/map` | The interactive airport map — 404 real locations, 35 Riyadh boarding gates, Arabic and English names, floor levels, category filters, sources panel. |
+| `/admin` | Control panel: edit guidance text per stage per language, enable/disable profiles, set the escalation threshold, show/hide the map, read the conversation log. |
+| `/healthz` | `200` + JSON. Used by the Docker `HEALTHCHECK`. |
+
+**Profiles** change the wording, not the facts: nervous first-timer (reassuring, one step), adult first international flight (efficient, full detail), experienced/hurried (next action only, plus the one after).
+
+**Escalation**: when the traveller has ≤ 60 minutes to boarding (adjustable in `/admin`), the reply leads with *find airport staff immediately*. Safe first, navigated second.
+
+**Honesty**: Dammam is verified end to end. Riyadh is partially verified from the airport's own indoor map. Jeddah is procedure only — the app says so, every time, on every profile. It never invents a gate, a floor or live flight status.
+
+## Layout
+
+```
+├── Dockerfile              multi-stage, node:22-alpine, runs as uid 1000
+├── docker-compose.yml      one service, port 8080, named volume for /data
+├── .env.example            every variable, documented, no secrets
+├── config/defaults.js      shipped stage text, profiles, airports
+├── src/
+│   ├── server.js           HTTP layer, zero dependencies
+│   ├── engine.js           ★ rule-based reply engine — the AI swap point
+│   └── store.js            persisted settings + bounded conversation log
+├── public/                 chat UI, /admin, shared CSS
+├── map/                    existing map asset, served at /map
+└── test/run.js             engine tests — node test/run.js
+```
+
+## Settings persistence
+
+`/admin` writes to `settings.json` inside the volume. Only values the operator changed are stored, so a new image can still improve defaults nobody touched. Writes are atomic; a corrupt file is moved aside on boot instead of crashing the container.
+
+## Tests
+
+```bash
+node test/run.js     # or: npm test
+```
+
+Covers onboarding-before-advice, the six-stage order, per-profile wording, Arabic output, the escalation threshold, airport honesty, admin-edited text, disabled stages and determinism.
+
+## Scope boundary
+
+Not handled, by design: rebooking, refunds, baggage claims, pricing, visa or immigration advice, tourism recommendations. Flight status is **simulated** — the map is not live indoor GPS, and the traveller is always told to confirm the gate on the departure screens.

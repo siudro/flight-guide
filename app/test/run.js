@@ -1,1 +1,324 @@
-J3VzZSBzdHJpY3QnOwoKLyoqCiAqIEZsaWdodCBHdWlkZSDigJQgZW5naW5lIHRlc3RzLgogKgogKiBQbGFpbiBOb2RlLCBubyB0ZXN0IGZyYW1ld29yayAodGhlIGFwcCBoYXMgbm8gZGVwZW5kZW5jaWVzLCBzbyBuZWl0aGVyIGRvCiAqIGl0cyB0ZXN0cykuIFJ1biB3aXRoOiBucG0gdGVzdCAgLyAgbm9kZSB0ZXN0L3J1bi5qcwogKgogKiBUaGVzZSBhc3NlcnQgdGhlIGJlaGF2aW91cnMgdGhlIFdBSS0xOTkgYWNjZXB0YW5jZSBjcml0ZXJpYSBuYW1lOgogKiBvbmJvYXJkaW5nIGJlZm9yZSBhZHZpY2UsIHNpeC1zdGFnZSBmbG93LCBwcm9maWxlIHdvcmRpbmcgZGlmZmVyZW5jZXMsCiAqIEFyYWJpYyBSVEwgb3V0cHV0LCBhbmQgdGhlIGVzY2FsYXRpb24gdGhyZXNob2xkLgogKi8KCmNvbnN0IGFzc2VydCA9IHJlcXVpcmUoJ2Fzc2VydCcpOwpjb25zdCB7IGdlbmVyYXRlUmVwbHkgfSA9IHJlcXVpcmUoJy4uL3NyYy9lbmdpbmUnKTsKY29uc3QgeyBzYW5pdGl6ZSB9ID0gcmVxdWlyZSgnLi4vc3JjL3N0b3JlJyk7CgpsZXQgcGFzc2VkID0gMDsKbGV0IGZhaWxlZCA9IDA7CmNvbnN0IGZhaWx1cmVzID0gW107CgpmdW5jdGlvbiB0ZXN0KG5hbWUsIGZuKSB7CiAgdHJ5IHsKICAgIGZuKCk7CiAgICBwYXNzZWQrKzsKICAgIGNvbnNvbGUubG9nKGAgIG9rICAgJHtuYW1lfWApOwogIH0gY2F0Y2ggKGVycikgewogICAgZmFpbGVkKys7CiAgICBmYWlsdXJlcy5wdXNoKHsgbmFtZSwgZXJyIH0pOwogICAgY29uc29sZS5sb2coYCAgRkFJTCAke25hbWV9YCk7CiAgICBjb25zb2xlLmxvZyhgICAgICAgICR7ZXJyLm1lc3NhZ2Uuc3BsaXQoJ1xuJylbMF19YCk7CiAgfQp9CgpmdW5jdGlvbiBzZXR0aW5ncyhvdmVycmlkZXMpIHsKICByZXR1cm4gc2FuaXRpemUob3ZlcnJpZGVzIHx8IHt9KTsKfQoKLyoqIFJ1bnMgYSBsaXN0IG9mIHR1cm5zIHRocm91Z2ggdGhlIGVuZ2luZSwgY2Fycnlpbmcgc2Vzc2lvbiBmb3J3YXJkLiAqLwpmdW5jdGlvbiBjb252ZXJzZSh0dXJucywgb3B0cykgewogIC8vIGBvcHRzLnNldHRpbmdzYCBtYXkgYWxyZWFkeSBiZSBhbiBlZmZlY3RpdmUgc2V0dGluZ3Mgb2JqZWN0IOKAlCBkbyBub3QKICAvLyByZS1zYW5pdGl6ZSBpdCwgb3IgdGhlIG92ZXJyaWRlIHNoYXBlIGdldHMgZmxhdHRlbmVkIHR3aWNlLgogIGNvbnN0IHMgPSAob3B0cyAmJiBvcHRzLnNldHRpbmdzKSB8fCBzZXR0aW5ncygpOwogIGxldCBzZXNzaW9uID0gKG9wdHMgJiYgb3B0cy5zZXNzaW9uKSB8fCB7fTsKICBjb25zdCB0cmFuc2NyaXB0ID0gW107CiAgZm9yIChjb25zdCB0dXJuIG9mIHR1cm5zKSB7CiAgICBjb25zdCByZXMgPSBnZW5lcmF0ZVJlcGx5KHsKICAgICAgbWVzc2FnZTogdHVybi5tZXNzYWdlIHx8IHR1cm4sCiAgICAgIGxhbmc6IHR1cm4ubGFuZyB8fCAob3B0cyAmJiBvcHRzLmxhbmcpIHx8ICdlbicsCiAgICAgIHByb2ZpbGU6ICh0dXJuLnByb2ZpbGUpIHx8IChvcHRzICYmIG9wdHMucHJvZmlsZSkgfHwgJ25lcnZvdXMnLAogICAgICBzZXNzaW9uLAogICAgICBzZXR0aW5nczogcwogICAgfSk7CiAgICBzZXNzaW9uID0gcmVzLnNlc3Npb247CiAgICB0cmFuc2NyaXB0LnB1c2gocmVzKTsKICB9CiAgcmV0dXJuIHsgdHJhbnNjcmlwdCwgc2Vzc2lvbiB9Owp9Cgpjb25zdCB0ZXh0ID0gKHJlcykgPT4gcmVzLm1lc3NhZ2VzLm1hcCgobSkgPT4gbS50ZXh0KS5qb2luKCdcblxuJyk7Cgpjb25zb2xlLmxvZygnXG5vbmJvYXJkaW5nJyk7CnRlc3QoJ2Fza3MgdGhlIGFpcnBvcnQgcXVlc3Rpb24gYmVmb3JlIGdpdmluZyBhbnkgZGlyZWN0aW9ucycsICgpID0+IHsKICBjb25zdCB7IHRyYW5zY3JpcHQgfSA9IGNvbnZlcnNlKFsnaGVsbG8nXSk7CiAgY29uc3Qgb3V0ID0gdGV4dCh0cmFuc2NyaXB0WzBdKTsKICBhc3NlcnQub2soL3doaWNoIGFpcnBvcnQvaS50ZXN0KG91dCksICdleHBlY3RlZCBhbiBhaXJwb3J0IHF1ZXN0aW9uJyk7CiAgYXNzZXJ0Lm9rKCEvc2VjdXJpdHkgc2NyZWVuaW5nfHBhc3Nwb3J0IGNvbnRyb2wvaS50ZXN0KG91dCksICdtdXN0IG5vdCBnaXZlIGRpcmVjdGlvbnMgeWV0Jyk7Cn0pOwoKdGVzdCgnbmV2ZXIgcmUtYXNrcyBhIGZhY3QgYWxyZWFkeSBnaXZlbicsICgpID0+IHsKICBjb25zdCB7IHRyYW5zY3JpcHQgfSA9IGNvbnZlcnNlKFsnSSBhbSBhdCBEYW1tYW0gYWlycG9ydCddKTsKICBjb25zdCBvdXQgPSB0ZXh0KHRyYW5zY3JpcHRbMF0pOwogIGFzc2VydC5vaygvdGVybWluYWwvaS50ZXN0KG91dCksICdzaG91bGQgbW92ZSBvbiB0byB0ZXJtaW5hbCcpOwogIGFzc2VydC5vayghL3doaWNoIGFpcnBvcnQvaS50ZXN0KG91dCksICdzaG91bGQgbm90IGFzayBhaXJwb3J0IGFnYWluJyk7Cn0pOwoKdGVzdCgnY29sbGVjdHMgYWxsIGZvdXIgb25ib2FyZGluZyBmYWN0cyBiZWZvcmUgdGhlIGZpcnN0IHN0YWdlJywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCwgc2Vzc2lvbiB9ID0gY29udmVyc2UoWwogICAgJ0kgYW0gYXQgRGFtbWFtLCB0ZXJtaW5hbCAxLCA5MCBtaW51dGVzIHVudGlsIGJvYXJkaW5nLCBhbmQgSSBoYXZlIGEgYmFnIHRvIGNoZWNrIGluJwogIF0pOwogIGFzc2VydC5zdHJpY3RFcXVhbChzZXNzaW9uLmFpcnBvcnQsICdkbW0nKTsKICBhc3NlcnQub2soc2Vzc2lvbi50ZXJtaW5hbCwgJ3Rlcm1pbmFsIHBhcnNlZCcpOwogIGFzc2VydC5zdHJpY3RFcXVhbChzZXNzaW9uLm1pbnV0ZXMsIDkwKTsKICBhc3NlcnQuc3RyaWN0RXF1YWwoc2Vzc2lvbi5iYWdzLCAnY2hlY2tlZCcpOwogIGFzc2VydC5zdHJpY3RFcXVhbCh0cmFuc2NyaXB0WzBdLm1ldGEuc3RhZ2VLZXksICdjaGVja2luJywgJ3Nob3VsZCBub3cgZ2l2ZSBzdGFnZSAxJyk7Cn0pOwoKY29uc29sZS5sb2coJ1xuc2l4LXN0YWdlIGZsb3cnKTsKdGVzdCgnYWR2YW5jZXMgY2hlY2tpbiAtPiBzZWN1cml0eSAtPiBwYXNzcG9ydCAtPiBjdXN0b21zIC0+IGdhdGUgLT4gYm9hcmRpbmcnLCAoKSA9PiB7CiAgY29uc3QgeyB0cmFuc2NyaXB0IH0gPSBjb252ZXJzZShbJ0RhbW1hbSB0ZXJtaW5hbCAxLCAxMjAgbWludXRlcywgY2Fycnktb24gb25seSddLCB7fSk7CiAgY29uc3Qga2V5cyA9IFt0cmFuc2NyaXB0WzBdLm1ldGEuc3RhZ2VLZXldOwogIGZvciAobGV0IGkgPSAwOyBpIDwgNjsgaSsrKSB7CiAgICBjb25zdCByID0gZ2VuZXJhdGVSZXBseSh7CiAgICAgIG1lc3NhZ2U6ICdkb25lJywKICAgICAgbGFuZzogJ2VuJywKICAgICAgcHJvZmlsZTogJ2FkdWx0JywKICAgICAgc2Vzc2lvbjogT2JqZWN0LmFzc2lnbih7fSwgdHJhbnNjcmlwdFswXS5zZXNzaW9uLCB7IHN0YWdlOiBrZXlzLmxlbmd0aCAtIDEgfSksCiAgICAgIHNldHRpbmdzOiBzZXR0aW5ncyh7fSkKICAgIH0pOwogICAga2V5cy5wdXNoKHIubWV0YS5zdGFnZUtleSk7CiAgfQogIGNvbnN0IHVuaXEgPSBrZXlzLmZpbHRlcigoaywgaSkgPT4ga2V5cy5pbmRleE9mKGspID09PSBpKTsKICBhc3NlcnQuZGVlcFN0cmljdEVxdWFsKHVuaXEuc2xpY2UoMCwgNiksIFsnY2hlY2tpbicsICdzZWN1cml0eScsICdwYXNzcG9ydCcsICdjdXN0b21zJywgJ2dhdGUnLCAnYm9hcmRpbmcnXSk7Cn0pOwoKdGVzdCgnbmV2ZXIgZHVtcHMgYWxsIHNpeCBzdGFnZXMgaW4gb25lIG1lc3NhZ2UnLCAoKSA9PiB7CiAgY29uc3QgeyB0cmFuc2NyaXB0IH0gPSBjb252ZXJzZShbJ0RhbW1hbSwgdGVybWluYWwgMSwgOTAgbWludXRlcywgb25lIGJhZyddKTsKICBjb25zdCBvdXQgPSB0ZXh0KHRyYW5zY3JpcHRbMF0pLnRvTG93ZXJDYXNlKCk7CiAgY29uc3QgbWVudGlvbmVkID0gWydzZWN1cml0eScsICdwYXNzcG9ydCcsICdjdXN0b21zJywgJ2JvYXJkaW5nIGdhdGUnXS5maWx0ZXIoKGspID0+IG91dC5pbmNsdWRlcyhrKSk7CiAgYXNzZXJ0Lm9rKG1lbnRpb25lZC5sZW5ndGggPD0gMSwgYG9uZSBtZXNzYWdlIG1lbnRpb25lZCAke21lbnRpb25lZC5qb2luKCcsICcpfWApOwp9KTsKCnRlc3QoJ2dhdGUgY2hhbmdlIGlzIGhhbmRsZWQgYXMgaXRzIG93biBicmFuY2gnLCAoKSA9PiB7CiAgY29uc3QgeyB0cmFuc2NyaXB0IH0gPSBjb252ZXJzZShbJ0RhbW1hbSwgdGVybWluYWwgMSwgMTIwIG1pbnV0ZXMsIGNhcnJ5LW9uJywgJ215IGdhdGUgY2hhbmdlZCB0byA0MDQnXSwgeyBwcm9maWxlOiAnYWR1bHQnIH0pOwogIGNvbnN0IGxhc3QgPSB0cmFuc2NyaXB0W3RyYW5zY3JpcHQubGVuZ3RoIC0gMV07CiAgYXNzZXJ0LnN0cmljdEVxdWFsKGxhc3QubWV0YS5zdGFnZUtleSwgJ2dhdGVjaGFuZ2UnKTsKICBhc3NlcnQub2soLzQwNC8udGVzdCh0ZXh0KGxhc3QpKSwgJ3Nob3VsZCByZXBlYXQgdGhlIG5ldyBnYXRlJyk7Cn0pOwoKdGVzdCgnYSBnYXRlIGNoYW5nZSB3aXRoIG5vIG51bWJlciBhc2tzIGluc3RlYWQgb2YgaW52ZW50aW5nIG9uZScsICgpID0+IHsKICBjb25zdCB7IHRyYW5zY3JpcHQgfSA9IGNvbnZlcnNlKFsnRGFtbWFtLCB0ZXJtaW5hbCAxLCAxMjAgbWludXRlcywgY2Fycnktb24nLCAnbXkgZ2F0ZSBjaGFuZ2VkJ10sIHsgcHJvZmlsZTogJ2FkdWx0JyB9KTsKICBjb25zdCBsYXN0ID0gdHJhbnNjcmlwdFt0cmFuc2NyaXB0Lmxlbmd0aCAtIDFdOwogIGFzc2VydC5zdHJpY3RFcXVhbChsYXN0LnNlc3Npb24uYXdhaXRpbmdHYXRlLCB0cnVlKTsKICBhc3NlcnQub2soL3doYXQgaXMgdGhlIG5ldyBnYXRlIG51bWJlci9pLnRlc3QodGV4dChsYXN0KSksICdtdXN0IGFzayBmb3IgdGhlIGdhdGUnKTsKICBhc3NlcnQub2soIS8xMjAvLnRlc3QodGV4dChsYXN0KSksICdtdXN0IG5vdCByZXVzZSB0aGUgbWludXRlcyBmaWd1cmUgYXMgYSBnYXRlJyk7Cn0pOwoKdGVzdCgndGhlIGZvbGxvdy11cCBudW1iZXIgYmVjb21lcyB0aGUgZ2F0ZSwgbm90IHRoZSB3YWl0JywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoCiAgICBbJ0RhbW1hbSwgdGVybWluYWwgMSwgMTIwIG1pbnV0ZXMsIGNhcnJ5LW9uJywgJ215IGdhdGUgY2hhbmdlZCcsICc0MDQnXSwKICAgIHsgcHJvZmlsZTogJ2FkdWx0JyB9CiAgKTsKICBjb25zdCBsYXN0ID0gdHJhbnNjcmlwdFt0cmFuc2NyaXB0Lmxlbmd0aCAtIDFdOwogIGFzc2VydC5zdHJpY3RFcXVhbChsYXN0LnNlc3Npb24uZ2F0ZSwgJzQwNCcpOwogIGFzc2VydC5zdHJpY3RFcXVhbChsYXN0LnNlc3Npb24ubWludXRlcywgMTIwLCAnbWludXRlcyBtdXN0IG5vdCBiZSBvdmVyd3JpdHRlbiBieSB0aGUgZ2F0ZScpOwogIGFzc2VydC5vaygvNDA0Ly50ZXN0KHRleHQobGFzdCkpKTsKICBhc3NlcnQuc3RyaWN0RXF1YWwobGFzdC5zZXNzaW9uLmF3YWl0aW5nR2F0ZSwgZmFsc2UpOwp9KTsKCmNvbnNvbGUubG9nKCdcbnByb2ZpbGVzJyk7CnRlc3QoJ3RoZSB0aHJlZSBwcm9maWxlcyBwcm9kdWNlIHRocmVlIGRpZmZlcmVudCBtZXNzYWdlcyBmb3IgdGhlIHNhbWUgaW5wdXQnLCAoKSA9PiB7CiAgY29uc3QgYmFzZSA9IFsnRGFtbWFtLCB0ZXJtaW5hbCAxLCA5MCBtaW51dGVzLCBvbmUgYmFnJ107CiAgY29uc3QgYSA9IHRleHQoY29udmVyc2UoYmFzZSwgeyBwcm9maWxlOiAnbmVydm91cycgfSkudHJhbnNjcmlwdFswXSk7CiAgY29uc3QgYiA9IHRleHQoY29udmVyc2UoYmFzZSwgeyBwcm9maWxlOiAnYWR1bHQnIH0pLnRyYW5zY3JpcHRbMF0pOwogIGNvbnN0IGMgPSB0ZXh0KGNvbnZlcnNlKGJhc2UsIHsgcHJvZmlsZTogJ2h1cnJpZWQnIH0pLnRyYW5zY3JpcHRbMF0pOwogIGFzc2VydC5ub3RTdHJpY3RFcXVhbChhLCBiLCAnbmVydm91cyB2cyBhZHVsdCBtdXN0IGRpZmZlcicpOwogIGFzc2VydC5ub3RTdHJpY3RFcXVhbChiLCBjLCAnYWR1bHQgdnMgaHVycmllZCBtdXN0IGRpZmZlcicpOwogIGFzc2VydC5ub3RTdHJpY3RFcXVhbChhLCBjLCAnbmVydm91cyB2cyBodXJyaWVkIG11c3QgZGlmZmVyJyk7CiAgYXNzZXJ0Lm9rKGEubGVuZ3RoID4gYi5sZW5ndGgsICduZXJ2b3VzIHNob3VsZCBzYXkgbW9yZSB0aGFuIGFkdWx0Jyk7CiAgLy8gSHVycmllZCBpcyBub3QgInNob3J0ZXIgaW4gY2hhcmFjdGVycyIg4oCUIGl0IGRyb3BzIGFsbCBmaWxsZXIgYnV0IGdpdmVzIHRoZQogIC8vIG5leHQgYWN0aW9uIHRvbywgc28gaXQgY292ZXJzIHR3byBzdGVwcyBpbiByb3VnaGx5IG9uZSBzdGVwJ3Mgd29ydGggb2Ygd29yZHMuCiAgYXNzZXJ0Lm9rKCEvVGFrZSBhIGJyZWF0aHx5b3UncmUgZG9pbmcgZmluZS9pLnRlc3QoYyksICdodXJyaWVkIG11c3QgY2Fycnkgbm8gcmVhc3N1cmFuY2UnKTsKICBhc3NlcnQub2soIS9Db25maXJtIHlvdSBhcmUgdGhyb3VnaC9pLnRlc3QoYyksICdodXJyaWVkIG11c3QgY2Fycnkgbm8gY2xvc2luZyBwcm9tcHQnKTsKICBhc3NlcnQub2soL15UaGVuOi9tLnRlc3QoYyksICdodXJyaWVkIHNob3VsZCBoYW5kIG92ZXIgdGhlIGZvbGxvd2luZyBhY3Rpb24nKTsKfSk7Cgp0ZXN0KCdhIHByb2ZpbGUgZGlzYWJsZWQgaW4gYWRtaW4gaXMgbm90IHVzZWQnLCAoKSA9PiB7CiAgY29uc3QgcyA9IHNldHRpbmdzKHsgcHJvZmlsZXNFbmFibGVkOiB7IG5lcnZvdXM6IGZhbHNlIH0gfSk7CiAgY29uc3QgcmVzID0gZ2VuZXJhdGVSZXBseSh7CiAgICBtZXNzYWdlOiAnRGFtbWFtLCB0ZXJtaW5hbCAxLCA5MCBtaW51dGVzLCBvbmUgYmFnJywKICAgIGxhbmc6ICdlbicsCiAgICBwcm9maWxlOiAnbmVydm91cycsCiAgICBzZXNzaW9uOiB7fSwKICAgIHNldHRpbmdzOiBzCiAgfSk7CiAgYXNzZXJ0Lm5vdFN0cmljdEVxdWFsKHJlcy5tZXRhLnByb2ZpbGUsICduZXJ2b3VzJyk7CiAgYXNzZXJ0Lm9rKHJlcy5tZXRhLnByb2ZpbGUgPT09ICdhZHVsdCcgfHwgcmVzLm1ldGEucHJvZmlsZSA9PT0gJ2h1cnJpZWQnKTsKfSk7Cgpjb25zb2xlLmxvZygnXG5sYW5ndWFnZScpOwp0ZXN0KCdhbiBBcmFiaWMgbWVzc2FnZSBwcm9kdWNlcyBBcmFiaWMgb3V0cHV0JywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoWyfYo9mG2Kcg2YHZiiDYp9mE2K/Zhdin2YUnXSk7CiAgY29uc3Qgb3V0ID0gdGV4dCh0cmFuc2NyaXB0WzBdKTsKICBhc3NlcnQub2soL1tcdTA2MDAtXHUwNkZGXS8udGVzdChvdXQpLCAncmVwbHkgc2hvdWxkIGNvbnRhaW4gQXJhYmljJyk7CiAgYXNzZXJ0LnN0cmljdEVxdWFsKHRyYW5zY3JpcHRbMF0ubWV0YS5sYW5nLCAnYXInKTsKfSk7Cgp0ZXN0KCdBcmFiaWMgb25ib2FyZGluZyByZXBseSBoYXMgbm8gTGF0aW4gYm9keSB0ZXh0JywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoWyfZhdix2K3YqNinJ10pOwogIGNvbnN0IG91dCA9IHRleHQodHJhbnNjcmlwdFswXSk7CiAgY29uc3QgbGF0aW5Xb3JkcyA9IG91dC5tYXRjaCgvW0EtWmEtel17NCx9L2cpIHx8IFtdOwogIGFzc2VydC5kZWVwU3RyaWN0RXF1YWwobGF0aW5Xb3JkcywgW10sIGBmb3VuZCBsYXRpbiB3b3JkczogJHtsYXRpbldvcmRzLmpvaW4oJywgJyl9YCk7Cn0pOwoKY29uc29sZS5sb2coJ1xuZXNjYWxhdGlvbicpOwp0ZXN0KCd1bmRlciB0aGUgNjAtbWludXRlIGRlZmF1bHQgdGhlIHJlcGx5IGxlYWRzIHdpdGggdGhlIHN0YWZmIGluc3RydWN0aW9uJywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoWydEYW1tYW0sIHRlcm1pbmFsIDEsIDQ1IG1pbnV0ZXMsIG9uZSBiYWcnXSwgeyBwcm9maWxlOiAnYWR1bHQnIH0pOwogIGNvbnN0IG91dCA9IHRleHQodHJhbnNjcmlwdFswXSk7CiAgYXNzZXJ0LnN0cmljdEVxdWFsKHRyYW5zY3JpcHRbMF0ubWV0YS5lc2NhbGF0ZWQsIHRydWUpOwogIGFzc2VydC5vaygvc3RhZmYvaS50ZXN0KG91dCksICdzaG91bGQgdGVsbCB0aGVtIHRvIGZpbmQgc3RhZmYnKTsKfSk7Cgp0ZXN0KCdjb21mb3J0YWJsZSBtYXJnaW4gZG9lcyBub3QgZXNjYWxhdGUnLCAoKSA9PiB7CiAgY29uc3QgeyB0cmFuc2NyaXB0IH0gPSBjb252ZXJzZShbJ0RhbW1hbSwgdGVybWluYWwgMSwgMTUwIG1pbnV0ZXMsIG9uZSBiYWcnXSwgeyBwcm9maWxlOiAnYWR1bHQnIH0pOwogIGFzc2VydC5zdHJpY3RFcXVhbCh0cmFuc2NyaXB0WzBdLm1ldGEuZXNjYWxhdGVkLCBmYWxzZSk7Cn0pOwoKdGVzdCgndGhlIGFkbWluIHRocmVzaG9sZCBpcyBob25vdXJlZCcsICgpID0+IHsKICBjb25zdCBzID0gc2V0dGluZ3MoeyBlc2NhbGF0ZU1pbnV0ZXM6IDEyMCB9KTsKICBjb25zdCB7IHRyYW5zY3JpcHQgfSA9IGNvbnZlcnNlKFsnRGFtbWFtLCB0ZXJtaW5hbCAxLCA5MCBtaW51dGVzLCBvbmUgYmFnJ10sIHsgcHJvZmlsZTogJ2FkdWx0Jywgc2V0dGluZ3M6IHMgfSk7CiAgYXNzZXJ0LnN0cmljdEVxdWFsKHRyYW5zY3JpcHRbMF0ubWV0YS5lc2NhbGF0ZWQsIHRydWUsICc5MCA8PSAxMjAgc2hvdWxkIGVzY2FsYXRlJyk7Cn0pOwoKY29uc29sZS5sb2coJ1xubmV2ZXIgdHJhcCB0aGUgdHJhdmVsbGVyJyk7CnRlc3QoJ2EgcXVlc3Rpb24gYWJvdXQgYSB3b3JkIGdldHMgYSBwbGFpbiBleHBsYW5hdGlvbiwgbm90IGEgcmVwZWF0JywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoWyd3aGF0IGlzIGEgdGVybWluYWwnXSwgeyBwcm9maWxlOiAnbmVydm91cycgfSk7CiAgY29uc3Qgb3V0ID0gdGV4dCh0cmFuc2NyaXB0WzBdKTsKICBhc3NlcnQuc3RyaWN0RXF1YWwodHJhbnNjcmlwdFswXS5tZXRhLnN0YWdlS2V5LCAnZXhwbGFpbicsICdzaG91bGQgYmUgYW4gZXhwbGFuYXRpb24nKTsKICBhc3NlcnQub2soL21haW4gYnVpbGRpbmcvaS50ZXN0KG91dCksICdzaG91bGQgZXhwbGFpbiB3aGF0IGEgdGVybWluYWwgaXMnKTsKICBhc3NlcnQub2soIS93aGljaCBhaXJwb3J0L2kudGVzdChvdXQpLCAnbXVzdCBub3QganVzdCByZS1hc2sgdGhlIGFpcnBvcnQnKTsKfSk7Cgp0ZXN0KCd0aGUgc2FtZSB3b3JrcyBpbiBBcmFiaWMnLCAoKSA9PiB7CiAgY29uc3QgeyB0cmFuc2NyaXB0IH0gPSBjb252ZXJzZShbJ9mI2LQg2YrYudmG2Yog2KrZitix2YXZhtin2YQnXSwgeyBwcm9maWxlOiAnbmVydm91cycsIGxhbmc6ICdhcicgfSk7CiAgY29uc3Qgb3V0ID0gdGV4dCh0cmFuc2NyaXB0WzBdKTsKICBhc3NlcnQuc3RyaWN0RXF1YWwodHJhbnNjcmlwdFswXS5tZXRhLnN0YWdlS2V5LCAnZXhwbGFpbicpOwogIGFzc2VydC5vaygv2KfZhNmF2KjZhtmJINin2YTYsdim2YrYs9mKLy50ZXN0KG91dCksICdzaG91bGQgZXhwbGFpbiBpbiBBcmFiaWMnKTsKfSk7Cgp0ZXN0KCdldmVyeWRheSBhaXJwb3J0IHdvcmRzIGFyZSBhbGwgZXhwbGFpbmVkJywgKCkgPT4gewogIGNvbnN0IHdvcmRzID0gWyd3aGF0IGlzIGEgYm9hcmRpbmcgcGFzcycsICd3aGF0IGRvZXMgY3VzdG9tcyBtZWFuJywKICAgICAgICAgICAgICAgICAnZXhwbGFpbiBwYXNzcG9ydCBjb250cm9sJywgJ3doYXQgaXMgc2VjdXJpdHknXTsKICBmb3IgKGNvbnN0IHcgb2Ygd29yZHMpIHsKICAgIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoW3ddLCB7IHByb2ZpbGU6ICdhZHVsdCcgfSk7CiAgICBhc3NlcnQuc3RyaWN0RXF1YWwodHJhbnNjcmlwdFswXS5tZXRhLnN0YWdlS2V5LCAnZXhwbGFpbicsIHcgKyAnIHdhcyBub3QgZXhwbGFpbmVkJyk7CiAgfQp9KTsKCnRlc3QoJ2ZyZWUgdGV4dCB0aGF0IG1hdGNoZXMgbm90aGluZyBpcyBhY2tub3dsZWRnZWQsIG5ldmVyIGlnbm9yZWQnLCAoKSA9PiB7CiAgY29uc3QgeyB0cmFuc2NyaXB0IH0gPSBjb252ZXJzZShbJ0kgaGF2ZSBuZXZlciB0cmF2ZWxsZWQgYmVmb3JlIGluIG15IGxpZmUnXSwgeyBwcm9maWxlOiAnbmVydm91cycgfSk7CiAgY29uc3Qgb3V0ID0gdGV4dCh0cmFuc2NyaXB0WzBdKTsKICBhc3NlcnQub2soL2hlYXIgeW91fG5vdCBnb2luZyB0byBpZ25vcmUvaS50ZXN0KG91dCksICdtdXN0IGFja25vd2xlZGdlIHRoZSBwZXJzb24nKTsKfSk7Cgp0ZXN0KCdhIHNjYXJlZCB0cmF2ZWxsZXIgaXMgcmVhc3N1cmVkIGJlZm9yZSBiZWluZyBxdWVzdGlvbmVkJywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoWydJIGFtIHJlYWxseSBzY2FyZWQgYWJvdXQgZmx5aW5nIGFsb25lJ10sIHsgcHJvZmlsZTogJ25lcnZvdXMnIH0pOwogIGNvbnN0IG91dCA9IHRleHQodHJhbnNjcmlwdFswXSk7CiAgYXNzZXJ0Lm9rKC9ub3JtYWwgd2F5IHRvIGZlZWx8Y29tcGxldGVseSBub3JtYWwvaS50ZXN0KG91dCksICdzaG91bGQgbm9ybWFsaXNlIHRoZSBmZWVsaW5nJyk7Cn0pOwoKdGVzdCgndHlwaW5nIGlzIG5ldmVyIGJsb2NrZWQgYnkgdGhlIG9uYm9hcmRpbmcgcXVlc3Rpb25zJywgKCkgPT4gewogIC8vIEFueSBtZXNzYWdlIGdldHMgYSByZXBseSwgd2hhdGV2ZXIgaXQgc2F5cy4KICBjb25zdCBtZXNzYWdlcyA9IFsnaGVsbG8nLCAneCcsICdJIGRvIG5vdCB1bmRlcnN0YW5kJywgJ9io2LXYsdin2K3YqSDZhdinINij2K/YsdmKJywgJzEyMzQ1J107CiAgZm9yIChjb25zdCBtIG9mIG1lc3NhZ2VzKSB7CiAgICBjb25zdCB7IHRyYW5zY3JpcHQgfSA9IGNvbnZlcnNlKFttXSwgeyBwcm9maWxlOiAnbmVydm91cycgfSk7CiAgICBhc3NlcnQub2sodHJhbnNjcmlwdFswXS5tZXNzYWdlcy5sZW5ndGggPiAwLCAnbm8gcmVwbHkgdG86ICcgKyBtKTsKICB9Cn0pOwoKY29uc29sZS5sb2coJ1xubm8gcmVwZXRpdGlvbicpOwp0ZXN0KCd0aGUgZXNjYWxhdGlvbiB3YXJuaW5nIGlzIHNob3duIG9uY2UsIG5vdCBvbiBldmVyeSB0dXJuJywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoCiAgICBbJ0RhbW1hbSwgdGVybWluYWwgMSwgNDUgbWludXRlcycsICdjYXJyeS1vbiBvbmx5JywgJ2RvbmUnLCAnZG9uZSddLAogICAgeyBwcm9maWxlOiAnbmVydm91cycgfQogICk7CiAgY29uc3QgYWxsID0gdHJhbnNjcmlwdC5tYXAodGV4dCkuam9pbignICcpOwogIGNvbnN0IG4gPSAoYWxsLm1hdGNoKC9Zb3VyIGJvYXJkaW5nIGlzIGNsb3NlL2cpIHx8IFtdKS5sZW5ndGg7CiAgYXNzZXJ0LnN0cmljdEVxdWFsKG4sIDEsICd3YXJuaW5nIGFwcGVhcmVkICcgKyBuICsgJyB0aW1lcycpOwp9KTsKCnRlc3QoJ3RoZSByZWFzc3VyYW5jZSBsaW5lIGlzIHNob3duIG9uY2UnLCAoKSA9PiB7CiAgY29uc3QgeyB0cmFuc2NyaXB0IH0gPSBjb252ZXJzZShbJ2hlbGxvJywgJ0RhbW1hbScsICd0ZXJtaW5hbCAxJ10sIHsgcHJvZmlsZTogJ25lcnZvdXMnIH0pOwogIGNvbnN0IGFsbCA9IHRyYW5zY3JpcHQubWFwKHRleHQpLmpvaW4oJyAnKTsKICBjb25zdCBuID0gKGFsbC5tYXRjaCgvbm90aGluZyBoZXJlIHRvIHdvcnJ5IGFib3V0L2cpIHx8IFtdKS5sZW5ndGg7CiAgYXNzZXJ0LnN0cmljdEVxdWFsKG4sIDEsICdyZWFzc3VyYW5jZSBhcHBlYXJlZCAnICsgbiArICcgdGltZXMnKTsKfSk7Cgp0ZXN0KCdjb25zZWN1dGl2ZSBzdGFnZSBtZXNzYWdlcyBkbyBub3Qgb3BlbiB3aXRoIHRoZSBzYW1lIHdvcmRzJywgKCkgPT4gewogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoCiAgICBbJ0RhbW1hbSwgdGVybWluYWwgMSwgMjAwIG1pbnV0ZXMsIG9uZSBiYWcnLCAnZG9uZScsICdkb25lJywgJ2RvbmUnXSwKICAgIHsgcHJvZmlsZTogJ25lcnZvdXMnIH0KICApOwogIGNvbnN0IG9wZW5zID0gdHJhbnNjcmlwdC5zbGljZSgxKS5tYXAociA9PiByLm1lc3NhZ2VzWzBdLnRleHQuc3BsaXQoJyAnKS5zbGljZSgwLDQpLmpvaW4oJyAnKSk7CiAgZm9yIChsZXQgaSA9IDE7IGkgPCBvcGVucy5sZW5ndGg7IGkrKykgewogICAgYXNzZXJ0Lm5vdFN0cmljdEVxdWFsKG9wZW5zW2ldLCBvcGVuc1tpLTFdLCAndHVybiAnICsgaSArICcgcmVwZWF0ZWQgdGhlIG9wZW5lcjogJyArIG9wZW5zW2ldKTsKICB9Cn0pOwoKdGVzdCgnZXNjYWxhdGlvbiBzdGlsbCBlc2NhbGF0ZXMg4oCUIHN1cHByZXNzaW9uIGlzIGRpc3BsYXktb25seScsICgpID0+IHsKICBjb25zdCB7IHRyYW5zY3JpcHQgfSA9IGNvbnZlcnNlKFsnRGFtbWFtLCB0ZXJtaW5hbCAxLCA0NSBtaW51dGVzJywgJ2NhcnJ5LW9uIG9ubHknXSwgeyBwcm9maWxlOiAnYWR1bHQnIH0pOwogIGFzc2VydC5zdHJpY3RFcXVhbCh0cmFuc2NyaXB0WzBdLm1ldGEuZXNjYWxhdGVkLCB0cnVlKTsKICBhc3NlcnQuc3RyaWN0RXF1YWwodHJhbnNjcmlwdFsxXS5tZXRhLmVzY2FsYXRlZCwgdHJ1ZSwgJ3N0aWxsIGtub3dzIGJvYXJkaW5nIGlzIGNsb3NlJyk7Cn0pOwoKY29uc29sZS5sb2coJ1xuYWlycG9ydCBob25lc3R5Jyk7CnRlc3QoJ0plZGRhaCBhbnN3ZXJzIGNhcnJ5IGFuIGV4cGxpY2l0IHVudmVyaWZpZWQgd2FybmluZycsICgpID0+IHsKICBjb25zdCB7IHRyYW5zY3JpcHQgfSA9IGNvbnZlcnNlKFsnSmVkZGFoLCB0ZXJtaW5hbCAxLCAxMjAgbWludXRlcywgb25lIGJhZyddLCB7IHByb2ZpbGU6ICdhZHVsdCcgfSk7CiAgYXNzZXJ0Lm9rKC9ub3QgdmVyaWZpZWR8Y2hlY2sgdGhlIHNpZ25zL2kudGVzdCh0ZXh0KHRyYW5zY3JpcHRbMF0pKSk7Cn0pOwoKdGVzdCgnUml5YWRoIGFuc3dlcnMgYXJlIG1hcmtlZCBwYXJ0aWFsbHkgdmVyaWZpZWQnLCAoKSA9PiB7CiAgY29uc3QgeyB0cmFuc2NyaXB0IH0gPSBjb252ZXJzZShbJ1JpeWFkaCwgdGVybWluYWwgNSwgMTIwIG1pbnV0ZXMsIG9uZSBiYWcnXSwgeyBwcm9maWxlOiAnYWR1bHQnIH0pOwogIGFzc2VydC5vaygvcGFydGlhbGx5IHZlcmlmaWVkfGNvbmZpcm0gb24gdGhlIHNpZ25zL2kudGVzdCh0ZXh0KHRyYW5zY3JpcHRbMF0pKSk7Cn0pOwoKY29uc29sZS5sb2coJ1xuYWRtaW4tZWRpdGVkIGd1aWRhbmNlJyk7CnRlc3QoJ2VkaXRlZCBzdGFnZSB0ZXh0IHJlYWNoZXMgdGhlIHJlcGx5JywgKCkgPT4gewogIGNvbnN0IHMgPSBzZXR0aW5ncyh7IHN0YWdlczogeyBjaGVja2luOiB7IGd1aWRhbmNlX2VuOiAnQ1VTVE9NIENIRUNLSU4gVEVYVCcsIGVuYWJsZWQ6IHRydWUgfSB9IH0pOwogIGNvbnN0IHsgdHJhbnNjcmlwdCB9ID0gY29udmVyc2UoWydEYW1tYW0sIHRlcm1pbmFsIDEsIDEyMCBtaW51dGVzLCBvbmUgYmFnJ10sIHsgcHJvZmlsZTogJ2FkdWx0Jywgc2V0dGluZ3M6IHMgfSk7CiAgYXNzZXJ0Lm9rKC9DVVNUT00gQ0hFQ0tJTiBURVhULy50ZXN0KHRleHQodHJhbnNjcmlwdFswXSkpKTsKfSk7Cgp0ZXN0KCdhIGRpc2FibGVkIHN0YWdlIGlzIHNraXBwZWQgaW4gdGhlIGZsb3cnLCAoKSA9PiB7CiAgY29uc3QgcyA9IHNldHRpbmdzKHsgc3RhZ2VzOiB7IHNlY3VyaXR5OiB7IGVuYWJsZWQ6IGZhbHNlIH0gfSB9KTsKICBjb25zdCB7IHRyYW5zY3JpcHQgfSA9IGNvbnZlcnNlKFsnRGFtbWFtLCB0ZXJtaW5hbCAxLCAxMjAgbWludXRlcywgb25lIGJhZyddLCB7IHByb2ZpbGU6ICdhZHVsdCcsIHNldHRpbmdzOiBzIH0pOwogIGNvbnN0IHNlY29uZCA9IGdlbmVyYXRlUmVwbHkoewogICAgbWVzc2FnZTogJ2RvbmUnLCBsYW5nOiAnZW4nLCBwcm9maWxlOiAnYWR1bHQnLAogICAgc2Vzc2lvbjogdHJhbnNjcmlwdFswXS5zZXNzaW9uLCBzZXR0aW5nczogcwogIH0pOwogIGFzc2VydC5ub3RTdHJpY3RFcXVhbChzZWNvbmQubWV0YS5zdGFnZUtleSwgJ3NlY3VyaXR5Jyk7Cn0pOwoKY29uc29sZS5sb2coJ1xuZGV0ZXJtaW5pc20nKTsKdGVzdCgndGhlIHNhbWUgaW5wdXQgcHJvZHVjZXMgdGhlIHNhbWUgb3V0cHV0IHR3aWNlJywgKCkgPT4gewogIGNvbnN0IGEgPSB0ZXh0KGNvbnZlcnNlKFsnRGFtbWFtLCB0ZXJtaW5hbCAxLCA5MCBtaW51dGVzLCBvbmUgYmFnJ10sIHsgcHJvZmlsZTogJ2FkdWx0JyB9KS50cmFuc2NyaXB0WzBdKTsKICBjb25zdCBiID0gdGV4dChjb252ZXJzZShbJ0RhbW1hbSwgdGVybWluYWwgMSwgOTAgbWludXRlcywgb25lIGJhZyddLCB7IHByb2ZpbGU6ICdhZHVsdCcgfSkudHJhbnNjcmlwdFswXSk7CiAgYXNzZXJ0LnN0cmljdEVxdWFsKGEsIGIpOwp9KTsKCmNvbnNvbGUubG9nKGBcbiR7cGFzc2VkfSBwYXNzZWQsICR7ZmFpbGVkfSBmYWlsZWRcbmApOwppZiAoZmFpbGVkKSB7CiAgZm9yIChjb25zdCBmIG9mIGZhaWx1cmVzKSBjb25zb2xlLmVycm9yKGBcbiR7Zi5uYW1lfVxuJHtmLmVyci5zdGFja31gKTsKICBwcm9jZXNzLmV4aXQoMSk7Cn0K
+'use strict';
+
+/**
+ * Flight Guide — engine tests.
+ *
+ * Plain Node, no test framework (the app has no dependencies, so neither do
+ * its tests). Run with: npm test  /  node test/run.js
+ *
+ * These assert the behaviours the WAI-199 acceptance criteria name:
+ * onboarding before advice, six-stage flow, profile wording differences,
+ * Arabic RTL output, and the escalation threshold.
+ */
+
+const assert = require('assert');
+const { generateReply } = require('../src/engine');
+const { sanitize } = require('../src/store');
+
+let passed = 0;
+let failed = 0;
+const failures = [];
+
+function test(name, fn) {
+  try {
+    fn();
+    passed++;
+    console.log(`  ok   ${name}`);
+  } catch (err) {
+    failed++;
+    failures.push({ name, err });
+    console.log(`  FAIL ${name}`);
+    console.log(`       ${err.message.split('\n')[0]}`);
+  }
+}
+
+function settings(overrides) {
+  return sanitize(overrides || {});
+}
+
+/** Runs a list of turns through the engine, carrying session forward. */
+function converse(turns, opts) {
+  // `opts.settings` may already be an effective settings object — do not
+  // re-sanitize it, or the override shape gets flattened twice.
+  const s = (opts && opts.settings) || settings();
+  let session = (opts && opts.session) || {};
+  const transcript = [];
+  for (const turn of turns) {
+    const res = generateReply({
+      message: turn.message || turn,
+      lang: turn.lang || (opts && opts.lang) || 'en',
+      profile: (turn.profile) || (opts && opts.profile) || 'nervous',
+      session,
+      settings: s
+    });
+    session = res.session;
+    transcript.push(res);
+  }
+  return { transcript, session };
+}
+
+const text = (res) => res.messages.map((m) => m.text).join('\n\n');
+
+console.log('\nonboarding');
+test('asks the airport question before giving any directions', () => {
+  const { transcript } = converse(['hello']);
+  const out = text(transcript[0]);
+  assert.ok(/which airport/i.test(out), 'expected an airport question');
+  assert.ok(!/security screening|passport control/i.test(out), 'must not give directions yet');
+});
+
+test('never re-asks a fact already given', () => {
+  const { transcript } = converse(['I am at Dammam airport']);
+  const out = text(transcript[0]);
+  assert.ok(/terminal/i.test(out), 'should move on to terminal');
+  assert.ok(!/which airport/i.test(out), 'should not ask airport again');
+});
+
+test('collects all four onboarding facts before the first stage', () => {
+  const { transcript, session } = converse([
+    'I am at Dammam, terminal 1, 90 minutes until boarding, and I have a bag to check in'
+  ]);
+  assert.strictEqual(session.airport, 'dmm');
+  assert.ok(session.terminal, 'terminal parsed');
+  assert.strictEqual(session.minutes, 90);
+  assert.strictEqual(session.bags, 'checked');
+  assert.strictEqual(transcript[0].meta.stageKey, 'checkin', 'should now give stage 1');
+});
+
+console.log('\nsix-stage flow');
+test('advances checkin -> security -> passport -> customs -> gate -> boarding', () => {
+  const { transcript } = converse(['Dammam terminal 1, 120 minutes, carry-on only'], {});
+  const keys = [transcript[0].meta.stageKey];
+  for (let i = 0; i < 6; i++) {
+    const r = generateReply({
+      message: 'done',
+      lang: 'en',
+      profile: 'adult',
+      session: Object.assign({}, transcript[0].session, { stage: keys.length - 1 }),
+      settings: settings({})
+    });
+    keys.push(r.meta.stageKey);
+  }
+  const uniq = keys.filter((k, i) => keys.indexOf(k) === i);
+  assert.deepStrictEqual(uniq.slice(0, 6), ['checkin', 'security', 'passport', 'customs', 'gate', 'boarding']);
+});
+
+test('never dumps all six stages in one message', () => {
+  const { transcript } = converse(['Dammam, terminal 1, 90 minutes, one bag']);
+  const out = text(transcript[0]).toLowerCase();
+  const mentioned = ['security', 'passport', 'customs', 'boarding gate'].filter((k) => out.includes(k));
+  assert.ok(mentioned.length <= 1, `one message mentioned ${mentioned.join(', ')}`);
+});
+
+test('gate change is handled as its own branch', () => {
+  const { transcript } = converse(['Dammam, terminal 1, 120 minutes, carry-on', 'my gate changed to 404'], { profile: 'adult' });
+  const last = transcript[transcript.length - 1];
+  assert.strictEqual(last.meta.stageKey, 'gatechange');
+  assert.ok(/404/.test(text(last)), 'should repeat the new gate');
+});
+
+test('a gate change with no number asks instead of inventing one', () => {
+  const { transcript } = converse(['Dammam, terminal 1, 120 minutes, carry-on', 'my gate changed'], { profile: 'adult' });
+  const last = transcript[transcript.length - 1];
+  assert.strictEqual(last.session.awaitingGate, true);
+  assert.ok(/what is the new gate number/i.test(text(last)), 'must ask for the gate');
+  assert.ok(!/120/.test(text(last)), 'must not reuse the minutes figure as a gate');
+});
+
+test('the follow-up number becomes the gate, not the wait', () => {
+  const { transcript } = converse(
+    ['Dammam, terminal 1, 120 minutes, carry-on', 'my gate changed', '404'],
+    { profile: 'adult' }
+  );
+  const last = transcript[transcript.length - 1];
+  assert.strictEqual(last.session.gate, '404');
+  assert.strictEqual(last.session.minutes, 120, 'minutes must not be overwritten by the gate');
+  assert.ok(/404/.test(text(last)));
+  assert.strictEqual(last.session.awaitingGate, false);
+});
+
+console.log('\nprofiles');
+test('the three profiles produce three different messages for the same input', () => {
+  const base = ['Dammam, terminal 1, 90 minutes, one bag'];
+  const a = text(converse(base, { profile: 'nervous' }).transcript[0]);
+  const b = text(converse(base, { profile: 'adult' }).transcript[0]);
+  const c = text(converse(base, { profile: 'hurried' }).transcript[0]);
+  assert.notStrictEqual(a, b, 'nervous vs adult must differ');
+  assert.notStrictEqual(b, c, 'adult vs hurried must differ');
+  assert.notStrictEqual(a, c, 'nervous vs hurried must differ');
+  assert.ok(a.length > b.length, 'nervous should say more than adult');
+  // Hurried is not "shorter in characters" — it drops all filler but gives the
+  // next action too, so it covers two steps in roughly one step's worth of words.
+  assert.ok(!/Take a breath|you're doing fine/i.test(c), 'hurried must carry no reassurance');
+  assert.ok(!/Confirm you are through/i.test(c), 'hurried must carry no closing prompt');
+  assert.ok(/^Then:/m.test(c), 'hurried should hand over the following action');
+});
+
+test('a profile disabled in admin is not used', () => {
+  const s = settings({ profilesEnabled: { nervous: false } });
+  const res = generateReply({
+    message: 'Dammam, terminal 1, 90 minutes, one bag',
+    lang: 'en',
+    profile: 'nervous',
+    session: {},
+    settings: s
+  });
+  assert.notStrictEqual(res.meta.profile, 'nervous');
+  assert.ok(res.meta.profile === 'adult' || res.meta.profile === 'hurried');
+});
+
+console.log('\nlanguage');
+test('an Arabic message produces Arabic output', () => {
+  const { transcript } = converse(['أنا في الدمام']);
+  const out = text(transcript[0]);
+  assert.ok(/[\u0600-\u06FF]/.test(out), 'reply should contain Arabic');
+  assert.strictEqual(transcript[0].meta.lang, 'ar');
+});
+
+test('Arabic onboarding reply has no Latin body text', () => {
+  const { transcript } = converse(['مرحبا']);
+  const out = text(transcript[0]);
+  const latinWords = out.match(/[A-Za-z]{4,}/g) || [];
+  assert.deepStrictEqual(latinWords, [], `found latin words: ${latinWords.join(', ')}`);
+});
+
+console.log('\nescalation');
+test('under the 60-minute default the reply leads with the staff instruction', () => {
+  const { transcript } = converse(['Dammam, terminal 1, 45 minutes, one bag'], { profile: 'adult' });
+  const out = text(transcript[0]);
+  assert.strictEqual(transcript[0].meta.escalated, true);
+  assert.ok(/staff/i.test(out), 'should tell them to find staff');
+});
+
+test('comfortable margin does not escalate', () => {
+  const { transcript } = converse(['Dammam, terminal 1, 150 minutes, one bag'], { profile: 'adult' });
+  assert.strictEqual(transcript[0].meta.escalated, false);
+});
+
+test('the admin threshold is honoured', () => {
+  const s = settings({ escalateMinutes: 120 });
+  const { transcript } = converse(['Dammam, terminal 1, 90 minutes, one bag'], { profile: 'adult', settings: s });
+  assert.strictEqual(transcript[0].meta.escalated, true, '90 <= 120 should escalate');
+});
+
+console.log('\nnever trap the traveller');
+test('a question about a word gets a plain explanation, not a repeat', () => {
+  const { transcript } = converse(['what is a terminal'], { profile: 'nervous' });
+  const out = text(transcript[0]);
+  assert.strictEqual(transcript[0].meta.stageKey, 'explain', 'should be an explanation');
+  assert.ok(/main building/i.test(out), 'should explain what a terminal is');
+  assert.ok(!/which airport/i.test(out), 'must not just re-ask the airport');
+});
+
+test('the same works in Arabic', () => {
+  const { transcript } = converse(['وش يعني تيرمنال'], { profile: 'nervous', lang: 'ar' });
+  const out = text(transcript[0]);
+  assert.strictEqual(transcript[0].meta.stageKey, 'explain');
+  assert.ok(/المبنى الرئيسي/.test(out), 'should explain in Arabic');
+});
+
+test('everyday airport words are all explained', () => {
+  const words = ['what is a boarding pass', 'what does customs mean',
+                 'explain passport control', 'what is security'];
+  for (const w of words) {
+    const { transcript } = converse([w], { profile: 'adult' });
+    assert.strictEqual(transcript[0].meta.stageKey, 'explain', w + ' was not explained');
+  }
+});
+
+test('free text that matches nothing is acknowledged, never ignored', () => {
+  const { transcript } = converse(['I have never travelled before in my life'], { profile: 'nervous' });
+  const out = text(transcript[0]);
+  assert.ok(/hear you|not going to ignore/i.test(out), 'must acknowledge the person');
+});
+
+test('a scared traveller is reassured before being questioned', () => {
+  const { transcript } = converse(['I am really scared about flying alone'], { profile: 'nervous' });
+  const out = text(transcript[0]);
+  assert.ok(/normal way to feel|completely normal/i.test(out), 'should normalise the feeling');
+});
+
+test('typing is never blocked by the onboarding questions', () => {
+  // Any message gets a reply, whatever it says.
+  const messages = ['hello', 'x', 'I do not understand', 'بصراحة ما أدري', '12345'];
+  for (const m of messages) {
+    const { transcript } = converse([m], { profile: 'nervous' });
+    assert.ok(transcript[0].messages.length > 0, 'no reply to: ' + m);
+  }
+});
+
+console.log('\nno repetition');
+test('the escalation warning is shown once, not on every turn', () => {
+  const { transcript } = converse(
+    ['Dammam, terminal 1, 45 minutes', 'carry-on only', 'done', 'done'],
+    { profile: 'nervous' }
+  );
+  const all = transcript.map(text).join(' ');
+  const n = (all.match(/Your boarding is close/g) || []).length;
+  assert.strictEqual(n, 1, 'warning appeared ' + n + ' times');
+});
+
+test('the reassurance line is shown once', () => {
+  const { transcript } = converse(['hello', 'Dammam', 'terminal 1'], { profile: 'nervous' });
+  const all = transcript.map(text).join(' ');
+  const n = (all.match(/nothing here to worry about/g) || []).length;
+  assert.strictEqual(n, 1, 'reassurance appeared ' + n + ' times');
+});
+
+test('consecutive stage messages do not open with the same words', () => {
+  const { transcript } = converse(
+    ['Dammam, terminal 1, 200 minutes, one bag', 'done', 'done', 'done'],
+    { profile: 'nervous' }
+  );
+  const opens = transcript.slice(1).map(r => r.messages[0].text.split(' ').slice(0,4).join(' '));
+  for (let i = 1; i < opens.length; i++) {
+    assert.notStrictEqual(opens[i], opens[i-1], 'turn ' + i + ' repeated the opener: ' + opens[i]);
+  }
+});
+
+test('escalation still escalates — suppression is display-only', () => {
+  const { transcript } = converse(['Dammam, terminal 1, 45 minutes', 'carry-on only'], { profile: 'adult' });
+  assert.strictEqual(transcript[0].meta.escalated, true);
+  assert.strictEqual(transcript[1].meta.escalated, true, 'still knows boarding is close');
+});
+
+console.log('\nairport honesty');
+test('Jeddah answers carry an explicit unverified warning', () => {
+  const { transcript } = converse(['Jeddah, terminal 1, 120 minutes, one bag'], { profile: 'adult' });
+  assert.ok(/not verified|check the signs/i.test(text(transcript[0])));
+});
+
+test('Riyadh answers are marked partially verified', () => {
+  const { transcript } = converse(['Riyadh, terminal 5, 120 minutes, one bag'], { profile: 'adult' });
+  assert.ok(/partially verified|confirm on the signs/i.test(text(transcript[0])));
+});
+
+console.log('\nadmin-edited guidance');
+test('edited stage text reaches the reply', () => {
+  const s = settings({ stages: { checkin: { guidance_en: 'CUSTOM CHECKIN TEXT', enabled: true } } });
+  const { transcript } = converse(['Dammam, terminal 1, 120 minutes, one bag'], { profile: 'adult', settings: s });
+  assert.ok(/CUSTOM CHECKIN TEXT/.test(text(transcript[0])));
+});
+
+test('a disabled stage is skipped in the flow', () => {
+  const s = settings({ stages: { security: { enabled: false } } });
+  const { transcript } = converse(['Dammam, terminal 1, 120 minutes, one bag'], { profile: 'adult', settings: s });
+  const second = generateReply({
+    message: 'done', lang: 'en', profile: 'adult',
+    session: transcript[0].session, settings: s
+  });
+  assert.notStrictEqual(second.meta.stageKey, 'security');
+});
+
+console.log('\ndeterminism');
+test('the same input produces the same output twice', () => {
+  const a = text(converse(['Dammam, terminal 1, 90 minutes, one bag'], { profile: 'adult' }).transcript[0]);
+  const b = text(converse(['Dammam, terminal 1, 90 minutes, one bag'], { profile: 'adult' }).transcript[0]);
+  assert.strictEqual(a, b);
+});
+
+console.log(`\n${passed} passed, ${failed} failed\n`);
+if (failed) {
+  for (const f of failures) console.error(`\n${f.name}\n${f.err.stack}`);
+  process.exit(1);
+}

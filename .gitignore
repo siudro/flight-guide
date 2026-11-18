@@ -1,1 +1,4 @@
-LmRhdGEvCm5vZGVfbW9kdWxlcy8KKi5sb2cKLmVudgo=
+.data/
+node_modules/
+*.log
+.env

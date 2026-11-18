@@ -1,1 +1,18 @@
-ewogICJuYW1lIjogImZsaWdodC1ndWlkZSIsCiAgInZlcnNpb24iOiAiMC4xLjAiLAogICJwcml2YXRlIjogdHJ1ZSwKICAiZGVzY3JpcHRpb24iOiAiRmxpZ2h0IEd1aWRlIOKAlCBmaXJzdCBpbnRlcm5hdGlvbmFsIGZsaWdodCBuYXZpZ2F0aW9uIHByb3RvdHlwZSAocnVsZS1iYXNlZCwgY29udGFpbmVyaXNlZCkiLAogICJsaWNlbnNlIjogIk1JVCIsCiAgImVuZ2luZXMiOiB7CiAgICAibm9kZSI6ICI+PTIwIgogIH0sCiAgIm1haW4iOiAic3JjL3NlcnZlci5qcyIsCiAgInNjcmlwdHMiOiB7CiAgICAic3RhcnQiOiAibm9kZSBzcmMvc2VydmVyLmpzIiwKICAgICJkZXYiOiAiRkdfREFUQV9ESVI9Li8uZGF0YSBub2RlIHNyYy9zZXJ2ZXIuanMiLAogICAgInRlc3QiOiAibm9kZSB0ZXN0L3J1bi5qcyIKICB9LAogICJkZXBlbmRlbmNpZXMiOiB7fSwKICAiZGV2RGVwZW5kZW5jaWVzIjoge30KfQo=
+{
+  "name": "flight-guide",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Flight Guide — first international flight navigation prototype (rule-based, containerised)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "FG_DATA_DIR=./.data node src/server.js",
+    "test": "node test/run.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

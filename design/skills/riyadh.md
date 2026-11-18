@@ -1,1 +1,77 @@
-IyBGbGlnaHQgR3VpZGUg4oCUIFNraWxsOiBSaXlhZGggKEtpbmcgS2hhbGlkIEludGVybmF0aW9uYWwgQWlycG9ydCkKCioqU3RhdHVzOioqIOKaoO+4jyBQQVJUSUFMTFkgVkVSSUZJRUQg4oCUIHRlcm1pbmFsL2ZsaWdodCBkYXRhIHBhZ2UgaXMgYm90LWJsb2NrZWQgKDQwMykuIEdhdGUgYW5kIGZhY2lsaXR5IGxvY2F0aW9ucyBiZWxvdyBjb21lIGZyb20gdGhlIGFpcnBvcnQncyBvd24gaW5kb29yIG1hcC4KCioqSUFUQToqKiBSVUggwrcgKipTaXRlOioqIGBra2lhLnNhYCDCtyAqKkluZG9vciBtYXA6KiogYG1hcHMua2tpYS5zYS9tYXBzL21hcC5odG1sYCDCtyAqKkxhbmd1YWdlczoqKiBBcmFiaWMsIEVuZ2xpc2gKCi0tLQoKIyMgVGVybWluYWxzClRoZSBtYXAgY292ZXJzICoqVGVybWluYWxzIDEsIDIsIDMsIDQgYW5kIDUqKiwgcGx1cyBQcml2YXRlIEF2aWF0aW9uIGFuZCB0aGUgcGFya2luZyBidWlsZGluZ3MuCgpGbG9vciBuYW1pbmcgZGlmZmVycyBmcm9tIG1vc3QgYWlycG9ydHMuIFRlcm1pbmFscyAx4oCTNCB1c2UgbGV0dGVyZWQgbGV2ZWxzOgoKfCBUZXJtaW5hbCBncm91cCB8IEZsb29ycyB8CnwtLS18LS0tfAp8IFRlcm1pbmFscyAx4oCTNCB8IExldmVsIFMsIExldmVsIEEsIExldmVsIEksIExldmVsIEQsIExldmVsIE0gfAp8IFRlcm1pbmFsIDUgfCBMZXZlbCAtMSwgTGV2ZWwgRywgTGV2ZWwgMSB8CgoqKkFsd2F5cyBhc2sgd2hpY2ggdGVybWluYWwgdGhlIHRyYXZlbGxlciBpcyBpbiBiZWZvcmUgZ2l2aW5nIGEgcm91dGUuKiogQSByb3V0ZSBmb3IgVGVybWluYWwgMSBpcyB3cm9uZyBmb3IgVGVybWluYWwgNS4KCi0tLQoKIyMgUmVhbCBmYWNpbGl0eSBsb2NhdGlvbnMgKGZyb20gdGhlIGFpcnBvcnQgaW5kb29yIG1hcCkKCiMjIyBQYXNzcG9ydCBjb250cm9sCi0gKipQYXNzcG9ydCBDb250cm9sKiog4oCUIEdhdGUgTGV2ZWwgRyDCtyBg2YXYsdin2YLYqNipINin2YTYrNmI2KfYstin2KpgCi0gKipQYXNzcG9ydCBDb250cm9sKiog4oCUIEdhdGUgTGV2ZWwgLTEKLSAqKkFpcnBvcnQgUGFzc3BvcnQgQ29udHJvbCoqIChJbW1pZ3JhdGlvbikg4oCUIEdhdGUgTGV2ZWwgRyDCtyBg2KfZhNmH2KzYsdipINmI2KfZhNis2YjYp9iy2KfYqmAKLSAqKlBhc3Nwb3J0IEUtR2F0ZSoqIOKAlCBHYXRlIExldmVsIEcgYW5kIEdhdGUgTGV2ZWwgMiDCtyBg2KjZiNin2KjYp9iqINin2YTYrNmI2KfYstin2Kog2KfZhNil2YTZg9iq2LHZiNmG2YrYqWAKLSAqKlBhc3Nwb3J0cyBDb3VudGVyKiog4oCUIEdhdGUgTGV2ZWwgMSDCtyBg2KfZhNis2YjYp9iy2KfYqmAKCiMjIyBDdXN0b21zCi0gKipTYXVkaSBDdXN0b21zKiog4oCUIEdhdGUgTGV2ZWwgRyDCtyBg2KfZhNis2YXYp9ix2YMg2KfZhNiz2LnZiNiv2YrYqWAKLSAqKkN1c3RvbSBWYWxpZGF0aW9uKiog4oCUIEdhdGUgTGV2ZWwgMiDCtyBg2KrYtdiv2YrZgiDYp9mE2KzZhdin2LHZg2AKCiMjIyBTZWN1cml0eSBzY3JlZW5pbmcKLSAqKlNlY3VyaXR5IFNjcmVlbmluZyoqIOKAlCBHYXRlIExldmVsIEcgwrcgYNmF2YbYt9mC2Kkg2YHYrdi1INin2YTYo9mF2KrYudipINin2YTZitiv2YjZitipYAotICoqU2VjdXJpdHkgU2NyZWVuaW5nKiog4oCUIEdhdGUgTGV2ZWwgMSDCtyBg2YXZhti32YLYqSDYp9mE2KrZgdiq2YrYtCDYp9mE2KPZhdmG2YpgCi0gKipTZWN1cml0eSBTY3JlZW5pbmcqKiDigJQgR2F0ZSBMZXZlbCAyIMK3IGDZhdmG2LfZgtipINin2YTYqtmB2KrZiti0INin2YTYo9mF2YbZimAKCioqU2VjdXJpdHkgZXhpc3RzIG9uIG1vcmUgdGhhbiBvbmUgbGV2ZWwuKiogVGVsbCB0aGUgdHJhdmVsbGVyIHRvIGZpbmQgdGhlIHNjcmVlbmluZyBwb2ludCBvbiB0aGVpciBvd24gbGV2ZWwgcmF0aGVyIHRoYW4gc2VuZGluZyB0aGVtIHRvIGEgc3BlY2lmaWMgb25lIGJsaW5kbHkuCgojIyMgQ2hlY2staW4KQ2hlY2staW4gY291bnRlcnMgYXBwZWFyIGFjcm9zcyBHYXRlIExldmVscyBHLCAtMSBhbmQgb3RoZXIgbGV2ZWxzLiBGaW5kIHRoZSBhaXJsaW5lJ3MgY291bnRlciBpbiB0aGUgZGVwYXJ0dXJlcyBoYWxsIG9mIHRoZSB0cmF2ZWxsZXIncyB0ZXJtaW5hbC4KCi0tLQoKIyMgQm9hcmRpbmcgZ2F0ZXMgKDM1IG1hcHBlZCkKCioqMTAwLXNlcmllcyoqIOKAlCBMZXZlbCBHIGFyZWE6IDEwMywgMTA0QSwgMTA0QiwgMTA1QSwgMTA1QiwgMTA2LCAxMDcsIDEwOCwgMTA5QSwgMTA5QgoqKjEzMC1zZXJpZXMqKiDigJQgMTMxLCAxMzIsIDEzMywgMTM0LCAxMzUKKiozMDAtc2VyaWVzKiog4oCUIDMwMSwgMzAyLCAzMDMsIDMwNCwgMzA1LCAzMDYsIDMwNywgMzMyLCAzMzMsIDMzNAoqKjQwMC1zZXJpZXMqKiDigJQgNDAxLCA0MDIsIDQwMywgNDA0LCA0MDUsIDQwNiwgNDA3LCA0MzEsIDQzMiwgNDMzCgpUaGUgKipodW5kcmVkcyBkaWdpdCByb3VnaGx5IGluZGljYXRlcyB0aGUgYXJlYSoqOiAxMDBzIGFuZCAzMDBzIGFyZSBuZWFyIHRoZSBjZW50cmFsIHpvbmU7IDQwMHMgYXJlIGZ1cnRoZXIgb3V0LiBUcmVhdCB0aGlzIGFzIGEgZ3VpZGUgdG8gd2hpY2ggZGlyZWN0aW9uIHRvIHdhbGssIGFuZCBjb25maXJtIG9uIHRoZSBzaWducy4KCi0tLQoKIyMgQWxzbyBhdmFpbGFibGUgdG8gdGhlIHRyYXZlbGxlcgpQcmF5ZXIgcm9vbXMgKDgpIMK3IFRvaWxldHMgKDI5KSDCtyBTcGVjaWFsIGFzc2lzdGFuY2UgcG9pbnRzICg5KSDCtyBMb3VuZ2VzICg3KSDCtyBEaW5pbmcgKDQ5KSDCtyBBVE1zICgxMSkgwrcgQmFnZ2FnZSBzZXJ2aWNlcyAoMjYpCgpVc2UgdGhlc2UgZm9yIHRoZSBzcGFyZS10aW1lIGJyYW5jaCDigJQgYnV0IG5hbWUgb25seSB3aGF0IHRoZSBtYXAgY29uZmlybXMuCgotLS0KCiMjIOKaoO+4jyBXaGF0IGlzIE5PVCB2ZXJpZmllZAotIExpdmUgZmxpZ2h0IHN0YXR1cywgZ2F0ZSBhc3NpZ25tZW50LCBhbmQgY2FuY2VsbGF0aW9ucyDigJQgdGhlIGRlcGFydHVyZXMgcGFnZSByZXR1cm5zIDQwMyB0byBhdXRvbWF0ZWQgYWNjZXNzCi0gRXhhY3Qgd2Fsa2luZyB0aW1lcyBiZXR3ZWVuIGdhdGVzCi0gV2hpY2ggYWlybGluZSB1c2VzIHdoaWNoIGdhdGUKCioqSWYgYXNrZWQgYWJvdXQgbGl2ZSBzdGF0dXMgYXQgUml5YWRoLCBzYXkgcGxhaW5seSB0aGF0IHlvdSBkbyBub3QgaGF2ZSBsaXZlIGRhdGEgZm9yIHRoaXMgYWlycG9ydCBhbmQgdGVsbCB0aGUgdHJhdmVsbGVyIHRvIGNoZWNrIHRoZSBkZXBhcnR1cmUgc2NyZWVucy4qKiBEbyBub3QgZ3Vlc3MuCgotLS0KCiMjIFNvdXJjZXMKLSBgbWFwcy5ra2lhLnNhL21hcHMvbWFwLmh0bWxgIOKAlCBpbmRvb3IgbWFwIChnYXRlIGFuZCBmYWNpbGl0eSBsb2NhdGlvbnMpCi0gYGtraWEuc2FgIOKAlCBhaXJwb3J0IHNpdGUgKGRlcGFydHVyZXMgcGFnZSBib3QtcHJvdGVjdGVkKQo=
+# Flight Guide — Skill: Riyadh (King Khalid International Airport)
+
+**Status:** ⚠️ PARTIALLY VERIFIED — terminal/flight data page is bot-blocked (403). Gate and facility locations below come from the airport's own indoor map.
+
+**IATA:** RUH · **Site:** `kkia.sa` · **Indoor map:** `maps.kkia.sa/maps/map.html` · **Languages:** Arabic, English
+
+---
+
+## Terminals
+The map covers **Terminals 1, 2, 3, 4 and 5**, plus Private Aviation and the parking buildings.
+
+Floor naming differs from most airports. Terminals 1–4 use lettered levels:
+
+| Terminal group | Floors |
+|---|---|
+| Terminals 1–4 | Level S, Level A, Level I, Level D, Level M |
+| Terminal 5 | Level -1, Level G, Level 1 |
+
+**Always ask which terminal the traveller is in before giving a route.** A route for Terminal 1 is wrong for Terminal 5.
+
+---
+
+## Real facility locations (from the airport indoor map)
+
+### Passport control
+- **Passport Control** — Gate Level G · `مراقبة الجوازات`
+- **Passport Control** — Gate Level -1
+- **Airport Passport Control** (Immigration) — Gate Level G · `الهجرة والجوازات`
+- **Passport E-Gate** — Gate Level G and Gate Level 2 · `بوابات الجوازات الإلكترونية`
+- **Passports Counter** — Gate Level 1 · `الجوازات`
+
+### Customs
+- **Saudi Customs** — Gate Level G · `الجمارك السعودية`
+- **Custom Validation** — Gate Level 2 · `تصديق الجمارك`
+
+### Security screening
+- **Security Screening** — Gate Level G · `منطقة فحص الأمتعة اليدوية`
+- **Security Screening** — Gate Level 1 · `منطقة التفتيش الأمني`
+- **Security Screening** — Gate Level 2 · `منطقة التفتيش الأمني`
+
+**Security exists on more than one level.** Tell the traveller to find the screening point on their own level rather than sending them to a specific one blindly.
+
+### Check-in
+Check-in counters appear across Gate Levels G, -1 and other levels. Find the airline's counter in the departures hall of the traveller's terminal.
+
+---
+
+## Boarding gates (35 mapped)
+
+**100-series** — Level G area: 103, 104A, 104B, 105A, 105B, 106, 107, 108, 109A, 109B
+**130-series** — 131, 132, 133, 134, 135
+**300-series** — 301, 302, 303, 304, 305, 306, 307, 332, 333, 334
+**400-series** — 401, 402, 403, 404, 405, 406, 407, 431, 432, 433
+
+The **hundreds digit roughly indicates the area**: 100s and 300s are near the central zone; 400s are further out. Treat this as a guide to which direction to walk, and confirm on the signs.
+
+---
+
+## Also available to the traveller
+Prayer rooms (8) · Toilets (29) · Special assistance points (9) · Lounges (7) · Dining (49) · ATMs (11) · Baggage services (26)
+
+Use these for the spare-time branch — but name only what the map confirms.
+
+---
+
+## ⚠️ What is NOT verified
+- Live flight status, gate assignment, and cancellations — the departures page returns 403 to automated access
+- Exact walking times between gates
+- Which airline uses which gate
+
+**If asked about live status at Riyadh, say plainly that you do not have live data for this airport and tell the traveller to check the departure screens.** Do not guess.
+
+---
+
+## Sources
+- `maps.kkia.sa/maps/map.html` — indoor map (gate and facility locations)
+- `kkia.sa` — airport site (departures page bot-protected)

@@ -1,1 +1,151 @@
-IyBGbGlnaHQgR3VpZGUg4oCUIFdBSUNZIDIwMjYgU3VibWlzc2lvbgojIyBMTE0gJiBBSSBBZ2VudCBUcmFjawoKKipUZWFtOioqIHlveW8uc2hlY28gwrcgbW9zYTNkYWxzYXl5YXIgwrcgbmFzc2lyCioqRGF0ZToqKiBOb3ZlbWJlciAyMDI2CgotLS0KCiMjIDEuIFdoYXQgU3BlY2lmaWMgU2VydmljZSBPdXIgQUkgUHJvdmlkZXMKCioqU3RhdHVzOiBEUkFGVEVEIOKAlCBjb3B5IGZyb20gdGhlIHByb2plY3QgZGVzY3JpcHRpb24sIHRoZW4gZWRpdCBpbnRvIHlvdXIgb3duIHZvaWNlLioqCgpGbGlnaHQgR3VpZGUgaXMgYW4gQUkgYWdlbnQgdGhhdCBoZWxwcyBhIHRyYXZlbGxlciB0YWtpbmcgdGhlaXIgZmlyc3QgaW50ZXJuYXRpb25hbCBmbGlnaHQgd2l0aCBub2JvZHkgdG8gZ3VpZGUgdGhlbS4gSXQgd2Fsa3MgdGhlbSB0aHJvdWdoIGNoZWNrLWluLCBzZWN1cml0eSwgcGFzc3BvcnQgY29udHJvbCBhbmQgY3VzdG9tcywgYW5kIG9uIHRvIHRoZWlyIGJvYXJkaW5nIGdhdGUg4oCUIGF0IERhbW1hbSAoS0ZJQSksIFJpeWFkaCAoS0tJQSkgb3IgSmVkZGFoIChLQUlBKSDigJQgaW4gQXJhYmljIG9yIEVuZ2xpc2guCgpUaGUgcHJvYmxlbSBpdCBhZGRyZXNzZXM6IGEgZmlyc3QgaW50ZXJuYXRpb25hbCBmbGlnaHQgYWxvbmUgaXMgYSBjaGFpbiBvZiBwcm9jZWR1cmVzIG5vYm9keSBoYXMgZXhwbGFpbmVkLiBUaGUgc2lnbnMgYXJlIGluIGEgbGFuZ3VhZ2UgdGhlIHRyYXZlbGxlciBtYXkgbm90IHJlYWQsIGFuZCB0aGVyZSBpcyBub2JvZHkgdG8gYXNrLgoKVGhlIHZhbHVlOiB0aGUgdHJhdmVsbGVyIHJlYWNoZXMgdGhlIGdhdGUgY2FsbSBhbmQgb24gdGltZSwgd2l0aG91dCBhIHN0YWZmIG1lbWJlciBoYXZpbmcgdG8gcmVzY3VlIHRoZW0uCgoqKlNjb3BlIOKAlCB3aGF0IGl0IGRvZXMgbm90IGRvOioqIG5vIHJlYm9va2luZywgcmVmdW5kcywgYmFnZ2FnZSBjbGFpbXMsIHRpY2tldCBwcmljZXMsIHZpc2Egb3IgaW1taWdyYXRpb24gYWR2aWNlLCBvciB0b3VyaXNtIHJlY29tbWVuZGF0aW9ucy4KCioqTm90IHRvbyBicm9hZDoqKiBub3QgImEgdHJhdmVsIGFkdmlzb3IiIOKAlCBpdCBjb3ZlcnMgb25lIHNpdHVhdGlvbiAoZmlyc3QgaW50ZXJuYXRpb25hbCBmbGlnaHQsIGFsb25lKSBhbmQgb25lIHN0cmV0Y2ggb2YgdGhlIGpvdXJuZXkgKGFpcnBvcnQgZW50cmFuY2UgdG8gYm9hcmRpbmcgZ2F0ZSkuCgoqV3JpdGUgMeKAkzIgc2VudGVuY2VzIGluIHlvdXIgb3duIHdvcmRzIGZvciBlYWNoIGl0YWxpYyBwYXJhZ3JhcGguKgoKLS0tCgojIyAyLiBNb3RpdmF0aW9uCgoqKlN0YXR1czogTkVFRFMgV1JJVElORyDigJQgeW91IGhhdmUgdGhlIHJhdyBtYXRlcmlhbC4qKgoKWW91ciBvd24gbGluZTogKiJzbyB0aGUgdHJpcCBkb2Vzbid0IG1pc3MgeW91IGJlY2F1c2Ugd2UgY2FyZS4iKgoKQW5zd2VyIHRoZXNlIHRocmVlIHF1ZXN0aW9uczoKLSBXaGF0IG1hZGUgdGhlIHRlYW0gdGhpbmsgb2YgdGhpcz8gKGEgcmVhbCBleHBlcmllbmNlPyBzb21lb25lIHlvdSBrbm93PykKLSBXaHkgZG9lcyBpdCBtYXR0ZXIgdGhhdCBpdCBpcyBhICpmaXJzdCogZmxpZ2h0IHNwZWNpZmljYWxseT8KLSBXaGF0IGlzIHRoZSBjb3N0IG9mIGdldHRpbmcgaXQgd3Jvbmc/IChmZWFyLCBtb25leSwgc2FmZXR5KQoKPiAqV3JpdGUgMSBwYXJhZ3JhcGgsIDEyMOKAkzE4MCB3b3Jkcy4qCgotLS0KCiMjIDMuIENoYXQgSGlzdG9yeQoKKipTdGF0dXM6IE5FRURTIERPSU5HIOKAlCAyMCBtaW51dGVzLioqCgpIYXZlIGEgY29udmVyc2F0aW9uIHdpdGggdGhlIGFnZW50IG9mICoqYXQgbGVhc3QgMTAgZXhjaGFuZ2VkIG1lc3NhZ2VzKiouIFNjcmVlbnNob3QgaXQsIG9yIHBhc3RlIHRoZSB0cmFuc2NyaXB0IGhlcmUuCgpTdWdnZXN0ZWQgZmxvdzoKMS4gIkknbSBhdCBEYW1tYW0gYWlycG9ydCwgZmlyc3QgZmxpZ2h0IGFsb25lIiDihpIgYWdlbnQgYXNrcyBxdWVzdGlvbnMKMi4gQW5zd2VyIHRoZSBxdWVzdGlvbnMKMy4gQXNrICJ3aGF0IGRvIEkgZG8gZmlyc3Q/Igo0LiBBc2sgImhvdyBsb25nIHdpbGwgc2VjdXJpdHkgdGFrZT8iCjUuIEFzayAid2hhdCBpZiB0aGUgZ2F0ZSBjaGFuZ2VzPyIKNi4gQXNrICJJIGRvbid0IHJlYWQgRW5nbGlzaCB3ZWxsIiAodGVzdHMgdGhlIGxhbmd1YWdlIHJ1bGUpCgoqKlBhc3RlIHRoZSB0cmFuc2NyaXB0IG9yIGEgbGluayBoZXJlLioqCgotLS0KCiMjIDQuIENoYXRib3QgUHJvdG90eXBlCgoqKlN0YXR1czogQkxPQ0tFRCDigJQgb25lIGF0dGVtcHQgYXQgR2VtaW5pIEdlbXMsIHRoZW4gdXNlIHRoZSBmYWxsYmFjayBzdGF0ZW1lbnQuKioKCipJZiB5b3UgZ2V0IGEgbGluazoqIHBhc3RlIGl0IGhlcmUuCgoqSWYgbm90LCogdXNlIHRoaXM6Cj4gVGhlIHByb3RvdHlwZSBpcyBkZW1vbnN0cmF0ZWQgdGhyb3VnaCB0aGUgY2hhdCB0cmFuc2NyaXB0IGluIFNlY3Rpb24gMy4gSG9zdGVkLWFnZW50IGNyZWF0aW9uIHdhcyB1bmF2YWlsYWJsZSBvbiB0aGUgdGVhbSdzIGFjY291bnQgZHVyaW5nIHRoZSBzdWJtaXNzaW9uIHdpbmRvdywgc28gdGhlIHdvcmtpbmcgcHJvdG90eXBlIGlzIHNob3duIHRocm91Z2ggcmVjb3JkZWQgY29udmVyc2F0aW9ucyBhZ2FpbnN0IHRoZSBmaW5hbCBpbnN0cnVjdGlvbiBzZXQgcmVwcm9kdWNlZCBpbiBTZWN0aW9uIDUuCgotLS0KCiMjIDUuIEl0ZXJhdGl2ZSBBSSBEZXNpZ24gUHJvY2VzcwoKKipTdGF0dXM6IFJFQURZIOKAlCBjb3B5IGZyb20gdGFzayA0IChXQUkgaXNzdWUpLioqCgpTdHJ1Y3R1cmU6ICoqSWRlYSDihpIgQWR2aXNvciBEZXNpZ24g4oaSIFRlc3Rpbmcg4oaSIEVycm9yIEFuYWx5c2lzIOKGkiBJbXByb3ZlbWVudCoqCgpQYXN0ZSBmcm9tIHRoZSB0YXNrLCBwbHVzIHRoZSBzY3JlZW5zaG90czoKCnwgVGVzdCB8IFJlc3VsdCB8CnwtLS18LS0tfAp8IEFobWVkLCBBcmFiaWMgfCBSZXBsaWVkIGluIEVuZ2xpc2gg4pyXIHwKfCBBaG1lZCByZXRlc3QgfCBBcmFiaWMg4pyTIHwKfCBGYXRpbWEsIGNhbm5vdCByZWFkIEVuZ2xpc2ggfCBSZXBsaWVkIGluIEVuZ2xpc2gg4pyXIHwKfCBGYXRpbWEgcmV0ZXN0IHwgU3dpdGNoZWQgdG8gQXJhYmljIOKckyB8CnwgWXVzdWYsIDcwIG1pbiB8IFJpZ2h0IHRvbmUsIHRvbyBtYW55IHN0ZXBzIOKaoCB8CgoqKkluY2x1ZGUgYWxsIGZpdmUgc2NyZWVuc2hvdHMsIGluY2x1ZGluZyB0aGUgZmFpbHVyZXMuKioKCi0tLQoKIyMgNi4gTGltaXRhdGlvbnMKCioqU3RhdHVzOiBORUVEUyBXUklUSU5HIOKAlCBmYWN0cyBhbHJlYWR5IGtub3duLioqCgpDb3ZlcjoKLSAqKkZsaWdodCBzdGF0dXMgaXMgc2ltdWxhdGVkLioqIFRoZSBhaXJwb3J0cycgbGl2ZSBkZXBhcnR1cmUgcGFnZXMgYmxvY2sgYXV0b21hdGVkIGFjY2VzcyAoSFRUUCA0MDMpLCBzbyB0aGUgYWdlbnQgY2Fubm90IG9ic2VydmUgcmVhbCBkZWxheXMgb3IgZ2F0ZSBjaGFuZ2VzLgotICoqSmVkZGFoIGlzIHVudmVyaWZpZWQuKiogT25seSB0aGUgZ2VuZXJhbCBwcm9jZWR1cmUgaXMgZGVzY3JpYmVkOyBubyBnYXRlIG51bWJlcnMgb3IgZmxvb3IgbG9jYXRpb25zLgotICoqQXJhYmljL0VuZ2xpc2ggb25seS4qKgotICoqTm8gaW5kb29yIEdQUy4qKiBUaGUgbWFwIHNob3dzIGxvY2F0aW9ucywgbm90IHRoZSB0cmF2ZWxsZXIncyBsaXZlIHBvc2l0aW9uLgotICoqTmV2ZXIgZ2l2ZXMgdmlzYSBvciBpbW1pZ3JhdGlvbiBhZHZpY2UqKiDigJQgZGlyZWN0cyB0byBzdGFmZi4KCj4gKldyaXRlIDEgcGFyYWdyYXBoIHBlciBsaW1pdGF0aW9uLCAy4oCTMyBzZW50ZW5jZXMgZWFjaC4qCgotLS0KCiMjIDcuIEZ1dHVyZSBEZXZlbG9wbWVudAoKKipTdGF0dXM6IE5FRURTIFdSSVRJTkcg4oCUIG9uZSBwYXJhZ3JhcGguKioKCi0gQ29ubmVjdCBhIGxpdmUgZmxpZ2h0LXN0YXR1cyBmZWVkIHNvIGRlbGF5cyBhbmQgZ2F0ZSBjaGFuZ2VzIHJlYWNoIHRoZSB0cmF2ZWxsZXIgaW4gcmVhbCB0aW1lLgotIFNlbmQgYW4gZW1haWwgb3IgV2hhdHNBcHAgYWxlcnQgd2hlbiBhIGRlbGF5IGlzIGNvbmZpcm1lZC4KLSBWZXJpZnkgSmVkZGFoJ3MgdGVybWluYWxzIGFuZCBnYXRlcy4KLSBBZGQgdm9pY2UgaW5wdXQgZm9yIHRyYXZlbGxlcnMgd2hvIGNhbm5vdCB0eXBlIGNvbWZvcnRhYmx5LgotIEV4dGVuZCB0byBBcmFiaWMgZGlhbGVjdHMuCgo+ICpXcml0ZSAxIHBhcmFncmFwaCwgMTAw4oCTMTUwIHdvcmRzLioKCi0tLQoKIyMgOC4gQ29uY2x1c2lvbgoKKipTdGF0dXM6IE5FRURTIFdSSVRJTkcg4oCUIHNob3J0LioqCgpTdW1tYXJpc2U6IHRoZSBzZXJ2aWNlLCB0aGUgcHJvYmxlbSwgd2hhdCB3YXMgYnVpbHQgYW5kIHRlc3RlZCwgYW5kIHdoYXQgaXQgbWVhbnMuCgo+ICpXcml0ZSAxIHBhcmFncmFwaCwgMTAwIHdvcmRzLioKCi0tLQoKIyMgOS4gUmVmZXJlbmNlcwoKKipTdGF0dXM6IE5FQVJMWSBSRUFEWSDigJQgZm9ybWF0IGFzIEFQQS4qKgoKLSBLaW5nIEZhaGQgSW50ZXJuYXRpb25hbCBBaXJwb3J0LiAobi5kLikuICpGbGlnaHRzIOKAlCBkZXBhcnR1cmVzKi4gaHR0cHM6Ly9rZmlhLnNhL2FyL0ZsaWdodHMKLSBLaW5nIEZhaGQgSW50ZXJuYXRpb25hbCBBaXJwb3J0LiAobi5kLikuICpQYXNzZW5nZXIgZ3VpZGUg4oCUIGFpcnBvcnQgbWFwKi4gaHR0cHM6Ly9rZmlhLnNhL2FyL0d1aWRlL1Bhc3Nlbmdlci9haXJwb3J0LW1hcAotIEtpbmcgS2hhbGlkIEludGVybmF0aW9uYWwgQWlycG9ydC4gKG4uZC4pLiAqSW50ZXJhY3RpdmUgYWlycG9ydCBtYXAqLiBodHRwczovL21hcHMua2tpYS5zYS9tYXBzL21hcC5odG1sCi0gS2luZyBLaGFsaWQgSW50ZXJuYXRpb25hbCBBaXJwb3J0LiAobi5kLikuICpEZXBhcnR1cmVzIGFuZCBhcnJpdmFscyouIGh0dHBzOi8vd3d3LmtraWEuc2EvZW4vZmxpZ2h0cy9kZXBhcnR1cmVzLWFuZC1hcnJpdmFscwotIEtpbmcgQWJkdWxheml6IEludGVybmF0aW9uYWwgQWlycG9ydC4gKG4uZC4pLiAqRmxpZ2h0cyouIGh0dHBzOi8vd3d3LmthaWEuc2EvYXItU0EvRmxpZ2h0cwoKKkFkZCBhbnkgc291cmNlcyB5b3UgdXNlZCBmb3Igc2VjdXJpdHkgb3IgY3VzdG9tcyBwcm9jZWR1cmUuKgoKLS0tCgojIyBDaGVja2xpc3QgYmVmb3JlIHN1Ym1pdHRpbmcKCi0gWyBdIEFsbCBuaW5lIHNlY3Rpb25zIHByZXNlbnQKLSBbIF0gQ2hhdCBoaXN0b3J5IGhhcyDiiaUgMTAgZXhjaGFuZ2VkIG1lc3NhZ2VzCi0gWyBdIFNjcmVlbnNob3RzIGluY2x1ZGVkIChpbmNsdWRpbmcgdGhlIGZhaWxlZCB0ZXN0cykKLSBbIF0gUmVmZXJlbmNlcyBpbiBBUEEKLSBbIF0gRXhwb3J0ZWQgYXMgb25lIFBERgotIFsgXSBGaWxlIG5hbWVkIGBMTE1fUHJvamVjdE5hbWUucGRmYAo=
+# Flight Guide — WAICY 2026 Submission
+## LLM & AI Agent Track
+
+**Team:** yoyo.sheco · mosa3dalsayyar · nassir
+**Date:** November 2026
+
+---
+
+## 1. What Specific Service Our AI Provides
+
+**Status: DRAFTED — copy from the project description, then edit into your own voice.**
+
+Flight Guide is an AI agent that helps a traveller taking their first international flight with nobody to guide them. It walks them through check-in, security, passport control and customs, and on to their boarding gate — at Dammam (KFIA), Riyadh (KKIA) or Jeddah (KAIA) — in Arabic or English.
+
+The problem it addresses: a first international flight alone is a chain of procedures nobody has explained. The signs are in a language the traveller may not read, and there is nobody to ask.
+
+The value: the traveller reaches the gate calm and on time, without a staff member having to rescue them.
+
+**Scope — what it does not do:** no rebooking, refunds, baggage claims, ticket prices, visa or immigration advice, or tourism recommendations.
+
+**Not too broad:** not "a travel advisor" — it covers one situation (first international flight, alone) and one stretch of the journey (airport entrance to boarding gate).
+
+*Write 1–2 sentences in your own words for each italic paragraph.*
+
+---
+
+## 2. Motivation
+
+**Status: NEEDS WRITING — you have the raw material.**
+
+Your own line: *"so the trip doesn't miss you because we care."*
+
+Answer these three questions:
+- What made the team think of this? (a real experience? someone you know?)
+- Why does it matter that it is a *first* flight specifically?
+- What is the cost of getting it wrong? (fear, money, safety)
+
+> *Write 1 paragraph, 120–180 words.*
+
+---
+
+## 3. Chat History
+
+**Status: NEEDS DOING — 20 minutes.**
+
+Have a conversation with the agent of **at least 10 exchanged messages**. Screenshot it, or paste the transcript here.
+
+Suggested flow:
+1. "I'm at Dammam airport, first flight alone" → agent asks questions
+2. Answer the questions
+3. Ask "what do I do first?"
+4. Ask "how long will security take?"
+5. Ask "what if the gate changes?"
+6. Ask "I don't read English well" (tests the language rule)
+
+**Paste the transcript or a link here.**
+
+---
+
+## 4. Chatbot Prototype
+
+**Status: BLOCKED — one attempt at Gemini Gems, then use the fallback statement.**
+
+*If you get a link:* paste it here.
+
+*If not,* use this:
+> The prototype is demonstrated through the chat transcript in Section 3. Hosted-agent creation was unavailable on the team's account during the submission window, so the working prototype is shown through recorded conversations against the final instruction set reproduced in Section 5.
+
+---
+
+## 5. Iterative AI Design Process
+
+**Status: READY — copy from task 4 (WAI issue).**
+
+Structure: **Idea → Advisor Design → Testing → Error Analysis → Improvement**
+
+Paste from the task, plus the screenshots:
+
+| Test | Result |
+|---|---|
+| Ahmed, Arabic | Replied in English ✗ |
+| Ahmed retest | Arabic ✓ |
+| Fatima, cannot read English | Replied in English ✗ |
+| Fatima retest | Switched to Arabic ✓ |
+| Yusuf, 70 min | Right tone, too many steps ⚠ |
+
+**Include all five screenshots, including the failures.**
+
+---
+
+## 6. Limitations
+
+**Status: NEEDS WRITING — facts already known.**
+
+Cover:
+- **Flight status is simulated.** The airports' live departure pages block automated access (HTTP 403), so the agent cannot observe real delays or gate changes.
+- **Jeddah is unverified.** Only the general procedure is described; no gate numbers or floor locations.
+- **Arabic/English only.**
+- **No indoor GPS.** The map shows locations, not the traveller's live position.
+- **Never gives visa or immigration advice** — directs to staff.
+
+> *Write 1 paragraph per limitation, 2–3 sentences each.*
+
+---
+
+## 7. Future Development
+
+**Status: NEEDS WRITING — one paragraph.**
+
+- Connect a live flight-status feed so delays and gate changes reach the traveller in real time.
+- Send an email or WhatsApp alert when a delay is confirmed.
+- Verify Jeddah's terminals and gates.
+- Add voice input for travellers who cannot type comfortably.
+- Extend to Arabic dialects.
+
+> *Write 1 paragraph, 100–150 words.*
+
+---
+
+## 8. Conclusion
+
+**Status: NEEDS WRITING — short.**
+
+Summarise: the service, the problem, what was built and tested, and what it means.
+
+> *Write 1 paragraph, 100 words.*
+
+---
+
+## 9. References
+
+**Status: NEARLY READY — format as APA.**
+
+- King Fahd International Airport. (n.d.). *Flights — departures*. https://kfia.sa/ar/Flights
+- King Fahd International Airport. (n.d.). *Passenger guide — airport map*. https://kfia.sa/ar/Guide/Passenger/airport-map
+- King Khalid International Airport. (n.d.). *Interactive airport map*. https://maps.kkia.sa/maps/map.html
+- King Khalid International Airport. (n.d.). *Departures and arrivals*. https://www.kkia.sa/en/flights/departures-and-arrivals
+- King Abdulaziz International Airport. (n.d.). *Flights*. https://www.kaia.sa/ar-SA/Flights
+
+*Add any sources you used for security or customs procedure.*
+
+---
+
+## Checklist before submitting
+
+- [ ] All nine sections present
+- [ ] Chat history has ≥ 10 exchanged messages
+- [ ] Screenshots included (including the failed tests)
+- [ ] References in APA
+- [ ] Exported as one PDF
+- [ ] File named `LLM_ProjectName.pdf`

@@ -1,1 +1,337 @@
-LyogRmxpZ2h0IEd1aWRlIOKAlCBwYXNzZW5nZXIgY2hhdCBVSS4gTm8gZnJhbWV3b3JrLCBubyBidWlsZCBzdGVwLiAqLwoKKGZ1bmN0aW9uICgpIHsKICAndXNlIHN0cmljdCc7CgogIHZhciBzdGF0ZSA9IHsKICAgIGxhbmc6IGxvY2FsU3RvcmFnZS5nZXRJdGVtKCdmZy5sYW5nJykgfHwgJ2VuJywKICAgIHByb2ZpbGU6IGxvY2FsU3RvcmFnZS5nZXRJdGVtKCdmZy5wcm9maWxlJykgfHwgJ25lcnZvdXMnLAogICAgc2Vzc2lvbklkOiBzZXNzaW9uU3RvcmFnZS5nZXRJdGVtKCdmZy5zZXNzaW9uJykgfHwgbnVsbCwKICAgIHByb2ZpbGVzRW5hYmxlZDogeyBuZXJ2b3VzOiB0cnVlLCBhZHVsdDogdHJ1ZSwgaHVycmllZDogdHJ1ZSB9LAogICAgbWFwVmlzaWJsZTogdHJ1ZSwKICAgIGJ1c3k6IGZhbHNlLAogICAgdHJpcDoge30KICB9OwoKICB2YXIgJCA9IGZ1bmN0aW9uIChzZWwpIHsgcmV0dXJuIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsgfTsKICB2YXIgbWVzc2FnZXNFbCA9ICQoJyNtZXNzYWdlcycpOwogIHZhciBpbnB1dEVsID0gJCgnI2lucHV0Jyk7CiAgdmFyIGZvcm1FbCA9ICQoJyNjb21wb3NlcicpOwogIHZhciBwcm9maWxlc0VsID0gJCgnI3Byb2ZpbGVzJyk7CiAgdmFyIHRyaXBFbCA9ICQoJyN0cmlwJyk7CiAgdmFyIHF1aWNrRWwgPSAkKCcjcXVpY2snKTsKCiAgLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIGkxOG4KICB2YXIgU1RSSU5HUyA9IHsKICAgIGVuOiB7CiAgICAgIHRhZ2xpbmU6ICdGaXJzdCBpbnRlcm5hdGlvbmFsIGZsaWdodD8gV2FsayB3aXRoIG1lLicsCiAgICAgIG1hcExpbms6ICdBaXJwb3J0IG1hcCcsCiAgICAgIGFkbWluTGluazogJ0NvbnRyb2wgcGFuZWwnLAogICAgICBwcm9maWxlSGVhZGluZzogJ0hvdyBzaG91bGQgSSB0YWxrIHRvIHlvdT8nLAogICAgICBwcm9maWxlSGludDogJ1lvdSBjYW4gY2hhbmdlIHRoaXMgYXQgYW55IHRpbWUuJywKICAgICAgdHJpcEhlYWRpbmc6ICdZb3VyIHRyaXAgc28gZmFyJywKICAgICAgc2ltTm90ZTogJ0ZsaWdodCBzdGF0dXMgaXMgc2ltdWxhdGVkIGluIHRoaXMgcHJvdG90eXBlLiBBbHdheXMgY29uZmlybSB0aGUgZ2F0ZSBvbiB0aGUgZGVwYXJ0dXJlIHNjcmVlbnMuIEZvciBhbnl0aGluZyB1bmV4cGVjdGVkLCBzdGFmZiBhdCB0aGUgYWlycG9ydCBhcmUgeW91ciBmYXN0ZXN0IHJvdXRlLicsCiAgICAgIGlucHV0TGFiZWw6ICdZb3VyIG1lc3NhZ2UnLAogICAgICBwbGFjZWhvbGRlcjogJ1R5cGUgeW91ciBxdWVzdGlvbiDigJQgZm9yIGV4YW1wbGU6IEkgaGF2ZSA5MCBtaW51dGVzIGFuZCBvbmUgYmFnIHRvIGNoZWNrIGluLicsCiAgICAgIHNlbmQ6ICdTZW5kJywKICAgICAgc3RhZ2U6ICdTdGFnZScsIGFpcnBvcnQ6ICdBaXJwb3J0JywgdGVybWluYWw6ICdUZXJtaW5hbCcsIG1pbnV0ZXM6ICdNaW51dGVzIHRvIGJvYXJkaW5nJywgYmFnczogJ0JhZ3MnLCBnYXRlOiAnR2F0ZScsCiAgICAgIGJhZ3NDaGVja2VkOiAnQmFnIHRvIGNoZWNrIGluJywgYmFnc0NhcnJ5b246ICdDYXJyeS1vbiBvbmx5JywKICAgICAgdW5zZXQ6ICfigJQnLAogICAgICBncmVldGluZzogJ0hlbGxvLiBJIGFtIEZsaWdodCBHdWlkZSwgYW5kIEkgd2lsbCBzdGF5IHdpdGggeW91IGZyb20gdGhlIHRlcm1pbmFsIGRvb3IgdG8geW91ciBib2FyZGluZyBnYXRlLlxuXG5JIHdpbGwgbm90IGdpdmUgeW91IGRpcmVjdGlvbnMgdW50aWwgSSBrbm93IGZvdXIgdGhpbmdzLCBiZWNhdXNlIHRoZSB3cm9uZyByb3V0ZSBpcyB3b3JzZSB0aGFuIG5vIHJvdXRlLiBJdCB3aWxsIHRha2UgeW91IHVuZGVyIGEgbWludXRlLicsCiAgICAgIGVycm9yTmV0d29yazogJ0kgY291bGQgbm90IHJlYWNoIHRoZSBhcHAganVzdCBub3cuIENoZWNrIHlvdXIgY29ubmVjdGlvbiBhbmQgc2VuZCBhZ2FpbiDigJQgbm90aGluZyB5b3UgdHlwZWQgaXMgbG9zdC4nLAogICAgICBlcnJvckVtcHR5OiAnV3JpdGUgc29tZXRoaW5nIGZpcnN0LCB0aGVuIHNlbmQuJywKICAgICAgcHJvZmlsZXM6IHsKICAgICAgICBuZXJ2b3VzOiB7IG5hbWU6ICdOZXJ2b3VzIGZpcnN0LXRpbWVyJywgdG9uZTogJ1JlYXNzdXJpbmcgwrcgb25lIHN0ZXAgYXQgYSB0aW1lJyB9LAogICAgICAgIGFkdWx0OiB7IG5hbWU6ICdBZHVsdCwgZmlyc3QgaW50ZXJuYXRpb25hbCBmbGlnaHQnLCB0b25lOiAnRWZmaWNpZW50IMK3IGZ1bGwgZGV0YWlsJyB9LAogICAgICAgIGh1cnJpZWQ6IHsgbmFtZTogJ0V4cGVyaWVuY2VkIC8gaHVycmllZCcsIHRvbmU6ICdEaXJlY3QgwrcgbmV4dCBhY3Rpb24gb25seScgfQogICAgICB9LAogICAgICBxdWljazogWydJIGFtIGF0IERhbW1hbScsICdXaGF0IGlzIHRoaXMgYWlycG9ydCBsaWtlPycsICdNeSBnYXRlIGNoYW5nZWQnLCAnSSBhbSBydW5uaW5nIGxhdGUnXQogICAgfSwKICAgIGFyOiB7CiAgICAgIHRhZ2xpbmU6ICfYo9mI2YQg2LHYrdmE2Kkg2K/ZiNmE2YrYqdifINiz2KPZhdi02Yog2YXYudmDINiu2LfZiNipINio2K7Yt9mI2KkuJywKICAgICAgbWFwTGluazogJ9iu2LHZiti32Kkg2KfZhNmF2LfYp9ixJywKICAgICAgYWRtaW5MaW5rOiAn2YTZiNit2Kkg2KfZhNiq2K3Zg9mFJywKICAgICAgcHJvZmlsZUhlYWRpbmc6ICfZg9mK2YEg2KrYsdmK2K/ZhtmKINij2YYg2KPYrdiv2ZHYq9mD2J8nLAogICAgICBwcm9maWxlSGludDogJ9mK2YXZg9mG2YMg2KrYutmK2YrYsSDYsNmE2YMg2YHZiiDYo9mKINmI2YLYqi4nLAogICAgICB0cmlwSGVhZGluZzogJ9ix2K3ZhNiq2YMg2K3YqtmJINin2YTYotmGJywKICAgICAgc2ltTm90ZTogJ9it2KfZhNipINin2YTYsdit2YTYqSDZhdit2KfZg9in2Kkg2YHZiiDZh9iw2Kcg2KfZhNmG2YXZiNiw2Kwg2KfZhNij2YjZhNmKLiDYqtit2YLZkdmCINiv2KfYptmF2YvYpyDZhdmGINin2YTYqNmI2KfYqNipINi52YTZiSDYtNin2LTYp9iqINin2YTZhdi62KfYr9ix2KkuINmI2KPZiiDYo9mF2LEg2LrZitixINmF2KrZiNmC2LnYjCDYo9iz2LHYuSDYrdmEINmH2Ygg2YXZiNi42YEg2KfZhNmF2LfYp9ixLicsCiAgICAgIGlucHV0TGFiZWw6ICfYsdiz2KfZhNiq2YMnLAogICAgICBwbGFjZWhvbGRlcjogJ9in2YPYqtioINiz2KTYp9mE2YMg4oCUINmF2KvZhNmL2Kc6INio2YLZiiDZhdi52Yog2anZoCDYr9mC2YrZgtipINmI2LnZhtiv2Yog2K3ZgtmK2KjYqSDYo9iz2KzZkdmE2YfYpy4nLAogICAgICBzZW5kOiAn2KXYsdiz2KfZhCcsCiAgICAgIHN0YWdlOiAn2KfZhNmF2LHYrdmE2KknLCBhaXJwb3J0OiAn2KfZhNmF2LfYp9ixJywgdGVybWluYWw6ICfYp9mE2LXYp9mE2KknLCBtaW51dGVzOiAn2KfZhNmF2KrYqNmC2Yog2YTZhNi12LnZiNivJywgYmFnczogJ9in2YTYrdmC2KfYptioJywgZ2F0ZTogJ9in2YTYqNmI2KfYqNipJywKICAgICAgYmFnc0NoZWNrZWQ6ICfYrdmC2YrYqNipINiq2Y/Ys9is2Y7ZkdmEJywgYmFnc0NhcnJ5b246ICfYrdmC2YrYqNipINmK2K8g2YHZgti3JywKICAgICAgdW5zZXQ6ICfigJQnLAogICAgICBncmVldGluZzogJ9mF2LHYrdio2YvYpy4g2KPZhtinIEZsaWdodCBHdWlkZdiMINmI2LPYo9io2YLZiSDZhdi52YMg2YXZhiDYqNin2Kgg2LXYp9mE2Kkg2KfZhNmF2LrYp9iv2LHYqSDYpdmE2Ykg2KjZiNin2KjYqSDYp9mE2LXYudmI2K8uXG5cbtmE2YYg2KPYudi32YrZgyDYo9mKINil2LHYtNin2K8g2YLYqNmEINij2YYg2KPYudix2YEg2KPYsdio2LnYqSDYo9mF2YjYsdiMINmE2KPZhiDYp9mE2YXYs9in2LEg2KfZhNiu2KfYt9imINij2LPZiNijINmF2YYg2YTYpyDZhdiz2KfYsS4g2YTZhiDZitiz2KrYutix2YIg2KfZhNij2YXYsSDYr9mC2YrZgtipLicsCiAgICAgIGVycm9yTmV0d29yazogJ9mE2YUg2KPYs9iq2LfYuSDYp9mE2YjYtdmI2YQg2KXZhNmJINin2YTYqti32KjZitmCINin2YTYotmGLiDYqtit2YLZkdmCINmF2YYg2KfZhNin2KrYtdin2YQg2KvZhSDYo9ix2LPZhCDZhdix2Kkg2KPYrtix2YnYjCDZgdmF2Kcg2YPYqtio2KrZhyDZhNmFINmK2Y/ZgdmC2K8uJywKICAgICAgZXJyb3JFbXB0eTogJ9in2YPYqtioINix2LPYp9mE2KrZgyDYo9mI2YTZi9inINir2YUg2KPYsdiz2YQuJywKICAgICAgcHJvZmlsZXM6IHsKICAgICAgICBuZXJ2b3VzOiB7IG5hbWU6ICfYp9mE2YXYs9in2YHYsSDYp9mE2YXYqNiq2K/YpiDYp9mE2YLZhNmCJywgdG9uZTogJ9mF2LfZhdim2YYgwrcg2K7Yt9mI2Kkg2YjYp9it2K/YqSDZgdmKINmD2YQg2YXYsdipJyB9LAogICAgICAgIGFkdWx0OiB7IG5hbWU6ICfYqNin2YTYuiDZgdmKINij2YjZhCDYsdit2YTYqSDYr9mI2YTZitipJywgdG9uZTogJ9mB2LnZkdin2YQgwrcg2KjZg9mEINin2YTYqtmB2KfYtdmK2YQnIH0sCiAgICAgICAgaHVycmllZDogeyBuYW1lOiAn2K7YqNmK2LEgLyDZhdiz2KrYudis2YQnLCB0b25lOiAn2YXYqNin2LTYsSDCtyDYp9mE2KXYrNix2KfYoSDYp9mE2KrYp9mE2Yog2YHZgti3JyB9CiAgICAgIH0sCiAgICAgIHF1aWNrOiBbJ9ij2YbYpyDZgdmKINin2YTYr9mF2KfZhScsICfZg9mK2YEg2YfZiCDZh9iw2Kcg2KfZhNmF2LfYp9ix2J8nLCAn2KrYutmK2ZHYsdiqINio2YjYp9io2KrZiicsICfYo9mG2Kcg2YXYqtij2K7YsSddCiAgICB9CiAgfTsKCiAgZnVuY3Rpb24gdChrZXkpIHsgcmV0dXJuIChTVFJJTkdTW3N0YXRlLmxhbmddIHx8IFNUUklOR1MuZW4pW2tleV07IH0KCiAgLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHJlbmRlcgogIGZ1bmN0aW9uIGFwcGx5TGFuZ3VhZ2UoKSB7CiAgICB2YXIgaHRtbCA9IGRvY3VtZW50LmRvY3VtZW50RWxlbWVudDsKICAgIGh0bWwubGFuZyA9IHN0YXRlLmxhbmc7CiAgICBodG1sLmRpciA9IHN0YXRlLmxhbmcgPT09ICdhcicgPyAncnRsJyA6ICdsdHInOwoKICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJ1tkYXRhLWkxOG5dJykuZm9yRWFjaChmdW5jdGlvbiAoZWwpIHsKICAgICAgdmFyIHYgPSB0KGVsLmdldEF0dHJpYnV0ZSgnZGF0YS1pMThuJykpOwogICAgICBpZiAodHlwZW9mIHYgPT09ICdzdHJpbmcnKSBlbC50ZXh0Q29udGVudCA9IHY7CiAgICB9KTsKICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJ1tkYXRhLWkxOG4tcGxhY2Vob2xkZXJdJykuZm9yRWFjaChmdW5jdGlvbiAoZWwpIHsKICAgICAgZWwucGxhY2Vob2xkZXIgPSB0KGVsLmdldEF0dHJpYnV0ZSgnZGF0YS1pMThuLXBsYWNlaG9sZGVyJykpOwogICAgfSk7CiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCdbZGF0YS1pMThuLWFyaWFdJykuZm9yRWFjaChmdW5jdGlvbiAoZWwpIHsKICAgICAgZWwuc2V0QXR0cmlidXRlKCdhcmlhLWxhYmVsJywgdChlbC5nZXRBdHRyaWJ1dGUoJ2RhdGEtaTE4bi1hcmlhJykpKTsKICAgIH0pOwoKICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5zZWctYnRuJykuZm9yRWFjaChmdW5jdGlvbiAoYikgewogICAgICBiLmNsYXNzTGlzdC50b2dnbGUoJ29uJywgYi5nZXRBdHRyaWJ1dGUoJ2RhdGEtbGFuZycpID09PSBzdGF0ZS5sYW5nKTsKICAgIH0pOwoKICAgIHJlbmRlclByb2ZpbGVzKCk7CiAgICByZW5kZXJUcmlwKCk7CiAgICByZW5kZXJRdWljaygpOwogIH0KCiAgZnVuY3Rpb24gcmVuZGVyUHJvZmlsZXMoKSB7CiAgICB2YXIgY29weSA9IHQoJ3Byb2ZpbGVzJyk7CiAgICBwcm9maWxlc0VsLmlubmVySFRNTCA9ICcnOwogICAgWyduZXJ2b3VzJywgJ2FkdWx0JywgJ2h1cnJpZWQnXS5mb3JFYWNoKGZ1bmN0aW9uIChrZXkpIHsKICAgICAgdmFyIGVuYWJsZWQgPSBzdGF0ZS5wcm9maWxlc0VuYWJsZWRba2V5XSAhPT0gZmFsc2U7CiAgICAgIHZhciBidG4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdidXR0b24nKTsKICAgICAgYnRuLnR5cGUgPSAnYnV0dG9uJzsKICAgICAgYnRuLmNsYXNzTmFtZSA9ICdwcm9maWxlJyArIChzdGF0ZS5wcm9maWxlID09PSBrZXkgPyAnIG9uJyA6ICcnKTsKICAgICAgYnRuLnNldEF0dHJpYnV0ZSgncm9sZScsICdyYWRpbycpOwogICAgICBidG4uc2V0QXR0cmlidXRlKCdhcmlhLWNoZWNrZWQnLCBTdHJpbmcoc3RhdGUucHJvZmlsZSA9PT0ga2V5KSk7CiAgICAgIGJ0bi5kaXNhYmxlZCA9ICFlbmFibGVkOwogICAgICBidG4uaW5uZXJIVE1MID0KICAgICAgICAnPHNwYW4gY2xhc3M9InJhZGlvIj48L3NwYW4+JyArCiAgICAgICAgJzxzcGFuIGNsYXNzPSJib2R5Ij4nICsKICAgICAgICAgICc8c3BhbiBjbGFzcz0ibmFtZSI+JyArIGVzYyhjb3B5W2tleV0ubmFtZSkgKyAnPC9zcGFuPicgKwogICAgICAgICAgJzxzcGFuIGNsYXNzPSJ0b25lIj4nICsgZXNjKGNvcHlba2V5XS50b25lKSArICc8L3NwYW4+JyArCiAgICAgICAgJzwvc3Bhbj4nOwogICAgICBpZiAoZW5hYmxlZCkgewogICAgICAgIGJ0bi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIGZ1bmN0aW9uICgpIHsKICAgICAgICAgIHN0YXRlLnByb2ZpbGUgPSBrZXk7CiAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgnZmcucHJvZmlsZScsIGtleSk7CiAgICAgICAgICByZW5kZXJQcm9maWxlcygpOwogICAgICAgIH0pOwogICAgICB9CiAgICAgIHByb2ZpbGVzRWwuYXBwZW5kQ2hpbGQoYnRuKTsKICAgIH0pOwogIH0KCiAgZnVuY3Rpb24gcmVuZGVyVHJpcCgpIHsKICAgIHZhciByb3dzID0gWwogICAgICBbJ3N0YWdlJywgc3RhdGUudHJpcC5zdGFnZSB8fCB0KCd1bnNldCcpXSwKICAgICAgWydhaXJwb3J0Jywgc3RhdGUudHJpcC5haXJwb3J0IHx8IHQoJ3Vuc2V0JyldLAogICAgICBbJ3Rlcm1pbmFsJywgc3RhdGUudHJpcC50ZXJtaW5hbCB8fCB0KCd1bnNldCcpXSwKICAgICAgWydtaW51dGVzJywgc3RhdGUudHJpcC5taW51dGVzICE9IG51bGwgPyBzdGF0ZS50cmlwLm1pbnV0ZXMgOiB0KCd1bnNldCcpXSwKICAgICAgWydiYWdzJywgc3RhdGUudHJpcC5iYWdzID09PSAnY2hlY2tlZCcgPyB0KCdiYWdzQ2hlY2tlZCcpCiAgICAgICAgICAgICA6IHN0YXRlLnRyaXAuYmFncyA9PT0gJ2NhcnJ5b24nID8gdCgnYmFnc0NhcnJ5b24nKSA6IHQoJ3Vuc2V0JyldLAogICAgICBbJ2dhdGUnLCBzdGF0ZS50cmlwLmdhdGUgfHwgdCgndW5zZXQnKV0KICAgIF07CiAgICB0cmlwRWwuaW5uZXJIVE1MID0gcm93cy5tYXAoZnVuY3Rpb24gKHIpIHsKICAgICAgcmV0dXJuICc8ZHQ+JyArIGVzYyh0KHJbMF0pKSArICc8L2R0PjxkZD4nICsgZXNjKFN0cmluZyhyWzFdKSkgKyAnPC9kZD4nOwogICAgfSkuam9pbignJyk7CiAgfQoKICBmdW5jdGlvbiByZW5kZXJRdWljaygpIHsKICAgIHF1aWNrRWwuaW5uZXJIVE1MID0gJyc7CiAgICB0KCdxdWljaycpLmZvckVhY2goZnVuY3Rpb24gKHBocmFzZSkgewogICAgICB2YXIgYiA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2J1dHRvbicpOwogICAgICBiLnR5cGUgPSAnYnV0dG9uJzsKICAgICAgYi50ZXh0Q29udGVudCA9IHBocmFzZTsKICAgICAgYi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIGZ1bmN0aW9uICgpIHsKICAgICAgICBpbnB1dEVsLnZhbHVlID0gcGhyYXNlOwogICAgICAgIGF1dG9zaXplKCk7CiAgICAgICAgZm9ybUVsLnJlcXVlc3RTdWJtaXQoKTsKICAgICAgfSk7CiAgICAgIHF1aWNrRWwuYXBwZW5kQ2hpbGQoYik7CiAgICB9KTsKICB9CgogIGZ1bmN0aW9uIGVzYyhzKSB7CiAgICByZXR1cm4gU3RyaW5nKHMpLnJlcGxhY2UoL1smPD4iJ10vZywgZnVuY3Rpb24gKGMpIHsKICAgICAgcmV0dXJuIHsgJyYnOiAnJmFtcDsnLCAnPCc6ICcmbHQ7JywgJz4nOiAnJmd0OycsICciJzogJyZxdW90OycsICInIjogJyYjMzk7JyB9W2NdOwogICAgfSk7CiAgfQoKICAvKiogUmVuZGVycyAqKmJvbGQqKiBhbmQgKml0YWxpYyogd2l0aG91dCBsZXR0aW5nIGFueXRoaW5nIGVsc2UgYmUgSFRNTC4gKi8KICBmdW5jdGlvbiBmb3JtYXQodGV4dCkgewogICAgcmV0dXJuIGVzYyh0ZXh0KQogICAgICAucmVwbGFjZSgvXCpcKihbXipdKylcKlwqL2csICc8c3Ryb25nPiQxPC9zdHJvbmc+JykKICAgICAgLnJlcGxhY2UoLyhefFxuKVwqKFteKlxuXSspXCovZywgJyQxPGVtPiQyPC9lbT4nKTsKICB9CgogIGZ1bmN0aW9uIGFkZEJ1YmJsZSh0ZXh0LCB3aG8sIG9wdHMpIHsKICAgIG9wdHMgPSBvcHRzIHx8IHt9OwogICAgdmFyIGVsID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7CiAgICBlbC5jbGFzc05hbWUgPSAnYnViYmxlICcgKyAod2hvID09PSAndXNlcicgPyAndXNlcicgOiAnYm90JykgKyAob3B0cy51cmdlbnQgPyAnIHVyZ2VudCcgOiAnJyk7CiAgICBlbC5pbm5lckhUTUwgPSBmb3JtYXQodGV4dCk7CiAgICBtZXNzYWdlc0VsLmFwcGVuZENoaWxkKGVsKTsKICAgIHNjcm9sbERvd24oKTsKICAgIHJldHVybiBlbDsKICB9CgogIGZ1bmN0aW9uIHNjcm9sbERvd24oKSB7CiAgICBtZXNzYWdlc0VsLnNjcm9sbFRvcCA9IG1lc3NhZ2VzRWwuc2Nyb2xsSGVpZ2h0OwogIH0KCiAgZnVuY3Rpb24gc2hvd1R5cGluZygpIHsKICAgIHZhciBlbCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpOwogICAgZWwuY2xhc3NOYW1lID0gJ2J1YmJsZSBib3QnOwogICAgZWwuaWQgPSAndHlwaW5nJzsKICAgIGVsLmlubmVySFRNTCA9ICc8c3BhbiBjbGFzcz0idHlwaW5nIj48aT48L2k+PGk+PC9pPjxpPjwvaT48L3NwYW4+JzsKICAgIG1lc3NhZ2VzRWwuYXBwZW5kQ2hpbGQoZWwpOwogICAgc2Nyb2xsRG93bigpOwogIH0KCiAgZnVuY3Rpb24gaGlkZVR5cGluZygpIHsKICAgIHZhciBlbCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0eXBpbmcnKTsKICAgIGlmIChlbCkgZWwucmVtb3ZlKCk7CiAgfQoKICAvLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gY2hhdAogIGZ1bmN0aW9uIHNlbmQobWVzc2FnZSkgewogICAgaWYgKHN0YXRlLmJ1c3kpIHJldHVybjsKICAgIG1lc3NhZ2UgPSBTdHJpbmcobWVzc2FnZSB8fCAnJykudHJpbSgpOwogICAgaWYgKCFtZXNzYWdlKSB7CiAgICAgIGFkZEJ1YmJsZSh0KCdlcnJvckVtcHR5JyksICdib3QnKTsKICAgICAgcmV0dXJuOwogICAgfQoKICAgIHN0YXRlLmJ1c3kgPSB0cnVlOwogICAgZm9ybUVsLnF1ZXJ5U2VsZWN0b3IoJy5zZW5kJykuZGlzYWJsZWQgPSB0cnVlOwoKICAgIGFkZEJ1YmJsZShtZXNzYWdlLCAndXNlcicpOwogICAgaW5wdXRFbC52YWx1ZSA9ICcnOwogICAgYXV0b3NpemUoKTsKICAgIHNob3dUeXBpbmcoKTsKCiAgICBmZXRjaCgnL2FwaS9jaGF0JywgewogICAgICBtZXRob2Q6ICdQT1NUJywKICAgICAgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nIH0sCiAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHsKICAgICAgICBtZXNzYWdlOiBtZXNzYWdlLAogICAgICAgIGxhbmc6IHN0YXRlLmxhbmcsCiAgICAgICAgcHJvZmlsZTogc3RhdGUucHJvZmlsZSwKICAgICAgICBzZXNzaW9uSWQ6IHN0YXRlLnNlc3Npb25JZAogICAgICB9KQogICAgfSkKICAgICAgLnRoZW4oZnVuY3Rpb24gKHIpIHsKICAgICAgICByZXR1cm4gci5qc29uKCkudGhlbihmdW5jdGlvbiAoYm9keSkgewogICAgICAgICAgaWYgKCFyLm9rKSB0aHJvdyBuZXcgRXJyb3IoYm9keSAmJiBib2R5LmVycm9yID8gYm9keS5lcnJvciA6ICdIVFRQICcgKyByLnN0YXR1cyk7CiAgICAgICAgICByZXR1cm4gYm9keTsKICAgICAgICB9KTsKICAgICAgfSkKICAgICAgLnRoZW4oZnVuY3Rpb24gKGJvZHkpIHsKICAgICAgICBoaWRlVHlwaW5nKCk7CiAgICAgICAgc3RhdGUuc2Vzc2lvbklkID0gYm9keS5zZXNzaW9uSWQ7CiAgICAgICAgc2Vzc2lvblN0b3JhZ2Uuc2V0SXRlbSgnZmcuc2Vzc2lvbicsIGJvZHkuc2Vzc2lvbklkKTsKCiAgICAgICAgKGJvZHkubWVzc2FnZXMgfHwgW10pLmZvckVhY2goZnVuY3Rpb24gKG0pIHsKICAgICAgICAgIC8vIE9ubHkgdGhlIHZlcnkgZmlyc3QgYnViYmxlIG9mIGFuIGVzY2FsYXRlZCB0dXJuIGNhcnJpZXMgdGhlIHJlZCBmbGFnLgogICAgICAgICAgYWRkQnViYmxlKG0udGV4dCwgJ2JvdCcsIHsgdXJnZW50OiAhIWJvZHkubWV0YSAmJiBib2R5Lm1ldGEuZXNjYWxhdGVkIH0pOwogICAgICAgIH0pOwoKICAgICAgICAvLyBBdXRvLWZvbGxvdyB0aGUgcmVwbHkgbGFuZ3VhZ2UsIHNvIGFuIEFyYWJpYyBhbnN3ZXIgcmVuZGVycyBSVEwKICAgICAgICAvLyBldmVuIGlmIHRoZSB0b2dnbGUgc2FpZCBFbmdsaXNoLgogICAgICAgIGlmIChib2R5Lm1ldGEgJiYgYm9keS5tZXRhLmxhbmcgJiYgYm9keS5tZXRhLmxhbmcgIT09IHN0YXRlLmxhbmcpIHsKICAgICAgICAgIHN0YXRlLmxhbmcgPSBib2R5Lm1ldGEubGFuZzsKICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCdmZy5sYW5nJywgc3RhdGUubGFuZyk7CiAgICAgICAgICBhcHBseUxhbmd1YWdlKCk7CiAgICAgICAgfQoKICAgICAgICBzdGF0ZS50cmlwID0gewogICAgICAgICAgc3RhZ2U6IGJvZHkubWV0YSAmJiBib2R5Lm1ldGEuc3RhZ2VOYW1lID8gYm9keS5tZXRhLnN0YWdlTmFtZQogICAgICAgICAgICAgICA6IChib2R5LnNlc3Npb24gJiYgYm9keS5zZXNzaW9uLnN0YWdlICE9IG51bGwgPyAnU3RlcCAnICsgKGJvZHkuc2Vzc2lvbi5zdGFnZSArIDEpIDogbnVsbCksCiAgICAgICAgICBhaXJwb3J0OiBib2R5LnNlc3Npb24gJiYgYm9keS5zZXNzaW9uLmFpcnBvcnQgPyBhaXgoYm9keS5zZXNzaW9uLmFpcnBvcnQpIDogbnVsbCwKICAgICAgICAgIHRlcm1pbmFsOiBib2R5LnNlc3Npb24gJiYgYm9keS5zZXNzaW9uLnRlcm1pbmFsLAogICAgICAgICAgbWludXRlczogYm9keS5zZXNzaW9uID8gYm9keS5zZXNzaW9uLm1pbnV0ZXMgOiBudWxsLAogICAgICAgICAgYmFnczogYm9keS5zZXNzaW9uID8gYm9keS5zZXNzaW9uLmJhZ3MgOiBudWxsLAogICAgICAgICAgZ2F0ZTogYm9keS5zZXNzaW9uID8gYm9keS5zZXNzaW9uLmdhdGUgOiBudWxsCiAgICAgICAgfTsKICAgICAgICByZW5kZXJUcmlwKCk7CiAgICAgIH0pCiAgICAgIC5jYXRjaChmdW5jdGlvbiAoZXJyKSB7CiAgICAgICAgaGlkZVR5cGluZygpOwogICAgICAgIGFkZEJ1YmJsZSh0KCdlcnJvck5ldHdvcmsnKSArICcgICgnICsgZXJyLm1lc3NhZ2UgKyAnKScsICdib3QnKTsKICAgICAgfSkKICAgICAgLmZpbmFsbHkoZnVuY3Rpb24gKCkgewogICAgICAgIHN0YXRlLmJ1c3kgPSBmYWxzZTsKICAgICAgICBmb3JtRWwucXVlcnlTZWxlY3RvcignLnNlbmQnKS5kaXNhYmxlZCA9IGZhbHNlOwogICAgICAgIGlucHV0RWwuZm9jdXMoKTsKICAgICAgfSk7CiAgfQoKICB2YXIgQUlSUE9SVF9OQU1FUyA9IHsKICAgIGRtbTogeyBlbjogJ0RhbW1hbSAoRE1NKScsIGFyOiAn2KfZhNiv2YXYp9mFIChETU0pJyB9LAogICAgcnVoOiB7IGVuOiAnUml5YWRoIChSVUgpJywgYXI6ICfYp9mE2LHZitin2LYgKFJVSCknIH0sCiAgICBqZWQ6IHsgZW46ICdKZWRkYWggKEpFRCknLCBhcjogJ9is2K/YqSAoSkVEKScgfQogIH07CiAgZnVuY3Rpb24gYWl4KGNvZGUpIHsKICAgIHZhciBhID0gQUlSUE9SVF9OQU1FU1tjb2RlXTsKICAgIHJldHVybiBhID8gKGFbc3RhdGUubGFuZ10gfHwgYS5lbikgOiBjb2RlOwogIH0KCiAgLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIGlucHV0CiAgZnVuY3Rpb24gYXV0b3NpemUoKSB7CiAgICBpbnB1dEVsLnN0eWxlLmhlaWdodCA9ICdhdXRvJzsKICAgIGlucHV0RWwuc3R5bGUuaGVpZ2h0ID0gTWF0aC5taW4oaW5wdXRFbC5zY3JvbGxIZWlnaHQsIDE1MCkgKyAncHgnOwogIH0KCiAgaW5wdXRFbC5hZGRFdmVudExpc3RlbmVyKCdpbnB1dCcsIGF1dG9zaXplKTsKICBpbnB1dEVsLmFkZEV2ZW50TGlzdGVuZXIoJ2tleWRvd24nLCBmdW5jdGlvbiAoZSkgewogICAgaWYgKGUua2V5ID09PSAnRW50ZXInICYmICFlLnNoaWZ0S2V5KSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZm9ybUVsLnJlcXVlc3RTdWJtaXQoKTsKICAgIH0KICB9KTsKCiAgZm9ybUVsLmFkZEV2ZW50TGlzdGVuZXIoJ3N1Ym1pdCcsIGZ1bmN0aW9uIChlKSB7CiAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICBzZW5kKGlucHV0RWwudmFsdWUpOwogIH0pOwoKICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcuc2VnLWJ0bicpLmZvckVhY2goZnVuY3Rpb24gKGIpIHsKICAgIGIuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBmdW5jdGlvbiAoKSB7CiAgICAgIHN0YXRlLmxhbmcgPSBiLmdldEF0dHJpYnV0ZSgnZGF0YS1sYW5nJyk7CiAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCdmZy5sYW5nJywgc3RhdGUubGFuZyk7CiAgICAgIGFwcGx5TGFuZ3VhZ2UoKTsKICAgIH0pOwogIH0pOwoKICAvLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gYm9vdAogIC8vIFB1bGwgdGhlIGxpdmUgc2V0dGluZ3Mgc28gYSBkaXNhYmxlZCBwcm9maWxlIG9yIGEgaGlkZGVuIG1hcCBpcyByZXNwZWN0ZWQKICAvLyBpbiB0aGUgVUkgaW1tZWRpYXRlbHksIG5vdCBqdXN0IG9uIHRoZSBzZXJ2ZXIuCiAgZmV0Y2goJy9hcGkvc2V0dGluZ3MnKQogICAgLnRoZW4oZnVuY3Rpb24gKHIpIHsgcmV0dXJuIHIub2sgPyByLmpzb24oKSA6IG51bGw7IH0pCiAgICAudGhlbihmdW5jdGlvbiAocykgewogICAgICBpZiAocykgewogICAgICAgIHN0YXRlLnByb2ZpbGVzRW5hYmxlZCA9IHMucHJvZmlsZXNFbmFibGVkIHx8IHN0YXRlLnByb2ZpbGVzRW5hYmxlZDsKICAgICAgICBzdGF0ZS5tYXBWaXNpYmxlID0gcy5tYXBWaXNpYmxlICE9PSBmYWxzZTsKICAgICAgICBpZiAoIXN0YXRlLnByb2ZpbGVzRW5hYmxlZFtzdGF0ZS5wcm9maWxlXSkgewogICAgICAgICAgc3RhdGUucHJvZmlsZSA9IFsnbmVydm91cycsICdhZHVsdCcsICdodXJyaWVkJ10uZmluZChmdW5jdGlvbiAocCkgewogICAgICAgICAgICByZXR1cm4gc3RhdGUucHJvZmlsZXNFbmFibGVkW3BdOwogICAgICAgICAgfSkgfHwgJ2FkdWx0JzsKICAgICAgICB9CiAgICAgICAgdmFyIG1hcExpbmsgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCdhW2hyZWY9Ii9tYXAiXScpOwogICAgICAgIGlmIChtYXBMaW5rICYmICFzdGF0ZS5tYXBWaXNpYmxlKSBtYXBMaW5rLnN0eWxlLmRpc3BsYXkgPSAnbm9uZSc7CiAgICAgIH0KICAgIH0pCiAgICAuY2F0Y2goZnVuY3Rpb24gKCkgeyAvKiBkZWZhdWx0cyBhcmUgZmluZSAqLyB9KQogICAgLmZpbmFsbHkoZnVuY3Rpb24gKCkgewogICAgICBhcHBseUxhbmd1YWdlKCk7CiAgICAgIGFkZEJ1YmJsZSh0KCdncmVldGluZycpLCAnYm90Jyk7CiAgICAgIGlucHV0RWwuZm9jdXMoKTsKICAgIH0pOwp9KSgpOwo=
+/* Flight Guide — passenger chat UI. No framework, no build step. */
+
+(function () {
+  'use strict';
+
+  var state = {
+    lang: localStorage.getItem('fg.lang') || 'en',
+    profile: localStorage.getItem('fg.profile') || 'nervous',
+    sessionId: sessionStorage.getItem('fg.session') || null,
+    profilesEnabled: { nervous: true, adult: true, hurried: true },
+    mapVisible: true,
+    busy: false,
+    trip: {}
+  };
+
+  var $ = function (sel) { return document.querySelector(sel); };
+  var messagesEl = $('#messages');
+  var inputEl = $('#input');
+  var formEl = $('#composer');
+  var profilesEl = $('#profiles');
+  var tripEl = $('#trip');
+  var quickEl = $('#quick');
+
+  // ------------------------------------------------------------------ i18n
+  var STRINGS = {
+    en: {
+      tagline: 'First international flight? Walk with me.',
+      mapLink: 'Airport map',
+      adminLink: 'Control panel',
+      profileHeading: 'How should I talk to you?',
+      profileHint: 'You can change this at any time.',
+      tripHeading: 'Your trip so far',
+      simNote: 'Flight status is simulated in this prototype. Always confirm the gate on the departure screens. For anything unexpected, staff at the airport are your fastest route.',
+      inputLabel: 'Your message',
+      placeholder: 'Type your question — for example: I have 90 minutes and one bag to check in.',
+      send: 'Send',
+      stage: 'Stage', airport: 'Airport', terminal: 'Terminal', minutes: 'Minutes to boarding', bags: 'Bags', gate: 'Gate',
+      bagsChecked: 'Bag to check in', bagsCarryon: 'Carry-on only',
+      unset: '—',
+      greeting: 'Hello. I am Flight Guide, and I will stay with you from the terminal door to your boarding gate.\n\nI will not give you directions until I know four things, because the wrong route is worse than no route. It will take you under a minute.',
+      errorNetwork: 'I could not reach the app just now. Check your connection and send again — nothing you typed is lost.',
+      errorEmpty: 'Write something first, then send.',
+      profiles: {
+        nervous: { name: 'Nervous first-timer', tone: 'Reassuring · one step at a time' },
+        adult: { name: 'Adult, first international flight', tone: 'Efficient · full detail' },
+        hurried: { name: 'Experienced / hurried', tone: 'Direct · next action only' }
+      },
+      quick: ['I am at Dammam', 'What is this airport like?', 'My gate changed', 'I am running late']
+    },
+    ar: {
+      tagline: 'أول رحلة دولية؟ سأمشي معك خطوة بخطوة.',
+      mapLink: 'خريطة المطار',
+      adminLink: 'لوحة التحكم',
+      profileHeading: 'كيف تريدني أن أحدّثك؟',
+      profileHint: 'يمكنك تغيير ذلك في أي وقت.',
+      tripHeading: 'رحلتك حتى الآن',
+      simNote: 'حالة الرحلة محاكاة في هذا النموذج الأولي. تحقّق دائمًا من البوابة على شاشات المغادرة. وأي أمر غير متوقع، أسرع حل هو موظف المطار.',
+      inputLabel: 'رسالتك',
+      placeholder: 'اكتب سؤالك — مثلًا: بقي معي ٩٠ دقيقة وعندي حقيبة أسجّلها.',
+      send: 'إرسال',
+      stage: 'المرحلة', airport: 'المطار', terminal: 'الصالة', minutes: 'المتبقي للصعود', bags: 'الحقائب', gate: 'البوابة',
+      bagsChecked: 'حقيبة تُسجَّل', bagsCarryon: 'حقيبة يد فقط',
+      unset: '—',
+      greeting: 'مرحبًا. أنا Flight Guide، وسأبقى معك من باب صالة المغادرة إلى بوابة الصعود.\n\nلن أعطيك أي إرشاد قبل أن أعرف أربعة أمور، لأن المسار الخاطئ أسوأ من لا مسار. لن يستغرق الأمر دقيقة.',
+      errorNetwork: 'لم أستطع الوصول إلى التطبيق الآن. تحقّق من الاتصال ثم أرسل مرة أخرى، فما كتبته لم يُفقد.',
+      errorEmpty: 'اكتب رسالتك أولًا ثم أرسل.',
+      profiles: {
+        nervous: { name: 'المسافر المبتدئ القلق', tone: 'مطمئن · خطوة واحدة في كل مرة' },
+        adult: { name: 'بالغ في أول رحلة دولية', tone: 'فعّال · بكل التفاصيل' },
+        hurried: { name: 'خبير / مستعجل', tone: 'مباشر · الإجراء التالي فقط' }
+      },
+      quick: ['أنا في الدمام', 'كيف هو هذا المطار؟', 'تغيّرت بوابتي', 'أنا متأخر']
+    }
+  };
+
+  function t(key) { return (STRINGS[state.lang] || STRINGS.en)[key]; }
+
+  // ------------------------------------------------------------------ render
+  function applyLanguage() {
+    var html = document.documentElement;
+    html.lang = state.lang;
+    html.dir = state.lang === 'ar' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var v = t(el.getAttribute('data-i18n'));
+      if (typeof v === 'string') el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+    });
+
+    document.querySelectorAll('.seg-btn').forEach(function (b) {
+      b.classList.toggle('on', b.getAttribute('data-lang') === state.lang);
+    });
+
+    renderProfiles();
+    renderTrip();
+    renderQuick();
+  }
+
+  function renderProfiles() {
+    var copy = t('profiles');
+    profilesEl.innerHTML = '';
+    ['nervous', 'adult', 'hurried'].forEach(function (key) {
+      var enabled = state.profilesEnabled[key] !== false;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'profile' + (state.profile === key ? ' on' : '');
+      btn.setAttribute('role', 'radio');
+      btn.setAttribute('aria-checked', String(state.profile === key));
+      btn.disabled = !enabled;
+      btn.innerHTML =
+        '<span class="radio"></span>' +
+        '<span class="body">' +
+          '<span class="name">' + esc(copy[key].name) + '</span>' +
+          '<span class="tone">' + esc(copy[key].tone) + '</span>' +
+        '</span>';
+      if (enabled) {
+        btn.addEventListener('click', function () {
+          state.profile = key;
+          localStorage.setItem('fg.profile', key);
+          renderProfiles();
+        });
+      }
+      profilesEl.appendChild(btn);
+    });
+  }
+
+  function renderTrip() {
+    var rows = [
+      ['stage', state.trip.stage || t('unset')],
+      ['airport', state.trip.airport || t('unset')],
+      ['terminal', state.trip.terminal || t('unset')],
+      ['minutes', state.trip.minutes != null ? state.trip.minutes : t('unset')],
+      ['bags', state.trip.bags === 'checked' ? t('bagsChecked')
+             : state.trip.bags === 'carryon' ? t('bagsCarryon') : t('unset')],
+      ['gate', state.trip.gate || t('unset')]
+    ];
+    tripEl.innerHTML = rows.map(function (r) {
+      return '<dt>' + esc(t(r[0])) + '</dt><dd>' + esc(String(r[1])) + '</dd>';
+    }).join('');
+  }
+
+  function renderQuick() {
+    quickEl.innerHTML = '';
+    t('quick').forEach(function (phrase) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = phrase;
+      b.addEventListener('click', function () {
+        inputEl.value = phrase;
+        autosize();
+        formEl.requestSubmit();
+      });
+      quickEl.appendChild(b);
+    });
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  /** Renders **bold** and *italic* without letting anything else be HTML. */
+  function format(text) {
+    return esc(text)
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)\*([^*\n]+)\*/g, '$1<em>$2</em>');
+  }
+
+  function addBubble(text, who, opts) {
+    opts = opts || {};
+    var el = document.createElement('div');
+    el.className = 'bubble ' + (who === 'user' ? 'user' : 'bot') + (opts.urgent ? ' urgent' : '');
+    el.innerHTML = format(text);
+    messagesEl.appendChild(el);
+    scrollDown();
+    return el;
+  }
+
+  function scrollDown() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function showTyping() {
+    var el = document.createElement('div');
+    el.className = 'bubble bot';
+    el.id = 'typing';
+    el.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+    messagesEl.appendChild(el);
+    scrollDown();
+  }
+
+  function hideTyping() {
+    var el = document.getElementById('typing');
+    if (el) el.remove();
+  }
+
+  // ------------------------------------------------------------------ chat
+  function send(message) {
+    if (state.busy) return;
+    message = String(message || '').trim();
+    if (!message) {
+      addBubble(t('errorEmpty'), 'bot');
+      return;
+    }
+
+    state.busy = true;
+    formEl.querySelector('.send').disabled = true;
+
+    addBubble(message, 'user');
+    inputEl.value = '';
+    autosize();
+    showTyping();
+
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: message,
+        lang: state.lang,
+        profile: state.profile,
+        sessionId: state.sessionId
+      })
+    })
+      .then(function (r) {
+        return r.json().then(function (body) {
+          if (!r.ok) throw new Error(body && body.error ? body.error : 'HTTP ' + r.status);
+          return body;
+        });
+      })
+      .then(function (body) {
+        hideTyping();
+        state.sessionId = body.sessionId;
+        sessionStorage.setItem('fg.session', body.sessionId);
+
+        (body.messages || []).forEach(function (m) {
+          // Only the very first bubble of an escalated turn carries the red flag.
+          addBubble(m.text, 'bot', { urgent: !!body.meta && body.meta.escalated });
+        });
+
+        // Auto-follow the reply language, so an Arabic answer renders RTL
+        // even if the toggle said English.
+        if (body.meta && body.meta.lang && body.meta.lang !== state.lang) {
+          state.lang = body.meta.lang;
+          localStorage.setItem('fg.lang', state.lang);
+          applyLanguage();
+        }
+
+        state.trip = {
+          stage: body.meta && body.meta.stageName ? body.meta.stageName
+               : (body.session && body.session.stage != null ? 'Step ' + (body.session.stage + 1) : null),
+          airport: body.session && body.session.airport ? aix(body.session.airport) : null,
+          terminal: body.session && body.session.terminal,
+          minutes: body.session ? body.session.minutes : null,
+          bags: body.session ? body.session.bags : null,
+          gate: body.session ? body.session.gate : null
+        };
+        renderTrip();
+      })
+      .catch(function (err) {
+        hideTyping();
+        addBubble(t('errorNetwork') + '  (' + err.message + ')', 'bot');
+      })
+      .finally(function () {
+        state.busy = false;
+        formEl.querySelector('.send').disabled = false;
+        inputEl.focus();
+      });
+  }
+
+  var AIRPORT_NAMES = {
+    dmm: { en: 'Dammam (DMM)', ar: 'الدمام (DMM)' },
+    ruh: { en: 'Riyadh (RUH)', ar: 'الرياض (RUH)' },
+    jed: { en: 'Jeddah (JED)', ar: 'جدة (JED)' }
+  };
+  function aix(code) {
+    var a = AIRPORT_NAMES[code];
+    return a ? (a[state.lang] || a.en) : code;
+  }
+
+  // ------------------------------------------------------------------ input
+  function autosize() {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 150) + 'px';
+  }
+
+  inputEl.addEventListener('input', autosize);
+  inputEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      formEl.requestSubmit();
+    }
+  });
+
+  formEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+    send(inputEl.value);
+  });
+
+  document.querySelectorAll('.seg-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.lang = b.getAttribute('data-lang');
+      localStorage.setItem('fg.lang', state.lang);
+      applyLanguage();
+    });
+  });
+
+  // ------------------------------------------------------------------ boot
+  // Pull the live settings so a disabled profile or a hidden map is respected
+  // in the UI immediately, not just on the server.
+  fetch('/api/settings')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (s) {
+      if (s) {
+        state.profilesEnabled = s.profilesEnabled || state.profilesEnabled;
+        state.mapVisible = s.mapVisible !== false;
+        if (!state.profilesEnabled[state.profile]) {
+          state.profile = ['nervous', 'adult', 'hurried'].find(function (p) {
+            return state.profilesEnabled[p];
+          }) || 'adult';
+        }
+        var mapLink = document.querySelector('a[href="/map"]');
+        if (mapLink && !state.mapVisible) mapLink.style.display = 'none';
+      }
+    })
+    .catch(function () { /* defaults are fine */ })
+    .finally(function () {
+      applyLanguage();
+      addBubble(t('greeting'), 'bot');
+      inputEl.focus();
+    });
+})();
