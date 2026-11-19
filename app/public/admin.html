@@ -67,6 +67,57 @@
   </section>
 
   <!-- ============================================================ -->
+  <section class="card" id="ai-card">
+    <div class="card-head">
+      <div>
+        <h2>AI model <span class="chip" id="ai-state">off</span></h2>
+        <p class="hint">Optional. With a key, replies are written by a language model. Without one, the built-in rule engine answers — the app never goes silent.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="switch-row">
+        <input id="aiEnabled" type="checkbox">
+        <span>Use a language model for replies</span>
+      </label>
+      <p class="help">The travel logic, the safety escalation and the “four facts before directions” rule always run. The model only rewrites the wording.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label for="aiProvider">Provider</label>
+        <select id="aiProvider">
+          <option value="deepinfra">DeepInfra</option>
+          <option value="openai">OpenAI</option>
+          <option value="groq">Groq</option>
+          <option value="openrouter">OpenRouter</option>
+        </select>
+        <p class="help">Any OpenAI-compatible provider works.</p>
+      </div>
+
+      <div class="field">
+        <label for="aiModel">Model <span class="unit">optional</span></label>
+        <input id="aiModel" type="text" placeholder="leave blank for the provider default" autocomplete="off">
+        <p class="help">Blank uses the provider's default model.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="aiKey">API key</label>
+      <div class="inline" style="gap:8px">
+        <input id="aiKey" type="password" placeholder="paste your key here" autocomplete="off" spellcheck="false" style="flex:1">
+        <button id="aiReveal" class="ghost-btn" type="button">Show</button>
+      </div>
+      <p class="help" id="aiKeyHelp">Stored on the server and never sent to the browser. Paste a key and press <strong>Test key</strong>.</p>
+      <div class="inline" style="gap:8px;margin-top:6px">
+        <button id="aiTest" class="ghost-btn" type="button">Test key</button>
+        <button id="aiClear" class="ghost-btn danger" type="button">Remove key</button>
+        <span class="save-state" id="aiStatus"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <section class="card">
     <div class="card-head">
       <div>

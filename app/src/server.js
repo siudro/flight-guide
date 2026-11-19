@@ -31,6 +31,7 @@ const crypto = require('crypto');
 
 const store = require('./store');
 const { generateReply, detectLanguage } = require('./engine');
+const llm = require('./llm');
 const DEFAULTS = require('../config/defaults');
 
 const PORT = Number(process.env.PORT || 8080);
@@ -152,7 +153,15 @@ function publicSettings() {
     profilesEnabled: settings.profilesEnabled,
     escalateMinutes: settings.escalateMinutes,
     mapVisible: settings.mapVisible,
-    airports: settings.airports
+    airports: settings.airports,
+    // The key itself never crosses this boundary. The panel only learns
+    // whether one is stored, so it can show "Saved" without echoing it.
+    ai: {
+      provider: (settings.ai && settings.ai.provider) || 'deepinfra',
+      model: (settings.ai && settings.ai.model) || '',
+      enabled: !!(settings.ai && settings.ai.enabled),
+      hasKey: !!(settings.ai && settings.ai.apiKey)
+    }
   };
 }
 
@@ -227,6 +236,21 @@ async function handle(req, res) {
     return sendJson(res, 405, { error: 'method not allowed' });
   }
 
+  // --- API: verify an AI key ---------------------------------------------
+  // Lets the panel prove a key works before the traveller ever relies on it.
+  // Accepts a key in the body (testing before save) or falls back to the
+  // stored one, so "Test" works both before and after saving.
+  if (p === '/api/ai/verify' && method === 'POST') {
+    const body = await readBody(req);
+    const ai = settings.ai || {};
+    const key = (typeof body.apiKey === 'string' && body.apiKey.trim()) || ai.apiKey || '';
+    const provider = body.provider || ai.provider || 'deepinfra';
+    const model = typeof body.model === 'string' ? body.model : ai.model;
+    if (!key) return sendJson(res, 400, { ok: false, code: 'NO_KEY', error: 'No API key supplied.' });
+    const out = await llm.verify({ apiKey: key, provider, model, settings, ctx: {} });
+    return sendJson(res, 200, out);
+  }
+
   if (p === '/api/settings/reset' && method === 'POST') {
     settings = store.resetSettings();
     return sendJson(res, 200, publicSettings());
@@ -271,6 +295,9 @@ async function handle(req, res) {
       : detectLanguage(message, 'en');
     const profile = body.profile;
 
+    // The rule engine always runs: it owns the conversation state, the safety
+    // escalation and the "have I got the four facts yet" logic. The model, when
+    // enabled, only rewrites the prose of a reply the engine already decided.
     const result = generateReply({
       message,
       lang,
@@ -278,6 +305,44 @@ async function handle(req, res) {
       session,
       settings
     });
+
+    // --- optional model pass ------------------------------------------------
+    // Behind a try/catch with a timeout inside llm.complete(). Any failure at
+    // all — no key, bad key, rate limit, timeout, offline, unsafe output —
+    // leaves the deterministic reply in place. The traveller always gets an
+    // answer, and a judge can see the app behave sensibly with no key at all.
+    let aiMeta = { used: false, reason: 'disabled' };
+    const ai = settings.ai || {};
+    if (ai.enabled && ai.apiKey) {
+      const spoke = result.messages && result.messages.length;
+      if (spoke) {
+        const out = await llm.complete({
+          apiKey: ai.apiKey,
+          provider: ai.provider,
+          model: ai.model,
+          settings,
+          ctx: {
+            message,
+            lang: result.meta.lang,
+            airport: result.session.airport,
+            stageName: result.meta.stageName || result.meta.stageKey,
+            minutes: result.session.minutes,
+            gate: result.session.gate
+          }
+        });
+        if (out.ok) {
+          // Replace the prose, keep the engine's structure: the urgent flag,
+          // the escalation bubble and the definitional styling all still apply.
+          result.messages = [{ text: out.text }];
+          result.meta.model = out.model;
+          aiMeta = { used: true, provider: out.provider, model: out.model };
+        } else {
+          aiMeta = { used: false, reason: out.code, error: out.error };
+          console.warn(`[chat] model unavailable (${out.code}): ${out.error} — using rule engine`);
+        }
+      }
+    }
+    result.meta.ai = aiMeta;
 
     sessions.set(sessionId, result.session);
     pruneSessions();

@@ -112,7 +112,37 @@ function sanitize(overrides) {
     : Object.keys(DEFAULTS.AIRPORTS);
   if (!airports.length) airports = Object.keys(DEFAULTS.AIRPORTS);
 
-  return { stages, byKey, profilesEnabled, escalateMinutes, mapVisible, airports };
+  // --- AI provider settings --------------------------------------------
+  // The key lives in the data volume beside settings.json. It is NEVER part
+  // of the object handed to the browser; publicSettings() strips it.
+  const ai = o.ai && typeof o.ai === 'object' ? o.ai : {};
+  const provider = ['deepinfra', 'openai', 'groq', 'openrouter'].includes(ai.provider)
+    ? ai.provider : 'deepinfra';
+  const model = typeof ai.model === 'string' ? ai.model.trim().slice(0, 120) : '';
+  const apiKey = typeof ai.apiKey === 'string' ? ai.apiKey.trim().slice(0, 400) : '';
+  const enabled = ai.enabled === undefined ? false : !!ai.enabled;
+
+  return {
+    stages, byKey, profilesEnabled, escalateMinutes, mapVisible, airports,
+    ai: { provider, model, apiKey, enabled }
+  };
+}
+
+/**
+ * Settings safe to send to the browser: everything except the key.
+ * A key that reaches /api/settings is a key that can be copied by anyone
+ * who opens the page, so this is a hard boundary, not a convenience.
+ */
+function publicSettings(settings) {
+  const s = Object.assign({}, settings);
+  const ai = settings.ai || {};
+  s.ai = {
+    provider: ai.provider,
+    model: ai.model,
+    enabled: !!ai.enabled,
+    hasKey: !!(ai.apiKey && ai.apiKey.length)
+  };
+  return s;
 }
 
 function loadSettings() {
@@ -182,6 +212,24 @@ function saveSettings(patch) {
     if (valid.length) next.airports = valid;
   }
 
+  if (patch.ai && typeof patch.ai === 'object') {
+    const cur = next.ai && typeof next.ai === 'object' ? Object.assign({}, next.ai) : {};
+    if (['deepinfra', 'openai', 'groq', 'openrouter'].includes(patch.ai.provider)) {
+      cur.provider = patch.ai.provider;
+    }
+    if (typeof patch.ai.model === 'string') cur.model = patch.ai.model.trim().slice(0, 120);
+    if (typeof patch.ai.enabled === 'boolean') cur.enabled = patch.ai.enabled;
+    // Only overwrite the key when a non-empty one is supplied, so saving the
+    // panel without re-pasting the key does not wipe it. An explicit empty
+    // string clears it.
+    if (typeof patch.ai.apiKey === 'string') {
+      const k = patch.ai.apiKey.trim();
+      if (k === '' && patch.ai.clearKey) cur.apiKey = '';
+      else if (k !== '') cur.apiKey = k.slice(0, 400);
+    }
+    next.ai = cur;
+  }
+
   writeJsonAtomic(SETTINGS_FILE, next);
   return sanitize(next);
 }
@@ -217,6 +265,7 @@ function clearConversations() {
 }
 
 module.exports = {
+  publicSettings,
   DATA_DIR,
   SETTINGS_FILE,
   MAX_CONVERSATIONS,

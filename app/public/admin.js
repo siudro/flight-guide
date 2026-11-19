@@ -199,6 +199,7 @@
       meta = res[0];
       settings = res[1];
       renderAll();
+      renderAi();
       markClean('Loaded settings from the server.');
     }).catch(function (err) {
       saveStateEl.textContent = 'Could not load settings: ' + err.message;
@@ -229,8 +230,103 @@
       profilesEnabled: settings.profilesEnabled,
       escalateMinutes: Number(escalateEl.value),
       mapVisible: mapEl.checked,
-      airports: settings.airports
+      airports: settings.airports,
+      ai: (function () {
+        var out = {
+          provider: aiProviderEl.value,
+          model: aiModelEl.value,
+          enabled: aiEnabledEl.checked
+        };
+        // Send the key only when the operator typed a new one. Re-saving the
+        // panel with the field untouched must not wipe a stored key.
+        if (aiKeyEl.value.trim()) out.apiKey = aiKeyEl.value.trim();
+        if (clearKeyRequested) { out.apiKey = ''; out.clearKey = true; }
+        return out;
+      })()
     };
+  }
+
+  // ------------------------------------------------------------------ AI model
+  var aiEnabledEl = $('#aiEnabled');
+  var aiProviderEl = $('#aiProvider');
+  var aiModelEl = $('#aiModel');
+  var aiKeyEl = $('#aiKey');
+  var aiStatusEl = $('#aiStatus');
+  var aiStateEl = document.getElementById('ai-state');
+  var aiKeyHelpEl = document.getElementById('aiKeyHelp');
+  var clearKeyRequested = false;
+
+  function renderAi() {
+    var ai = (settings && settings.ai) || {};
+    aiEnabledEl.checked = !!ai.enabled;
+    aiProviderEl.value = ai.provider || 'deepinfra';
+    aiModelEl.value = ai.model || '';
+    // The stored key is never returned by the server, so the field starts
+    // empty and shows a placeholder that says one is on file.
+    aiKeyEl.value = '';
+    clearKeyRequested = false;
+    aiKeyEl.placeholder = ai.hasKey ? '•••••••••• key saved — paste a new one to replace' : 'paste your key here';
+    aiKeyHelpEl.textContent = ai.hasKey
+      ? 'A key is stored on the server. It is never sent back to this page.'
+      : 'Stored on the server and never sent to the browser.';
+    aiStateEl.textContent = ai.enabled ? (ai.hasKey ? 'model on' : 'on, no key') : 'off';
+    aiStateEl.className = 'chip ' + (ai.enabled && ai.hasKey ? 'ok' : 'warn');
+  }
+
+  $('#aiReveal').addEventListener('click', function () {
+    var showing = aiKeyEl.type === 'text';
+    aiKeyEl.type = showing ? 'password' : 'text';
+    this.textContent = showing ? 'Show' : 'Hide';
+  });
+
+  $('#aiClear').addEventListener('click', function () {
+    aiKeyEl.value = '';
+    clearKeyRequested = true;
+    aiStatusEl.textContent = 'Key will be removed when you save.';
+    aiStatusEl.className = 'save-state dirty';
+  });
+
+  $('#aiTest').addEventListener('click', function () {
+    var btn = this;
+    btn.disabled = true;
+    aiStatusEl.textContent = 'Testing…';
+    aiStatusEl.className = 'save-state';
+    fetch('/api/ai/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        apiKey: aiKeyEl.value.trim() || undefined,
+        provider: aiProviderEl.value,
+        model: aiModelEl.value
+      })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res.ok) {
+          aiStatusEl.textContent = res.message || 'Key works.';
+          aiStatusEl.className = 'save-state saved';
+        } else {
+          aiStatusEl.textContent = friendlyAiError(res);
+          aiStatusEl.className = 'save-state err';
+        }
+      })
+      .catch(function (err) {
+        aiStatusEl.textContent = 'Could not reach the app: ' + err.message;
+        aiStatusEl.className = 'save-state err';
+      })
+      .finally(function () { btn.disabled = false; });
+  });
+
+  // Turn a provider error code into something a student can act on.
+  function friendlyAiError(res) {
+    var code = res && res.code;
+    if (code === 'BAD_KEY') return 'That key was rejected. Check you copied all of it.';
+    if (code === 'RATE_LIMIT') return 'The provider is rate-limiting this key. Try again shortly.';
+    if (code === 'PROVIDER_DOWN') return 'The provider is having an outage. The rule engine still works.';
+    if (code === 'TIMEOUT') return 'The provider did not answer in time.';
+    if (code === 'NETWORK') return 'No internet connection from the server.';
+    if (code === 'NO_KEY') return 'Paste a key first.';
+    return (res && res.error) || 'Unknown error.';
   }
 
   $('#save').addEventListener('click', function () {
