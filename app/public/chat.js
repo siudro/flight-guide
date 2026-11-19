@@ -177,7 +177,9 @@
   function addBubble(text, who, opts) {
     opts = opts || {};
     var el = document.createElement('div');
-    el.className = 'bubble ' + (who === 'user' ? 'user' : 'bot') + (opts.urgent ? ' urgent' : '');
+    el.className = 'bubble ' + (who === 'user' ? 'user' : 'bot')
+      + (opts.urgent ? ' urgent' : '')
+      + (opts.definition ? ' definition' : '');
     el.innerHTML = format(text);
     messagesEl.appendChild(el);
     scrollDown();
@@ -241,9 +243,17 @@
         state.sessionId = body.sessionId;
         sessionStorage.setItem('fg.session', body.sessionId);
 
+        // A turn that answered a "what does X mean" question is styled
+        // differently so the traveller can tell an explanation apart from
+        // the route they are following.
+        var isDefinition = !!body.meta && body.meta.stageKey === 'explain';
+
         (body.messages || []).forEach(function (m) {
           // Only the very first bubble of an escalated turn carries the red flag.
-          addBubble(m.text, 'bot', { urgent: !!body.meta && body.meta.escalated });
+          addBubble(m.text, 'bot', {
+            urgent: !!body.meta && body.meta.escalated,
+            definition: isDefinition
+          });
         });
 
         // Auto-follow the reply language, so an Arabic answer renders RTL

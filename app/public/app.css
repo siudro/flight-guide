@@ -10,9 +10,12 @@
   --ink:       #1b2624;
   --ink-dim:   #4a5a55;
   --ink-faint: #7d8c87;
-  --accent:    #0f6b63;
-  --accent-2:  #0b544e;
-  --accent-lo: #e3efec;
+  --accent:    #142f6b;
+  --accent-2:  #0d214f;
+  --accent-lo: #e7ecf7;
+  --navy:      #142f6b;
+  --navy-2:    #0d214f;
+  --navy-lo:   #e7ecf7;
   --warm:      #b8791f;
   --danger:    #b3261e;
   --ok:        #1f7a4d;
@@ -63,9 +66,10 @@ html[lang="ar"] body {
 .mark {
   display: grid; place-items: center;
   width: 38px; height: 38px; border-radius: 11px;
-  background: linear-gradient(145deg, var(--accent), var(--accent-2));
+  background: linear-gradient(145deg, #1c418f, var(--navy-2));
   color: #fff; font-size: 19px;
-  box-shadow: 0 4px 14px rgba(15,107,99,.28);
+  box-shadow: 0 3px 12px rgba(20,47,107,.30);
+  transform: none;
   transform: rotate(-8deg);
 }
 
@@ -226,7 +230,22 @@ html[lang="ar"] body {
 html[dir="rtl"] .bubble.bot { border-start-start-radius: 15px; border-start-end-radius: 5px; align-self: flex-start; }
 html[dir="rtl"] .bubble.user { border-start-end-radius: 15px; border-start-start-radius: 5px; align-self: flex-end; }
 
-.bubble strong { color: #fff; font-weight: 650; }
+.bubble strong { color: var(--ink); font-weight: 680; }
+.bubble.user strong { color: #fff; }
+.bubble.bot.definition {
+  background: var(--navy-lo);
+  border-color: rgba(20,47,107,.30);
+  border-inline-start: 3px solid var(--navy);
+  color: var(--ink);
+}
+.bubble.bot.definition::before {
+  content: "?";
+  display: inline-grid; place-items: center;
+  width: 17px; height: 17px; margin-inline-end: 7px;
+  border-radius: 50%; background: var(--navy); color: #fff;
+  font-size: 11.5px; font-weight: 800; vertical-align: 1px;
+}
+
 .bubble.bot.urgent {
   border-color: rgba(239,83,80,.55);
   background: rgba(239,83,80,.1);
@@ -278,7 +297,7 @@ html[dir="rtl"] .bubble.user { border-start-end-radius: 15px; border-start-start
 }
 .composer textarea:focus {
   outline: none; border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(15,107,99,.16);
+  box-shadow: 0 0 0 3px rgba(20,47,107,.16);
 }
 .composer textarea::placeholder { color: var(--ink-faint); }
 
