@@ -193,11 +193,24 @@ function detectConcern(message) {
 function detectIntent(message) {
   const m = normalize(message);
   if (/(gate change|changed gate|new gate|تغيرت البوابة|تغيّرت البوابة|بوابة جديدة|بوابه جديده)/.test(m)) return 'gatechange';
-  if (/(what|mاذا|ماذا|وين|أين|اين|where|how do i|how to|كيف|steps|خطوات|اشرح|explain)/.test(m) && m.length > 8) return 'explain';
+  // --- progression wins over the broad question rule ----------------------
+  // "What do I do now?" contains "what", so it would otherwise be classified
+  // as an explanation request and the traveller would never move on.
+  if (/\b(what now|what next|then what|and then|what do i do|what should i do|what's next|whats next|go on|continue|move on|next)\b/.test(m)) return 'next';
+  // Arabic definition words: معنى / يعني / اشرح / وش يعني / ايش معنى.
+  // These must be tested before the length guard: "ايش معنى تيرمنال" is a
+  // definitional question even though it is short.
+  if (/(معنى|معني|يعني|اشرح|فسر|وش يعني|ايش يعني|ايش معنى|وش معنى|اي معنى)/.test(m)) return 'explain';
+  if (/(what|ماذا|وين|أين|اين|where|how do i|how to|كيف|steps|خطوات|explain)/.test(m) && m.length > 8) return 'explain';
   // `done`/`ok`/`next` are matched on whole words so "I don't read Arabic"
   // or "where do I go" cannot trip the advance.
-  if (/\b(done|finished|ok|okay|next|next step)\b/.test(m)) return 'next';
-  if (/(تم|خلصت|انتهيت|انهيت|أكملت|اكملت|التالي|الخطوة التالية)/.test(m)) return 'next';
+  // "What now / what do I do" is the most natural way a traveller asks to move
+  // on. Leaving it unmatched made the app repeat the same stage verbatim,
+  // which reads as a frozen conversation. Matched on whole words where the
+  // phrase is short enough for `\b` to be meaningful.
+  if (/\b(done|finished|ok|okay|next|next step|next one|what now|what next|and then|then what|what do i do|what should i do|what do i do now|what's next|whats next|go on|continue|move on|i'm done|im done)\b/.test(m)) return 'next';
+  // Arabic: "وش أسوي", "ايش أسوي", "بعدين", "وبعدين", "الحين وش" and friends.
+  if (/(تم|خلصت|انتهيت|انهيت|أكملت|اكملت|التالي|الخطوة التالية|وش أسوي|وش اسوي|ايش أسوي|ايش اسوي|وش الحين|ايش الحين|وش بعد|ايش بعد|وبعدين|بعدين|الحين وش|الحين ايش|الخطوة الجاية|الخطوه الجايه|كمل|نكمل)/.test(m)) return 'next';
   if (/(stuck|help|ساعدني|مساعدة|مساعده|تائه|ضائع|ضايع)/.test(m)) return 'help';
   return null;
 }
