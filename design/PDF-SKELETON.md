@@ -70,21 +70,19 @@ Suggested flow:
 
 ## 5. Iterative AI Design Process
 
-**Status: READY — copy from task 4 (WAI issue).**
+**Status: WRITTEN — copy [`docs/Flight-Guide-Iteration-Log.md`](../docs/Flight-Guide-Iteration-Log.md) in, then edit into your own voice.**
 
-Structure: **Idea → Advisor Design → Testing → Error Analysis → Improvement**
-
-Paste from the task, plus the screenshots:
+Structure: **Idea → Advisor Design → Testing → Error Analysis → Improvement.** The log is already in that order and already carries the four screenshots inline.
 
 | Test | Result |
 |---|---|
-| Ahmed, Arabic | Replied in English ✗ |
-| Ahmed retest | Arabic ✓ |
-| Fatima, cannot read English | Replied in English ✗ |
-| Fatima retest | Switched to Arabic ✓ |
-| Yusuf, 70 min | Right tone, too many steps ⚠ |
+| Arabic message | Replied in English ✗ → fixed, retested ✓ |
+| "I don't read English well" | Replied in English ✗ → fixed, retested ✓ |
+| Hurried, 70 min | Right tone and facts, three steps at once ⚠ |
 
-**Include all five screenshots, including the failures.**
+**Include all four screenshots, including the failures.** `docs/Flight-Guide-Iteration-Log.md` embeds them in place.
+
+> Before pasting: the third fix is logged as *applied but not retested*. Keep that wording — it is more credible than claiming a verification that did not happen. If you retest it before 23 Nov, update the table and add the screenshot.
 
 ---
 
