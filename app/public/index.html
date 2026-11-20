@@ -55,6 +55,18 @@
 
     <form id="composer" class="composer" autocomplete="off">
       <label for="input" class="sr-only" data-i18n="inputLabel">Your message</label>
+      <!-- Ticket photo. capture="environment" opens the rear camera directly
+           on a phone; on desktop the browser falls back to a file picker.
+           The image is sent to OUR server, which holds the API key. -->
+      <input id="photo-input" class="sr-only" type="file" accept="image/*"
+             capture="environment" aria-label="Ticket photo" data-i18n-aria="photo">
+      <button type="button" id="photo-btn" class="attach" aria-label="Ticket photo"
+              data-i18n-aria="photo" data-i18n-title="photoTitle" title="Photo of your ticket">
+        <span aria-hidden="true"><svg viewBox="0 0 24 24" width="21" height="21" fill="none"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8.5h3l1.3-2h7.4l1.3 2h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1Z"/>
+          <circle cx="12" cy="13.2" r="3.4"/></svg></span>
+      </button>
       <textarea id="input" rows="1" data-i18n-placeholder="placeholder"
                 placeholder="Type your question — for example: I have 90 minutes and one bag to check in."></textarea>
       <button type="submit" class="send" aria-label="Send" data-i18n-aria="send">

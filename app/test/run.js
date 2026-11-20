@@ -282,6 +282,135 @@ test('escalation still escalates — suppression is display-only', () => {
   assert.strictEqual(transcript[1].meta.escalated, true, 'still knows boarding is close');
 });
 
+console.log('\nLLM layer (no network)');
+// These run offline: they exercise prompt assembly, key resolution and the
+// safety check, none of which should need a provider. That is deliberate — the
+// suite must pass on a laptop with no key and no internet.
+test('the .env parser reads real pairs and skips blanks', () => {
+  const { parse } = require('../src/env');
+  const out = parse([
+    '# a comment',
+    'OPENAI_API_KEY=sk-abc',
+    'EMPTY=',
+    'QUOTED="a b"',
+    'LLM_ENABLED=1'
+  ].join('\n'));
+  assert.strictEqual(out.OPENAI_API_KEY, 'sk-abc');
+  assert.strictEqual(out.QUOTED, 'a b');
+  assert.strictEqual(out.LLM_ENABLED, '1');
+  assert.ok(!('EMPTY' in out), 'an empty value must be skipped');
+  assert.ok(!('a comment' in out), 'comments must be skipped');
+});
+
+test('prompt versions are ordered and the active one exists', () => {
+  const prompts = require('../src/prompts');
+  assert.ok(prompts.PROMPT_VERSIONS.length >= 2, 'keep a history, do not overwrite');
+  const versions = prompts.PROMPT_VERSIONS.map((v) => v.version);
+  for (let i = 1; i < versions.length; i++) {
+    assert.ok(versions[i] > versions[i - 1], 'versions must increase');
+  }
+  assert.ok(versions.includes(prompts.ACTIVE_VERSION), 'ACTIVE must be a real version');
+  for (const v of prompts.PROMPT_VERSIONS) {
+    assert.ok(v.note && v.note.length > 8, 'version ' + v.version + ' needs a change note');
+  }
+});
+
+test('a prompt always carries the language and the no-invention rule', () => {
+  const prompts = require('../src/prompts');
+  for (const lang of ['en', 'ar']) {
+    const built = prompts.build({ lang, context: { stageName: 'check-in' } });
+    assert.ok(/Answer in (English|Arabic)/.test(built.text), 'missing language instruction');
+    assert.ok(/NEVER invent a gate/.test(built.text), 'missing the no-invention rule');
+    assert.ok(built.version >= 1);
+    assert.ok(built.chars > 200);
+    assert.ok(built.segments.length >= 3);
+  }
+});
+
+test('a prompt includes ticket and status only when they exist', () => {
+  const prompts = require('../src/prompts');
+  const bare = prompts.build({ lang: 'en', context: {} });
+  assert.ok(!/TICKET PHOTO/.test(bare.text), 'no ticket means no ticket section');
+
+  const withTicket = prompts.build({
+    lang: 'en',
+    context: {},
+    ticket: { flight: 'SV1234', gate: 'B12', seat: '14A' },
+    status: { delayMinutes: 40 }
+  });
+  assert.ok(/SV1234/.test(withTicket.text));
+  assert.ok(/14A/.test(withTicket.text));
+  assert.ok(/CURRENT FLIGHT STATUS/.test(withTicket.text));
+  assert.ok(/delayed by about 40 minutes/.test(withTicket.text));
+});
+
+test('key resolution prefers the environment and reports its source', () => {
+  const llm = require('../src/llm');
+  const prev = process.env.OPENAI_API_KEY;
+
+  try {
+    delete process.env.OPENAI_API_KEY;
+    let cfg = llm.resolveConfig({ ai: { provider: 'openai', apiKey: 'sk-from-admin', enabled: true } });
+    assert.strictEqual(cfg.source, 'admin');
+    assert.strictEqual(cfg.apiKey, 'sk-from-admin');
+
+    process.env.OPENAI_API_KEY = 'sk-from-env';
+    cfg = llm.resolveConfig({ ai: { provider: 'openai', apiKey: 'sk-from-admin', enabled: true } });
+    assert.strictEqual(cfg.source, 'env', 'the environment must win');
+    assert.strictEqual(cfg.apiKey, 'sk-from-env');
+
+    delete process.env.OPENAI_API_KEY;
+    cfg = llm.resolveConfig({ ai: { provider: 'openai' } });
+    assert.strictEqual(cfg.configured, false);
+  } finally {
+    if (prev === undefined) delete process.env.OPENAI_API_KEY;
+    else process.env.OPENAI_API_KEY = prev;
+  }
+});
+
+test('the key is never logged in full', () => {
+  const llm = require('../src/llm');
+  const key = 'sk-proj-abcdefghijklmnopqrstuvwxyz0123456789';
+  const masked = llm.mask(key);
+  assert.ok(!masked.includes('abcdefghij'), 'the middle of the key must be hidden');
+  assert.ok(masked.startsWith('sk-pro'));
+  assert.ok(masked.length < key.length);
+});
+
+test('an invented gate is rejected before it reaches the traveller', () => {
+  const { _internal } = require('../src/llm');
+  // No gate known: any gate claim is a fabrication.
+  assert.ok(_internal.looksUnsafe('Go to gate B12 now.', {}), 'must reject with no known gate');
+  // Known gate B12: saying B12 is fine, saying C44 is not.
+  assert.strictEqual(_internal.looksUnsafe('Go to gate B12 now.', { gate: 'B12' }), null);
+  assert.ok(_internal.looksUnsafe('Go to gate C44 now.', { gate: 'B12' }), 'must reject a different gate');
+  // The Arabic form must be caught too.
+  assert.ok(_internal.looksUnsafe('اذهب إلى بوابة C44', { gate: 'B12' }), 'must reject in Arabic');
+});
+
+test('ticket JSON is parsed and never invents fields', () => {
+  const { _internal } = require('../src/llm');
+  const ok = _internal.parseTicketJson('{ "flight": "SV123", "gate": "B12", "seat": null }');
+  assert.strictEqual(ok.flight, 'SV123');
+  assert.strictEqual(ok.gate, 'B12');
+  assert.ok(!('seat' in ok), 'nulls must be dropped, not guessed');
+  assert.strictEqual(_internal.parseTicketJson('I cannot read this'), null);
+});
+
+test('the rule engine still decides when the model is unavailable', () => {
+  // With no key configured, generateReply must be untouched: the app never
+  // depends on the network to answer.
+  const prev = process.env.OPENAI_API_KEY;
+  try {
+    delete process.env.OPENAI_API_KEY;
+    const { transcript, session } = converse(['Dammam, terminal 1, 120 minutes, carry-on']);
+    assert.strictEqual(session.airport, 'dmm');
+    assert.strictEqual(transcript[0].meta.stageKey, 'checkin');
+  } finally {
+    if (prev !== undefined) process.env.OPENAI_API_KEY = prev;
+  }
+});
+
 console.log('\nairport honesty');
 test('Jeddah answers carry an explicit unverified warning', () => {
   const { transcript } = converse(['Jeddah, terminal 1, 120 minutes, one bag'], { profile: 'adult' });

@@ -117,7 +117,7 @@ function sanitize(overrides) {
   // of the object handed to the browser; publicSettings() strips it.
   const ai = o.ai && typeof o.ai === 'object' ? o.ai : {};
   const provider = ['deepinfra', 'openai', 'groq', 'openrouter'].includes(ai.provider)
-    ? ai.provider : 'deepinfra';
+    ? ai.provider : 'openai';
   const model = typeof ai.model === 'string' ? ai.model.trim().slice(0, 120) : '';
   const apiKey = typeof ai.apiKey === 'string' ? ai.apiKey.trim().slice(0, 400) : '';
   const enabled = ai.enabled === undefined ? false : !!ai.enabled;

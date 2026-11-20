@@ -43,6 +43,9 @@ COPY --chown=root:root package.json ./
 COPY --chown=root:root src/ ./src/
 COPY --chown=root:root config/ ./config/
 COPY --chown=root:root public/ ./public/
+# Tests ship with the image because the app runs them on every boot, so the
+# boot log can state pass/fail inside the container too.
+COPY --chown=root:root test/ ./test/
 COPY --chown=root:root map/ ./map/
 
 # node_modules is created empty in the deps stage (see above) so this COPY

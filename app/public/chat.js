@@ -36,6 +36,15 @@
       inputLabel: 'Your message',
       placeholder: 'Type your question — for example: I have 90 minutes and one bag to check in.',
       send: 'Send',
+      photo: 'Photo of your ticket',
+      photoTitle: 'Take a photo of your ticket and I will read it.',
+      photoCap: 'Your ticket',
+      photoReading: 'Reading your ticket… a few seconds.',
+      photoFailed: 'I could not read that photo. You can type the details instead.',
+      photoNoModel: 'Ticket reading needs the AI key. For now, please type the details.',
+      ticketUse: 'Use these details',
+      ticketAgain: 'Try another photo',
+      ticketHeading: 'From your ticket',
       stage: 'Stage', airport: 'Airport', terminal: 'Terminal', minutes: 'Minutes to boarding', bags: 'Bags', gate: 'Gate',
       bagsChecked: 'Bag to check in', bagsCarryon: 'Carry-on only',
       unset: '—',
@@ -60,6 +69,15 @@
       inputLabel: 'رسالتك',
       placeholder: 'اكتب سؤالك — مثلًا: بقي معي ٩٠ دقيقة وعندي حقيبة أسجّلها.',
       send: 'إرسال',
+      photo: 'صورة من تذكرتك',
+      photoTitle: 'صوّر تذكرتك وسأقرأها لك.',
+      photoCap: 'تذكرتك',
+      photoReading: 'أقرأ تذكرتك… لحظات.',
+      photoFailed: 'لم أستطع قراءة الصورة. يمكنك كتابة التفاصيل.',
+      photoNoModel: 'قراءة التذكرة تحتاج مفتاح الذكاء الاصطناعي. الآن، اكتب التفاصيل.',
+      ticketUse: 'استخدم هذه التفاصيل',
+      ticketAgain: 'جرّب صورة أخرى',
+      ticketHeading: 'من تذكرتك',
       stage: 'المرحلة', airport: 'المطار', terminal: 'الصالة', minutes: 'المتبقي للصعود', bags: 'الحقائب', gate: 'البوابة',
       bagsChecked: 'حقيبة تُسجَّل', bagsCarryon: 'حقيبة يد فقط',
       unset: '—',
@@ -173,6 +191,156 @@
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/(^|\n)\*([^*\n]+)\*/g, '$1<em>$2</em>');
   }
+
+  // ------------------------------------------------------------------ ticket
+  // The photo goes to OUR server, which holds the API key. The browser never
+  // talks to OpenAI and never sees the key. The model reads the image and
+  // returns fields; the traveller confirms before they are used.
+  var photoInput = $('#photo-input');
+  var photoBtn = $('#photo-btn');
+  var ticketBusy = false;
+
+  function shrinkImage(file, maxSide) {
+    // Downscale before upload: a 12MP phone photo is ~4MB and slow to send.
+    // 1400px on the long side is plenty for a boarding pass.
+    return new Promise(function (resolve, reject) {
+      if (!/^image\//.test(file.type || '')) return reject(new Error('not an image'));
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        var w = img.naturalWidth, h = img.naturalHeight;
+        var scale = Math.min(1, (maxSide || 1400) / Math.max(w, h));
+        var cw = Math.round(w * scale), ch = Math.round(h * scale);
+        var canvas = document.createElement('canvas');
+        canvas.width = cw; canvas.height = ch;
+        canvas.getContext('2d').drawImage(img, 0, 0, cw, ch);
+        URL.revokeObjectURL(url);
+        try {
+          resolve(canvas.toDataURL('image/jpeg', 0.85));
+        } catch (e) { reject(e); }
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('image failed to load')); };
+      img.src = url;
+    });
+  }
+
+  function addTicketBubble(dataUrl) {
+    var el = document.createElement('div');
+    el.className = 'bubble user photo';
+    var img = document.createElement('img');
+    img.src = dataUrl;
+    img.alt = t('photoCap');
+    el.appendChild(img);
+    messagesEl.appendChild(el);
+    scrollDown();
+  }
+
+  function addTicketCard(fields) {
+    var card = document.createElement('div');
+    card.className = 'ticket-card';
+    var labels = {
+      flight: ['Flight', 'الرحلة'], airline: ['Airline', 'شركة الطيران'],
+      terminal: ['Terminal', 'الصالة'], gate: ['Gate', 'البوابة'],
+      seat: ['Seat', 'المقعد'], destination: ['Destination', 'الوجهة'],
+      boarding: ['Boarding', 'الصعود'], date: ['Date', 'التاريخ'],
+      airport: ['Airport', 'المطار']
+    };
+    var html = '<h4>' + esc(t('ticketHeading')) + '</h4>';
+    Object.keys(labels).forEach(function (k) {
+      if (!fields[k]) return;
+      var pair = labels[k];
+      html += '<div class="row"><span>' + esc(state.lang === 'ar' ? pair[1] : pair[0]) +
+        '</span><b>' + esc(fields[k]) + '</b></div>';
+    });
+    html += '<div class="acts"></div>';
+    card.innerHTML = html;
+
+    var acts = card.querySelector('.acts');
+    var use = document.createElement('button');
+    use.type = 'button';
+    use.className = 'quick-use';
+    use.textContent = t('ticketUse');
+    use.style.cssText = 'border:0;background:var(--accent);color:#fff;padding:8px 14px;border-radius:10px;font:inherit;font-weight:650;cursor:pointer';
+    use.addEventListener('click', function () {
+      card.remove();
+      applyTicket(fields);
+    });
+    var again = document.createElement('button');
+    again.type = 'button';
+    again.textContent = t('ticketAgain');
+    again.style.cssText = 'background:transparent;border:1px solid var(--line);color:var(--ink-dim);padding:8px 14px;border-radius:10px;font:inherit;cursor:pointer';
+    again.addEventListener('click', function () {
+      card.remove();
+      photoInput.value = '';
+      photoInput.click();
+    });
+    acts.appendChild(use);
+    acts.appendChild(again);
+
+    messagesEl.appendChild(card);
+    scrollDown();
+  }
+
+  function applyTicket(f) {
+    var parts = [];
+    if (f.airport) parts.push(f.airport);
+    if (f.terminal) parts.push('terminal ' + f.terminal);
+    if (f.flight) parts.push('flight ' + f.flight);
+    if (f.airline) parts.push(f.airline);
+    if (f.gate) parts.push('gate ' + f.gate);
+    // Feed the engine exactly as if the traveller had typed it, so the
+    // rule engine still owns the state.
+    send('From my ticket: ' + parts.join(', '));
+  }
+
+  function handleTicketFile(file) {
+    if (!file || ticketBusy) return;
+    ticketBusy = true;
+    photoBtn.disabled = true;
+
+    shrinkImage(file, 1400)
+      .then(function (dataUrl) {
+        addTicketBubble(dataUrl);
+        showTyping();
+        addBubble(t('photoReading'), 'bot');
+        return fetch('/api/ticket', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            image: dataUrl.split(',')[1],
+            mime: 'image/jpeg',
+            sessionId: state.sessionId
+          })
+        });
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (body) {
+        hideTyping();
+        if (body && body.ok) {
+          addTicketCard(body.fields || {});
+        } else {
+          addBubble(body && body.code === 'NOT_CONFIGURED' ? t('photoNoModel') : t('photoFailed'), 'bot');
+        }
+      })
+      .catch(function (err) {
+        hideTyping();
+        addBubble(t('photoFailed') + '  (' + err.message + ')', 'bot');
+      })
+      .finally(function () {
+        ticketBusy = false;
+        photoBtn.disabled = false;
+        photoInput.value = '';
+      });
+  }
+
+  photoBtn.addEventListener('click', function () {
+    if (state.busy || ticketBusy) return;
+    photoInput.value = '';
+    photoInput.click();
+  });
+  photoInput.addEventListener('change', function () {
+    handleTicketFile(photoInput.files && photoInput.files[0]);
+  });
 
   function addBubble(text, who, opts) {
     opts = opts || {};

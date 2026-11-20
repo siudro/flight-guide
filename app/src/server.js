@@ -29,14 +29,27 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
+// Load .env before anything reads process.env. A real environment variable
+// always wins, so Docker and CI are unaffected. This is where the API key comes
+// from when it is pasted into a file rather than exported in a shell.
+const path0 = require('path');
+const env = require('./env');
+const envResult = env.load([
+  path0.join(__dirname, '..', '.env'),
+  path0.join(process.cwd(), '.env')
+]);
+
 const store = require('./store');
 const { generateReply, detectLanguage } = require('./engine');
 const llm = require('./llm');
+const prompts = require('./prompts');
+const boot = require('./boot');
 const DEFAULTS = require('../config/defaults');
 
 const PORT = Number(process.env.PORT || 8080);
 const HOST = process.env.HOST || '0.0.0.0';
 const MAX_BODY = Number(process.env.FG_MAX_BODY_BYTES || 64 * 1024);
+const MAX_IMAGE_BODY = Number(process.env.FG_MAX_IMAGE_BYTES || 8 * 1024 * 1024);
 const MAX_SESSIONS = 500;
 
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
@@ -49,6 +62,15 @@ let settings = store.loadSettings();
 // is in the flow. Lost on restart by design; the ticket data is not worth
 // persisting and the log in /data gives the operator the history.
 const sessions = new Map();
+
+// Ticket details read from a photo, keyed by session. In memory only: a
+// boarding pass has a name, flight and seat, and none of it belongs on disk.
+// After a restart the traveller simply photographs it again.
+const ticketStore = new Map();
+
+// The last N assembled prompts, so a surprising answer can be traced to the
+// exact text that produced it. Read-only at /api/prompts.
+const promptLog = prompts.createLog();
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -116,13 +138,13 @@ function serveStatic(req, res, rootDir, urlPath) {
   return true;
 }
 
-function readBody(req) {
+function readBody(req, limit) {
   return new Promise((resolve, reject) => {
     let size = 0;
     const chunks = [];
     req.on('data', (chunk) => {
       size += chunk.length;
-      if (size > MAX_BODY) {
+      if (size > (limit || MAX_BODY)) {
         reject(Object.assign(new Error('Payload too large'), { statusCode: 413 }));
         req.destroy();
         return;
@@ -295,59 +317,81 @@ async function handle(req, res) {
       : detectLanguage(message, 'en');
     const profile = body.profile;
 
-    // The rule engine always runs: it owns the conversation state, the safety
-    // escalation and the "have I got the four facts yet" logic. The model, when
-    // enabled, only rewrites the prose of a reply the engine already decided.
-    const result = generateReply({
-      message,
-      lang,
-      profile,
-      session,
-      settings
-    });
+    // The rule engine always runs FIRST. It owns the conversation state, the
+    // safety escalation and the "do I have the four facts yet" logic. The model
+    // writes the words; it cannot change what the engine decided, so a bad
+    // model reply can never advance a stage, invent a gate, or drop the
+    // "find staff" warning.
+    const result = generateReply({ message, lang, profile, session, settings });
 
-    // --- optional model pass ------------------------------------------------
-    // Behind a try/catch with a timeout inside llm.complete(). Any failure at
-    // all — no key, bad key, rate limit, timeout, offline, unsafe output —
-    // leaves the deterministic reply in place. The traveller always gets an
-    // answer, and a judge can see the app behave sensibly with no key at all.
-    let aiMeta = { used: false, reason: 'disabled' };
-    const ai = settings.ai || {};
-    if (ai.enabled && ai.apiKey) {
-      const spoke = result.messages && result.messages.length;
-      if (spoke) {
-        const out = await llm.complete({
-          apiKey: ai.apiKey,
-          provider: ai.provider,
-          model: ai.model,
-          settings,
-          ctx: {
-            message,
-            lang: result.meta.lang,
-            airport: result.session.airport,
-            stageName: result.meta.stageName || result.meta.stageKey,
-            minutes: result.session.minutes,
-            gate: result.session.gate
-          }
+    // --- who answers this turn? One log line, always. -----------------------
+    const turnNo = result.session.askedCount || 0;
+    const cfg = llm.resolveConfig(settings);
+    const stageKey = result.meta.stageKey || 'unknown';
+    let aiMeta = { used: false, mode: 'rules', reason: 'llm-off' };
+
+    if (cfg.enabled && cfg.apiKey) {
+      const ticket = ticketStore.get(sessionId) || null;
+      const status = session.status || null;
+
+      const out = await llm.reply({
+        config: cfg,
+        settings,
+        lang: result.meta.lang,
+        history: session.history || [],
+        context: {
+          airport: result.session.airport,
+          stageName: result.meta.stageName || stageKey,
+          minutes: result.session.minutes,
+          terminal: result.session.terminal,
+          gate: result.session.gate,
+          flight: result.session.flight,
+          airline: result.session.airline,
+          bags: result.session.bags
+        },
+        ticket,
+        status,
+        engine: { text: result.messages.map((m) => m.text).join('\n\n') },
+        message
+      });
+
+      if (out.ok) {
+        result.messages = [{ text: out.text }];
+        result.meta.model = out.model;
+        aiMeta = { used: true, mode: 'llm', provider: out.provider, model: out.model };
+        console.log('[llm] LLM   turn ' + turnNo + '  stage=' + stageKey +
+          '  prompt=v' + (out.prompt ? out.prompt.version : '?') +
+          '  ' + out.model + '  ' + out.ms + 'ms' +
+          (out.usage && out.usage.total_tokens ? '  ' + out.usage.total_tokens + ' tok' : ''));
+        promptLog.add({
+          sessionId, turn: turnNo, version: out.prompt.version,
+          segments: out.prompt.segments, chars: out.prompt.chars,
+          text: out.prompt.text, model: out.model, ms: out.ms
         });
-        if (out.ok) {
-          // Replace the prose, keep the engine's structure: the urgent flag,
-          // the escalation bubble and the definitional styling all still apply.
-          result.messages = [{ text: out.text }];
-          result.meta.model = out.model;
-          aiMeta = { used: true, provider: out.provider, model: out.model };
-        } else {
-          aiMeta = { used: false, reason: out.code, error: out.error };
-          console.warn(`[chat] model unavailable (${out.code}): ${out.error} — using rule engine`);
-        }
+      } else {
+        aiMeta = { used: false, mode: 'rules', reason: out.code, error: out.error };
+        console.log('[llm] RULES turn ' + turnNo + '  stage=' + stageKey +
+          '  (' + out.code + ': ' + out.error + ') — rule-engine reply kept');
       }
+    } else {
+      const why = !cfg.enabled ? 'LLM_ENABLED=0' : 'no key configured';
+      aiMeta = { used: false, mode: 'rules', reason: why };
+      console.log('[llm] RULES turn ' + turnNo + '  stage=' + stageKey + '  (' + why + ')');
     }
+
+    if (!Array.isArray(session.history)) session.history = [];
+    session.history.push({ role: 'user', content: message.slice(0, 600) });
+    session.history.push({
+      role: 'assistant',
+      content: result.messages.map((m) => m.text).join('\n\n').slice(0, 900)
+    });
+    session.history = session.history.slice(-16);
+
     result.meta.ai = aiMeta;
 
     sessions.set(sessionId, result.session);
     pruneSessions();
 
-    // Log the turn for /admin. Bounded and volume-backed.
     try {
       store.appendConversation({
         at: new Date().toISOString(),
@@ -357,11 +401,12 @@ async function handle(req, res) {
         stage: result.meta.stageKey,
         airport: result.meta.airport || null,
         escalated: !!result.meta.escalated,
+        mode: aiMeta.mode,
         user: message.slice(0, 500),
         assistant: result.messages.map((m) => m.text).join('\n\n').slice(0, 1500)
       });
     } catch (err) {
-      console.warn(`[chat] log failed: ${err.message}`);
+      console.warn('[chat] log failed: ' + err.message);
     }
 
     return sendJson(res, 200, {
@@ -376,6 +421,66 @@ async function handle(req, res) {
         bags: result.session.bags,
         gate: result.session.gate
       }
+    });
+  }
+
+  // --- API: ticket photo -> fields (vision) --------------------------------
+  // The browser sends base64. The key stays on the server: the browser never
+  // sees it and never talks to the provider directly.
+  if (p === '/api/ticket') {
+    if (method !== 'POST') return sendJson(res, 405, { error: 'method not allowed' });
+
+    const body = await readBody(req, MAX_IMAGE_BODY);
+    const cfg = llm.resolveConfig(settings);
+
+    if (!cfg.configured) {
+      console.log('[llm] TICKET skipped (' + (cfg.enabled ? 'no key configured' : 'LLM_ENABLED=0') + ')');
+      return sendJson(res, 200, {
+        ok: false, code: 'NOT_CONFIGURED',
+        message: 'Ticket reading by the model is not available. Type the details instead.'
+      });
+    }
+
+    const image = {
+      data: typeof body.image === 'string' ? body.image : '',
+      mime: typeof body.mime === 'string' ? body.mime : 'image/jpeg'
+    };
+    if (!image.data || image.data.length > 7.5 * 1024 * 1024) {
+      return sendJson(res, 400, { ok: false, code: 'NO_IMAGE', message: 'No usable image was received.' });
+    }
+
+    const out = await llm.readTicket({ config: cfg, settings, image });
+    if (!out.ok) {
+      console.log('[llm] TICKET failed (' + out.code + '): ' + out.error + '  ' + (out.ms || 0) + 'ms');
+      return sendJson(res, 200, {
+        ok: false, code: out.code,
+        message: 'I could not read the ticket photo. You can type the details instead.'
+      });
+    }
+
+    const sid = typeof body.sessionId === 'string' ? body.sessionId : null;
+    if (sid && out.fields && Object.keys(out.fields).length) {
+      ticketStore.set(sid, out.fields);
+    }
+
+    const summary = Object.keys(out.fields || {}).join(', ') || 'nothing';
+    console.log('[llm] TICKET ' + out.provider + '/' + out.model + '  ' + out.ms + 'ms  read: ' + summary);
+
+    return sendJson(res, 200, { ok: true, fields: out.fields, ms: out.ms, model: out.model });
+  }
+
+  // --- API: prompts (versions + recent assemblies) -------------------------
+  if (p === '/api/prompts') {
+    if (method !== 'GET') return sendJson(res, 405, { error: 'method not allowed' });
+    const url2 = new URL(req.url, 'http://localhost');
+    const n = Number(url2.searchParams.get('recent') || 5);
+    return sendJson(res, 200, {
+      active: prompts.ACTIVE_VERSION,
+      versions: prompts.PROMPT_VERSIONS.map((v) => ({
+        version: v.version, date: v.date, note: v.note,
+        segments: Object.keys(v.segments)
+      })),
+      recent: promptLog.recent(Math.min(Math.max(n, 1), 40))
     });
   }
 
@@ -405,17 +510,46 @@ server.headersTimeout = 20000;
 server.requestTimeout = 30000;
 server.keepAliveTimeout = 5000;
 
-server.listen(PORT, HOST, () => {
-  // Plain-language banner: whoever runs this needs to know what to open.
-  console.log('');
-  console.log('  Flight Guide is running.');
-  console.log('');
-  console.log(`  Open this in your browser:   http://localhost:${PORT}`);
-  console.log('');
-  console.log('  Leave this window open. Press Ctrl+C here to stop the app.');
-  console.log('');
-  console.log(`  Settings stored in: ${store.SETTINGS_FILE}`);
-  console.log(`  Map visible: ${settings.mapVisible} | Escalate at ${settings.escalateMinutes} min`);
+/**
+ * Boot, then listen.
+ *
+ * The boot step runs before listen() on purpose: it runs the test suite,
+ * resolves the API key, and makes one live provider check when a key exists.
+ * Whoever starts the app — npm start, node src/server.js, docker run — sees at
+ * the top of the log whether tests pass and whether replies come from the model
+ * or the rules.
+ */
+async function start() {
+  if (envResult.loaded) {
+    console.log('');
+    console.log('  [env] loaded ' + require('path').basename(envResult.file) +
+      '  (' + envResult.keys.length + ' variable' + (envResult.keys.length === 1 ? '' : 's') + ' applied)');
+  }
+
+  await boot.boot(settings, {
+    skipTests: process.env.FG_SKIP_BOOT_TESTS === '1',
+    skipLiveCheck: process.env.FG_SKIP_LIVE_CHECK === '1'
+  });
+
+  server.listen(PORT, HOST, () => {
+    console.log('  Flight Guide is running.');
+    console.log('');
+    console.log('  Open this in your browser:   http://localhost:' + PORT);
+    console.log('');
+    console.log('  Leave this window open. Press Ctrl+C here to stop the app.');
+    console.log('');
+    console.log('  Settings stored in: ' + store.SETTINGS_FILE);
+    console.log('  Map visible: ' + settings.mapVisible + ' | Escalate at ' + settings.escalateMinutes + ' min');
+    console.log('');
+    console.log('  Prompt versions:  http://localhost:' + PORT + '/api/prompts');
+    console.log('  Health:           http://localhost:' + PORT + '/healthz');
+    console.log('');
+  });
+}
+
+start().catch((err) => {
+  console.error('[boot] failed:', err);
+  process.exit(1);
 });
 
 function shutdown(signal) {

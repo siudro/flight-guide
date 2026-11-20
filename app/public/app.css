@@ -314,6 +314,52 @@ html[dir="rtl"] .bubble.user { border-start-end-radius: 15px; border-start-start
 .send:hover:not(:disabled) { background: var(--accent-2); }
 .send:disabled { opacity: .45; cursor: default; }
 
+/* Ticket button: same height as Send, quiet outline so it never competes
+   with sending a message. 44px is the minimum comfortable touch target. */
+.attach {
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); color: var(--ink-dim);
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: .15s;
+}
+.attach:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.attach:disabled { opacity: .45; cursor: default; }
+
+/* A ticket photo and the fields read from it. */
+.bubble.user.photo { padding: 4px; background: var(--panel); border: 1px solid var(--line); }
+.bubble.user.photo img {
+  display: block; max-width: min(280px, 66vw); max-height: 260px;
+  width: auto; height: auto; border-radius: 10px;
+}
+.ticket-card {
+  align-self: flex-start; max-width: min(420px, 92%);
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 14px; padding: 12px 14px; font-size: 14px;
+}
+.ticket-card h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--ink-faint); font-weight: 650; }
+.ticket-card .row { display: flex; justify-content: space-between; gap: 12px;
+  padding: 4px 0; border-top: 1px solid var(--line); }
+.ticket-card .row:first-of-type { border-top: 0; }
+.ticket-card .row span { color: var(--ink-dim); }
+.ticket-card .row b { font-weight: 650; }
+.ticket-card .acts { display: flex; gap: 8px; margin-top: 10px; }
+
+/* Mobile first: the app is used one-handed, while walking. */
+@media (max-width: 640px) {
+  .layout { grid-template-columns: 1fr !important; }
+  .sidebar { display: none; }
+  .chat-panel { border-radius: 0; }
+  .composer { padding: 10px; gap: 7px; position: sticky; bottom: 0; }
+  .composer textarea { min-height: 46px; font-size: 16px; }
+  .send, .attach { width: 46px; height: 46px; }
+  .bubble { max-width: 90%; font-size: 15px; }
+  .quick { padding: 0 10px 10px; }
+}
+
 .quick {
   display: flex; gap: 7px; flex-wrap: wrap;
   padding: 0 14px 13px;
