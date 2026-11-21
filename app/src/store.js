@@ -116,7 +116,7 @@ function sanitize(overrides) {
   // The key lives in the data volume beside settings.json. It is NEVER part
   // of the object handed to the browser; publicSettings() strips it.
   const ai = o.ai && typeof o.ai === 'object' ? o.ai : {};
-  const provider = ['deepinfra', 'openai', 'groq', 'openrouter'].includes(ai.provider)
+  const provider = ['deepinfra', 'deepseek', 'openai', 'groq', 'openrouter'].includes(ai.provider)
     ? ai.provider : 'openai';
   const model = typeof ai.model === 'string' ? ai.model.trim().slice(0, 120) : '';
   const apiKey = typeof ai.apiKey === 'string' ? ai.apiKey.trim().slice(0, 400) : '';
@@ -214,7 +214,7 @@ function saveSettings(patch) {
 
   if (patch.ai && typeof patch.ai === 'object') {
     const cur = next.ai && typeof next.ai === 'object' ? Object.assign({}, next.ai) : {};
-    if (['deepinfra', 'openai', 'groq', 'openrouter'].includes(patch.ai.provider)) {
+    if (['deepinfra', 'deepseek', 'openai', 'groq', 'openrouter'].includes(patch.ai.provider)) {
       cur.provider = patch.ai.provider;
     }
     if (typeof patch.ai.model === 'string') cur.model = patch.ai.model.trim().slice(0, 120);

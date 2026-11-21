@@ -41,6 +41,13 @@ const PROVIDERS = {
     envKey: 'DEEPINFRA_API_KEY',
     supportsVision: false
   },
+  deepseek: {
+    label: 'DeepSeek',
+    url: 'https://api.deepseek.com/chat/completions',
+    defaultModel: 'deepseek-chat',
+    envKey: 'DEEPSEEK_API_KEY',
+    supportsVision: false
+  },
   groq: {
     label: 'Groq',
     url: 'https://api.groq.com/openai/v1/chat/completions',
@@ -317,9 +324,26 @@ async function readTicket(opts) {
 }
 
 async function verify(opts) {
-  const cfg = opts.config || resolveConfig(opts.settings);
+  // The panel tests a key it has not saved yet, so an explicit key/provider in
+  // opts must win over whatever is on disk.
+  let cfg;
+  if (opts.apiKey) {
+    const provider = PROVIDERS[opts.provider] ? opts.provider : 'openai';
+    const conf = PROVIDERS[provider];
+    cfg = {
+      provider, label: conf.label,
+      model: opts.model || conf.defaultModel,
+      apiKey: opts.apiKey, source: 'test', enabled: true, configured: true
+    };
+  } else {
+    cfg = opts.config || resolveConfig(opts.settings);
+  }
   if (!cfg.configured) {
-    return { ok: false, code: 'NOT_CONFIGURED', error: 'No key configured. Put OPENAI_API_KEY in .env and restart.' };
+    const conf = PROVIDERS[cfg.provider] || PROVIDERS.openai;
+    return {
+      ok: false, code: 'NOT_CONFIGURED',
+      error: `No key yet. Paste a ${conf.label} key above, or put ${conf.envKey} in .env and restart.`
+    };
   }
   const started = Date.now();
   const res = await callProvider({
@@ -329,7 +353,17 @@ async function verify(opts) {
   });
   const ms = Date.now() - started;
   if (res.ok) return { ok: true, message: 'Connected to ' + res.provider + ' (' + res.model + ').', ms };
-  return { ok: false, error: res.error, code: res.code, ms };
+
+  const friendly = {
+    BAD_KEY: 'That key was rejected. Check you copied the whole key, and that it belongs to this provider.',
+    NO_KEY: 'No API key supplied. Paste one first.',
+    RATE_LIMIT: 'This key is rate-limited. Wait a minute and try again.',
+    PROVIDER_DOWN: 'The provider is having an outage. The site still works without it.',
+    TIMEOUT: 'The provider did not answer in time. Try again.',
+    NETWORK: 'No internet connection from the server.',
+    UNSAFE_OUTPUT: 'The model returned something unusable. Try again.'
+  };
+  return { ok: false, code: res.code, error: friendly[res.code] || res.error, detail: res.error, ms };
 }
 
 module.exports = {
