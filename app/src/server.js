@@ -490,13 +490,17 @@ async function handle(req, res) {
       console.log('[llm] RULES turn ' + turnNo + '  stage=' + stageKey + '  (' + why + ')');
     }
 
-    if (!Array.isArray(session.history)) session.history = [];
-    session.history.push({ role: 'user', content: message.slice(0, 600) });
-    session.history.push({
+    // Keep the transcript on the object we persist (result.session), not the
+    // one we loaded, or a resumed conversation loses its history.
+    if (!Array.isArray(result.session.history)) {
+      result.session.history = Array.isArray(session.history) ? session.history.slice() : [];
+    }
+    result.session.history.push({ role: 'user', content: message.slice(0, 600) });
+    result.session.history.push({
       role: 'assistant',
       content: result.messages.map((m) => m.text).join('\n\n').slice(0, 900)
     });
-    session.history = session.history.slice(-16);
+    result.session.history = result.session.history.slice(-16);
 
     result.meta.ai = aiMeta;
     result.meta.live = live && live.ok ? {
