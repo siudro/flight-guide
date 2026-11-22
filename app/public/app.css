@@ -295,7 +295,7 @@ html[lang="ar"] body {
 }
 .composer textarea {
   flex: 1; resize: none; font: inherit; font-size: 16px; line-height: 1.5;
-  padding: 13px 16px; max-height: 38vh;
+  padding: 13px 16px; min-height: 50px; max-height: 38vh;
   border-radius: 14px; border: 1.5px solid var(--line);
   background: var(--surface); color: var(--ink);
   transition: border-color .15s, box-shadow .15s;

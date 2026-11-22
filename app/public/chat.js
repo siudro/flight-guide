@@ -481,7 +481,8 @@
   // ------------------------------------------------------------------ input
   function autosize() {
     inputEl.style.height = 'auto';
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 150) + 'px';
+    var cap = document.body.classList.contains('walking-mode') ? 220 : 150;
+    inputEl.style.height = Math.min(inputEl.scrollHeight, cap) + 'px';
   }
 
   inputEl.addEventListener('input', autosize);
