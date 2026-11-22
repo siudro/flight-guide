@@ -17,7 +17,7 @@ Legend: `[x]` done and verified · `[ ]` not done · `[!]` blocked or at risk
 | 2. Motivation | **Not written** | — |
 | 3. Chat History (≥10 msgs) | **Not done** | Bot link must exist first |
 | 4. Chatbot live link | **Not done** | No public deploy |
-| 5. Iterative Design Process | Ready | — |
+| 5. Iterative Design Process | **Written** (`docs/Flight-Guide-Iteration-Log.md`) | Paste into PDF |
 | 6. Limitations | **Not written** | — |
 | 7. Future Development | **Not written** | — |
 | 8. Conclusion | **Not written** | — |
@@ -77,14 +77,15 @@ Legend: `[x]` done and verified · `[ ]` not done · `[!]` blocked or at risk
 
 ## 5. Iterative AI Design Process
 
-- [x] Idea → Advisor Design → Testing → Error Analysis → Improvement documented
+- [x] **Iteration log written:** `docs/Flight-Guide-Iteration-Log.md` — Idea → Advisor Design → Testing → Error Analysis → Improvement
 - [x] Full conversation record published (`docs/Flight-Guide-Conversation-Record.md`, 127 messages)
-- [x] Test screenshots captured (`docs/testing/01`–`04`)
+- [x] Test screenshots captured (`docs/testing/01`–`04`), embedded inline in the log
 - [x] Three distinct user profiles (`design/user-profiles.md`)
-- [ ] Pull the **specific failures and fixes** into the PDF — not the whole transcript
-- [ ] Show before/after for each failure
+- [x] Before/after shown for the two verified failures
+- [ ] Paste the log into the PDF (it is written in the team's own measured voice — read it once and edit anything that does not sound like you)
+- [ ] **Open item:** the third fix (hurried traveller, max three steps) is logged as *applied, not retested*. Either retest it and update the table, or submit with the honest "unverified" wording — do not claim it.
 
-> You already have this: the Arabic greeting bug, the font collapse, the terminal-vs-map confusion. That is genuine error analysis. Quote it.
+> The log is the scored artifact. It keeps the failed replies on purpose, and it is explicit about which fixes were verified and which were not — that distinction is what the rubric's error-analysis row is looking for.
 
 ---
 
