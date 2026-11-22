@@ -354,6 +354,10 @@
     el.className = 'bubble ' + (who === 'user' ? 'user' : 'bot')
       + (opts.urgent ? ' urgent' : '')
       + (opts.definition ? ' definition' : '');
+    // dir="auto" lets each bubble follow its own script. Without it, switching
+    // the UI to Arabic re-renders English history with the punctuation on the
+    // wrong side, because every bubble inherits the page direction.
+    el.setAttribute('dir', 'auto');
     el.innerHTML = format(text);
     messagesEl.appendChild(el);
     scrollDown();
