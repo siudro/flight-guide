@@ -33,6 +33,19 @@ services:
       # Largest request body accepted, in bytes.
       FG_MAX_BODY_BYTES: "${FG_MAX_BODY_BYTES:-65536}"
 
+      # --- AI -----------------------------------------------------------------
+      # gpt-6-luna reads text AND images (ticket photos) over Chat Completions.
+      OPENAI_MODEL: "${OPENAI_MODEL:-gpt-6-luna}"
+      LLM_ENABLED: "${LLM_ENABLED:-1}"
+      # The key comes from the host environment or app/.env — never baked into
+      # the image and never visible to the browser.
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+
+      # --- live airport feed --------------------------------------------------
+      # Dammam publishes real departures; polled at most every 90 seconds.
+      FG_STATUS_TTL_MS: "${FG_STATUS_TTL_MS:-90000}"
+      FG_STATUS_TIMEOUT_MS: "${FG_STATUS_TIMEOUT_MS:-12000}"
+
     volumes:
       # Settings and the conversation log. This is the only writable path.
       - flight-guide-data:/data
