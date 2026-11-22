@@ -1,0 +1,17 @@
+# Railway / Nixpacks build for Flight Guide.
+#
+# railway.json pins the Dockerfile builder. This is the fallback: if Railway
+# ignores railway.json (older service type, or a cached builder decision),
+# Nixpacks still has to install and start a Node app instead of publishing the
+# repo as static files.
+#
+# The app lives in app/ and has zero runtime dependencies.
+
+[phases.install]
+cmds = ["cd app && npm install --omit=dev --no-audit --no-fund --ignore-scripts"]
+
+[phases.build]
+cmds = ["echo no build step required"]
+
+[start]
+cmd = "cd app && node src/server.js"
