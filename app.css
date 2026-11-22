@@ -1,0 +1,434 @@
+/* Flight Guide — shared styling for the passenger UI (dark, calm, high contrast) */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  /* ---- neutral scale (light, warm, calm) --------------------------------- */
+  --bg:        #f7f4ef;
+  --panel:     #ffffff;
+  --panel-2:   #f1ece3;
+  --line:      #d8cfbe;
+  --ink:       #1b2624;   /* 14.19:1 on --bg */
+  --ink-dim:   #4a5a55;   /*  7.28:1 on white */
+  --ink-faint: #667570;   /*  4.83:1 on white — was #7d8c87 (3.52, failed AA) */
+
+  /* ---- primary ----------------------------------------------------------- */
+  --accent:    #142f6b;   /* 12.74:1 */
+  --accent-2:  #0d214f;   /* 15.58:1 */
+  --accent-lo: #e7ecf7;
+  --navy:      #142f6b;
+  --navy-2:    #0d214f;
+  --navy-lo:   #e7ecf7;
+
+  /* ---- four distinct semantic colours -----------------------------------
+     Chosen so critical cases never rely on hue alone: each is also used with
+     an icon and a word, and every one clears WCAG AA on white. -------------- */
+  --c-info:    #0c6b7b;   /*  6.17:1  teal    — guidance, "next step"        */
+  --c-warn:    #8a5a11;   /*  5.91:1  amber   — delay, gate closed, hurry    */
+  --c-critical:#b3261e;   /*  6.54:1  red     — missed flight, escalation    */
+  --c-ok:      #1f7a4d;   /*  5.32:1  green   — done, on your way            */
+  --c-note:    #5b3a8c;   /*  8.65:1  violet  — ticket / personal detail     */
+
+  /* legacy aliases kept so existing rules keep working */
+  --warm:      var(--c-warn);
+  --danger:    var(--c-critical);
+  --ok:        var(--c-ok);
+
+  --radius:    14px;
+  --shadow:    0 1px 2px rgba(27,38,36,.06), 0 8px 28px rgba(27,38,36,.08);
+}
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: radial-gradient(1100px 560px at 15% -12%, #ffffff 0%, var(--bg) 60%) no-repeat, var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic",
+               "Noto Naskh Arabic", "Noto Kufi Arabic", "Geeza Pro", "Arabic Typesetting",
+               Tahoma, Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.62;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Arabic gets a font that actually has proper Arabic glyphs, and more leading. */
+html[lang="ar"] body {
+  font-family: "Noto Sans Arabic", "Noto Kufi Arabic", "Noto Naskh Arabic",
+               "Geeza Pro", "Arabic Typesetting", "Segoe UI", Tahoma, sans-serif;
+  line-height: 1.85;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ---------------------------------------------------------------- topbar */
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px 20px;
+  background: rgba(255, 252, 247, .88);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  position: sticky; top: 0; z-index: 30;
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+
+.mark {
+  display: grid; place-items: center;
+  width: 38px; height: 38px; border-radius: 11px;
+  background: linear-gradient(145deg, #1c418f, var(--navy-2));
+  color: #fff; font-size: 19px;
+  box-shadow: 0 3px 12px rgba(20,47,107,.30);
+  transform: none;
+  transform: rotate(-8deg);
+}
+
+
+/* inline SVG logo mark */
+.mark { padding: 0; }
+.mark svg { display: block; }
+
+.brand h1 { margin: 0; font-size: 16.5px; font-weight: 650; letter-spacing: .1px; }
+.tagline { margin: 1px 0 0; font-size: 12px; color: var(--ink-dim); }
+
+.topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.seg {
+  display: inline-flex; padding: 3px; gap: 2px;
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
+}
+.seg-btn {
+  border: 0; background: transparent; color: var(--ink-dim);
+  padding: 5px 11px; border-radius: 7px; font-size: 12.5px; font-weight: 600;
+  cursor: pointer; transition: .15s; font-family: inherit;
+  min-width: 34px; text-align: center; line-height: 1.35;
+}
+/* The Arabic button is a single letter; give it room and let the Arabic face
+   render it at a legible size instead of a clipped squiggle. */
+.seg-btn[data-lang="ar"] {
+  font-size: 17px; padding: 2px 12px 4px; min-width: 38px;
+}
+.seg-btn:hover { color: var(--ink); }
+.seg-btn.on { background: var(--accent); color: #fff; }
+
+.ghost-btn {
+  text-decoration: none; color: var(--ink-dim);
+  border: 1px solid var(--line); background: var(--panel-2);
+  padding: 6px 12px; border-radius: 10px; font-size: 12.5px; font-weight: 550;
+  transition: .15s;
+}
+.ghost-btn:hover { color: var(--ink); border-color: #d8cebd; background: var(--panel-2); }
+
+/* ---------------------------------------------------------------- layout */
+
+.layout {
+  display: grid;
+  grid-template-columns: 316px minmax(0, 1fr);
+  gap: 18px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 18px 20px 26px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; padding: 14px; }
+  .sidebar { order: 2; }
+}
+
+.sidebar { display: flex; flex-direction: column; gap: 14px; }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 15px 16px;
+  box-shadow: var(--shadow);
+}
+.card h2 { margin: 0 0 4px; font-size: 13px; font-weight: 650; letter-spacing: .2px; color: var(--ink); }
+.hint { margin: 0 0 12px; font-size: 11.5px; color: var(--ink-faint); }
+
+/* ---------------------------------------------------------------- profiles */
+
+.profile-list { display: flex; flex-direction: column; gap: 8px; }
+
+.profile {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--panel-2);
+  cursor: pointer;
+  transition: .15s;
+  text-align: start;
+  color: inherit;
+  font: inherit;
+  width: 100%;
+}
+.profile:hover { border-color: #d8cebd; background: var(--panel-2); }
+.profile.on { border-color: var(--accent); background: var(--accent-lo); box-shadow: 0 0 0 1px var(--accent) inset; }
+.profile[disabled] { opacity: .4; cursor: not-allowed; }
+
+.profile .radio {
+  flex: 0 0 auto; width: 15px; height: 15px; margin-top: 3px;
+  border-radius: 50%; border: 2px solid #d8cebd;
+  display: grid; place-items: center;
+}
+.profile.on .radio { border-color: var(--accent); }
+.profile.on .radio::after {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+}
+.profile .body { min-width: 0; }
+.profile .name { display: block; font-size: 13px; font-weight: 600; }
+.profile .tone { display: block; font-size: 11.5px; color: var(--ink-faint); margin-top: 1px; }
+
+/* ---------------------------------------------------------------- trip dl */
+
+.trip { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 12.5px; }
+.trip dt { color: var(--ink-faint); }
+.trip dd { margin: 0; color: var(--ink); font-weight: 550; overflow-wrap: anywhere; }
+
+.note p { margin: 0; font-size: 11.5px; color: var(--ink-dim); line-height: 1.6; }
+
+/* ---------------------------------------------------------------- chat */
+
+.chat-panel {
+  display: flex; flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-height: 62vh;
+}
+
+.messages {
+  flex: 1;
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  overflow-y: auto;
+  max-height: calc(100vh - 300px);
+  min-height: 320px;
+  scroll-behavior: smooth;
+}
+
+.bubble {
+  max-width: min(680px, 88%);
+  padding: 11px 15px;
+  border-radius: 15px;
+  font-size: 14.5px;
+  line-height: 1.62;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  animation: rise .18s ease-out;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+.bubble.bot {
+  align-self: flex-start;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-start-start-radius: 5px;
+}
+.bubble.user {
+  align-self: flex-end;
+  background: linear-gradient(145deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-start-end-radius: 5px;
+}
+html[dir="rtl"] .bubble.bot { border-start-start-radius: 15px; border-start-end-radius: 5px; align-self: flex-start; }
+html[dir="rtl"] .bubble.user { border-start-end-radius: 15px; border-start-start-radius: 5px; align-self: flex-end; }
+
+.bubble strong { color: var(--ink); font-weight: 680; }
+.bubble.user strong { color: #fff; }
+.bubble.bot.definition {
+  background: var(--navy-lo);
+  border-color: rgba(20,47,107,.30);
+  border-inline-start: 3px solid var(--navy);
+  color: var(--ink);
+}
+.bubble.bot.definition::before {
+  content: "?";
+  display: inline-grid; place-items: center;
+  width: 17px; height: 17px; margin-inline-end: 7px;
+  border-radius: 50%; background: var(--navy); color: #fff;
+  font-size: 11.5px; font-weight: 800; vertical-align: 1px;
+}
+
+.bubble.bot.urgent {
+  border-color: rgba(239,83,80,.55);
+  background: rgba(239,83,80,.1);
+}
+.bubble.bot.urgent::before {
+  content: "!";
+  display: inline-grid; place-items: center;
+  width: 17px; height: 17px; margin-inline-end: 7px;
+  border-radius: 50%; background: var(--danger); color: #fff;
+  font-size: 11.5px; font-weight: 800; vertical-align: 1px;
+}
+
+.typing { display: inline-flex; gap: 4px; padding: 4px 0; }
+.typing i {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--ink-faint);
+  animation: blink 1.1s infinite;
+}
+.typing i:nth-child(2) { animation-delay: .16s; }
+.typing i:nth-child(3) { animation-delay: .32s; }
+@keyframes blink { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+
+.err {
+  align-self: center; font-size: 12.5px; color: var(--danger);
+  background: rgba(239,83,80,.1); border: 1px solid rgba(239,83,80,.35);
+  padding: 7px 13px; border-radius: 9px;
+}
+
+/* ---------------------------------------------------------------- composer */
+
+.composer {
+  display: flex; align-items: flex-end; gap: 9px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  background: var(--panel-2);
+}
+
+.composer textarea {
+  flex: 1;
+  resize: none;
+  min-height: 44px; max-height: 150px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.composer textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(20,47,107,.16);
+}
+.composer textarea::placeholder { color: var(--ink-faint); }
+
+.send {
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border: 0; border-radius: 12px;
+  background: var(--accent); color: #fff;
+  font-size: 19px; font-weight: 700;
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: .15s;
+}
+.send:hover:not(:disabled) { background: var(--accent-2); }
+.send:disabled { opacity: .45; cursor: default; }
+
+/* Ticket button: same height as Send, quiet outline so it never competes
+   with sending a message. 44px is the minimum comfortable touch target. */
+.attach {
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); color: var(--ink-dim);
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: .15s;
+}
+.attach:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.attach:disabled { opacity: .45; cursor: default; }
+
+/* A ticket photo and the fields read from it. */
+.bubble.user.photo { padding: 4px; background: var(--panel); border: 1px solid var(--line); }
+.bubble.user.photo img {
+  display: block; max-width: min(280px, 66vw); max-height: 260px;
+  width: auto; height: auto; border-radius: 10px;
+}
+.ticket-card {
+  align-self: flex-start; max-width: min(420px, 92%);
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 14px; padding: 12px 14px; font-size: 14px;
+}
+.ticket-card h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--ink-faint); font-weight: 650; }
+.ticket-card .row { display: flex; justify-content: space-between; gap: 12px;
+  padding: 4px 0; border-top: 1px solid var(--line); }
+.ticket-card .row:first-of-type { border-top: 0; }
+.ticket-card .row span { color: var(--ink-dim); }
+.ticket-card .row b { font-weight: 650; }
+.ticket-card .acts { display: flex; gap: 8px; margin-top: 10px; }
+
+/* Mobile first: the app is used one-handed, while walking. */
+@media (max-width: 640px) {
+  .layout { grid-template-columns: 1fr !important; }
+  .sidebar { display: none; }
+  .chat-panel { border-radius: 0; }
+  .composer { padding: 10px; gap: 7px; position: sticky; bottom: 0; }
+  .composer textarea { min-height: 46px; font-size: 16px; }
+  .send, .attach { width: 46px; height: 46px; }
+  .bubble { max-width: 90%; font-size: 15px; }
+  .quick { padding: 0 10px 10px; }
+}
+
+.quick {
+  display: flex; gap: 7px; flex-wrap: wrap;
+  padding: 0 14px 13px;
+  background: transparent;
+}
+.quick button {
+  border: 1px solid var(--line); background: transparent; color: var(--ink-dim);
+  padding: 5px 11px; border-radius: 20px; font-size: 12px; cursor: pointer;
+  font-family: inherit; transition: .15s;
+}
+.quick button:hover { color: var(--ink); border-color: var(--line); background: var(--panel-2); }
+
+
+/* Critical-system focus: always visible, never removed. A traveller using one
+   hand in a busy hall must be able to see where they are. */
+:focus-visible {
+  outline: 3px solid var(--c-info);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Status chip colours, paired with words so colour is never the only signal. */
+.chip-info     { background: var(--accent-lo); color: var(--c-info);     border: 1px solid var(--c-info); }
+.chip-warn     { background: #fdf3e2;          color: var(--c-warn);     border: 1px solid var(--c-warn); }
+.chip-critical { background: #fbe9e7;          color: var(--c-critical); border: 1px solid var(--c-critical); }
+.chip-ok       { background: #e8f5ee;          color: var(--c-ok);       border: 1px solid var(--c-ok); }
+.chip-note     { background: #f0ebf8;          color: var(--c-note);     border: 1px solid var(--c-note); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+
+/* ---------------------------------------------------------------------------
+   Walking mode ("drive mode" for a user on foot and in a hurry)
+   The traveller may literally be walking while reading. This raises type size,
+   increases line height and spacing, and hides everything that is not the next
+   instruction. It never hides the input box or a safety warning.
+   --------------------------------------------------------------------------- */
+body.walking-mode {
+  font-size: 19px;
+}
+body.walking-mode .bubble {
+  font-size: 1.12em;
+  line-height: 1.75;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+body.walking-mode .stage-strip,
+body.walking-mode .trip-panel .meta-row:not(.keep) {
+  opacity: .75;
+}
+body.walking-mode #walkingToggle {
+  border-color: var(--c-info);
+  color: var(--c-info);
+  font-weight: 600;
+}

@@ -92,6 +92,14 @@ async function main() {
 
   await writeFile(idxPath, idx);
   await writeFile(path.join(OUT, '.nojekyll'), '');
+
+  // Pages is configured as branch=main, path=/, so what it serves is whatever
+  // sits at the repo root. Copying the build there (plus a root index.html and
+  // .nojekyll) is what replaces the rendered README with the actual app.
+  for (const f of ['app.css', 'chat.js', 'demo-static.js', 'favicon.svg', 'index.html']) {
+    await cp(path.join(OUT, f), path.join(ROOT, f));
+  }
+  await writeFile(path.join(ROOT, '.nojekyll'), '');
   console.log('built', OUT, '| flights', flights.length, '| date', builtAt);
 }
 
