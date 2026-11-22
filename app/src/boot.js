@@ -71,17 +71,22 @@ async function reportConfig(settings, opts) {
   line('  REPLY ENGINE');
   line(RULE);
 
-  if (!cfg.enabled) {
-    line('  Mode ......... RULE ENGINE ONLY  (LLM_ENABLED=0)');
+  // Two different reasons turn the model off, and conflating them is how a
+  // deployment ends up silently AI-less: reporting "LLM_ENABLED=0" when the
+  // real cause is a missing key sends the operator hunting a variable they
+  // never set.
+  if (process.env.LLM_ENABLED === '0') {
+    line('  Mode ......... RULE ENGINE ONLY  (LLM_ENABLED=0 was set)');
     line('  Every reply is written by the deterministic rule engine.');
   } else if (!cfg.apiKey) {
-    line('  Mode ......... RULE ENGINE ONLY  (no API key found)');
+    line('  Mode ......... RULE ENGINE ONLY  — NO API KEY');
     line('');
-    line('  To switch to model-written replies:');
-    line('     1. open  ' + path.join(__dirname, '..', '.env'));
-    line('     2. set   OPENAI_API_KEY=sk-...');
-    line('     3. restart the app');
-    line('  The app works fully without a key — this is not an error.');
+    line('  !! This instance has NO AI. Every reply is rule-based.');
+    line('  !! If this is a deployment, set OPENAI_API_KEY on the host');
+    line('  !! and redeploy — the variable does nothing until a restart.');
+    line('');
+    line('  Searched: the real environment, then app/.env');
+    line('  (app/.env is git-ignored and will NOT exist inside a container).');
   } else {
     line('  Mode ......... LLM WRITES REPLIES  (' + cfg.label + ')');
     line('  Model ........ ' + cfg.model);

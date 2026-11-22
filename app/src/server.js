@@ -220,10 +220,21 @@ async function handle(req, res) {
   // --- health -------------------------------------------------------------
   if (p === '/healthz') {
     if (method !== 'GET' && method !== 'HEAD') return sendJson(res, 405, { error: 'method not allowed' });
+    // `ai` is published so a deployment can be checked from outside with one
+    // curl, instead of reading logs or guessing why replies feel dumb.
+    const hcfg = llm.resolveConfig(settings);
     return sendJson(res, 200, {
       status: 'ok',
       uptimeSeconds: Math.round(process.uptime()),
-      version: process.env.FG_VERSION || 'prototype'
+      version: process.env.FG_VERSION || 'prototype',
+      ai: {
+        enabled: !!(hcfg.enabled && hcfg.apiKey),
+        model: hcfg.configured ? hcfg.model : null,
+        reason: !hcfg.enabled ? 'LLM_ENABLED=0'
+              : !hcfg.apiKey ? 'no OPENAI_API_KEY on this instance'
+              : null
+      },
+      liveFeed: { dammam: true, riyadh: false, jeddah: false }
     });
   }
 
