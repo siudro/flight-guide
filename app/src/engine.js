@@ -523,7 +523,12 @@ function generateReply(state) {
   );
 
   // --- 1. Language ---------------------------------------------------------
-  const lang = detectLanguage(message, state.lang === 'ar' ? 'ar' : 'en');
+  // `state.lang` and `state.langLocked` are decided by the caller: locked means
+  // the traveller pressed a language button, so that choice wins outright.
+  // Unlocked means auto-follow the script of the message.
+  const lang = state.langLocked === true && (state.lang === 'ar' || state.lang === 'en')
+    ? state.lang
+    : detectLanguage(message, state.lang === 'ar' ? 'ar' : 'en');
 
   // --- 2. Allowed profile (admin can switch any of the three off) ----------
   let profile = state.profile;

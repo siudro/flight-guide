@@ -47,6 +47,7 @@ function converse(turns, opts) {
     const res = generateReply({
       message: turn.message || turn,
       lang: turn.lang || (opts && opts.lang) || 'en',
+      langLocked: turn.langLocked === true || (opts && opts.langLocked) === true,
       profile: (turn.profile) || (opts && opts.profile) || 'nervous',
       session,
       settings: s
@@ -172,6 +173,25 @@ test('an Arabic message produces Arabic output', () => {
   const { transcript } = converse(['أنا في الدمام']);
   const out = text(transcript[0]);
   assert.ok(/[\u0600-\u06FF]/.test(out), 'reply should contain Arabic');
+  assert.strictEqual(transcript[0].meta.lang, 'ar');
+});
+
+test('Arabic typed into an English UI answers in English when the traveller pinned EN', () => {
+  // A traveller may read Arabic but want the app in English, or be stuck on an
+  // Arabic keyboard. Pressing EN is an explicit choice and must win over
+  // script detection -- otherwise there was no way to keep replies in English.
+  const { transcript } = converse(['مرحبا، بوابتي تغيرت، ماذا أفعل الآن؟'],
+    { lang: 'en', langLocked: true });
+  const out = text(transcript[0]);
+  assert.strictEqual(transcript[0].meta.lang, 'en', 'pinned language must win over script');
+  const arabic = (out.match(/[\u0600-\u06FF]/g) || []).length;
+  assert.strictEqual(arabic, 0, `English reply contained Arabic: ${out.slice(0, 80)}`);
+});
+
+test('Arabic typed into an unlocked English UI still answers in Arabic', () => {
+  // The safety default: an Arabic speaker must never be answered in a language
+  // they may not read just because the toggle defaulted to English.
+  const { transcript } = converse(['مرحبا، بوابتي تغيرت، ماذا أفعل الآن؟'], { lang: 'en' });
   assert.strictEqual(transcript[0].meta.lang, 'ar');
 });
 

@@ -3,10 +3,37 @@
 (function () {
   'use strict';
 
+  // Safari Private Browsing and some hardened mobile browsers THROW on any
+  // access to localStorage/sessionStorage rather than returning null. Reading
+  // them unguarded at the top of the IIFE killed the whole script before a
+  // single listener was bound: the page rendered, looked complete, and was
+  // completely dead to touch. That is unrecoverable from the user's side, so
+  // every access now goes through these safe wrappers.
+  var store = (function () {
+    function make(kind) {
+      var backing = null;
+      try { backing = window[kind]; } catch (_) { backing = null; }
+      return {
+        get: function (k) {
+          try { return backing ? backing.getItem(k) : null; } catch (_) { return null; }
+        },
+        set: function (k, v) {
+          try { if (backing) backing.setItem(k, v); } catch (_) { /* quota / private mode */ }
+        }
+      };
+    }
+    return { local: make('localStorage'), session: make('sessionStorage') };
+  })();
+  // Shared with the walking-mode IIFE below, which runs in its own scope.
+  window.FGStore = store;
+
   var state = {
-    lang: localStorage.getItem('fg.lang') || 'en',
-    profile: localStorage.getItem('fg.profile') || 'nervous',
-    sessionId: sessionStorage.getItem('fg.session') || null,
+    lang: store.local.get('fg.lang') || 'en',
+    profile: store.local.get('fg.profile') || 'nervous',
+    sessionId: store.session.get('fg.session') || null,
+    // True once the traveller presses EN/ع. From then on their choice wins
+    // over script detection, so an Arabic keyboard cannot flip the app.
+    langLocked: store.local.get('fg.langLocked') === '1',
     profilesEnabled: { nervous: true, adult: true, hurried: true },
     mapVisible: true,
     busy: false,
@@ -147,7 +174,7 @@
       if (enabled) {
         btn.addEventListener('click', function () {
           state.profile = key;
-          localStorage.setItem('fg.profile', key);
+          store.local.set('fg.profile', key);
           renderProfiles();
         });
       }
@@ -410,6 +437,7 @@
       body: JSON.stringify({
         message: message,
         lang: state.lang,
+        langLocked: state.langLocked === true,
         profile: state.profile,
         sessionId: state.sessionId
       })
@@ -423,7 +451,7 @@
       .then(function (body) {
         hideTyping();
         state.sessionId = body.sessionId;
-        sessionStorage.setItem('fg.session', body.sessionId);
+        store.session.set('fg.session', body.sessionId);
 
         // A turn that answered a "what does X mean" question is styled
         // differently so the traveller can tell an explanation apart from
@@ -438,11 +466,12 @@
           });
         });
 
-        // Auto-follow the reply language, so an Arabic answer renders RTL
-        // even if the toggle said English.
-        if (body.meta && body.meta.lang && body.meta.lang !== state.lang) {
+        // Auto-follow the reply language, so an Arabic answer renders RTL even
+        // if the toggle said English -- unless the traveller pinned a language
+        // by hand, in which case their choice must not be overridden.
+        if (!state.langLocked && body.meta && body.meta.lang && body.meta.lang !== state.lang) {
           state.lang = body.meta.lang;
-          localStorage.setItem('fg.lang', state.lang);
+          store.local.set('fg.lang', state.lang);
           applyLanguage();
         }
 
@@ -503,7 +532,9 @@
       var next = b.getAttribute('data-lang');
       if (next === state.lang) return;
       state.lang = next;
-      localStorage.setItem('fg.lang', state.lang);
+      state.langLocked = true;
+      store.local.set('fg.lang', state.lang);
+      store.local.set('fg.langLocked', '1');
       applyLanguage();
       // The greeting is written once at boot in one language. If the traveller
       // switches before saying anything, rewrite it rather than leaving the
@@ -554,12 +585,15 @@
   var btn = document.getElementById('walkingToggle');
   if (!btn) return;
 
+  // Defined in the main IIFE above; may be absent if that script body failed.
+  var store = window.FGStore || { local: { get: function () { return null; }, set: function () {} } };
+
   var wakeLock = null;
 
   function setOn(on) {
     document.body.classList.toggle('walking-mode', on);
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    try { localStorage.setItem('fg.walking', on ? '1' : '0'); } catch (_) {}
+    store.local.set('fg.walking', on ? '1' : '0');
     if (on) {
       requestWake();
       console.log('[ui] walking mode on — larger type, screen kept awake');
@@ -593,6 +627,6 @@
   });
 
   var saved = false;
-  try { saved = localStorage.getItem('fg.walking') === '1'; } catch (_) {}
+  saved = store.local.get('fg.walking') === '1';
   if (saved) setOn(true);
 })();

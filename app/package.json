@@ -11,7 +11,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "FG_DATA_DIR=./.data node src/server.js",
-    "test": "node test/run.js"
+    "test": "node test/run.js && node test/mobile-storage.js"
   },
   "dependencies": {},
   "devDependencies": {}
