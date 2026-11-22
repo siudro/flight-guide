@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flight Guide — First Gate, Alone</title>
+<meta name="description" content="Flight Guide walks a first-time international traveller through check-in, security, passport control and customs to the boarding gate.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="app.css">
+  <script src="demo-static.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark" aria-hidden="true"><svg class="mark-svg" viewBox="0 0 32 32" width="22" height="22" fill="none" aria-hidden="true"><path d="M4.5 17.4 27 7.2c.9-.4 1.7.5 1.2 1.3l-7.1 12.2a1.5 1.5 0 0 1-1.6.7l-4.9-1.3-3.1 3.9c-.5.6-1.5.3-1.6-.5l-.6-4.4-4.6-1.4c-.7-.2-.8-1.1-.2-1.4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M13 19.9 24 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+    <div>
+      <h1>Flight Guide</h1>
+      <p class="tagline" data-i18n="tagline">First international flight? Walk with me.</p>
+    </div>
+  </div>
+
+  <nav class="topbar-actions">
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="seg-btn on">EN</button>
+      <button type="button" data-lang="ar" class="seg-btn">ع</button>
+    </div>
+    </nav>
+      <button type="button" id="walkingToggle" class="btn ghost" aria-pressed="false"
+              data-i18n="driveMode" data-i18n-aria="driveMode" title="Bigger text, one step at a time, screen kept awake">Walking mode</button>
+      
+    </header>
+
+<main class="layout">
+
+  <!-- ---------------------------------------------------------------- -->
+  <aside class="sidebar">
+    <section class="card">
+      <h2 data-i18n="profileHeading">How should I talk to you?</h2>
+      <p class="hint" data-i18n="profileHint">You can change this at any time.</p>
+      <div id="profiles" class="profile-list" role="radiogroup" aria-label="Communication profile"></div>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="tripHeading">Your trip so far</h2>
+      <dl id="trip" class="trip"></dl>
+    </section>
+
+    <section class="card note">
+      <p>Static demo. This page shows a snapshot of the Dammam departures feed taken on 2026-11-22. The live feed and AI replies run on the server, which GitHub Pages cannot host. Always confirm the gate on the departure screen.</p>
+    </section>
+  </aside>
+
+  <!-- ---------------------------------------------------------------- -->
+  <section class="chat-panel">
+    <div id="messages" class="messages" aria-live="polite"></div>
+
+    <form id="composer" class="composer" autocomplete="off">
+      <label for="input" class="sr-only" data-i18n="inputLabel">Your message</label>
+      <!-- Ticket photo. capture="environment" opens the rear camera directly
+           on a phone; on desktop the browser falls back to a file picker.
+           The image is sent to OUR server, which holds the API key. -->
+      <input id="photo-input" class="sr-only" type="file" accept="image/*"
+             capture="environment" aria-label="Ticket photo" data-i18n-aria="photo">
+      <button type="button" id="photo-btn" class="attach" aria-label="Ticket photo"
+              data-i18n-aria="photo" data-i18n-title="photoTitle" title="Photo of your ticket">
+        <span aria-hidden="true"><svg viewBox="0 0 24 24" width="21" height="21" fill="none"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8.5h3l1.3-2h7.4l1.3 2h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1Z"/>
+          <circle cx="12" cy="13.2" r="3.4"/></svg></span>
+      </button>
+      <textarea id="input" rows="1" data-i18n-placeholder="placeholder"
+                placeholder="Type your question — for example: I have 90 minutes and one bag to check in."></textarea>
+      <button type="submit" class="send" aria-label="Send" data-i18n-aria="send">
+        <span aria-hidden="true">→</span>
+      </button>
+    </form>
+
+    <div id="quick" class="quick"></div>
+  </section>
+
+</main>
+
+<script src="chat.js"></script>
+</body>
+</html>
