@@ -493,6 +493,29 @@ test('nonsense does not claim a flight number', () => {
   assert.strictEqual(digits('').number, null);
 });
 
+console.log('\ndefault airport');
+
+// Dammam is the only airport with a live feed. A traveller who states a flight
+// number but not an airport must still get live data — requiring "I am at
+// Dammam" first was the most common complaint on the live site.
+test('DMM is the default airport when nothing is stated', () => {
+  const status = require('../src/status');
+  assert.strictEqual(status.normalizeAirport('dmm'), 'dmm');
+  // And the server must resolve an empty airport to dmm, not to null.
+  const src = require('fs').readFileSync(__dirname + '/../src/server.js', 'utf8');
+  assert.ok(
+    /\|\|\s*'dmm';/.test(src),
+    'server must fall back to dmm when no airport is known'
+  );
+});
+
+test('only Dammam has a live feed', () => {
+  const status = require('../src/status');
+  assert.strictEqual(status.FEEDS.dmm.supported, true);
+  assert.strictEqual(status.FEEDS.ruh.supported, false);
+  assert.strictEqual(status.FEEDS.jed.supported, false);
+});
+
 console.log(`\n${passed} passed, ${failed} failed\n`);
 if (failed) {
   for (const f of failures) console.error(`\n${f.name}\n${f.err.stack}`);
