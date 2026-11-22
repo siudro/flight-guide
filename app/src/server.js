@@ -424,8 +424,16 @@ async function handle(req, res) {
       const sessionStatus = session.status || null;
 
       // --- ground the reply in the airport's own live feed ---------------
-      const flightNo = result.session.flight;
-      const airportCode = result.session.airport;
+      // The session is the source of truth, but a session created before a
+      // ticket was scanned (or restored from disk) may not carry the flight
+      // yet. The ticket store is the backstop, so a scanned ticket always
+      // enables the live lookup.
+      const flightNo = result.session.flight || (ticket && ticket.flight) || null;
+      const airportCode = result.session.airport
+        || (ticket && String(ticket.airport || '').toLowerCase())
+        || null;
+      if (!result.session.flight && flightNo) result.session.flight = flightNo;
+      if (!result.session.airport && airportCode) result.session.airport = airportCode;
       if (flightNo && airportCode) {
         try {
           live = await status.findFlight(airportCode, flightNo);
@@ -559,7 +567,8 @@ async function handle(req, res) {
         terminal: result.session.terminal,
         minutes: result.session.minutes,
         bags: result.session.bags,
-        gate: result.session.gate
+        gate: result.session.gate,
+        flight: result.session.flight || null
       }
     });
   }
@@ -601,6 +610,23 @@ async function handle(req, res) {
     const sid = typeof body.sessionId === 'string' ? body.sessionId : null;
     if (sid && out.fields && Object.keys(out.fields).length) {
       ticketStore.set(sid, out.fields);
+
+      // Also write the usable facts onto the session. Without this the ticket
+      // only reached the prompt: every later turn looked for
+      // session.flight, found nothing, and skipped the live airport lookup
+      // entirely — so the agent told a traveller "I can't see live flight
+      // information" while holding their flight number.
+      const sess = sessions.get(sid) || store.loadSession(sid) || {};
+      if (out.fields.flight) sess.flight = out.fields.flight;
+      if (out.fields.airline) sess.airline = out.fields.airline;
+      if (out.fields.terminal) sess.terminal = out.fields.terminal;
+      if (out.fields.gate) sess.gate = out.fields.gate;
+      const dep = String(out.fields.airport || '').toUpperCase();
+      if (dep === 'DMM' || dep === 'RUH' || dep === 'JED') sess.airport = dep.toLowerCase();
+      sessions.set(sid, sess);
+      try { store.saveSession(sid, sess); } catch (_) {}
+      console.log('[ticket] wrote to session ' + sid.slice(0, 8) +
+        ' flight=' + (sess.flight || 'none') + ' airport=' + (sess.airport || 'none'));
     }
 
     const summary = Object.keys(out.fields || {}).join(', ') || 'nothing';

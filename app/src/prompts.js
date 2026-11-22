@@ -142,7 +142,11 @@ function build(opts) {
     }
     if (t.length) {
       push('READ FROM THEIR TICKET PHOTO', t.concat([
-        'These values were read from a photo of their own ticket. You may repeat them. Do not add any value that is not listed here.'
+        'These values were read from a photo of their own ticket. You may repeat them.',
+        'Do not add any value that is not listed here.',
+        'This person may be flying for the first time and may not know what any of it means. Never answer with bare codes or jargon.',
+        'Always translate: say "Dammam" not only "DMM", "Abha" not only "AHB", and explain gate and boarding in plain words the first time you use them.',
+        'If they say they do not understand, apologise once, then say the same thing again in simpler words with no codes at all.'
       ]));
     }
   }
