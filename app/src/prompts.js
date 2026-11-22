@@ -147,6 +147,33 @@ function build(opts) {
     }
   }
 
+  // --- LIVE AIRPORT FEED -------------------------------------------------
+  // Read from the airport's own departures endpoint moments ago. This is the
+  // only place the model may take a gate number from.
+  if (ctx.live && Object.keys(ctx.live).length) {
+    const L = ctx.live;
+    const lines = [];
+    if (L.flight) lines.push('Flight: ' + L.flight);
+    if (L.destination) lines.push('Destination: ' + L.destination);
+    if (L.gate) lines.push('Gate (live): ' + L.gate);
+    if (L.terminal) lines.push('Terminal (live): ' + L.terminal);
+    if (L.status) lines.push('Status (live): ' + L.status);
+    if (L.delayMinutes) lines.push('Delayed by: ' + L.delayMinutes + ' minutes');
+    if (L.remark) lines.push('Airport remark: ' + L.remark);
+    if (L.checkinCounters) lines.push('Check-in counters: ' + L.checkinCounters);
+    if (L.scheduled) lines.push('Scheduled: ' + L.scheduled);
+    if (L.estimated) lines.push('Now expected: ' + L.estimated);
+    if (L.stale) lines.push('NOTE: this feed data is a few minutes old.');
+    lines.push('Source: ' + (L.source || 'the airport departures feed') + ', checked just now.');
+    lines.push('State these as current fact. If a value is missing above, you do NOT have it.');
+    push('LIVE FROM THE AIRPORT (checked a moment ago)', lines);
+  } else if (ctx.flight) {
+    push('LIVE STATUS', [
+      'No live status was retrieved for this flight. Do not state a gate, delay or terminal.',
+      'Tell them plainly you cannot see the live screen, and send them to the nearest departure board or a member of staff.'
+    ]);
+  }
+
   if (opts.status && Object.keys(opts.status).length) {
     const st = opts.status;
     const lines = [];

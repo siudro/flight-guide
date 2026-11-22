@@ -42,6 +42,7 @@ const envResult = env.load([
 const store = require('./store');
 const { generateReply, detectLanguage } = require('./engine');
 const llm = require('./llm');
+const status = require('./status');
 const prompts = require('./prompts');
 const boot = require('./boot');
 const DEFAULTS = require('../config/defaults');
@@ -193,6 +194,20 @@ function pruneSessions() {
   for (const k of keys) sessions.delete(k);
 }
 
+// One line per status lookup so an operator can see the live feed working.
+function logStatusLookup(airport, flightNo, result) {
+  const id = String(flightNo || '').toUpperCase();
+  if (result && result.ok && result.flight) {
+    console.log('[status] lookup ' + airport + ' ' + id +
+      ' -> gate=' + (result.flight.gate || 'none') +
+      ' status=' + (result.flight.status || 'unknown') +
+      ' delay=' + (result.flight.delayMinutes || 0) + 'm');
+  } else {
+    console.log('[status] lookup ' + airport + ' ' + id +
+      ' -> ' + (result && result.code ? result.code : 'failed'));
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Request handler
 // ---------------------------------------------------------------------------
@@ -248,6 +263,52 @@ async function handle(req, res) {
   }
 
   // --- API: settings ------------------------------------------------------
+  // --- live airport status -------------------------------------------------
+  // GET /api/flights/:airport           -> shaped departures from the airport
+  // GET /api/flights/:airport/:flight   -> one flight: gate, status, delay
+  if (p.indexOf('/api/flights/') === 0 && method === 'GET') {
+    const parts = p.split('/').filter(Boolean);
+    const airportCode = parts[2] || '';
+    const flightNo = parts[3] ? decodeURIComponent(parts[3]) : '';
+    const force = url.searchParams.get('refresh') === '1';
+    try {
+      if (flightNo) {
+        const found = await status.findFlight(airportCode, flightNo, { force });
+        logStatusLookup(airportCode, flightNo, found);
+        return sendJson(res, found.ok ? 200 : (found.code === 'NOT_FOUND' ? 404 : 200), found);
+      }
+      const deps = await status.departures(airportCode, { force });
+      if (!deps.ok) {
+        console.log('[status] departures failed airport=' + airportCode + ' code=' + deps.code);
+        return sendJson(res, 200, { ok: false, code: deps.code, error: deps.error });
+      }
+      const flights = (deps.flights || []).slice(0, 60).map(status._internal.shapeFlight);
+      return sendJson(res, 200, {
+        ok: true, airport: deps.airport, airportName: deps.airportName,
+        currentTime: deps.currentTime, count: deps.count,
+        cached: !!deps.cached, flights
+      });
+    } catch (err) {
+      console.log('[status] route error ' + (err && err.message));
+      return sendJson(res, 500, { ok: false, code: 'ROUTE_ERROR', error: String((err && err.message) || err) });
+    }
+  }
+
+  // --- durable chat history -----------------------------------------------
+  if (p.indexOf('/api/history/') === 0 && method === 'GET') {
+    const hid = decodeURIComponent(p.split('/')[3] || '');
+    if (!hid) return sendJson(res, 400, { error: 'session id required' });
+    const stored = store.loadSession(hid);
+    if (!stored) return sendJson(res, 404, { ok: false, error: 'no such session' });
+    return sendJson(res, 200, {
+      ok: true, sessionId: hid,
+      history: Array.isArray(stored.history) ? stored.history : [],
+      stage: stored.stage != null ? stored.stage : null,
+      flight: stored.flight || null, gate: stored.gate || null,
+      airport: stored.airport || null
+    });
+  }
+
   if (p === '/api/settings') {
     if (method === 'GET') return sendJson(res, 200, publicSettings());
     if (method === 'PUT') {
@@ -311,7 +372,19 @@ async function handle(req, res) {
       ? body.sessionId
       : crypto.randomUUID();
 
-    const session = sessions.get(sessionId) || {};
+    // Memory first, then disk: a traveller who closed the tab keeps their
+    // conversation instead of starting over.
+    let session = sessions.get(sessionId);
+    if (!session) {
+      const stored = store.loadSession(sessionId);
+      if (stored && typeof stored === 'object') {
+        session = stored;
+        console.log('[chat] resumed session ' + sessionId.slice(0, 8) + ' from disk (' +
+          (Array.isArray(stored.history) ? stored.history.length : 0) + ' msgs)');
+      } else {
+        session = {};
+      }
+    }
     const lang = body.lang === 'ar' || body.lang === 'en'
       ? body.lang
       : detectLanguage(message, 'en');
@@ -330,9 +403,34 @@ async function handle(req, res) {
     const stageKey = result.meta.stageKey || 'unknown';
     let aiMeta = { used: false, mode: 'rules', reason: 'llm-off' };
 
+    // Declared outside the block: the response meta reports it afterwards.
+    let live = null;
+
     if (cfg.enabled && cfg.apiKey) {
       const ticket = ticketStore.get(sessionId) || null;
-      const status = session.status || null;
+      const sessionStatus = session.status || null;
+
+      // --- ground the reply in the airport's own live feed ---------------
+      const flightNo = result.session.flight;
+      const airportCode = result.session.airport;
+      if (flightNo && airportCode) {
+        try {
+          live = await status.findFlight(airportCode, flightNo);
+          if (live && live.ok) {
+            console.log('[status] grounded turn ' + turnNo + ' flight=' + flightNo +
+              ' gate=' + (live.flight.gate || 'none') +
+              ' delay=' + (live.flight.delayMinutes || 0) + 'm');
+            if (live.flight.gate) result.session.gate = live.flight.gate;
+            if (live.flight.terminal) result.session.terminal = live.flight.terminal;
+          } else {
+            console.log('[status] no live data turn ' + turnNo + ' flight=' + flightNo +
+              ' code=' + (live && live.code));
+          }
+        } catch (err) {
+          console.log('[status] grounding failed turn ' + turnNo + ': ' + (err && err.message));
+          live = null;
+        }
+      }
 
       const out = await llm.reply({
         config: cfg,
@@ -347,10 +445,23 @@ async function handle(req, res) {
           gate: result.session.gate,
           flight: result.session.flight,
           airline: result.session.airline,
-          bags: result.session.bags
+          bags: result.session.bags,
+          live: live && live.ok ? {
+            gate: live.flight.gate || null,
+            terminal: live.flight.terminal || null,
+            status: live.flight.status || null,
+            delayMinutes: live.flight.delayMinutes || 0,
+            remark: live.flight.remark || null,
+            checkinCounters: live.flight.checkinCounters || null,
+            destination: live.flight.destination || null,
+            scheduled: live.flight.scheduled || null,
+            estimated: live.flight.estimated || null,
+            stale: !!live.stale,
+            source: 'kfia.sa live departures'
+          } : null
         },
         ticket,
-        status,
+        status: sessionStatus,
         engine: { text: result.messages.map((m) => m.text).join('\n\n') },
         message
       });
@@ -388,8 +499,20 @@ async function handle(req, res) {
     session.history = session.history.slice(-16);
 
     result.meta.ai = aiMeta;
+    result.meta.live = live && live.ok ? {
+      gate: live.flight.gate || null,
+      status: live.flight.status || null,
+      delayMinutes: live.flight.delayMinutes || 0,
+      remark: live.flight.remark || null,
+      stale: !!live.stale
+    } : null;
 
     sessions.set(sessionId, result.session);
+    try {
+      store.saveSession(sessionId, result.session);
+    } catch (err) {
+      console.warn('[chat] session persist failed: ' + err.message);
+    }
     pruneSessions();
 
     try {

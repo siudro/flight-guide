@@ -141,25 +141,41 @@ function looksUnsafe(reply, ctx) {
   return null;
 }
 
+/**
+ * GPT-6 / GPT-5 / o-series reject `max_tokens` and expect
+ * `max_completion_tokens`; GPT-6 Luna also rejects any temperature but 1.
+ * Either would be a hard 400 on every call, so both are decided from the
+ * model name instead of being sent blindly.
+ */
+function usesCompletionTokens(model) {
+  return /^(gpt-6|gpt-5|o1|o3|o4)/.test(String(model || '').toLowerCase());
+}
+
 async function callProvider(opts) {
   const { apiKey, provider, model, messages, timeoutMs, temperature, maxTokens } = opts;
   const conf = PROVIDERS[provider] || PROVIDERS.openai;
   if (!apiKey) return { ok: false, error: 'no API key configured', code: 'NO_KEY' };
 
+  const effectiveModel = model || conf.defaultModel;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs || DEFAULT_TIMEOUT_MS);
+
+  const body = { model: effectiveModel, messages };
+  if (usesCompletionTokens(effectiveModel)) {
+    body.max_completion_tokens = Math.max(maxTokens || 400, 1500);
+    body.reasoning_effort = opts.reasoningEffort || 'low';
+    if (temperature === 1) body.temperature = 1;
+  } else {
+    body.temperature = temperature == null ? 0.4 : temperature;
+    body.max_tokens = maxTokens || 400;
+  }
 
   try {
     const res = await fetch(conf.url, {
       method: 'POST',
       signal: controller.signal,
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + apiKey },
-      body: JSON.stringify({
-        model: model || conf.defaultModel,
-        messages,
-        temperature: temperature == null ? 0.4 : temperature,
-        max_tokens: maxTokens || 400
-      })
+      body: JSON.stringify(body)
     });
 
     if (!res.ok) {
@@ -181,7 +197,7 @@ async function callProvider(opts) {
       : (json && json.output_text) || '';
 
     return {
-      ok: true, text: text || '', model: model || conf.defaultModel,
+      ok: true, text: text || '', model: effectiveModel,
       provider, usage: (json && json.usage) || null
     };
   } catch (err) {
@@ -309,7 +325,7 @@ async function readTicket(opts) {
   const started = Date.now();
   const res = await callProvider({
     apiKey: cfg.apiKey, provider: cfg.provider, model: cfg.model, messages,
-    timeoutMs: opts.timeoutMs || DEFAULT_VISION_TIMEOUT_MS, temperature: 0, maxTokens: 300
+    timeoutMs: opts.timeoutMs || DEFAULT_VISION_TIMEOUT_MS, maxTokens: 300
   });
   const ms = Date.now() - started;
 
@@ -349,7 +365,7 @@ async function verify(opts) {
   const res = await callProvider({
     apiKey: cfg.apiKey, provider: cfg.provider, model: cfg.model,
     messages: [{ role: 'user', content: 'Reply with exactly: OK' }],
-    timeoutMs: 20000, temperature: 0, maxTokens: 10
+    timeoutMs: 20000, maxTokens: 10
   });
   const ms = Date.now() - started;
   if (res.ok) return { ok: true, message: 'Connected to ' + res.provider + ' (' + res.model + ').', ms };
@@ -369,5 +385,5 @@ async function verify(opts) {
 module.exports = {
   PROVIDERS, DEFAULT_TIMEOUT_MS, resolveConfig, buildSystemPrompt,
   reply, readTicket, verify, mask,
-  _internal: { looksUnsafe, trim, parseTicketJson, callProvider }
+  _internal: { looksUnsafe, trim, parseTicketJson, callProvider, usesCompletionTokens }
 };

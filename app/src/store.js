@@ -25,6 +25,8 @@ const DEFAULTS = require('../config/defaults');
 const DATA_DIR = process.env.FG_DATA_DIR || path.join(__dirname, '..', '.data');
 const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
 const CONVERSATIONS_FILE = path.join(DATA_DIR, 'conversations.json');
+// Durable chat history: one JSON file per session.
+const SESSIONS_DIR = path.join(DATA_DIR, 'sessions');
 const MAX_CONVERSATIONS = Number(process.env.FG_MAX_CONVERSATIONS || 200);
 
 function ensureDir() {
@@ -264,6 +266,60 @@ function clearConversations() {
   try { writeJsonAtomic(CONVERSATIONS_FILE, []); } catch (_) { /* best effort */ }
 }
 
+// ---------------------------------------------------------------------------
+// Durable chat sessions
+//
+// In-memory sessions vanish on restart, and a traveller who closes the tab
+// mid-procedure should not start over. One small JSON file per session.
+//
+// PRIVACY: ticket photos are never written here, only the fields extracted
+// from them, which the traveller already sees on screen.
+// ---------------------------------------------------------------------------
+
+function sessionFile(id) {
+  const safe = String(id || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 80);
+  if (!safe) return null;
+  return path.join(SESSIONS_DIR, safe + '.json');
+}
+
+function ensureSessionsDir() {
+  try { fs.mkdirSync(SESSIONS_DIR, { recursive: true }); }
+  catch (err) { if (err.code !== 'EEXIST') throw err; }
+}
+
+function loadSession(id) {
+  const f = sessionFile(id);
+  if (!f) return null;
+  const data = readJson(f, null);
+  return data && typeof data === 'object' ? data : null;
+}
+
+function saveSession(id, session) {
+  const f = sessionFile(id);
+  if (!f) return false;
+  try {
+    ensureSessionsDir();
+    writeJsonAtomic(f, session);
+    return true;
+  } catch (err) {
+    console.warn('[store] could not persist session ' + id + ': ' + err.message);
+    return false;
+  }
+}
+
+function deleteSession(id) {
+  const f = sessionFile(id);
+  if (!f) return false;
+  try { fs.unlinkSync(f); return true; } catch (_) { return false; }
+}
+
+function countSessions() {
+  try {
+    ensureSessionsDir();
+    return fs.readdirSync(SESSIONS_DIR).filter(function (n) { return n.endsWith('.json'); }).length;
+  } catch (_) { return 0; }
+}
+
 module.exports = {
   publicSettings,
   DATA_DIR,
@@ -275,5 +331,10 @@ module.exports = {
   sanitize,
   loadConversations,
   appendConversation,
-  clearConversations
+  clearConversations,
+  SESSIONS_DIR,
+  loadSession,
+  saveSession,
+  deleteSession,
+  countSessions
 };
