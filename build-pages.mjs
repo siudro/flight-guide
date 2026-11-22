@@ -84,6 +84,12 @@ async function main() {
   if (!idx.includes('demo-static.js')) {
     idx = idx.replace('</head>', '  <script src="demo-static.js"></script>\n</head>');
   }
+
+  // A GitHub Pages project site is served from /<repo>/, not the domain root.
+  // The app uses root-absolute paths (/app.css, /chat.js), which would 404
+  // there, so every local asset reference is rewritten to a relative one.
+  idx = idx.replace(/(src|href)="\/(?!\/)/g, '$1="');
+
   await writeFile(idxPath, idx);
   await writeFile(path.join(OUT, '.nojekyll'), '');
   console.log('built', OUT, '| flights', flights.length, '| date', builtAt);
