@@ -228,10 +228,12 @@ async function handle(req, res) {
       uptimeSeconds: Math.round(process.uptime()),
       version: process.env.FG_VERSION || 'prototype',
       ai: {
-        enabled: !!(hcfg.enabled && hcfg.apiKey),
+        enabled: !!(hcfg.apiKey && process.env.LLM_ENABLED !== '0'),
         model: hcfg.configured ? hcfg.model : null,
-        reason: !hcfg.enabled ? 'LLM_ENABLED=0'
+        // Mirror the boot logic: name the actual cause, not a derived flag.
+        reason: process.env.LLM_ENABLED === '0' ? 'LLM_ENABLED=0'
               : !hcfg.apiKey ? 'no OPENAI_API_KEY on this instance'
+              : !hcfg.enabled ? 'LLM disabled for this provider'
               : null
       },
       liveFeed: { dammam: true, riyadh: false, jeddah: false }
