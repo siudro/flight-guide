@@ -409,9 +409,21 @@ body.walking-mode .skip { display: none; }
 
 /* ------------------------------------------------------------ responsive -- */
 @media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
+  .layout {
+    grid-template-columns: 1fr;
+    /* Mobile had no scroll affordance: the chat panel was sized to almost the
+       full viewport and the sidebar stacked *below* it, so the composer and
+       every control under it sat off-screen with nothing hinting they existed. */
+    padding-top: 10px;
+  }
   .sidebar { position: static; order: 2; }
-  .chat-panel { min-height: calc(100dvh - 210px); order: 1; }
+  .chat-panel {
+    order: 1;
+    /* Reserve room for the sticky header and the on-screen keyboard instead of
+       subtracting one hand-tuned number that differs on every device. */
+    min-height: min(72dvh, calc(100dvh - 240px));
+    max-height: none;
+  }
 }
 
 @media (max-width: 560px) {
@@ -421,6 +433,12 @@ body.walking-mode .skip { display: none; }
   .bubble { max-width: 88%; }
   .quick { padding-inline: 14px; }
   .composer { padding: 10px 14px 14px; }
+  /* Touch targets: 44px is the minimum reliable tap area. The attach and send
+     buttons were smaller than that, so taps on a phone missed them. */
+  .composer .send { width: 46px; height: 46px; flex-basis: 46px; }
+  .attach { min-height: 46px; }
+  .quick button { min-height: 44px; padding: 10px 16px; }
+  .seg-btn { min-height: 40px; min-width: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
