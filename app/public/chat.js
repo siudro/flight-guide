@@ -7,6 +7,9 @@
     lang: localStorage.getItem('fg.lang') || 'en',
     profile: localStorage.getItem('fg.profile') || 'nervous',
     sessionId: sessionStorage.getItem('fg.session') || null,
+    // True once the traveller presses EN/ع. From then on their choice wins
+    // over script detection, so an Arabic keyboard cannot flip the app.
+    langLocked: localStorage.getItem('fg.langLocked') === '1',
     profilesEnabled: { nervous: true, adult: true, hurried: true },
     mapVisible: true,
     busy: false,
@@ -410,6 +413,7 @@
       body: JSON.stringify({
         message: message,
         lang: state.lang,
+        langLocked: state.langLocked === true,
         profile: state.profile,
         sessionId: state.sessionId
       })
@@ -438,9 +442,10 @@
           });
         });
 
-        // Auto-follow the reply language, so an Arabic answer renders RTL
-        // even if the toggle said English.
-        if (body.meta && body.meta.lang && body.meta.lang !== state.lang) {
+        // Auto-follow the reply language, so an Arabic answer renders RTL even
+        // if the toggle said English -- unless the traveller pinned a language
+        // by hand, in which case their choice must not be overridden.
+        if (!state.langLocked && body.meta && body.meta.lang && body.meta.lang !== state.lang) {
           state.lang = body.meta.lang;
           localStorage.setItem('fg.lang', state.lang);
           applyLanguage();
@@ -503,7 +508,9 @@
       var next = b.getAttribute('data-lang');
       if (next === state.lang) return;
       state.lang = next;
+      state.langLocked = true;
       localStorage.setItem('fg.lang', state.lang);
+      localStorage.setItem('fg.langLocked', '1');
       applyLanguage();
       // The greeting is written once at boot in one language. If the traveller
       // switches before saying anything, rewrite it rather than leaving the

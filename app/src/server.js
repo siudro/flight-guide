@@ -430,7 +430,16 @@ async function handle(req, res) {
     // writes the words; it cannot change what the engine decided, so a bad
     // model reply can never advance a stage, invent a gate, or drop the
     // "find staff" warning.
-    const result = generateReply({ message, lang, profile, session, settings });
+    const result = generateReply({
+      message,
+      lang,
+      // The client sets this when the traveller picks a language by hand, so
+      // an explicit choice is never overridden by script detection.
+      langLocked: body.langLocked === true,
+      profile,
+      session,
+      settings
+    });
 
     // --- who answers this turn? One log line, always. -----------------------
     const turnNo = result.session.askedCount || 0;
