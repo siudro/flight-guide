@@ -64,8 +64,15 @@
       out.push('Are you checking a bag, or carrying on only? If you are checking one, go to bag drop first.');
       return out;
     }
-    out.push('I can walk you through ' + STAGES.join(', ') + '.');
-    out.push('Tell me your flight number, and I will show you the gate from the feed snapshot.');
+    // A first-timer opening with nerves deserves warmth, not a contents page.
+    if (/first time|first flight|alone|nervous|scared|worried|help/.test(msg)) {
+      out.push('You are in the right place, and there is nothing here you are expected to already know.');
+      out.push('Start with check-in and bag drop: find the counter for your airline, show your passport and boarding pass, then put your bag on the belt.');
+      out.push('Tell me your flight number and I will show you the gate and check-in counters from the feed snapshot.');
+      return out;
+    }
+    out.push('Tell me your flight number and I will show you the gate from the feed snapshot.');
+    out.push('Or ask about any step: ' + STAGES.join(', ') + '.');
     return out;
   }
 
