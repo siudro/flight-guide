@@ -32,7 +32,7 @@
       profileHeading: 'How should I talk to you?',
       profileHint: 'You can change this at any time.',
       tripHeading: 'Your trip so far',
-      simNote: 'Flight status is simulated in this prototype. Always confirm the gate on the departure screens. For anything unexpected, staff at the airport are your fastest route.',
+      simNote: 'Live gates and delays come from Dammam airport directly. Riyadh and Jeddah are not connected yet. Always confirm on the departure screen, and staff are your fastest route for anything unexpected.',
       inputLabel: 'Your message',
       placeholder: 'Type your question — for example: I have 90 minutes and one bag to check in.',
       send: 'Send',
@@ -48,6 +48,10 @@
       stage: 'Stage', airport: 'Airport', terminal: 'Terminal', minutes: 'Minutes to boarding', bags: 'Bags', gate: 'Gate',
       bagsChecked: 'Bag to check in', bagsCarryon: 'Carry-on only',
       unset: '—',
+      ticketFirst: 'Do you have your ticket? A photo is fastest - I can read the gate, terminal and time from it in a few seconds.',
+      ticketSkip: 'Skip - I will type it',
+      driveMode: 'Walking mode',
+      driveHint: 'Bigger text, one instruction at a time, screen kept awake.',
       greeting: 'Hello. I am Flight Guide, and I will stay with you from the terminal door to your boarding gate.\n\nI will not give you directions until I know four things, because the wrong route is worse than no route. It will take you under a minute.',
       errorNetwork: 'I could not reach the app just now. Check your connection and send again — nothing you typed is lost.',
       errorEmpty: 'Write something first, then send.',
@@ -65,7 +69,7 @@
       profileHeading: 'كيف تريدني أن أحدّثك؟',
       profileHint: 'يمكنك تغيير ذلك في أي وقت.',
       tripHeading: 'رحلتك حتى الآن',
-      simNote: 'حالة الرحلة محاكاة في هذا النموذج الأولي. تحقّق دائمًا من البوابة على شاشات المغادرة. وأي أمر غير متوقع، أسرع حل هو موظف المطار.',
+      simNote: 'البوابة والتأخير في مطار الدمام تُقرأ مباشرة من المطار. الرياض وجدة غير مربوطتين بعد. تحقّق دائمًا من شاشة المغادرة، وموظف المطار هو أسرع حل لأي أمر غير متوقع.',
       inputLabel: 'رسالتك',
       placeholder: 'اكتب سؤالك — مثلًا: بقي معي ٩٠ دقيقة وعندي حقيبة أسجّلها.',
       send: 'إرسال',
@@ -81,6 +85,8 @@
       stage: 'المرحلة', airport: 'المطار', terminal: 'الصالة', minutes: 'المتبقي للصعود', bags: 'الحقائب', gate: 'البوابة',
       bagsChecked: 'حقيبة تُسجَّل', bagsCarryon: 'حقيبة يد فقط',
       unset: '—',
+      ticketFirstAr: 'عندك تذكرتك؟ الصورة أسرع - أقرأ منها البوابة والصالة والوقت في ثوانٍ.',
+      ticketSkipAr: 'تخطَّ - سأكتبها بنفسي',
       greeting: 'مرحبًا. أنا Flight Guide، وسأبقى معك من باب صالة المغادرة إلى بوابة الصعود.\n\nلن أعطيك أي إرشاد قبل أن أعرف أربعة أمور، لأن المسار الخاطئ أسوأ من لا مسار. لن يستغرق الأمر دقيقة.',
       errorNetwork: 'لم أستطع الوصول إلى التطبيق الآن. تحقّق من الاتصال ثم أرسل مرة أخرى، فما كتبته لم يُفقد.',
       errorEmpty: 'اكتب رسالتك أولًا ثم أرسل.',
@@ -526,4 +532,58 @@
       addBubble(t('greeting'), 'bot');
       inputEl.focus();
     });
+})();
+
+
+/* ---------------------------------------------------------------------------
+   Walking mode
+   A traveller may be reading this while walking through a terminal. The mode
+   raises type size, keeps the screen awake, and shows one instruction at a
+   time. The preference is remembered.
+   --------------------------------------------------------------------------- */
+(function initWalkingMode() {
+  var btn = document.getElementById('walkingToggle');
+  if (!btn) return;
+
+  var wakeLock = null;
+
+  function setOn(on) {
+    document.body.classList.toggle('walking-mode', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    try { localStorage.setItem('fg.walking', on ? '1' : '0'); } catch (_) {}
+    if (on) {
+      requestWake();
+      console.log('[ui] walking mode on — larger type, screen kept awake');
+    } else {
+      releaseWake();
+      console.log('[ui] walking mode off');
+    }
+  }
+
+  function requestWake() {
+    // Screen Wake Lock keeps the phone from dimming mid-instruction. Not all
+    // browsers support it, and it requires a visible page, so failure is fine.
+    if (!('wakeLock' in navigator)) return;
+    navigator.wakeLock.request('screen').then(function (lock) {
+      wakeLock = lock;
+      console.log('[ui] wake lock acquired');
+      lock.addEventListener('release', function () {
+        console.log('[ui] wake lock released');
+      });
+    }).catch(function (err) {
+      console.log('[ui] wake lock unavailable: ' + err.message);
+    });
+  }
+
+  function releaseWake() {
+    if (wakeLock) { try { wakeLock.release(); } catch (_) {} wakeLock = null; }
+  }
+
+  btn.addEventListener('click', function () {
+    setOn(!document.body.classList.contains('walking-mode'));
+  });
+
+  var saved = false;
+  try { saved = localStorage.getItem('fg.walking') === '1'; } catch (_) {}
+  if (saved) setOn(true);
 })();

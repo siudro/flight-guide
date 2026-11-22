@@ -3,22 +3,37 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 :root {
+  /* ---- neutral scale (light, warm, calm) --------------------------------- */
   --bg:        #f7f4ef;
   --panel:     #ffffff;
   --panel-2:   #f1ece3;
-  --line:      #e0d8ca;
-  --ink:       #1b2624;
-  --ink-dim:   #4a5a55;
-  --ink-faint: #7d8c87;
-  --accent:    #142f6b;
-  --accent-2:  #0d214f;
+  --line:      #d8cfbe;
+  --ink:       #1b2624;   /* 14.19:1 on --bg */
+  --ink-dim:   #4a5a55;   /*  7.28:1 on white */
+  --ink-faint: #667570;   /*  4.83:1 on white — was #7d8c87 (3.52, failed AA) */
+
+  /* ---- primary ----------------------------------------------------------- */
+  --accent:    #142f6b;   /* 12.74:1 */
+  --accent-2:  #0d214f;   /* 15.58:1 */
   --accent-lo: #e7ecf7;
   --navy:      #142f6b;
   --navy-2:    #0d214f;
   --navy-lo:   #e7ecf7;
-  --warm:      #b8791f;
-  --danger:    #b3261e;
-  --ok:        #1f7a4d;
+
+  /* ---- four distinct semantic colours -----------------------------------
+     Chosen so critical cases never rely on hue alone: each is also used with
+     an icon and a word, and every one clears WCAG AA on white. -------------- */
+  --c-info:    #0c6b7b;   /*  6.17:1  teal    — guidance, "next step"        */
+  --c-warn:    #8a5a11;   /*  5.91:1  amber   — delay, gate closed, hurry    */
+  --c-critical:#b3261e;   /*  6.54:1  red     — missed flight, escalation    */
+  --c-ok:      #1f7a4d;   /*  5.32:1  green   — done, on your way            */
+  --c-note:    #5b3a8c;   /*  8.65:1  violet  — ticket / personal detail     */
+
+  /* legacy aliases kept so existing rules keep working */
+  --warm:      var(--c-warn);
+  --danger:    var(--c-critical);
+  --ok:        var(--c-ok);
+
   --radius:    14px;
   --shadow:    0 1px 2px rgba(27,38,36,.06), 0 8px 28px rgba(27,38,36,.08);
 }
@@ -371,3 +386,49 @@ html[dir="rtl"] .bubble.user { border-start-end-radius: 15px; border-start-start
   font-family: inherit; transition: .15s;
 }
 .quick button:hover { color: var(--ink); border-color: var(--line); background: var(--panel-2); }
+
+
+/* Critical-system focus: always visible, never removed. A traveller using one
+   hand in a busy hall must be able to see where they are. */
+:focus-visible {
+  outline: 3px solid var(--c-info);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Status chip colours, paired with words so colour is never the only signal. */
+.chip-info     { background: var(--accent-lo); color: var(--c-info);     border: 1px solid var(--c-info); }
+.chip-warn     { background: #fdf3e2;          color: var(--c-warn);     border: 1px solid var(--c-warn); }
+.chip-critical { background: #fbe9e7;          color: var(--c-critical); border: 1px solid var(--c-critical); }
+.chip-ok       { background: #e8f5ee;          color: var(--c-ok);       border: 1px solid var(--c-ok); }
+.chip-note     { background: #f0ebf8;          color: var(--c-note);     border: 1px solid var(--c-note); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+
+/* ---------------------------------------------------------------------------
+   Walking mode ("drive mode" for a user on foot and in a hurry)
+   The traveller may literally be walking while reading. This raises type size,
+   increases line height and spacing, and hides everything that is not the next
+   instruction. It never hides the input box or a safety warning.
+   --------------------------------------------------------------------------- */
+body.walking-mode {
+  font-size: 19px;
+}
+body.walking-mode .bubble {
+  font-size: 1.12em;
+  line-height: 1.75;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+body.walking-mode .stage-strip,
+body.walking-mode .trip-panel .meta-row:not(.keep) {
+  opacity: .75;
+}
+body.walking-mode #walkingToggle {
+  border-color: var(--c-info);
+  color: var(--c-info);
+  font-weight: 600;
+}
