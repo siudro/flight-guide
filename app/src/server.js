@@ -451,9 +451,13 @@ async function handle(req, res) {
       // yet. The ticket store is the backstop, so a scanned ticket always
       // enables the live lookup.
       const flightNo = result.session.flight || (ticket && ticket.flight) || null;
+      // Dammam is the only airport with a live feed, so it is the default.
+      // Requiring the traveller to type "I am at Dammam" before any live data
+      // appears was the most common complaint: they had to say it twice
+      // before the agent would look anything up.
       const airportCode = result.session.airport
         || (ticket && String(ticket.airport || '').toLowerCase())
-        || null;
+        || 'dmm';
       if (!result.session.flight && flightNo) result.session.flight = flightNo;
       if (!result.session.airport && airportCode) result.session.airport = airportCode;
       if (flightNo && airportCode) {
