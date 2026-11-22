@@ -194,6 +194,28 @@ function pruneSessions() {
   for (const k of keys) sessions.delete(k);
 }
 
+
+/**
+ * Minutes from now until a HH:MM boarding time. Returns null when the time is
+ * unparseable, or when the result is absurd (a boarding time more than 18
+ * hours away is almost certainly yesterday's or tomorrow's, so guessing would
+ * be worse than saying nothing).
+ */
+function minutesUntilBoarding(boarding, fallback) {
+  const raw = String(boarding || fallback || '').trim();
+  const m = raw.match(/^(\d{1,2})[:.](\d{2})$/);
+  if (!m) return null;
+  const h = Number(m[1]), min = Number(m[2]);
+  if (h > 23 || min > 59) return null;
+  const now = new Date();
+  const target = new Date(now);
+  target.setHours(h, min, 0, 0);
+  let diff = Math.round((target - now) / 60000);
+  if (diff < 0) diff += 24 * 60;          // boarding just after midnight
+  if (diff > 18 * 60) return null;         // too far to be today's boarding
+  return diff;
+}
+
 // One line per status lookup so an operator can see the live feed working.
 function logStatusLookup(airport, flightNo, result) {
   const id = String(flightNo || '').toUpperCase();
@@ -453,6 +475,21 @@ async function handle(req, res) {
         }
       }
 
+      // If we already know the boarding time, work out the countdown instead
+      // of asking the traveller. Telling someone "you have 25 minutes" is the
+      // product; asking them to compute it is the thing we exist to replace.
+      let minutesLeft = result.session.minutes;
+      if (minutesLeft == null) {
+        minutesLeft = minutesUntilBoarding(
+          (ticket && ticket.boarding) || null,
+          result.session.boarding || null
+        );
+        if (minutesLeft != null) {
+          result.session.minutes = minutesLeft;
+          console.log('[ticket] computed minutes-to-boarding=' + minutesLeft);
+        }
+      }
+
       const out = await llm.reply({
         config: cfg,
         settings,
@@ -461,7 +498,7 @@ async function handle(req, res) {
         context: {
           airport: result.session.airport,
           stageName: result.meta.stageName || stageKey,
-          minutes: result.session.minutes,
+          minutes: minutesLeft,
           terminal: result.session.terminal,
           gate: result.session.gate,
           flight: result.session.flight,
@@ -621,6 +658,7 @@ async function handle(req, res) {
       if (out.fields.airline) sess.airline = out.fields.airline;
       if (out.fields.terminal) sess.terminal = out.fields.terminal;
       if (out.fields.gate) sess.gate = out.fields.gate;
+      if (out.fields.boarding) sess.boarding = out.fields.boarding;
       const dep = String(out.fields.airport || '').toUpperCase();
       if (dep === 'DMM' || dep === 'RUH' || dep === 'JED') sess.airport = dep.toLowerCase();
       sessions.set(sid, sess);
