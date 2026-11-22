@@ -430,3 +430,9 @@ body.walking-mode .skip { display: none; }
     scroll-behavior: auto !important;
   }
 }
+
+/* The header is sticky; the trip strip sits directly under it in walking mode
+   and was sliding beneath it. Give the scroll container its own offset. */
+body.walking-mode .chat-panel { scroll-margin-top: 96px; }
+body.walking-mode .messages { scroll-padding-top: 8px; }
+body.walking-mode .layout { padding-top: 8px; }
