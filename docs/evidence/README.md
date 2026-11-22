@@ -22,3 +22,9 @@ differ when you look at the airport today — that is the point.
 - Nothing about Riyadh or Jeddah, which return `NOT_SUPPORTED` by design.
 - Nothing after a page reload mid-conversation (history persistence is covered
   by `GET /api/history/:sessionId`, not by a screenshot).
+
+## 05-pages-demo.png
+
+The static GitHub Pages build, served from a subpath (`/flight-guide/`) the way
+Pages serves a project site. Proves the relative-path rewrite works — before
+it, `app.css` and `chat.js` 404'd and the page rendered unstyled.
