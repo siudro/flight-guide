@@ -34,7 +34,7 @@
       tripHeading: 'Your trip so far',
       simNote: 'Live gates and delays come from Dammam airport directly. Riyadh and Jeddah are not connected yet. Always confirm on the departure screen, and staff are your fastest route for anything unexpected.',
       inputLabel: 'Your message',
-      placeholder: 'Type your question — for example: I have 90 minutes and one bag to check in.',
+      placeholder: 'Ask me anything about getting to your gate…',
       send: 'Send',
       photo: 'Photo of your ticket',
       photoTitle: 'Take a photo of your ticket and I will read it.',
@@ -71,7 +71,7 @@
       tripHeading: 'رحلتك حتى الآن',
       simNote: 'البوابة والتأخير في مطار الدمام تُقرأ مباشرة من المطار. الرياض وجدة غير مربوطتين بعد. تحقّق دائمًا من شاشة المغادرة، وموظف المطار هو أسرع حل لأي أمر غير متوقع.',
       inputLabel: 'رسالتك',
-      placeholder: 'اكتب سؤالك — مثلًا: بقي معي ٩٠ دقيقة وعندي حقيبة أسجّلها.',
+      placeholder: 'اسألني أي شيء عن الوصول إلى بوابتك…',
       send: 'إرسال',
       photo: 'صورة من تذكرتك',
       photoTitle: 'صوّر تذكرتك وسأقرأها لك.',
@@ -134,15 +134,15 @@
       var enabled = state.profilesEnabled[key] !== false;
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'profile' + (state.profile === key ? ' on' : '');
+      btn.className = 'profile';
       btn.setAttribute('role', 'radio');
       btn.setAttribute('aria-checked', String(state.profile === key));
       btn.disabled = !enabled;
       btn.innerHTML =
-        '<span class="radio"></span>' +
-        '<span class="body">' +
-          '<span class="name">' + esc(copy[key].name) + '</span>' +
-          '<span class="tone">' + esc(copy[key].tone) + '</span>' +
+        '<span class="dot" aria-hidden="true"></span>' +
+        '<span class="p-body">' +
+          '<span class="p-name">' + esc(copy[key].name) + '</span>' +
+          '<span class="p-sub">' + esc(copy[key].tone) + '</span>' +
         '</span>';
       if (enabled) {
         btn.addEventListener('click', function () {
@@ -166,7 +166,11 @@
       ['gate', state.trip.gate || t('unset')]
     ];
     tripEl.innerHTML = rows.map(function (r) {
-      return '<dt>' + esc(t(r[0])) + '</dt><dd>' + esc(String(r[1])) + '</dd>';
+      var unset = String(r[1]) === t('unset');
+      var hot = (r[0] === 'gate' && !unset);
+      return '<div class="row"><dt>' + esc(t(r[0])) + '</dt>' +
+             '<dd class="' + (unset ? 'unset' : (hot ? 'hot' : '')) + '">' +
+             esc(String(r[1])) + '</dd></div>';
     }).join('');
   }
 
@@ -477,7 +481,8 @@
   // ------------------------------------------------------------------ input
   function autosize() {
     inputEl.style.height = 'auto';
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 150) + 'px';
+    var cap = document.body.classList.contains('walking-mode') ? 220 : 150;
+    inputEl.style.height = Math.min(inputEl.scrollHeight, cap) + 'px';
   }
 
   inputEl.addEventListener('input', autosize);

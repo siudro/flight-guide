@@ -12,42 +12,48 @@
 
 <header class="topbar">
   <div class="brand">
-    <span class="mark" aria-hidden="true"><svg class="mark-svg" viewBox="0 0 32 32" width="22" height="22" fill="none" aria-hidden="true"><path d="M4.5 17.4 27 7.2c.9-.4 1.7.5 1.2 1.3l-7.1 12.2a1.5 1.5 0 0 1-1.6.7l-4.9-1.3-3.1 3.9c-.5.6-1.5.3-1.6-.5l-.6-4.4-4.6-1.4c-.7-.2-.8-1.1-.2-1.4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M13 19.9 24 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-    <div>
-      <h1>Flight Guide</h1>
-      <p class="tagline" data-i18n="tagline">First international flight? Walk with me.</p>
-    </div>
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+           stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 3 10.5 13.5M21 3l-7 18-3.5-7.5L3 10l18-7Z"/>
+      </svg>
+    </span>
+    <span class="brand-text">
+      <strong>Flight Guide</strong>
+      <span data-i18n="tagline">First international flight? Walk with me.</span>
+    </span>
   </div>
 
-  <nav class="topbar-actions">
+  <nav class="topbar-actions" aria-label="Controls">
     <div class="seg" role="group" aria-label="Language">
       <button type="button" data-lang="en" class="seg-btn on">EN</button>
       <button type="button" data-lang="ar" class="seg-btn">ع</button>
     </div>
     <a class="ghost-btn" href="/map" data-i18n="mapLink">Airport map</a>
-    <a class="ghost-btn" href="/admin" data-i18n="adminLink">Control panel</a>
+    <button type="button" id="walkingToggle" class="walk-btn" aria-pressed="false">
+      <span class="walk-dot" aria-hidden="true"></span>
+      <span data-i18n="driveMode">Walking mode</span>
+    </button>
   </nav>
-      <button type="button" id="walkingToggle" class="btn ghost" aria-pressed="false"
-              data-i18n="driveMode" data-i18n-aria="driveMode" title="Bigger text, one step at a time, screen kept awake">Walking mode</button>
-      
-    </header>
+</header>
 
 <main class="layout">
 
   <!-- ---------------------------------------------------------------- -->
-  <aside class="sidebar">
-    <section class="card">
+  <aside class="sidebar" id="sidebar">
+    <section class="card" id="tripCard">
+      <h2 data-i18n="tripHeading">Your trip so far</h2>
+      <dl id="trip" class="trip"></dl>
+    </section>
+
+    <section class="card" id="profileCard">
       <h2 data-i18n="profileHeading">How should I talk to you?</h2>
       <p class="hint" data-i18n="profileHint">You can change this at any time.</p>
       <div id="profiles" class="profile-list" role="radiogroup" aria-label="Communication profile"></div>
     </section>
 
-    <section class="card">
-      <h2 data-i18n="tripHeading">Your trip so far</h2>
-      <dl id="trip" class="trip"></dl>
-    </section>
-
-    <section class="card note">
+    
+    <section class="card note" id="noteCard">
       <p data-i18n="simNote">Live gates and delays come from Dammam airport directly. Riyadh and Jeddah are not connected yet. Always confirm on the departure screen, and staff are your fastest route for anything unexpected.</p>
     </section>
   </aside>
@@ -55,6 +61,8 @@
   <!-- ---------------------------------------------------------------- -->
   <section class="chat-panel">
     <div id="messages" class="messages" aria-live="polite"></div>
+
+    <div id="quick" class="quick"></div>
 
     <form id="composer" class="composer" autocomplete="off">
       <label for="input" class="sr-only" data-i18n="inputLabel">Your message</label>
@@ -69,15 +77,16 @@
           stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 8.5h3l1.3-2h7.4l1.3 2h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1Z"/>
           <circle cx="12" cy="13.2" r="3.4"/></svg></span>
+        <span class="attach-label" data-i18n="photo">Ticket photo</span>
       </button>
       <textarea id="input" rows="1" data-i18n-placeholder="placeholder"
-                placeholder="Type your question — for example: I have 90 minutes and one bag to check in."></textarea>
+                placeholder="Ask me anything about getting to your gate…"></textarea>
       <button type="submit" class="send" aria-label="Send" data-i18n-aria="send">
         <span aria-hidden="true">→</span>
       </button>
     </form>
 
-    <div id="quick" class="quick"></div>
+    
   </section>
 
 </main>
