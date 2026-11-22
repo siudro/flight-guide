@@ -28,3 +28,9 @@ differ when you look at the airport today — that is the point.
 The static GitHub Pages build, served from a subpath (`/flight-guide/`) the way
 Pages serves a project site. Proves the relative-path rewrite works — before
 it, `app.css` and `chat.js` 404'd and the page rendered unstyled.
+
+## 06-live-pages.png
+
+The live GitHub Pages site at https://siudro.github.io/flight-guide/ after the
+root-publish fix, with a real conversation on it. Before the fix that URL
+rendered README.md through Jekyll instead of the app.
