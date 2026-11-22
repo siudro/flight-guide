@@ -87,13 +87,13 @@ Where an airline's unaccompanied-minor service applies, Flight Guide works **alo
 
 ## Documented iteration
 
-The `design/` prompt is the result of five real tests, not a first draft. The strongest evidence is in `docs/testing/`: the same question producing a different, better answer after a specific change.
+The `design/` prompt is the result of five real tests, not a first draft. The strongest evidence is in `docs/testing/`: the same question producing a different, better answer after a specific change. The full write-up — Idea → Advisor Design → Testing → Error Analysis → Improvement, with every failure kept — is [`docs/Flight-Guide-Iteration-Log.md`](docs/Flight-Guide-Iteration-Log.md).
 
 | Failure observed | Change made | Verified |
 |---|---|---|
-| Replied in English to an Arabic message | Reply in the exact language the passenger writes | ✅ retest in Arabic |
+| Replied in English to an Arabic message | Language made a mandatory rule, not a capability | ✅ retest in Arabic |
 | Ignored a stated inability to read English | If they say they cannot read English, reply in Arabic even if they wrote in English | ✅ retest in Arabic |
-| Three steps at once to a hurried traveller | For a hurrying passenger: the next step plus the one after — never more than three | ⏳ needs retest |
+| Three steps at once to a hurried traveller | For a hurrying passenger: the next step plus the one after — never more than three | ⏳ fix applied, not yet retested |
 
 The failed replies are kept in the archive on purpose. The failure is the evidence.
 
