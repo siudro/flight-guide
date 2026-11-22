@@ -74,11 +74,31 @@ async function fetchJson(url, timeoutMs) {
   }
 }
 
+/**
+ * Split a flight number as printed on a ticket into airline + digits.
+ *
+ * Real tickets and boarding passes write these inconsistently:
+ *   XY811   XY-811   XY 811   EY-7450   F3-123   3O-123   MS 1234
+ * The feed only stores the digits, so every one of those has to resolve to
+ * the same number. Stripping only whitespace meant "XY-811" — the exact
+ * format on a scanned ticket — parsed to nothing, the live lookup never ran,
+ * and the agent told a traveller it could not see flight status.
+ */
 function flightDigits(flight) {
-  const s = String(flight || '').toUpperCase().replace(/\s+/g, '');
-  const m = s.match(/^([A-Z0-9]{2})?(\d{1,4})$/);
-  if (!m) return { airline: null, number: null };
-  return { airline: m[1] || null, number: m[2] || null };
+  const raw = String(flight || '').toUpperCase().trim();
+  // Airline designator: two letters/digits (F3, 3O) optionally separated from
+  // the number by a space or hyphen. Captured separately so "3O-123" is not
+  // misread as airline "3O" with an empty number.
+  const m = raw.match(/^([A-Z0-9]{1,2})\s*-?\s*(\d{1,4}[A-Z]?)$/);
+  if (m && /[A-Z]/.test(m[1])) {
+    return { airline: m[1], number: m[2].replace(/[A-Z]$/, '') };
+  }
+  // Bare number ("811") — no airline, still worth a lookup.
+  const bare = raw.replace(/[^0-9]/g, '');
+  if (/^\d{1,4}$/.test(bare)) {
+    return { airline: null, number: bare };
+  }
+  return { airline: null, number: null };
 }
 
 function minutesBetween(a, b) {

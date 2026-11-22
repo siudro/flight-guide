@@ -446,6 +446,53 @@ test('the same input produces the same output twice', () => {
   assert.strictEqual(a, b);
 });
 
+console.log('\nflight number parsing');
+
+// A real ticket photographed by a traveller printed "XY-811". The parser only
+// stripped whitespace, so the dash broke it, the live lookup silently skipped,
+// and the agent told the traveller it could not see flight status. These lock
+// every format a real ticket actually uses.
+const status = require('../src/status');
+const digits = status._internal.flightDigits;
+
+test('parses the dashed format printed on tickets', () => {
+  const r = digits('XY-811');
+  assert.strictEqual(r.airline, 'XY');
+  assert.strictEqual(r.number, '811');
+});
+
+test('parses letter+digit airline codes with a dash', () => {
+  const r = digits('F3-123');
+  assert.strictEqual(r.airline, 'F3');
+  assert.strictEqual(r.number, '123');
+});
+
+test('parses digit+letter airline codes with a dash', () => {
+  const r = digits('3O-123');
+  assert.strictEqual(r.airline, '3O');
+  assert.strictEqual(r.number, '123');
+});
+
+test('all common flight-number spellings agree', () => {
+  const want = { airline: 'XY', number: '811' };
+  for (const raw of ['XY811', 'XY-811', 'XY 811', 'xy811', ' xy - 811 ']) {
+    const r = digits(raw);
+    assert.strictEqual(r.airline, want.airline, 'airline for ' + raw);
+    assert.strictEqual(r.number, want.number, 'number for ' + raw);
+  }
+});
+
+test('a bare number still resolves', () => {
+  const r = digits('811');
+  assert.strictEqual(r.airline, null);
+  assert.strictEqual(r.number, '811');
+});
+
+test('nonsense does not claim a flight number', () => {
+  assert.strictEqual(digits('hello').number, null);
+  assert.strictEqual(digits('').number, null);
+});
+
 console.log(`\n${passed} passed, ${failed} failed\n`);
 if (failed) {
   for (const f of failures) console.error(`\n${f.name}\n${f.err.stack}`);
