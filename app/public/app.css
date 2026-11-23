@@ -476,3 +476,48 @@ body.walking-mode .skip { display: none; }
 body.walking-mode .chat-panel { scroll-margin-top: 96px; }
 body.walking-mode .messages { scroll-padding-top: 8px; }
 body.walking-mode .layout { padding-top: 8px; }
+
+/* --------------------------------------------------------- first screen --- */
+/* On first open, the only thing shown is the category choice. The chat is
+   hidden until one is picked, so it cannot be missed or mistaken for the
+   sidebar card that offers the same three options. */
+body.needs-profile .layout > .sidebar,
+body.needs-profile .layout > .chat-panel { display: none; }
+
+.welcome-screen { grid-column: 1 / -1; display: none; }
+body.needs-profile .welcome-screen { display: block; }
+
+.ws-inner {
+  max-width: 620px;
+  margin: clamp(24px, 6vh, 72px) auto 0;
+  padding: 0 4px;
+}
+.ws-heading {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 3.4vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+}
+.ws-lead { margin: 0 0 22px; font-size: 15.5px; line-height: 1.6; color: var(--ink-3); }
+.ws-options { display: grid; gap: 12px; }
+.ws-opt {
+  display: block; width: 100%; text-align: start; cursor: pointer;
+  padding: 16px 18px; border-radius: 14px;
+  border: 1.5px solid var(--line); background: var(--surface);
+  font: inherit; color: var(--ink);
+  transition: border-color .15s, background .15s, transform .12s;
+}
+.ws-opt:hover { border-color: var(--navy); background: var(--surface-2); }
+.ws-opt:hover .ws-go { opacity: 1; }
+.ws-opt.on { border-color: var(--navy); background: var(--navy-soft); }
+.ws-name { display: block; font-size: 17px; font-weight: 650; }
+.ws-opt .ws-sub { display: block; font-size: 13.5px; color: var(--ink-3); margin-top: 3px; }
+.ws-go { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600;
+         color: var(--navy); opacity: .55; transition: opacity .15s; }
+.ws-foot { margin: 26px 0 0; font-size: 13px; color: var(--ink-3); }
+@media (max-width: 520px) {
+  .ws-inner { margin-top: 18px; }
+  .ws-opt { min-height: 64px; padding: 15px 16px; }
+  .ws-go { opacity: .7; }
+}

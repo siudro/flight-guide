@@ -26,26 +26,22 @@ okIf((js.match(/airportMapLink:/g) || []).length === 2, 'airportMapLink exists i
 okIf(!/mapVisible\) mapLink/.test(js), 'no leftover code hides the airport link');
 
 
-// The three profiles must be offered in the conversation itself: on a phone
-// the sidebar sits below the chat, so it is not visible at load.
-okIf(/function addWelcome\(/.test(js), 'addWelcome() exists');
-okIf(/addWelcome\(\);/.test(js) && (js.match(/addWelcome\(\);/g) || []).length >= 2,
-  'opener is called at boot AND after a language switch before the first turn');
-okIf(/welcomeHeading:/.test(js) && (js.match(/welcomeHeading:/g) || []).length === 2,
-  'welcomeHeading exists in en and ar');
-okIf(/\.w-opt/.test(fs.readFileSync(path.join(__dirname, '../public/app.css'), 'utf8')),
-  'opener styles are present');
+// The category choice is a first screen, not a bubble in the transcript.
+// A picker inside the chat duplicated the sidebar card beside it, so opening
+// the link looked unchanged to the traveller.
+const html2 = fs.readFileSync(path.join(__dirname, '../public/index.html'), 'utf8');
+const css2 = fs.readFileSync(path.join(__dirname, '../public/app.css'), 'utf8');
 
-
-// Choosing a category must visibly confirm it, per category — a generic
-// "Got it" left the traveller unable to tell the tap registered.
-okIf(/welcomeDone: \{/.test(js) && (js.match(/welcomeDone: \{/g) || []).length === 2,
-  'welcomeDone is a per-category map in both languages');
-for (const k of ['nervous', 'adult', 'hurried']) {
-  const hits = (js.match(new RegExp('\\b' + k + ':\\s*\'[^\']*سأ', 'g')) || []).length;
-}
-okIf(/done\[key\]|done && done\[key\]/.test(js), 'confirmation picks the message for the chosen category');
-okIf(!/replace\('\{who\}'/.test(js), 'no string-interpolated phrasing that reads awkwardly');
+okIf(/id="welcomeScreen"/.test(html2), 'first screen exists in the HTML');
+okIf(/id="wsOptions"/.test(html2), 'first screen has an options host');
+okIf(/data-i18n="wsHeading"/.test(html2), 'the question is translatable');
+okIf(/function renderWelcomeScreen\(/.test(js), 'renderWelcomeScreen() exists');
+okIf((js.match(/renderWelcomeScreen\(\)/g) || []).length >= 2, 'rendered at boot and on language switch');
+okIf(/needs-profile/.test(js) && /needs-profile/.test(css2), 'the chat is hidden until a choice is made');
+okIf(/body\.needs-profile \.layout > \.chat-panel/.test(css2), 'chat panel hidden while choosing');
+okIf(/profileChosen/.test(js), 'the choice is remembered across visits');
+okIf(!/function addWelcome\(/.test(js), 'the duplicate in-transcript picker is gone');
+okIf(/wsHeading:/.test(js) && (js.match(/wsHeading:/g) || []).length === 2, 'wsHeading exists in en and ar');
 
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);

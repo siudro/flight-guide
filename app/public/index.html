@@ -39,7 +39,18 @@
   </nav>
 </header>
 
-<main class="layout">
+<main class="layout" id="layout">
+
+  <!-- First screen. The chat is hidden until a category is chosen, so the
+       choice cannot be missed or confused with the sidebar card. -->
+  <section class="welcome-screen" id="welcomeScreen" aria-labelledby="wsHeading">
+    <div class="ws-inner">
+      <h1 id="wsHeading" class="ws-heading" data-i18n="wsHeading">Who is travelling?</h1>
+      <p class="ws-lead" data-i18n="wsSub">I will talk to you differently depending on what you pick. You can change it later.</p>
+      <div class="ws-options" id="wsOptions" role="radiogroup" aria-labelledby="wsHeading"></div>
+      <p class="ws-foot" data-i18n="wsFoot">Flight Guide walks you from the airport door to your boarding gate.</p>
+    </div>
+  </section>
 
   <!-- ---------------------------------------------------------------- -->
   <aside class="sidebar" id="sidebar">
@@ -61,7 +72,7 @@
   </aside>
 
   <!-- ---------------------------------------------------------------- -->
-  <section class="chat-panel">
+  <section class="chat-panel" id="chatPanel">
     <div id="messages" class="messages" aria-live="polite"></div>
 
     <div id="quick" class="quick"></div>
