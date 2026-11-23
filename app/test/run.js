@@ -536,6 +536,27 @@ test('only Dammam has a live feed', () => {
   assert.strictEqual(status.FEEDS.jed.supported, false);
 });
 
+console.log('\nshareable transcript');
+
+// A WAICY submission needs a LINK a judge can open, not raw JSON. These guard
+// the route that renders the conversation as a plain HTML page.
+test('a transcript route exists and renders HTML', () => {
+  const src = require('fs').readFileSync(__dirname + '/../src/server.js', 'utf8');
+  assert.ok(src.includes("p.indexOf('/transcript/') === 0"),
+    'server must serve /transcript/:sessionId');
+  assert.ok(src.includes('function sendHtml'),
+    'server must be able to send an HTML body');
+});
+
+test('the transcript keeps enough turns to show the opening', () => {
+  const src = require('fs').readFileSync(__dirname + '/../src/server.js', 'utf8');
+  const m = src.match(/history\.slice\(-(\d+)\)/);
+  assert.ok(m, 'history retention must be explicit');
+  // The judged conversation must show its first message, so the cap has to be
+  // comfortably above the 10-message minimum.
+  assert.ok(Number(m[1]) >= 30, 'history cap too small for a judged transcript: ' + m[1]);
+});
+
 console.log(`\n${passed} passed, ${failed} failed\n`);
 if (failed) {
   for (const f of failures) console.error(`\n${f.name}\n${f.err.stack}`);
