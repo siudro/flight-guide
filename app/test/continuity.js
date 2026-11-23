@@ -185,6 +185,41 @@ test('the airport is never asked, and Dammam is assumed', () => {
   assert.strictEqual(r.session.airport, 'dmm', 'Dammam is assumed silently');
 });
 
+
+// 6 — "something happened to my flight" gets the airport's own board -------
+
+test('a suspected delay returns the departure board, not prose', () => {
+  const r = generateReply({ message: 'i think something happened to my flight', lang: 'en', profile: 'nervous', session: {}, settings: sanitize({}) });
+  const out = r.messages.map((m) => m.text).join(' ');
+  assert.strictEqual(r.meta.intent, 'flightcheck');
+  assert.ok(/kfia\.sa\/ar\/Flights/.test(out), 'the departures board link must be present');
+});
+
+test('the board branch shows the traveller their own flight number', () => {
+  const r = generateReply({ message: 'is my flight on time', lang: 'en', profile: 'nervous', session: { flight: 'XY-811' }, settings: sanitize({}) });
+  const out = r.messages.map((m) => m.text).join(' ');
+  assert.ok(/XY-811/.test(out), 'their flight number must be shown so they can find it on the board');
+});
+
+test('a cancellation still reaches the board even with a ticket', () => {
+  const r = generateReply({ message: 'my flight is cancelled', lang: 'en', profile: 'nervous', session: { flight: 'XY-811', boarding: '23:50', minutes: 200 }, settings: sanitize({}) });
+  const out = r.messages.map((m) => m.text).join(' ');
+  assert.ok(/kfia\.sa\/ar\/Flights/.test(out), 'a cancellation must send them to the board');
+});
+
+test('"am i late" with a ticket is NOT turned into a link', () => {
+  // The core product: a known boarding time is answered arithmetically.
+  const r = generateReply({ message: 'am i late', lang: 'en', profile: 'nervous', session: { flight: 'XY-811', boarding: '23:50', minutes: 42 }, settings: sanitize({}) });
+  assert.notStrictEqual(r.meta.links, true, 'must not trade a countdown for a URL');
+});
+
+test('Arabic delay questions reach the board too', () => {
+  const r = generateReply({ message: 'هل رحلتي متأخرة', lang: 'ar', profile: 'nervous', session: {}, settings: sanitize({}) });
+  const out = r.messages.map((m) => m.text).join(' ');
+  assert.strictEqual(r.meta.intent, 'flightcheck');
+  assert.ok(/kfia\.sa/.test(out), 'Arabic must get the same link');
+});
+
 console.log('');
 if (failed) {
   console.log(failed + ' failed, ' + passed + ' passed');

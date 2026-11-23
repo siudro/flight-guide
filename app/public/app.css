@@ -261,6 +261,28 @@ html[lang="ar"] body {
   border-start-end-radius: 6px;
 }
 .bubble.urgent { background: #fdecea; color: #7a1611; border-inline-start: 4px solid var(--critical); }
+
+/* The opener: three profiles offered in the conversation, before the first
+   message. On a phone the sidebar sits below the chat, so this is the only
+   place the choice is visible at load. */
+.bubble.welcome { white-space: normal; max-width: min(92%, 560px); }
+.bubble.welcome .w-head { font-weight: 700; font-size: 16.5px; margin-bottom: 4px; }
+.bubble.welcome .w-hint { font-size: 13.5px; color: var(--ink-3); line-height: 1.5; margin-bottom: 12px; }
+.w-options { display: grid; gap: 8px; }
+.w-opt {
+  display: block; width: 100%; text-align: start; cursor: pointer;
+  padding: 11px 14px; border-radius: 12px;
+  border: 1.5px solid var(--line); background: var(--surface);
+  font: inherit; color: var(--ink);
+  transition: border-color .15s, background .15s;
+}
+.w-opt:hover { border-color: #cbbfa9; }
+.w-opt.on { border-color: var(--navy); background: var(--navy-soft); }
+.w-opt .w-name { display: block; font-size: 14.5px; font-weight: 600; }
+.w-opt .w-sub { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+@media (max-width: 520px) {
+  .w-opt { min-height: 52px; }
+}
 .bubble.bot strong, .bubble.bot b { color: var(--navy); }
 .bubble a { color: var(--info); }
 .bubble.photo { padding: 7px; background: var(--navy-soft); }
