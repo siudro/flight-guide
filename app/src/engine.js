@@ -190,9 +190,28 @@ function detectConcern(message) {
   return null;
 }
 
+// The airport's own pages. Handed over verbatim when someone asks the way:
+// a link they can tap beats any description we could write.
+const DIRECTIONS_LINKS = {
+  en: {
+    intro: 'Here is the airport\'s own map, straight from King Fahd International. Open it on your phone:',
+    map: 'Map: https://kfia.sa/ar/Guide/Passenger/airport-map',
+    departures: 'Live departures (gates and delays): https://kfia.sa/ar/Flights#departures'
+  },
+  ar: {
+    intro: 'هذه خريطة المطار الرسمية مباشرة من مطار الملك فهد الدولي. افتحها على جهازك:',
+    map: 'الخريطة: https://kfia.sa/ar/Guide/Passenger/airport-map',
+    departures: 'المغادرة المباشرة (البوابات والتأخير): https://kfia.sa/ar/Flights#departures'
+  }
+};
+
 function detectIntent(message) {
   const m = normalize(message);
   if (/(gate change|changed gate|new gate|تغيرت البوابة|تغيّرت البوابة|بوابة جديدة|بوابه جديده)/.test(m)) return 'gatechange';
+  // Directions / "what does the airport look like". This must be tested before
+  // the broad question rule, or "where do I go" is swallowed by 'explain' and
+  // the traveller gets prose instead of the airport's own map link.
+  if (/(direction|directions|how do i get|how do i reach|where do i go|where is the|airport look|look like|show me the airport|map|navigate|اتجاه|اتجاهات|الطريق|وين أروح|وين اروح|أين أذهب|اين اذهب|كيف أوصل|كيف اوصل|خريطة|خريطه|شكل المطار|المطار مثل)/.test(m)) return 'directions';
   // --- progression wins over the broad question rule ----------------------
   // "What do I do now?" contains "what", so it would otherwise be classified
   // as an explanation request and the traveller would never move on.
@@ -450,7 +469,10 @@ function voice(profile, lang) {
 // ---------------------------------------------------------------------------
 
 function missingField(session) {
-  if (!session.airport) return 'airport';
+  // The airport is never asked. Every session is Dammam: it is the only
+  // airport with a live feed, and making a traveller type "I am at Dammam"
+  // before anything works was the single most-repeated complaint.
+  if (!session.airport) session.airport = 'dmm';
   if (!session.terminal) return 'terminal';
   if (session.minutes === null || session.minutes === undefined) return 'minutes';
   if (!session.bags) return 'bags';
@@ -667,6 +689,24 @@ function generateReply(state) {
     }
   }
 
+  // --- 5b. Directions: hand over the airport's own link immediately ------
+  // Before onboarding, on purpose. Someone asking "where do I go" wants a
+  // URL, not four questions first. A link is never wrong, so it needs no
+  // personalisation.
+  if (intent === 'directions') {
+    if (!session.airport) session.airport = 'dmm';
+    const L = DIRECTIONS_LINKS[lang] || DIRECTIONS_LINKS.en;
+    push(L.intro);
+    push(L.map);
+    push(L.departures);
+    return {
+      messages,
+      session,
+      meta: { stage: session.stage, stageKey: 'directions', escalated,
+              escalationAnnounced: !!announceEscalation, intent, lang, profile, links: true }
+    };
+  }
+
   // --- 6. Onboarding: ask before advising ---------------------------------
   const missing = missingField(session);
 
@@ -829,12 +869,107 @@ function generateReply(state) {
   };
 }
 
+// ---------------------------------------------------------------------------
+// TICKET -> CONVERSATION
+//
+// A scanned ticket used to reach only the prompt's ticket block. The chat
+// history — the thing the model actually replays each turn — contained no
+// trace of it. The traveller saw a tidy card on screen while the model saw a
+// conversation in which no ticket had ever been mentioned, and answered
+// "I can't see the ticket picture here" while holding their flight number.
+//
+// The scan is therefore made a real conversational event: when a ticket is
+// read it is written into the history as something the agent said, with the
+// facts spelled out. From then on the model remembers it like any other turn.
+// ---------------------------------------------------------------------------
+
+const AIRPORT_WORDS = {
+  DMM: 'Dammam (King Fahd International)',
+  RUH: 'Riyadh (King Khalid International)',
+  JED: 'Jeddah (King Abdulaziz International)',
+  DXB: 'Dubai (DXB)', AUH: 'Abu Dhabi (AUH)', DOH: 'Doha (DOH)',
+  BAH: 'Bahrain (BAH)', KWI: 'Kuwait (KWI)', CAI: 'Cairo (CAI)',
+  IST: 'Istanbul (IST)', LHR: 'London Heathrow (LHR)'
+};
+
+function airportWords(code) {
+  const c = String(code || '').trim().toUpperCase();
+  return c ? (AIRPORT_WORDS[c] || c) : '';
+}
+
+/**
+ * Make a model-read ticket safe to store, replay and show.
+ *
+ * The vision model returns literal "null"/"N/A" strings for fields it could
+ * not read, and splits flight numbers ("XY 406") which then fail the live
+ * lookup. Both are fixed here, once, so every consumer sees the same values.
+ */
+function normalizeTicketFields(fields) {
+  const out = {};
+  const BAD = /^(null|undefined|n\/?a|none|-|—|)$/i;
+  for (const [k, raw] of Object.entries(fields || {})) {
+    if (raw === null || raw === undefined) continue;
+    const v = String(raw).trim();
+    if (BAD.test(v)) continue;
+    out[k] = v;
+  }
+  if (out.flight) {
+    // "XY 406", "XY406", "XY-406" all become the printed "XY-406".
+    const f = String(out.flight).toUpperCase().replace(/\s+/g, '');
+    const m = f.match(/^([A-Z]{2}|[A-Z][0-9]|[0-9][A-Z])-?([0-9]{1,4})$/);
+    out.flight = m ? m[1] + '-' + m[2] : f;
+  }
+  if (out.airport) out.airport = String(out.airport).toUpperCase().replace(/[^A-Z]/g, '');
+  return out;
+}
+
+const TICKET_TURN = /^I have read your ticket\.|^قرأت تذكرتك\./;
+
+/**
+ * Write a ticket into the session history as an assistant turn.
+ *
+ * Idempotent: a re-scan replaces the previous ticket turn instead of adding a
+ * second one, so a traveller can photograph another boarding pass without the
+ * model replaying two contradictory cards.
+ */
+function recordTicketInHistory(session, fields, lang) {
+  if (!session) return session;
+  if (!Array.isArray(session.history)) session.history = [];
+  const t = normalizeTicketFields(fields);
+  if (!Object.keys(t).length) return session;
+
+  const ar = lang === 'ar';
+  const parts = [];
+  if (t.flight) parts.push((ar ? 'رقم الرحلة' : 'Flight') + ': ' + t.flight);
+  if (t.airline) parts.push((ar ? 'الناقل' : 'Airline') + ': ' + t.airline);
+  if (t.airport) parts.push((ar ? 'مطار المغادرة' : 'Departure airport') + ': ' + airportWords(t.airport));
+  if (t.destination) parts.push((ar ? 'الوجهة' : 'Destination') + ': ' + t.destination);
+  if (t.terminal) parts.push((ar ? 'الصالة' : 'Terminal') + ': ' + t.terminal);
+  if (t.gate) parts.push((ar ? 'البوابة' : 'Gate') + ': ' + t.gate);
+  if (t.boarding) parts.push((ar ? 'وقت الصعود' : 'Boarding time') + ': ' + t.boarding);
+  if (t.seat) parts.push((ar ? 'المقعد' : 'Seat') + ': ' + t.seat);
+  if (t.date) parts.push((ar ? 'التاريخ' : 'Date') + ': ' + t.date);
+
+  const content = (ar
+    ? 'قرأت تذكرتك. هذه التفاصيل موجودة لديّ بالفعل في هذه المحادثة، ولن أطلبها منك مرة أخرى:\n'
+    : 'I have read your ticket. These details are already in this conversation — do not ask for them again:\n'
+  ).concat(parts.join('\n')).slice(0, 900);
+
+  session.history = session.history.filter((h) => !(h && h.role === 'assistant' && TICKET_TURN.test(String(h.content))));
+  session.history.push({ role: 'assistant', content });
+  session.ticketRecorded = true;
+  return session;
+}
+
 module.exports = {
   generateReply,
   detectLanguage,
   detectAirport,
   detectMinutes,
   detectBags,
+  normalizeTicketFields,
+  recordTicketInHistory,
+  airportWords,
   FLOW_KEYS,
   // exported for tests
   _internal: { fill, detectTerminal, detectGate, detectFlight, detectConcern, stageKeyAt }
