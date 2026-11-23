@@ -82,7 +82,12 @@
       driveHint: 'Bigger text, one instruction at a time, screen kept awake.',
       welcomeHeading: 'Before we start — who is travelling?',
       welcomeHint: 'Pick the one that fits. I will talk to you differently because of it, and you can change it any time.',
-      welcomeDone: 'Got it. How can I help? Tap a ticket photo, or just tell me what is happening.',
+      welcomeDone: {
+        nervous: 'Got it — I will keep things calm and take you one step at a time. Tap a ticket photo, or just tell me what is happening.',
+        adult: 'Got it — I will give you the full detail. Tap a ticket photo, or just tell me what is happening.',
+        hurried: 'Got it — I will keep it to the next action only. Tap a ticket photo, or just tell me what is happening.'
+      },
+      welcomeDoneHint: 'You can change this any time from the panel on the side.',
       greeting: 'Hello. I am Flight Guide, and I will stay with you from the terminal door to your boarding gate.\n\nI will not give you directions until I know four things, because the wrong route is worse than no route. It will take you under a minute.',
       errorNetwork: 'I could not reach the app just now. Check your connection and send again — nothing you typed is lost.',
       errorEmpty: 'Write something first, then send.',
@@ -121,7 +126,12 @@
       ticketSkipAr: 'تخطَّ - سأكتبها بنفسي',
       welcomeHeading: 'قبل أن نبدأ — من المسافر؟',
       welcomeHint: 'اختر الأنسب لك. سأحدّثك بطريقة مختلفة بناءً عليه، ويمكنك تغييره في أي وقت.',
-      welcomeDone: 'تمام. كيف أساعدك؟ التقط صورة تذكرتك، أو قل لي ما الذي يحدث.',
+      welcomeDone: {
+        nervous: 'تمام — سأكون هادئًا وأمشي معك خطوة بخطوة. التقط صورة تذكرتك، أو قل لي ما الذي يحدث.',
+        adult: 'تمام — سأعطيك التفاصيل كاملة. التقط صورة تذكرتك، أو قل لي ما الذي يحدث.',
+        hurried: 'تمام — سأقول لك الخطوة التالية فقط. التقط صورة تذكرتك، أو قل لي ما الذي يحدث.'
+      },
+      welcomeDoneHint: 'يمكنك تغيير ذلك في أي وقت من اللوحة الجانبية.',
       greeting: 'مرحبًا. أنا Flight Guide، وسأبقى معك من باب صالة المغادرة إلى بوابة الصعود.\n\nلن أعطيك أي إرشاد قبل أن أعرف أربعة أمور، لأن المسار الخاطئ أسوأ من لا مسار. لن يستغرق الأمر دقيقة.',
       errorNetwork: 'لم أستطع الوصول إلى التطبيق الآن. تحقّق من الاتصال ثم أرسل مرة أخرى، فما كتبته لم يُفقد.',
       errorEmpty: 'اكتب رسالتك أولًا ثم أرسل.',
@@ -447,7 +457,8 @@
           c.classList.toggle('on', c === b);
           c.setAttribute('aria-pressed', String(c === b));
         });
-        addBubble(t('welcomeDone'), 'bot');
+        var done = t('welcomeDone');
+        addBubble((done && done[key]) || t('welcomeDone').nervous || '', 'bot');
       });
       wrap.appendChild(b);
     });
