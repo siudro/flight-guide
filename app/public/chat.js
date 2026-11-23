@@ -80,6 +80,9 @@
       ticketSkip: 'Skip - I will type it',
       driveMode: 'Walking mode',
       driveHint: 'Bigger text, one instruction at a time, screen kept awake.',
+      welcomeHeading: 'Before we start — who is travelling?',
+      welcomeHint: 'Pick the one that fits. I will talk to you differently because of it, and you can change it any time.',
+      welcomeDone: 'Got it. How can I help? Tap a ticket photo, or just tell me what is happening.',
       greeting: 'Hello. I am Flight Guide, and I will stay with you from the terminal door to your boarding gate.\n\nI will not give you directions until I know four things, because the wrong route is worse than no route. It will take you under a minute.',
       errorNetwork: 'I could not reach the app just now. Check your connection and send again — nothing you typed is lost.',
       errorEmpty: 'Write something first, then send.',
@@ -116,6 +119,9 @@
       unset: '—',
       ticketFirstAr: 'عندك تذكرتك؟ الصورة أسرع - أقرأ منها البوابة والصالة والوقت في ثوانٍ.',
       ticketSkipAr: 'تخطَّ - سأكتبها بنفسي',
+      welcomeHeading: 'قبل أن نبدأ — من المسافر؟',
+      welcomeHint: 'اختر الأنسب لك. سأحدّثك بطريقة مختلفة بناءً عليه، ويمكنك تغييره في أي وقت.',
+      welcomeDone: 'تمام. كيف أساعدك؟ التقط صورة تذكرتك، أو قل لي ما الذي يحدث.',
       greeting: 'مرحبًا. أنا Flight Guide، وسأبقى معك من باب صالة المغادرة إلى بوابة الصعود.\n\nلن أعطيك أي إرشاد قبل أن أعرف أربعة أمور، لأن المسار الخاطئ أسوأ من لا مسار. لن يستغرق الأمر دقيقة.',
       errorNetwork: 'لم أستطع الوصول إلى التطبيق الآن. تحقّق من الاتصال ثم أرسل مرة أخرى، فما كتبته لم يُفقد.',
       errorEmpty: 'اكتب رسالتك أولًا ثم أرسل.',
@@ -400,6 +406,57 @@
     return el;
   }
 
+  // The three profiles, offered in the conversation itself.
+  //
+  // They already exist in the sidebar, but on a phone the sidebar is stacked
+  // *below* the chat (order: 2), so a first-time visitor opening the link sees
+  // a greeting and no visible way to say who they are. Asking here means the
+  // choice is on screen before the first message, on every device.
+  function addWelcome() {
+    var copy = t('profiles');
+    var el = document.createElement('div');
+    el.className = 'bubble bot welcome';
+    el.setAttribute('dir', 'auto');
+
+    var head = document.createElement('div');
+    head.className = 'w-head';
+    head.textContent = t('welcomeHeading');
+    el.appendChild(head);
+
+    var hint = document.createElement('div');
+    hint.className = 'w-hint';
+    hint.textContent = t('welcomeHint');
+    el.appendChild(hint);
+
+    var wrap = document.createElement('div');
+    wrap.className = 'w-options';
+    ['nervous', 'adult', 'hurried'].forEach(function (key) {
+      if (state.profilesEnabled[key] === false) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'w-opt' + (state.profile === key ? ' on' : '');
+      b.setAttribute('aria-pressed', String(state.profile === key));
+      b.innerHTML = '<span class="w-name"></span><span class="w-sub"></span>';
+      b.querySelector('.w-name').textContent = copy[key].name;
+      b.querySelector('.w-sub').textContent = copy[key].tone;
+      b.addEventListener('click', function () {
+        state.profile = key;
+        store.local.set('fg.profile', key);
+        renderProfiles();
+        Array.prototype.forEach.call(wrap.children, function (c) {
+          c.classList.toggle('on', c === b);
+          c.setAttribute('aria-pressed', String(c === b));
+        });
+        addBubble(t('welcomeDone'), 'bot');
+      });
+      wrap.appendChild(b);
+    });
+    el.appendChild(wrap);
+    messagesEl.appendChild(el);
+    scrollDown();
+    return el;
+  }
+
   function scrollDown() {
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
@@ -549,6 +606,7 @@
       if (!anyTurn) {
         if (messagesEl) messagesEl.innerHTML = '';
         addBubble(t('greeting'), 'bot');
+        addWelcome();
       }
     });
   });
@@ -573,6 +631,7 @@
     .finally(function () {
       applyLanguage();
       addBubble(t('greeting'), 'bot');
+      addWelcome();
       inputEl.focus();
     });
 })();

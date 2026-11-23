@@ -25,5 +25,16 @@ okIf(/data-i18n="airportMapLink"/.test(html), 'link label is translated');
 okIf((js.match(/airportMapLink:/g) || []).length === 2, 'airportMapLink exists in en and ar');
 okIf(!/mapVisible\) mapLink/.test(js), 'no leftover code hides the airport link');
 
+
+// The three profiles must be offered in the conversation itself: on a phone
+// the sidebar sits below the chat, so it is not visible at load.
+okIf(/function addWelcome\(/.test(js), 'addWelcome() exists');
+okIf(/addWelcome\(\);/.test(js) && (js.match(/addWelcome\(\);/g) || []).length >= 2,
+  'opener is called at boot AND after a language switch before the first turn');
+okIf(/welcomeHeading:/.test(js) && (js.match(/welcomeHeading:/g) || []).length === 2,
+  'welcomeHeading exists in en and ar');
+okIf(/\.w-opt/.test(fs.readFileSync(path.join(__dirname, '../public/app.css'), 'utf8')),
+  'opener styles are present');
+
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);
