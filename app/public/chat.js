@@ -30,6 +30,7 @@
   var state = {
     lang: store.local.get('fg.lang') || 'en',
     profile: store.local.get('fg.profile') || 'nervous',
+    profileChosen: store.local.get('fg.profileChosen') === '1',
     sessionId: store.session.get('fg.session') || null,
     // True once the traveller presses EN/ع. From then on their choice wins
     // over script detection, so an Arabic keyboard cannot flip the app.
@@ -80,14 +81,11 @@
       ticketSkip: 'Skip - I will type it',
       driveMode: 'Walking mode',
       driveHint: 'Bigger text, one instruction at a time, screen kept awake.',
-      welcomeHeading: 'Before we start — who is travelling?',
+      wsHeading: 'Who is travelling?',
+      wsSub: 'I will talk to you differently depending on what you pick. You can change it later.',
+      wsFoot: 'Flight Guide walks you from the airport door to your boarding gate.',
+      wsPick: 'Continue',
       welcomeHint: 'Pick the one that fits. I will talk to you differently because of it, and you can change it any time.',
-      welcomeDone: {
-        nervous: 'Got it — I will keep things calm and take you one step at a time. Tap a ticket photo, or just tell me what is happening.',
-        adult: 'Got it — I will give you the full detail. Tap a ticket photo, or just tell me what is happening.',
-        hurried: 'Got it — I will keep it to the next action only. Tap a ticket photo, or just tell me what is happening.'
-      },
-      welcomeDoneHint: 'You can change this any time from the panel on the side.',
       greeting: 'Hello. I am Flight Guide, and I will stay with you from the terminal door to your boarding gate.\n\nI will not give you directions until I know four things, because the wrong route is worse than no route. It will take you under a minute.',
       errorNetwork: 'I could not reach the app just now. Check your connection and send again — nothing you typed is lost.',
       errorEmpty: 'Write something first, then send.',
@@ -124,14 +122,11 @@
       unset: '—',
       ticketFirstAr: 'عندك تذكرتك؟ الصورة أسرع - أقرأ منها البوابة والصالة والوقت في ثوانٍ.',
       ticketSkipAr: 'تخطَّ - سأكتبها بنفسي',
-      welcomeHeading: 'قبل أن نبدأ — من المسافر؟',
+      wsHeading: 'من المسافر؟',
+      wsSub: 'سأحدّثك بطريقة مختلفة حسب اختيارك. يمكنك تغييره لاحقًا.',
+      wsFoot: 'Flight Guide يمشي معك من باب المطار إلى بوابة الصعود.',
+      wsPick: 'متابعة',
       welcomeHint: 'اختر الأنسب لك. سأحدّثك بطريقة مختلفة بناءً عليه، ويمكنك تغييره في أي وقت.',
-      welcomeDone: {
-        nervous: 'تمام — سأكون هادئًا وأمشي معك خطوة بخطوة. التقط صورة تذكرتك، أو قل لي ما الذي يحدث.',
-        adult: 'تمام — سأعطيك التفاصيل كاملة. التقط صورة تذكرتك، أو قل لي ما الذي يحدث.',
-        hurried: 'تمام — سأقول لك الخطوة التالية فقط. التقط صورة تذكرتك، أو قل لي ما الذي يحدث.'
-      },
-      welcomeDoneHint: 'يمكنك تغيير ذلك في أي وقت من اللوحة الجانبية.',
       greeting: 'مرحبًا. أنا Flight Guide، وسأبقى معك من باب صالة المغادرة إلى بوابة الصعود.\n\nلن أعطيك أي إرشاد قبل أن أعرف أربعة أمور، لأن المسار الخاطئ أسوأ من لا مسار. لن يستغرق الأمر دقيقة.',
       errorNetwork: 'لم أستطع الوصول إلى التطبيق الآن. تحقّق من الاتصال ثم أرسل مرة أخرى، فما كتبته لم يُفقد.',
       errorEmpty: 'اكتب رسالتك أولًا ثم أرسل.',
@@ -173,6 +168,7 @@
     renderProfiles();
     renderTrip();
     renderQuick();
+    if (typeof renderWelcomeScreen === 'function') renderWelcomeScreen();
   }
 
   function renderProfiles() {
@@ -422,50 +418,43 @@
   // *below* the chat (order: 2), so a first-time visitor opening the link sees
   // a greeting and no visible way to say who they are. Asking here means the
   // choice is on screen before the first message, on every device.
-  function addWelcome() {
+  // First screen: the only thing on the page until a category is chosen.
+  // A picker inside the transcript duplicated the sidebar card right beside
+  // it, so opening the link looked unchanged. This is a separate step that
+  // hides the chat, so the choice cannot be missed or mistaken for the old one.
+  function renderWelcomeScreen() {
+    var host = document.getElementById('wsOptions');
+    if (!host) return;
+    var body = document.body;
+    var hasChosen = state.profileChosen === true || state.explicitProfile === true;
+    body.classList.toggle('needs-profile', !hasChosen);
+
     var copy = t('profiles');
-    var el = document.createElement('div');
-    el.className = 'bubble bot welcome';
-    el.setAttribute('dir', 'auto');
-
-    var head = document.createElement('div');
-    head.className = 'w-head';
-    head.textContent = t('welcomeHeading');
-    el.appendChild(head);
-
-    var hint = document.createElement('div');
-    hint.className = 'w-hint';
-    hint.textContent = t('welcomeHint');
-    el.appendChild(hint);
-
-    var wrap = document.createElement('div');
-    wrap.className = 'w-options';
+    host.innerHTML = '';
     ['nervous', 'adult', 'hurried'].forEach(function (key) {
       if (state.profilesEnabled[key] === false) return;
       var b = document.createElement('button');
       b.type = 'button';
-      b.className = 'w-opt' + (state.profile === key ? ' on' : '');
-      b.setAttribute('aria-pressed', String(state.profile === key));
-      b.innerHTML = '<span class="w-name"></span><span class="w-sub"></span>';
-      b.querySelector('.w-name').textContent = copy[key].name;
-      b.querySelector('.w-sub').textContent = copy[key].tone;
+      b.className = 'ws-opt' + (state.profile === key ? ' on' : '');
+      b.setAttribute('role', 'radio');
+      b.setAttribute('aria-checked', String(state.profile === key));
+      b.innerHTML = '<span class="ws-name"></span><span class="ws-sub"></span><span class="ws-go"></span>';
+      b.querySelector('.ws-name').textContent = copy[key].name;
+      b.querySelector('.ws-sub').textContent = copy[key].tone;
+      b.querySelector('.ws-go').textContent = t('wsPick') + ' →';
       b.addEventListener('click', function () {
         state.profile = key;
+        state.profileChosen = true;
         store.local.set('fg.profile', key);
+        store.local.set('fg.profileChosen', '1');
         renderProfiles();
-        Array.prototype.forEach.call(wrap.children, function (c) {
-          c.classList.toggle('on', c === b);
-          c.setAttribute('aria-pressed', String(c === b));
-        });
-        var done = t('welcomeDone');
-        addBubble((done && done[key]) || t('welcomeDone').nervous || '', 'bot');
+        renderWelcomeScreen();
+        var last = messagesEl.lastElementChild;
+        if (last) last.scrollIntoView({ block: 'nearest' });
+        if (inputEl) inputEl.focus();
       });
-      wrap.appendChild(b);
+      host.appendChild(b);
     });
-    el.appendChild(wrap);
-    messagesEl.appendChild(el);
-    scrollDown();
-    return el;
   }
 
   function scrollDown() {
@@ -617,7 +606,6 @@
       if (!anyTurn) {
         if (messagesEl) messagesEl.innerHTML = '';
         addBubble(t('greeting'), 'bot');
-        addWelcome();
       }
     });
   });
@@ -641,8 +629,8 @@
     .catch(function () { /* defaults are fine */ })
     .finally(function () {
       applyLanguage();
+      renderWelcomeScreen();
       addBubble(t('greeting'), 'bot');
-      addWelcome();
       inputEl.focus();
     });
 })();
