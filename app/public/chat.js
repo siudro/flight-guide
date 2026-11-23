@@ -30,6 +30,7 @@
   var state = {
     lang: store.local.get('fg.lang') || 'en',
     profile: store.local.get('fg.profile') || 'nervous',
+    profileChosen: store.local.get('fg.profileChosen') === '1',
     sessionId: store.session.get('fg.session') || null,
     // True once the traveller presses EN/ع. From then on their choice wins
     // over script detection, so an Arabic keyboard cannot flip the app.
@@ -80,6 +81,11 @@
       ticketSkip: 'Skip - I will type it',
       driveMode: 'Walking mode',
       driveHint: 'Bigger text, one instruction at a time, screen kept awake.',
+      wsHeading: 'Who is travelling?',
+      wsSub: 'I will talk to you differently depending on what you pick. You can change it later.',
+      wsFoot: 'Flight Guide walks you from the airport door to your boarding gate.',
+      wsPick: 'Continue',
+      welcomeHint: 'Pick the one that fits. I will talk to you differently because of it, and you can change it any time.',
       greeting: 'Hello. I am Flight Guide, and I will stay with you from the terminal door to your boarding gate.\n\nI will not give you directions until I know four things, because the wrong route is worse than no route. It will take you under a minute.',
       errorNetwork: 'I could not reach the app just now. Check your connection and send again — nothing you typed is lost.',
       errorEmpty: 'Write something first, then send.',
@@ -116,6 +122,11 @@
       unset: '—',
       ticketFirstAr: 'عندك تذكرتك؟ الصورة أسرع - أقرأ منها البوابة والصالة والوقت في ثوانٍ.',
       ticketSkipAr: 'تخطَّ - سأكتبها بنفسي',
+      wsHeading: 'من المسافر؟',
+      wsSub: 'سأحدّثك بطريقة مختلفة حسب اختيارك. يمكنك تغييره لاحقًا.',
+      wsFoot: 'Flight Guide يمشي معك من باب المطار إلى بوابة الصعود.',
+      wsPick: 'متابعة',
+      welcomeHint: 'اختر الأنسب لك. سأحدّثك بطريقة مختلفة بناءً عليه، ويمكنك تغييره في أي وقت.',
       greeting: 'مرحبًا. أنا Flight Guide، وسأبقى معك من باب صالة المغادرة إلى بوابة الصعود.\n\nلن أعطيك أي إرشاد قبل أن أعرف أربعة أمور، لأن المسار الخاطئ أسوأ من لا مسار. لن يستغرق الأمر دقيقة.',
       errorNetwork: 'لم أستطع الوصول إلى التطبيق الآن. تحقّق من الاتصال ثم أرسل مرة أخرى، فما كتبته لم يُفقد.',
       errorEmpty: 'اكتب رسالتك أولًا ثم أرسل.',
@@ -157,6 +168,7 @@
     renderProfiles();
     renderTrip();
     renderQuick();
+    if (typeof renderWelcomeScreen === 'function') renderWelcomeScreen();
   }
 
   function renderProfiles() {
@@ -400,6 +412,51 @@
     return el;
   }
 
+  // The three profiles, offered in the conversation itself.
+  //
+  // They already exist in the sidebar, but on a phone the sidebar is stacked
+  // *below* the chat (order: 2), so a first-time visitor opening the link sees
+  // a greeting and no visible way to say who they are. Asking here means the
+  // choice is on screen before the first message, on every device.
+  // First screen: the only thing on the page until a category is chosen.
+  // A picker inside the transcript duplicated the sidebar card right beside
+  // it, so opening the link looked unchanged. This is a separate step that
+  // hides the chat, so the choice cannot be missed or mistaken for the old one.
+  function renderWelcomeScreen() {
+    var host = document.getElementById('wsOptions');
+    if (!host) return;
+    var body = document.body;
+    var hasChosen = state.profileChosen === true || state.explicitProfile === true;
+    body.classList.toggle('needs-profile', !hasChosen);
+
+    var copy = t('profiles');
+    host.innerHTML = '';
+    ['nervous', 'adult', 'hurried'].forEach(function (key) {
+      if (state.profilesEnabled[key] === false) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ws-opt' + (state.profile === key ? ' on' : '');
+      b.setAttribute('role', 'radio');
+      b.setAttribute('aria-checked', String(state.profile === key));
+      b.innerHTML = '<span class="ws-name"></span><span class="ws-sub"></span><span class="ws-go"></span>';
+      b.querySelector('.ws-name').textContent = copy[key].name;
+      b.querySelector('.ws-sub').textContent = copy[key].tone;
+      b.querySelector('.ws-go').textContent = t('wsPick') + ' →';
+      b.addEventListener('click', function () {
+        state.profile = key;
+        state.profileChosen = true;
+        store.local.set('fg.profile', key);
+        store.local.set('fg.profileChosen', '1');
+        renderProfiles();
+        renderWelcomeScreen();
+        var last = messagesEl.lastElementChild;
+        if (last) last.scrollIntoView({ block: 'nearest' });
+        if (inputEl) inputEl.focus();
+      });
+      host.appendChild(b);
+    });
+  }
+
   function scrollDown() {
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
@@ -572,6 +629,7 @@
     .catch(function () { /* defaults are fine */ })
     .finally(function () {
       applyLanguage();
+      renderWelcomeScreen();
       addBubble(t('greeting'), 'bot');
       inputEl.focus();
     });

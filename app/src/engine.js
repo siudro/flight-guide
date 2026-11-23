@@ -196,18 +196,28 @@ const DIRECTIONS_LINKS = {
   en: {
     intro: 'Here is the airport\'s own map, straight from King Fahd International. Open it on your phone:',
     map: 'Map: https://kfia.sa/ar/Guide/Passenger/airport-map',
-    departures: 'Live departures (gates and delays): https://kfia.sa/ar/Flights#departures'
+    departures: 'Live departures (gates and delays): https://kfia.sa/ar/Flights#departures',
+    checkIntro: 'If you think something has changed with your flight, this is the airport\'s own departure board — it is the most current answer there is:',
+    checkFlight: 'Your flight on that board: ',
+    checkPlan: 'Look for your flight number. If it says delayed, final call or cancelled, tell me what it says and I will tell you what to do next.'
   },
   ar: {
     intro: 'هذه خريطة المطار الرسمية مباشرة من مطار الملك فهد الدولي. افتحها على جهازك:',
     map: 'الخريطة: https://kfia.sa/ar/Guide/Passenger/airport-map',
-    departures: 'المغادرة المباشرة (البوابات والتأخير): https://kfia.sa/ar/Flights#departures'
+    departures: 'المغادرة المباشرة (البوابات والتأخير): https://kfia.sa/ar/Flights#departures',
+    checkIntro: 'إذا كنت تعتقد أن شيئًا تغيّر في رحلتك، فهذه شاشة مغادرة المطار الرسمية — وهي أحدث جواب متاح:',
+    checkFlight: 'رحلتك على هذه الشاشة: ',
+    checkPlan: 'ابحث عن رقم رحلتك. إن كانت مؤجّلة أو النداء الأخير أو ملغاة، أخبرني بما تراه وسأخبرك بما تفعله بعد ذلك.'
   }
 };
 
 function detectIntent(message) {
   const m = normalize(message);
   if (/(gate change|changed gate|new gate|تغيرت البوابة|تغيّرت البوابة|بوابة جديدة|بوابه جديده)/.test(m)) return 'gatechange';
+  // Something may have happened to the flight itself: a delay, a cancellation,
+  // a missed flight, or "I think something changed". These deserve the live
+  // departure board, not a generic walkthrough.
+  if (/(delay|delayed|late|cancel|cancelled|canceled|missed|miss my flight|something happened|something changed|on time|final call|gate closed|\u0645\u062a\u0623\u062e\u0631|\u0645\u062a\u0627\u062e\u0631|\u0645\u0644\u063a\u064a|\u0623\u0644\u063a\u064a\u062a|\u0627\u0644\u063a\u064a\u062a|\u0641\u0627\u062a\u062a\u0646\u064a|\u0641\u0627\u062a\u062a|\u0635\u0627\u0631 \u0634\u064a|\u0634\u064a \u0635\u0627\u0631|\u062a\u063a\u064a\u0631 \u0634\u064a|\u0628\u0627\u0644\u0645\u0648\u0639\u062f|\u0627\u0644\u0646\u062f\u0627\u0621 \u0627\u0644\u0623\u062e\u064a\u0631)/.test(m)) return 'flightcheck';
   // Directions / "what does the airport look like". This must be tested before
   // the broad question rule, or "where do I go" is swallowed by 'explain' and
   // the traveller gets prose instead of the airport's own map link.
@@ -705,6 +715,34 @@ function generateReply(state) {
       meta: { stage: session.stage, stageKey: 'directions', escalated,
               escalationAnnounced: !!announceEscalation, intent, lang, profile, links: true }
     };
+  }
+
+  // --- 5c. "Something happened to my flight" -----------------------------
+  // The airport's own board is authoritative and always current. When the
+  // traveller suspects a delay, cancellation or a missed flight, send them
+  // straight to it with their flight number ready, rather than describing it.
+  // A ticket with a boarding time answers "am I late" arithmetically — that is
+  // the core product. Only fall through to the board when we cannot compute a
+  // countdown, or when the traveller reports something specific (cancelled,
+  // missed). Otherwise "am i late" would trade a number for a URL.
+  if (intent === 'flightcheck') {
+    const hasCountdown = session.minutes != null || (session.boarding && session.flight);
+    const reportsEvent = /(cancel|missed|miss my flight|final call|gate closed|ألغيت|الغيت|فاتت|فاتتني|النداء الأخير|ملغاة)/i.test(message);
+    if (!hasCountdown || reportsEvent) {
+      if (!session.airport) session.airport = 'dmm';
+    const L = DIRECTIONS_LINKS[lang] || DIRECTIONS_LINKS.en;
+    push(L.checkIntro);
+    push(L.departures);
+    if (session.flight) push(L.checkFlight + session.flight);
+    push(L.checkPlan);
+    return {
+      messages,
+      session,
+      meta: { stage: session.stage, stageKey: 'flightcheck', escalated,
+              escalationAnnounced: !!announceEscalation, intent, lang, profile,
+              links: true, flight: session.flight || null }
+      };
+    }
   }
 
   // --- 6. Onboarding: ask before advising ---------------------------------
