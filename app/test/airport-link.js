@@ -36,5 +36,16 @@ okIf(/welcomeHeading:/.test(js) && (js.match(/welcomeHeading:/g) || []).length =
 okIf(/\.w-opt/.test(fs.readFileSync(path.join(__dirname, '../public/app.css'), 'utf8')),
   'opener styles are present');
 
+
+// Choosing a category must visibly confirm it, per category — a generic
+// "Got it" left the traveller unable to tell the tap registered.
+okIf(/welcomeDone: \{/.test(js) && (js.match(/welcomeDone: \{/g) || []).length === 2,
+  'welcomeDone is a per-category map in both languages');
+for (const k of ['nervous', 'adult', 'hurried']) {
+  const hits = (js.match(new RegExp('\\b' + k + ':\\s*\'[^\']*سأ', 'g')) || []).length;
+}
+okIf(/done\[key\]|done && done\[key\]/.test(js), 'confirmation picks the message for the chosen category');
+okIf(!/replace\('\{who\}'/.test(js), 'no string-interpolated phrasing that reads awkwardly');
+
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);
