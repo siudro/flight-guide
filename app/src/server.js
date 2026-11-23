@@ -88,6 +88,17 @@ const MIME = {
   '.webmanifest': 'application/manifest+json'
 };
 
+function sendHtml(res, status, html) {
+  const buf = Buffer.from(String(html), 'utf8');
+  res.writeHead(status, {
+    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Length': buf.length,
+    'Cache-Control': 'no-store',
+    'X-Content-Type-Options': 'nosniff'
+  });
+  res.end(buf);
+}
+
 function sendJson(res, status, body) {
   const payload = JSON.stringify(body);
   res.writeHead(status, {
@@ -344,6 +355,53 @@ async function handle(req, res) {
     });
   }
 
+  // --- shareable transcript ------------------------------------------------
+  // GET /transcript/:sessionId
+  //
+  // A submission requires a LINK a judge can open and read. Raw JSON at
+  // /api/history is not that. This renders the conversation as a plain HTML
+  // page: no login, no JavaScript, no dependencies — just the messages.
+  if (p.indexOf('/transcript/') === 0 && method === 'GET') {
+    const hid = decodeURIComponent(p.split('/')[2] || '');
+    if (!hid) return sendJson(res, 400, { error: 'session id required' });
+    const stored = store.loadSession(hid);
+    if (!stored) {
+      return sendHtml(res, 404, '<h1>No conversation found</h1><p>This link does not match a stored conversation.</p>');
+    }
+    const turns = Array.isArray(stored.history) ? stored.history : [];
+    const esc = (t) => String(t || '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const rows = turns.map((m, i) => {
+      const who = m.role === 'user' ? 'Traveller' : 'Flight Guide';
+      const cls = m.role === 'user' ? 'u' : 'b';
+      return '<div class="t"><div class="who">' + (i + 1) + '  ' + who + '</div>' +
+             '<div class="msg ' + cls + '" dir="auto">' + esc(m.content) + '</div></div>';
+    }).join('');
+    const html = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>Flight Guide — conversation record</title><style>' +
+      'body{font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;' +
+      'max-width:760px;margin:0 auto;padding:32px 20px 80px;color:#18211f;background:#f6f3ee}' +
+      'h1{color:#0f2547;font-size:22px;margin:0 0 4px}' +
+      '.sub{color:#667570;font-size:13px;margin-bottom:26px}' +
+      '.t{margin:0 0 16px}.who{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;' +
+      'color:#667570;margin-bottom:4px}' +
+      '.msg{padding:13px 16px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word}' +
+      '.msg.b{background:#f1ece3;border-start-start-radius:5px}' +
+      '.msg.u{background:#0f2547;color:#fff;border-start-end-radius:5px}' +
+      'footer{margin-top:34px;color:#667570;font-size:12px;border-top:1px solid #ddd3c2;padding-top:14px}' +
+      '</style></head><body>' +
+      '<h1>Flight Guide — conversation record</h1>' +
+      '<div class="sub">' + turns.length + ' exchanged messages' +
+      (stored.flight ? ' &middot; flight ' + esc(stored.flight) : '') +
+      (stored.airport ? ' &middot; ' + esc(String(stored.airport).toUpperCase()) : '') +
+      '</div>' + rows +
+      '<footer>Recorded against the deployed build at flight-guide-production.up.railway.app. ' +
+      'Flight Guide is a WAICY 2026 LLM &amp; AI Agent track submission.</footer>' +
+      '</body></html>';
+    return sendHtml(res, 200, html);
+  }
+
   if (p === '/api/settings') {
     if (method === 'GET') return sendJson(res, 200, publicSettings());
     if (method === 'PUT') {
@@ -571,7 +629,7 @@ async function handle(req, res) {
       role: 'assistant',
       content: result.messages.map((m) => m.text).join('\n\n').slice(0, 900)
     });
-    result.session.history = result.session.history.slice(-16);
+    result.session.history = result.session.history.slice(-60);
 
     result.meta.ai = aiMeta;
     result.meta.live = live && live.ok ? {
