@@ -61,11 +61,24 @@ function converse(turns, opts) {
 const text = (res) => res.messages.map((m) => m.text).join('\n\n');
 
 console.log('\nonboarding');
-test('asks the airport question before giving any directions', () => {
-  const { transcript } = converse(['hello']);
+// WAI-246: the airport is Dammam, assumed. Asking was the most-repeated
+// complaint — a traveller had to say "I am at Dammam" twice before live data
+// appeared. This replaces the old test that asserted the question existed.
+test('never asks which airport — Dammam is assumed', () => {
+  const { transcript, session } = converse(['hello']);
   const out = text(transcript[0]);
-  assert.ok(/which airport/i.test(out), 'expected an airport question');
-  assert.ok(!/security screening|passport control/i.test(out), 'must not give directions yet');
+  assert.ok(!/which airport/i.test(out), 'must not ask for the airport');
+  assert.ok(!/Dammam, Riyadh|Riyadh, Jeddah|الرياض أم جدة/i.test(out), 'must not offer other airports');
+  assert.strictEqual(session.airport, 'dmm', 'Dammam is assumed silently');
+});
+
+test('directions are answered with the airport link, not a question', () => {
+  const { transcript, session } = converse(['where do I go']);
+  const out = text(transcript[0]);
+  assert.ok(/kfia\.sa/.test(out), 'expected the airport link immediately');
+  assert.ok(!/which airport/i.test(out), 'a directions request must not be gated on a question');
+  assert.strictEqual(transcript[0].meta.intent, 'directions');
+  assert.strictEqual(session.airport, 'dmm');
 });
 
 test('never re-asks a fact already given', () => {
@@ -350,7 +363,7 @@ test('a prompt always carries the language and the no-invention rule', () => {
 test('a prompt includes ticket and status only when they exist', () => {
   const prompts = require('../src/prompts');
   const bare = prompts.build({ lang: 'en', context: {} });
-  assert.ok(!/TICKET PHOTO/.test(bare.text), 'no ticket means no ticket section');
+  assert.ok(!/READ FROM THEIR TICKET PHOTO/.test(bare.text), 'no ticket means no ticket section');
 
   const withTicket = prompts.build({
     lang: 'en',

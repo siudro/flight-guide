@@ -54,7 +54,8 @@
   var STRINGS = {
     en: {
       tagline: 'First international flight? Walk with me.',
-      mapLink: 'Airport map',
+      airportMapLink: 'Official airport map ↗',
+      airportMapTitle: 'King Fahd International — the airport\'s own map page',
       adminLink: 'Control panel',
       profileHeading: 'How should I talk to you?',
       profileHint: 'You can change this at any time.',
@@ -91,7 +92,8 @@
     },
     ar: {
       tagline: 'أول رحلة دولية؟ سأمشي معك خطوة بخطوة.',
-      mapLink: 'خريطة المطار',
+      airportMapLink: 'خريطة المطار الرسمية ↗',
+      airportMapTitle: 'مطار الملك فهد الدولي — صفحة الخريطة الرسمية للمطار',
       adminLink: 'لوحة التحكم',
       profileHeading: 'كيف تريدني أن أحدّثك؟',
       profileHint: 'يمكنك تغيير ذلك في أي وقت.',
@@ -143,6 +145,9 @@
     });
     document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
       el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+      el.setAttribute('title', t(el.getAttribute('data-i18n-title')));
     });
 
     document.querySelectorAll('.seg-btn').forEach(function (b) {
@@ -549,21 +554,19 @@
   });
 
   // ------------------------------------------------------------------ boot
-  // Pull the live settings so a disabled profile or a hidden map is respected
-  // in the UI immediately, not just on the server.
+  // Pull the live settings so a disabled profile is respected in the UI
+  // immediately, not just on the server. The map link now points at the
+  // airport's own page, so the "hidden map" toggle no longer applies to it.
   fetch('/api/settings')
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (s) {
       if (s) {
         state.profilesEnabled = s.profilesEnabled || state.profilesEnabled;
-        state.mapVisible = s.mapVisible !== false;
         if (!state.profilesEnabled[state.profile]) {
           state.profile = ['nervous', 'adult', 'hurried'].find(function (p) {
             return state.profilesEnabled[p];
           }) || 'adult';
         }
-        var mapLink = document.querySelector('a[href="/map"]');
-        if (mapLink && !state.mapVisible) mapLink.style.display = 'none';
       }
     })
     .catch(function () { /* defaults are fine */ })

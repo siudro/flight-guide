@@ -40,7 +40,7 @@ const envResult = env.load([
 ]);
 
 const store = require('./store');
-const { generateReply, detectLanguage } = require('./engine');
+const { generateReply, detectLanguage, recordTicketInHistory, normalizeTicketFields } = require('./engine');
 const llm = require('./llm');
 const status = require('./status');
 const prompts = require('./prompts');
@@ -716,8 +716,12 @@ async function handle(req, res) {
     }
 
     const sid = typeof body.sessionId === 'string' ? body.sessionId : null;
-    if (sid && out.fields && Object.keys(out.fields).length) {
-      ticketStore.set(sid, out.fields);
+    // Normalise once, at the boundary: the vision model returns "null"
+    // strings and splits flight numbers ("XY 406"), and both broke the
+    // card, the live lookup and the replayed history.
+    const fields = normalizeTicketFields(out.fields || {});
+    if (sid && Object.keys(fields).length) {
+      ticketStore.set(sid, fields);
 
       // Also write the usable facts onto the session. Without this the ticket
       // only reached the prompt: every later turn looked for
@@ -725,23 +729,28 @@ async function handle(req, res) {
       // entirely — so the agent told a traveller "I can't see live flight
       // information" while holding their flight number.
       const sess = sessions.get(sid) || store.loadSession(sid) || {};
-      if (out.fields.flight) sess.flight = out.fields.flight;
-      if (out.fields.airline) sess.airline = out.fields.airline;
-      if (out.fields.terminal) sess.terminal = out.fields.terminal;
-      if (out.fields.gate) sess.gate = out.fields.gate;
-      if (out.fields.boarding) sess.boarding = out.fields.boarding;
-      const dep = String(out.fields.airport || '').toUpperCase();
-      if (dep === 'DMM' || dep === 'RUH' || dep === 'JED') sess.airport = dep.toLowerCase();
+      if (fields.flight) sess.flight = fields.flight;
+      if (fields.airline) sess.airline = fields.airline;
+      if (fields.terminal) sess.terminal = fields.terminal;
+      if (fields.gate) sess.gate = fields.gate;
+      if (fields.boarding) sess.boarding = fields.boarding;
+      const dep = String(fields.airport || '').toUpperCase();
+      if (dep) sess.airport = dep.toLowerCase();
+      // The scan must become part of the conversation, or the model replays a
+      // history in which no ticket was ever mentioned and answers "I can't
+      // see the ticket picture" while the flight number is on screen.
+      const langForTicket = typeof body.lang === 'string' ? body.lang : 'en';
+      recordTicketInHistory(sess, fields, langForTicket);
       sessions.set(sid, sess);
       try { store.saveSession(sid, sess); } catch (_) {}
       console.log('[ticket] wrote to session ' + sid.slice(0, 8) +
         ' flight=' + (sess.flight || 'none') + ' airport=' + (sess.airport || 'none'));
     }
 
-    const summary = Object.keys(out.fields || {}).join(', ') || 'nothing';
+    const summary = Object.keys(fields).join(', ') || 'nothing';
     console.log('[llm] TICKET ' + out.provider + '/' + out.model + '  ' + out.ms + 'ms  read: ' + summary);
 
-    return sendJson(res, 200, { ok: true, fields: out.fields, ms: out.ms, model: out.model });
+    return sendJson(res, 200, { ok: true, fields, ms: out.ms, model: out.model });
   }
 
   // --- API: prompts (versions + recent assemblies) -------------------------

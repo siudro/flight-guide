@@ -61,7 +61,7 @@ const PROMPT_VERSIONS = [
       scope: [
         'WHAT YOU COVER: the airport only — check-in and bag drop, security, passport control, customs, finding the gate, and a gate change. Nothing else.',
         'WHAT YOU REFUSE: rebooking, refunds, baggage claims, ticket prices, visa or immigration advice, tourism, restaurants. Say plainly that this is outside what you do and point to airline or airport staff.',
-        'NEVER invent a gate number, terminal, flight number, or boarding time. If you do not have a value, ask for it or tell them to read the departure screen. A wrong gate is worse than no answer.',
+        'NEVER invent a gate number, terminal, flight number, or boarding time. If a value is genuinely unknown to you, ask for it once, or tell them to read the departure screen. A wrong gate is worse than no answer.',
         'Airport staff always override you. Say so when it matters.',
         'If time before boarding is short, the first thing you say is to find airport staff — they move faster than any app.',
         'Do not mention that you are an AI, a model, or a rule engine. Just help.'
@@ -143,6 +143,8 @@ function build(opts) {
     if (t.length) {
       push('READ FROM THEIR TICKET PHOTO', t.concat([
         'These values were read from a photo of their own ticket. You may repeat them.',
+        'Never ask for any of these again. They are already known; asking tells the traveller you were not listening.',
+        'You already have the boarding time from this ticket. Do not ask for it, and do not ask which terminal or gate when it is listed above.',
         'Do not add any value that is not listed here.',
         'This person may be flying for the first time and may not know what any of it means. Never answer with bare codes or jargon.',
         'Always translate: say "Dammam" not only "DMM", "Abha" not only "AHB", and explain gate and boarding in plain words the first time you use them.',
@@ -172,10 +174,19 @@ function build(opts) {
     lines.push('State these as current fact. If a value is missing above, you do NOT have it.');
     push('LIVE FROM THE AIRPORT (checked a moment ago)', lines);
   } else if (ctx.flight) {
-    push('LIVE STATUS', [
-      'No live status was retrieved for this flight. Do not state a gate, delay or terminal.',
-      'Tell them plainly you cannot see the live screen, and send them to the nearest departure board or a member of staff.'
-    ]);
+    // Only reached when there is no live feed data. It must not tell the model
+    // to disown facts it already holds from the ticket — that produced the
+    // "I can't see the ticket picture here" reply while the flight number was
+    // on screen. Separate "no live screen" from "no ticket".
+    const lines = [
+      'No live departure-screen data was retrieved for this flight just now. Do not state a live gate, delay or cancellation as current fact.'
+    ];
+    if (opts.ticket && Object.keys(opts.ticket).length) {
+      lines.push('You DO have their ticket details above. Use them. The only thing you lack is the airport\'s live screen — say that, and never claim you cannot see their ticket.');
+    } else {
+      lines.push('You also have no ticket details for this flight. Ask for the boarding time, or send them to the nearest departure board.');
+    }
+    push('LIVE STATUS', lines);
   }
 
   if (opts.status && Object.keys(opts.status).length) {
