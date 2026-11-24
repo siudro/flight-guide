@@ -11,7 +11,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "FG_DATA_DIR=./.data node src/server.js",
-    "test": "node test/run.js && node test/mobile-storage.js && node test/airport-link.js && node test/continuity.js"
+    "test": "node test/run.js && node test/mobile-storage.js && node test/airport-link.js && node test/continuity.js && node test/gate-map-voice.js && node test/weather-watch.js && node test/improvements.js"
   },
   "dependencies": {},
   "devDependencies": {}
