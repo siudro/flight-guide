@@ -630,8 +630,11 @@ body.walking-mode .map-note { font-size: 16.5px; }
   .composer { gap: 7px; padding-inline: 12px; }
   .composer .attach { padding: 12px 11px; }
   .composer textarea { padding-inline: 12px; }
+  /* Icon-only on a phone to save the text box's width, but it must still be
+     tappable (44px) and must still announce itself to a screen reader. */
   .speak-btn span[data-i18n] { display: none; }
-  .speak-btn { padding: 8px 10px; }
+  .speak-btn { padding: 0; width: 44px; height: 44px; min-width: 44px;
+               justify-content: center; }
   .map-canvas { height: 220px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -724,3 +727,7 @@ body.staff-open { overflow: hidden; }
   .staff-btn span[data-i18n] { display: none; }
   .staff-btn { padding: 8px 10px; }
 }
+
+/* Read aloud is a toggle. With the label hidden on a phone, the pressed state
+   is the only cue that it is on. */
+.speak-btn[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
