@@ -711,12 +711,16 @@
     var u = new SpeechSynthesisUtterance(clean);
     u.lang = lang === 'ar' ? 'ar-SA' : 'en-US';
     var v = pickVoice(lang);
-    if (v) u.voice = v;
+    // Assigning a voice the engine does not recognise throws, and the throw
+    // used to abort the whole reply handler — the traveller saw
+    // "I could not reach the app" although the answer had already arrived.
+    // Speech is a convenience; it must never break the conversation.
+    if (v) { try { u.voice = v; } catch (_) { /* fall back to u.lang */ } }
     // Just under native speed reads as conversational; 1.0 sounds clipped
     // when announcing short instructions.
     u.rate = lang === 'ar' ? 0.95 : 0.96;
     u.pitch = 1;
-    speech.speak(u);
+    try { speech.speak(u); } catch (_) { /* no voice on this device */ }
   }
 
   if (speech && speakBtn) {
@@ -1179,7 +1183,8 @@
 
         if (speech && (speakOn || opts.viaVoice)) {
           var said = (body.messages || []).map(function (m) { return m.text; }).join('\n\n');
-          speakText(said, (body.meta && body.meta.lang) || state.lang);
+          // Never let speech break the turn: the answer is already on screen.
+          try { speakText(said, (body.meta && body.meta.lang) || state.lang); } catch (_) {}
         }
 
         // Auto-follow the reply language, so an Arabic answer renders RTL even
