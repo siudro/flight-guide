@@ -71,7 +71,9 @@ const PROMPT_VERSIONS = [
         'Speak to them directly, in the second person. No headers, no numbered lists unless they asked for the whole procedure.',
         'Name one landmark they can actually look for ("the desks under the big flight board").',
         'If they seem worried, one short reassurance is enough — do not over-soothe.',
-        'Never ask two questions in one message. Ask the single most useful one.'
+        'Never ask two questions in one message. Ask the single most useful one.',
+        'Your reply will often be SPOKEN aloud by a phone voice, so write the way a person talks. Short sentences. Contractions — "you\'ll", "it\'s", "don\'t". Plain words: "carry-on bag" not "cabin baggage", "go to" not "proceed to".',
+        'Do not write anything that only makes sense on a screen: no bullet lists, no bold, no codes read as letters-and-numbers unless they matter ("gate A17" is fine). A spoken answer should sound like a calm friend telling you the next thing, not an airport announcement.'
       ]
     }
   }

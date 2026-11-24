@@ -656,13 +656,47 @@
     try { speech.speak(new SpeechSynthesisUtterance('')); } catch (_) {}
   }
 
+  // Names reliably male on the platforms we care about. Chrome/Edge expose
+  // "Google US English" and Microsoft "Guy"/"David"/"Mark"; Safari "Alex",
+  // "Tom". Phone voice lists are short, so this is a preference order: it
+  // degrades to the best available voice instead of failing.
+  var MALE_NAMES = /(guy|david|mark|alex|tom|aaron|fred|daniel|james|male|matthew|joey|eric|ryan|christopher|roger|steffan|arthur)/;
+  var FEMALE_NAMES = /(samantha|victoria|karen|susan|zira|aria|jenny|michelle|female|allison|ava|serena|fiona|moira|tessa|kathy|nicky|martha|libby|sonia|hazel)/;
+
+  function scoreVoice(v, lang) {
+    if (!v || !v.lang) return -1;
+    var code = String(v.lang).toLowerCase().replace('_', '-');
+    var name = String(v.name || '').toLowerCase();
+    var score = 0;
+
+    if (lang === 'ar') {
+      if (code.indexOf('ar') !== 0) return -1;
+      if (code === 'ar-sa') score += 40;   // the traveller is in Dammam
+      if (MALE_NAMES.test(name)) score += 20;
+      return score;
+    }
+
+    if (code.indexOf('en') !== 0) return -1;
+    if (code === 'en-us') score += 50;     // a US voice, as asked
+    else if (code === 'en-gb') score += 5;
+    if (MALE_NAMES.test(name)) score += 40;
+    if (FEMALE_NAMES.test(name)) score -= 40;
+    // Prefer higher-quality network/natural voices where a device offers them.
+    if (/(natural|neural|online|premium|enhanced)/.test(name)) score += 10;
+    return score;
+  }
+
   function pickVoice(lang) {
     if (!speech) return null;
     var voices = speech.getVoices() || [];
-    var want = lang === 'ar' ? 'ar' : 'en';
-    return voices.find(function (v) { return v.lang && v.lang.toLowerCase().indexOf(want === 'ar' ? 'ar-sa' : 'en-gb') === 0; })
-      || voices.find(function (v) { return v.lang && v.lang.toLowerCase().indexOf(want) === 0; })
-      || null;
+    if (!voices.length) return null;
+    var best = null;
+    var bestScore = -1;
+    for (var i = 0; i < voices.length; i++) {
+      var sc = scoreVoice(voices[i], lang);
+      if (sc > bestScore) { bestScore = sc; best = voices[i]; }
+    }
+    return bestScore >= 0 ? best : null;
   }
 
   function speakText(text, lang) {
@@ -675,10 +709,13 @@
     if (!clean) return;
     speech.cancel();
     var u = new SpeechSynthesisUtterance(clean);
-    u.lang = lang === 'ar' ? 'ar-SA' : 'en-GB';
+    u.lang = lang === 'ar' ? 'ar-SA' : 'en-US';
     var v = pickVoice(lang);
     if (v) u.voice = v;
-    u.rate = lang === 'ar' ? 0.95 : 1;
+    // Just under native speed reads as conversational; 1.0 sounds clipped
+    // when announcing short instructions.
+    u.rate = lang === 'ar' ? 0.95 : 0.96;
+    u.pitch = 1;
     speech.speak(u);
   }
 
