@@ -258,7 +258,7 @@ function detectConcern(message) {
 // a link they can tap beats any description we could write.
 // A cancellation or a missed flight is the one case where a person is
 // genuinely required — only the airline can rebook.
-const USER_SAYS_CANCELLED = /(cancel+ed|missing my flight|missed my flight|missed it|i missed|فاتت|فاتتني|ألغيت|الغيت|ملغاة|ملغا)/i;
+const USER_SAYS_CANCELLED = /(cancel+ed|cancel+ed flight|missing my flight|missed my flight|missed it|i missed|فاتت|فاتتني|ألغيت|الغيت|ألغت|الغت|ملغاة|ملغية|ملغا)/i;
 
 const DIRECTIONS_LINKS = {
   en: {
@@ -289,7 +289,7 @@ function detectIntent(message) {
   // Something may have happened to the flight itself: a delay, a cancellation,
   // a missed flight, or "I think something changed". These deserve the live
   // departure board, not a generic walkthrough.
-  if (/(delay|delayed|late|cancel|cancelled|canceled|missed|miss my flight|something happened|something changed|on time|final call|gate closed|\u0645\u062a\u0623\u062e\u0631|\u0645\u062a\u0627\u062e\u0631|\u0645\u0644\u063a\u064a|\u0623\u0644\u063a\u064a\u062a|\u0627\u0644\u063a\u064a\u062a|\u0641\u0627\u062a\u062a\u0646\u064a|\u0641\u0627\u062a\u062a|\u0635\u0627\u0631 \u0634\u064a|\u0634\u064a \u0635\u0627\u0631|\u062a\u063a\u064a\u0631 \u0634\u064a|\u0628\u0627\u0644\u0645\u0648\u0639\u062f|\u0627\u0644\u0646\u062f\u0627\u0621 \u0627\u0644\u0623\u062e\u064a\u0631)/.test(m)) return 'flightcheck';
+  if (/(delay|delayed|late|cancel|cancelled|canceled|missed|miss my flight|something happened|something changed|on time|final call|gate closed|\u0645\u062a\u0623\u062e\u0631|\u0645\u062a\u0627\u062e\u0631|ملغاة|ملغية|ملغي|ألغيت|الغيت|الغت|ألغت|\u0641\u0627\u062a\u062a\u0646\u064a|\u0641\u0627\u062a\u062a|\u0635\u0627\u0631 \u0634\u064a|\u0634\u064a \u0635\u0627\u0631|\u062a\u063a\u064a\u0631 \u0634\u064a|\u0628\u0627\u0644\u0645\u0648\u0639\u062f|\u0627\u0644\u0646\u062f\u0627\u0621 \u0627\u0644\u0623\u062e\u064a\u0631)/.test(m)) return 'flightcheck';
   // Directions / "what does the airport look like". This must be tested before
   // the broad question rule, or "where do I go" is swallowed by 'explain' and
   // the traveller gets prose instead of the airport's own map link.

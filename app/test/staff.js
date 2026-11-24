@@ -116,6 +116,24 @@ test('the prompt tells it to answer before escalating', () => {
     'the prompt should say: answer first, involve staff only when it matters');
 });
 
+
+test('Arabic cancellations are recognised and escalate to the airline desk', () => {
+  // "ملغاة" (feminine) was missing from the intent pattern, so an Arabic
+  // cancellation fell through to the generic onboarding question.
+  for (const m of ['هل رحلتي ملغاة', 'رحلتي ملغية', 'ألغيت رحلتي']) {
+    const r = reply(m, { flight: 'XY-811' }, 'ar');
+    assert.strictEqual(r.meta.intent, 'flightcheck', m + ' must be recognised as a flight change');
+    assert.ok(/شركة الطيران|كاونتر/.test(r.text), m + ' must point to the airline desk');
+  }
+});
+
+test('Arabic routine questions still never delegate', () => {
+  for (const m of ['وين الحمام', 'وين أروح']) {
+    const { text } = reply(m, {}, 'ar');
+    assert.ok(!AR.test(text), m + ' must not send them to staff: ' + text.slice(0, 70));
+  }
+});
+
 console.log('');
 if (failed) { console.log(failed + ' failed, ' + passed + ' passed'); process.exit(1); }
 console.log(passed + ' passed, 0 failed — staff escalation');
