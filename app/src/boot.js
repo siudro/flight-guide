@@ -25,6 +25,7 @@ const { execFileSync } = require('child_process');
 
 const llm = require('./llm');
 const prompts = require('./prompts');
+const voice = require('./voice');
 
 const RULE = '─'.repeat(66);
 
@@ -114,6 +115,13 @@ async function reportConfig(settings, opts) {
       }
     }
   }
+
+  // Voice messages are a separate provider (Cohere) with a separate key, so
+  // they get their own line: a missing COHERE_API_KEY only hides the mic.
+  const vc = voice.config();
+  line('  Voice ........ ' + (vc.enabled
+    ? 'Cohere Transcribe (' + vc.model + ')  key ' + voice.maskKey(vc.apiKey)
+    : 'off — set COHERE_API_KEY to show the microphone'));
 
   line(RULE);
   return cfg;

@@ -19,7 +19,8 @@
 const FEEDS = {
   dmm: {
     name: 'King Fahd International Airport (Dammam)',
-    departures: 'https://kfia.sa/api/aodb/flights?arr_dep=D',
+    // Overridable only so tests can point at a fake board.
+    departures: process.env.FG_DMM_FEED_URL || 'https://kfia.sa/api/aodb/flights?arr_dep=D',
     supported: true
   },
   ruh: { name: 'King Khalid International Airport (Riyadh)', supported: false },

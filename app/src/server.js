@@ -40,11 +40,15 @@ const envResult = env.load([
 ]);
 
 const store = require('./store');
-const { generateReply, detectLanguage, recordTicketInHistory, normalizeTicketFields } = require('./engine');
+const { generateReply, detectLanguage, detectAirport, recordTicketInHistory, normalizeTicketFields } = require('./engine');
 const llm = require('./llm');
 const status = require('./status');
 const prompts = require('./prompts');
 const boot = require('./boot');
+const gatemap = require('./gatemap');
+const voice = require('./voice');
+const weather = require('./weather');
+const watch = require('./watch');
 const DEFAULTS = require('../config/defaults');
 
 const PORT = Number(process.env.PORT || 8080);
@@ -185,6 +189,8 @@ function publicSettings() {
       enabled: !!settings.byKey[s.key]
     })),
     profilesEnabled: settings.profilesEnabled,
+    // Lets the chat hide the microphone when this instance has no Cohere key.
+    voice: { enabled: voice.config().enabled },
     escalateMinutes: settings.escalateMinutes,
     mapVisible: settings.mapVisible,
     airports: settings.airports,
@@ -269,7 +275,8 @@ async function handle(req, res) {
               : !hcfg.enabled ? 'LLM disabled for this provider'
               : null
       },
-      liveFeed: { dammam: true, riyadh: false, jeddah: false }
+      liveFeed: { dammam: true, riyadh: false, jeddah: false },
+      voice: { enabled: voice.config().enabled, provider: 'cohere', model: voice.config().model }
     });
   }
 
@@ -340,18 +347,61 @@ async function handle(req, res) {
     }
   }
 
+  // --- flight watch: alert on changes while the traveller waits -------------
+  // GET /api/watch/:sessionId?lang=en|ar
+  // Polled by the chat every couple of minutes once a Dammam flight is known.
+  // Returns only what changed since the last poll (see src/watch.js).
+  if (p.indexOf('/api/watch/') === 0 && method === 'GET') {
+    const wid = decodeURIComponent(p.split('/')[3] || '');
+    if (!wid || wid.length > 100) return sendJson(res, 400, { ok: false, error: 'session id required' });
+    const wlang = url.searchParams.get('lang') === 'ar' ? 'ar' : 'en';
+    let wsession = sessions.get(wid) || store.loadSession(wid);
+    if (!wsession) return sendJson(res, 404, { ok: false, code: 'NO_SESSION' });
+    const out = await watch.poll({ session: wsession, lang: wlang, findFlight: status.findFlight });
+    if (out.ok) {
+      if (out.intro) {
+        if (!Array.isArray(wsession.history)) wsession.history = [];
+        wsession.history.push({ role: 'assistant', content: out.intro });
+      }
+      if (out.text) {
+        if (!Array.isArray(wsession.history)) wsession.history = [];
+        // `alert` lets a reloaded chat draw it red again.
+        wsession.history.push({ role: 'assistant', content: out.text.slice(0, 900), alert: true });
+        wsession.history = wsession.history.slice(-60);
+        console.log('[watch] ' + wid.slice(0, 8) + ' ' + out.flight.number + ' changes=' +
+          out.changes.map((c) => c.kind + ':' + (c.from != null ? c.from : '') + '->' + c.to).join(','));
+      }
+      sessions.set(wid, wsession);
+      try { store.saveSession(wid, wsession); } catch (_) { /* in memory is enough */ }
+      if (out.changes.some((c) => c.kind === 'gate')) {
+        out.map = settings.mapVisible === false ? null
+          : gatemap.build(wsession.airport || 'dmm', wsession.gate, wlang);
+      }
+      out.session = { gate: wsession.gate || null, flight: wsession.flight || null, airport: wsession.airport || null };
+    }
+    return sendJson(res, 200, out);
+  }
+
   // --- durable chat history -----------------------------------------------
   if (p.indexOf('/api/history/') === 0 && method === 'GET') {
     const hid = decodeURIComponent(p.split('/')[3] || '');
     if (!hid) return sendJson(res, 400, { error: 'session id required' });
-    const stored = store.loadSession(hid);
+    // Memory first: it can be a poll or two newer than the file.
+    const stored = sessions.get(hid) || store.loadSession(hid);
     if (!stored) return sendJson(res, 404, { ok: false, error: 'no such session' });
+    // Everything the chat needs to come back exactly where it was after a
+    // reload: the transcript, the trip card, and whether to resume the watch.
     return sendJson(res, 200, {
       ok: true, sessionId: hid,
       history: Array.isArray(stored.history) ? stored.history : [],
       stage: stored.stage != null ? stored.stage : null,
       flight: stored.flight || null, gate: stored.gate || null,
-      airport: stored.airport || null
+      airport: stored.airport || null,
+      otherAirport: stored.otherAirport || null,
+      terminal: stored.terminal || null,
+      minutes: stored.minutes != null ? stored.minutes : null,
+      bags: stored.bags || null,
+      flightStatus: stored.watch && stored.watch.snapshot ? stored.watch.snapshot.status || null : null
     });
   }
 
@@ -483,6 +533,63 @@ async function handle(req, res) {
       : detectLanguage(message, 'en');
     const profile = body.profile;
 
+    // Some questions are answered from live data fetched BEFORE the engine
+    // writes its reply, so the words and the data cannot disagree:
+    //   "where is my gate?"      -> the gate from the airport's live board
+    //   weather / delay question -> the forecast at both ends of the flight
+    const wantsGate = gatemap.isGateQuestion(message);
+    const wantsWeather = weather.isWeatherQuestion(message) || weather.isDelayQuestion(message);
+    let weatherReport = null;
+    if (wantsGate || wantsWeather) {
+      const t0 = ticketStore.get(sessionId) || null;
+      const fNo = session.flight || (t0 && t0.flight) || null;
+      const msgOther = require('./engine').detectOtherAirport(message);
+      const other = msgOther || (detectAirport(message) ? null : session.otherAirport) || null;
+      // At another airport: no Dammam board lookup; the forecast uses that
+      // airport if we know where it is.
+      const aCode = other ? other.code : (session.airport || detectAirport(message) ||
+        (t0 && String(t0.airport || '').toLowerCase()) || 'dmm');
+      let pre = null;
+      if (fNo && aCode === 'dmm') {
+        try {
+          pre = await status.findFlight(aCode, fNo);
+          if (pre && pre.ok && pre.flight && pre.flight.gate && wantsGate) {
+            session.gate = pre.flight.gate;
+            if (!session.flight) session.flight = fNo;
+            console.log('[map] live gate for ' + fNo + ' -> ' + pre.flight.gate);
+          }
+        } catch (err) {
+          console.log('[status] pre-lookup failed: ' + (err && err.message));
+          pre = null;
+        }
+      }
+      if (wantsWeather) {
+        const lf = pre && pre.ok ? pre.flight : null;
+        // Destination: live board, then ticket, then a city named in the message.
+        const named = weather.resolvePlace(message);
+        const depPlace = weather.resolvePlace(aCode);
+        const destination = (lf && lf.destination) || (t0 && t0.destination) || session.destination ||
+          (named && named !== depPlace ? named : null);
+        try {
+          weatherReport = await weather.report({
+            airport: aCode,
+            destination,
+            departure: lf ? (lf.estimated || lf.scheduled) : null
+          });
+          if (weatherReport.destination && weatherReport.destination.place) {
+            session.destination = weatherReport.destination.place;
+          }
+          console.log('[weather] ' + (weatherReport.ok
+            ? weatherReport.departure.place + (weatherReport.destination ? '->' + weatherReport.destination.place : '') +
+              ' level=' + weatherReport.level
+            : 'unavailable (' + weatherReport.code + ')'));
+        } catch (err) {
+          console.log('[weather] failed: ' + (err && err.message));
+          weatherReport = null;
+        }
+      }
+    }
+
     // The rule engine always runs FIRST. It owns the conversation state, the
     // safety escalation and the "do I have the four facts yet" logic. The model
     // writes the words; it cannot change what the engine decided, so a bad
@@ -496,7 +603,8 @@ async function handle(req, res) {
       langLocked: body.langLocked === true,
       profile,
       session,
-      settings
+      settings,
+      weather: weatherReport
     });
 
     // --- who answers this turn? One log line, always. -----------------------
@@ -507,6 +615,8 @@ async function handle(req, res) {
 
     // Declared outside the block: the response meta reports it afterwards.
     let live = null;
+    // undefined = not decided yet (rules-only turns decide after the block).
+    let mapCard;
 
     if (cfg.enabled && cfg.apiKey) {
       const ticket = ticketStore.get(sessionId) || null;
@@ -522,9 +632,11 @@ async function handle(req, res) {
       // Requiring the traveller to type "I am at Dammam" before any live data
       // appears was the most common complaint: they had to say it twice
       // before the agent would look anything up.
-      const airportCode = result.session.airport
+      const defaultAirport = result.session.airport
         || (ticket && String(ticket.airport || '').toLowerCase())
         || 'dmm';
+      // Not at another airport, where Dammam's board would be the wrong board.
+      const airportCode = result.session.otherAirport ? null : defaultAirport;
       if (!result.session.flight && flightNo) result.session.flight = flightNo;
       if (!result.session.airport && airportCode) result.session.airport = airportCode;
       if (flightNo && airportCode) {
@@ -561,9 +673,18 @@ async function handle(req, res) {
         }
       }
 
+      // Decide the map now, with the live gate in hand, so the model knows a
+      // map is on screen and does not reply "I can't show you a map".
+      mapCard = gatemap.decide({
+        message, meta: result.meta, session: result.session, lang: result.meta.lang, settings
+      });
+      const mapLine = gatemap.describeForModel(mapCard);
+      const toolLines = [mapLine, weatherReport ? weather.toModelLine(weatherReport) : null].filter(Boolean);
+
       const out = await llm.reply({
         config: cfg,
         settings,
+        tools: toolLines.length ? toolLines : undefined,
         lang: result.meta.lang,
         history: session.history || [],
         context: {
@@ -631,6 +752,16 @@ async function handle(req, res) {
     });
     result.session.history = result.session.history.slice(-60);
 
+    if (mapCard === undefined) {
+      mapCard = gatemap.decide({
+        message, meta: result.meta, session: result.session, lang: result.meta.lang, settings
+      });
+    }
+    if (mapCard) {
+      console.log('[map] turn ' + turnNo + ' airport=' + mapCard.airport +
+        ' gate=' + (mapCard.gate || 'none') + ' exact=' + mapCard.exact);
+    }
+
     result.meta.ai = aiMeta;
     result.meta.live = live && live.ok ? {
       gate: live.flight.gate || null,
@@ -665,9 +796,19 @@ async function handle(req, res) {
       console.warn('[chat] log failed: ' + err.message);
     }
 
+    // Mark which bubble is the safety warning, so only it is drawn red.
+    // The model folds everything into one message: then that one is red when
+    // the engine announced the warning this turn.
+    const escText = (DEFAULTS.TEXT[result.meta.lang] || DEFAULTS.TEXT.en).escalate;
+    const outMessages = result.messages.map((m) => Object.assign({}, m, {
+      urgent: aiMeta.used ? !!result.meta.escalationAnnounced : String(m.text).indexOf(escText) === 0
+    }));
+
     return sendJson(res, 200, {
       sessionId,
-      messages: result.messages,
+      messages: outMessages,
+      map: mapCard || null,
+      weather: weatherReport ? weather.toCard(weatherReport, result.meta.lang) : null,
       meta: result.meta,
       session: {
         stage: result.session.stage,
@@ -679,6 +820,33 @@ async function handle(req, res) {
         flight: result.session.flight || null
       }
     });
+  }
+
+  // --- API: voice message -> text (Cohere Transcribe) -----------------------
+  // Body: { audio: base64 WAV, mime: 'audio/wav', lang: 'en'|'ar' }.
+  // Returns only the text; the browser then sends it through /api/chat like
+  // a typed message, so the rule engine still owns the conversation.
+  if (p === '/api/voice') {
+    if (method !== 'POST') return sendJson(res, 405, { error: 'method not allowed' });
+    const vcfg = voice.config();
+    if (!vcfg.enabled) {
+      return sendJson(res, 200, { ok: false, code: 'NOT_CONFIGURED', message: 'Voice messages are not switched on.' });
+    }
+    const body = await readBody(req, Math.ceil(voice.MAX_AUDIO_BYTES * 1.4) + 4096);
+    const b64 = typeof body.audio === 'string' ? body.audio.replace(/^data:[^,]*,/, '') : '';
+    const audio = Buffer.from(b64, 'base64');
+    const out = await voice.transcribe({
+      audio,
+      mime: typeof body.mime === 'string' ? body.mime : 'audio/wav',
+      lang: body.lang === 'ar' ? 'ar' : 'en'
+    });
+    if (!out.ok) {
+      console.log('[voice] failed (' + out.code + '): ' + out.error + '  ' + (out.ms || 0) + 'ms');
+      return sendJson(res, 200, { ok: false, code: out.code });
+    }
+    console.log('[voice] ' + out.lang + '  ' + Math.round(audio.length / 1024) + 'KB  ' +
+      out.ms + 'ms  ' + out.text.length + ' chars');
+    return sendJson(res, 200, { ok: true, text: out.text.slice(0, 1000), lang: out.lang });
   }
 
   // --- API: ticket photo -> fields (vision) --------------------------------

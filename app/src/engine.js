@@ -47,6 +47,8 @@
  */
 
 const { AIRPORTS, TEXT } = require('../config/defaults');
+const gatemap = require('./gatemap');
+const weather = require('./weather');
 
 // ---------------------------------------------------------------------------
 // Small parsing helpers
@@ -90,6 +92,55 @@ function detectAirport(message) {
   return null;
 }
 
+// Airports the app has no specific knowledge of. Named so the traveller is
+// told the truth ("I only know Dammam, Riyadh and Jeddah") instead of being
+// handed Dammam's map, links and live board while standing in Abha.
+const OTHER_AIRPORTS = [
+  ['AHB', 'Abha', 'أبها', 'abha|ابها|أبها'], ['MED', 'Madinah', 'المدينة المنورة', 'madinah|medina|madina|المدينة'],
+  ['TIF', 'Taif', 'الطائف', 'taif|الطائف'], ['GIZ', 'Jazan', 'جازان', 'jazan|jizan|gizan|جازان|جيزان'],
+  ['TUU', 'Tabuk', 'تبوك', 'tabuk|تبوك'], ['ELQ', 'Qassim', 'القصيم', 'qassim|gassim|buraydah|القصيم|بريدة'],
+  ['HOF', 'Al-Ahsa', 'الأحساء', 'ahsa|hofuf|الأحساء|الاحساء'], ['HAS', 'Hail', 'حائل', 'hail|ha\'il|حائل'],
+  ['EAM', 'Najran', 'نجران', 'najran|نجران'], ['ULH', 'AlUla', 'العلا', 'alula|al ula|العلا'],
+  ['YNB', 'Yanbu', 'ينبع', 'yanbu|ينبع'], ['AJF', 'Al-Jouf', 'الجوف', 'jouf|jawf|الجوف'],
+  ['RAE', 'Arar', 'عرعر', 'arar|عرعر'], ['BHH', 'Bisha', 'بيشة', 'bisha|بيشة'],
+  ['ABT', 'Al-Baha', 'الباحة', 'baha|الباحة'], ['SHW', 'Sharurah', 'شرورة', 'sharurah|شرورة'],
+  ['URY', 'Qurayyat', 'القريات', 'qurayyat|القريات'], ['RSI', 'Red Sea International', 'مطار البحر الأحمر', 'red sea international|مطار البحر الأحمر'],
+  ['DXB', 'Dubai', 'دبي', 'dubai|دبي'], ['DOH', 'Doha', 'الدوحة', 'doha|الدوحة'], ['BAH', 'Bahrain', 'البحرين', 'bahrain|البحرين'],
+  ['KWI', 'Kuwait', 'الكويت', 'kuwait|الكويت'], ['CAI', 'Cairo', 'القاهرة', 'cairo|القاهرة'], ['AMM', 'Amman', 'عمّان', 'amman|عمّان']
+];
+
+/**
+ * "I am at Abha airport", "انا في مطار أبها" -> { code, en, ar }.
+ * Only where the traveller IS (at/in/from), never where they are going
+ * ("flying to Dubai" is a destination, not a location).
+ */
+function detectOtherAirport(message) {
+  const m = normalize(message);
+  // A supported airport named only as the destination ("going home to
+  // Riyadh") does not mean the traveller is standing in it.
+  const DEST = /(?:flying|going|travel+ing|heading|home|returning|flight|fly)\s+(?:back\s+|home\s+)?to\s+(?:the\s+)?\S+|(?:مسافر|رايح|راجع|متجه|رحلتي|طالع)\s*(?:إلى|الى|ل)\s*\S+/g;
+  if (detectAirport(m.replace(DEST, ' '))) return null;
+  for (const [code, en, ar, names] of OTHER_AIRPORTS) {
+    const n = '(?:' + names + ')';
+    const here = new RegExp('(?:\\bat|\\bin|\\bfrom)\\s+(?:the\\s+)?(?:airport\\s+(?:of|in)\\s+)?' + n +
+      '|(?:^|\\s)(?:في|من|بمطار|مطار)\\s*' + n);
+    const goingTo = new RegExp('(?:\\bto|إلى|الى)\\s+(?:the\\s+)?(?:مطار\\s*)?' + n);
+    if (here.test(m) && !goingTo.test(m)) return { code, en, ar };
+  }
+  return null;
+}
+
+function otherAirportNote(o, lang) {
+  return lang === 'ar'
+    ? `ليست عندي معلومات خاصة بمطار ${o.ar} — أعرف فقط الدمام والرياض وجدة. سأرشدك بالخطوات العامة التي تنفع في أي مطار، أما البوابة وأي تغيير في رحلتك فشاشات المغادرة وموظفو المطار هناك هم مصدرك.`
+    : `I do not have information specific to ${o.en} airport — I only know Dammam, Riyadh and Jeddah. I will guide you with the general steps that work at any airport; for your gate and any change to your flight, the departure screens and the staff there are your source.`;
+}
+
+/** The app's default: Dammam, unless the traveller said they are elsewhere. */
+function assumeDammam(session) {
+  if (!session.airport && !session.otherAirport) session.airport = 'dmm';
+}
+
 function detectTerminal(message) {
   const m = normalize(message);
   // No leading \b: JavaScript's word boundary does not treat Arabic letters as
@@ -119,14 +170,27 @@ function detectFlight(message) {
   return f[1] + f[2];
 }
 
+// Arabic writes Riyadh's "109B" as "١٠٩ب" or "109 ب": a lone أ/ا/ب straight
+// after the number is the gate's letter, not the start of the next word.
+function withArabicSuffix(id, rest) {
+  const up = id.toUpperCase();
+  if (/[A-Z]/.test(up)) return up;
+  const s = String(rest || '').match(/^\s?([أاب])(?![؀-ۿ])/);
+  return s ? up + (s[1] === 'ب' ? 'B' : 'A') : up;
+}
+
 function detectGate(message) {
   const m = normalize(message);
-  // "gate 404", "gate changed to 404", "new gate is 404", "gate:404"
-  const g = m.match(/(?:gate|بوابة|بوابه)\s*(?:changed|change|is|now|to|became)?\s*(?:to|is|:)?\s*#?\s*([0-9]{2,3}[a-z]?)\b/);
-  if (g) return g[1].toUpperCase();
+  // "gate 404", "gate changed to 404", "new gate is 404", "gate:404",
+  // "my gate, it is 401", and lettered gates as some boards print them ("B7").
+  const GATE_ID = '([a-z][0-9]{1,3}|[0-9]{2,3}[a-z]?)(?![0-9a-z])';
+  const g = m.match(new RegExp('(?:gate|بوابتي|بوابة|بوابه|جيت)\\s*(?:[,:\\-]\\s*)?' +
+    '(?:(?:it|that)\\s*(?:\'s|’s|is)\\s*|number\\s*|no\\.?\\s*|رقم\\s*)?' +
+    '(?:changed|change|is|now|to|became)?\\s*(?:to|is|:)?\\s*#?\\s*' + GATE_ID));
+  if (g) return withArabicSuffix(g[1], m.slice(g.index + g[0].length));
   // "my gate changed to 404" — the number follows the verb, not the noun.
-  const g3 = m.match(/(?:changed|change|moved|new)\s*(?:to|is)?\s*([0-9]{2,3}[a-z]?)\b/);
-  if (g3) return g3[1].toUpperCase();
+  const g3 = m.match(new RegExp('(?:changed|change|moved|new)\\s*(?:to|is)?\\s*' + GATE_ID));
+  if (g3) return withArabicSuffix(g3[1], m.slice(g3.index + g3[0].length));
   // A bare three-digit number is a gate, never minutes — minutes are asked in
   // prose ("120 minutes") and a lone "404" is not a plausible wait.
   // Only consult this fallback when the message is ONLY that number, or when
@@ -482,7 +546,7 @@ function missingField(session) {
   // The airport is never asked. Every session is Dammam: it is the only
   // airport with a live feed, and making a traveller type "I am at Dammam"
   // before anything works was the single most-repeated complaint.
-  if (!session.airport) session.airport = 'dmm';
+  assumeDammam(session);
   if (!session.terminal) return 'terminal';
   if (session.minutes === null || session.minutes === undefined) return 'minutes';
   if (!session.bags) return 'bags';
@@ -577,8 +641,18 @@ function generateReply(state) {
   };
 
   // --- 3. Harvest facts from this message ----------------------------------
-  const airportIn = detectAirport(message);
-  if (airportIn) session.airport = airportIn;
+  const otherIn = detectOtherAirport(message);
+  // "I am at Dubai, going home to Riyadh": the traveller is in Dubai.
+  const airportIn = otherIn ? null : detectAirport(message);
+  if (airportIn) { session.airport = airportIn; session.otherAirport = null; }
+  if (otherIn) {
+    const isNew = !session.otherAirport || session.otherAirport.code !== otherIn.code;
+    session.otherAirport = otherIn;
+    session.airport = null;
+    // Said once, when they first tell us where they are.
+    if (isNew) push(otherAirportNote(otherIn, lang));
+  }
+  const other = session.otherAirport || null;
   const terminalIn = detectTerminal(message);
   if (terminalIn) session.terminal = terminalIn;
   const flightIn = detectFlight(message);
@@ -611,6 +685,65 @@ function generateReply(state) {
   // app and trains the traveller to ignore the red box.
   const announceEscalation = escalated && !session.escalationShown;
   if(announceEscalation) session.escalationShown = true;
+
+  // --- 4a0. Weather ---------------------------------------------------------
+  // The server fetched the forecast before calling us (state.weather), so the
+  // reply is written from real numbers. No forecast -> say so, never invent.
+  if (weather.isWeatherQuestion(message)) {
+    assumeDammam(session);
+    push(weather.toText(state.weather || null, lang));
+    if (announceEscalation) push(TEXT[lang].escalate);
+    return {
+      messages,
+      session,
+      meta: { stage: session.stage, stageKey: 'weather', escalated,
+              escalationAnnounced: !!announceEscalation, intent: 'weather', lang, profile,
+              airport: session.airport, weatherLevel: state.weather && state.weather.ok ? state.weather.level : null }
+    };
+  }
+  // A delay question gets the forecast as an extra line wherever it lands.
+  const weatherNote = weather.isDelayQuestion(message) ? weather.toShortText(state.weather || null, lang) : null;
+
+  // --- 4a. "Where is my gate?" -------------------------------------------
+  // Answered before the glossary, or "what is my gate" would explain what a
+  // gate is. The server attaches a map card to this turn (src/gatemap.js);
+  // the words here never claim a position the map does not pin.
+  if (intent !== 'gatechange' && !session.awaitingGate && gatemap.isGateQuestion(message)) {
+    assumeDammam(session);
+    const gate = session.gate;
+    const hit = gate && session.airport === 'ruh' ? gatemap.findRiyadhGate(gate) : null;
+    let body;
+    if (other) {
+      body = lang === 'ar'
+        ? (gate
+          ? `بوابتك **${gate}**. ليست عندي خريطة لمطار ${other.ar}، فاتبع لوحات «البوابات» المعلّقة في السقف حتى ترى الرقم ${gate}، وتحقّق منه على أقرب شاشة مغادرة. إن لم تجده فاسأل أي موظف.`
+          : `ليست عندي خريطة لمطار ${other.ar}. رقم بوابتك مكتوب على بطاقة الصعود وعلى شاشات المغادرة، وأي موظف يدلّك عليها.`)
+        : (gate
+          ? `Your gate is **${gate}**. I do not have a map of ${other.en} airport, so follow the overhead "Gates" signs until you see ${gate}, and check it on the nearest departure screen. If you cannot find it, ask any staff member.`
+          : `I do not have a map of ${other.en} airport. Your gate is on your boarding pass and on the departure screens, and any staff member can point you to it.`);
+    } else if (gate && hit) {
+      body = lang === 'ar'
+        ? `بوابتك **${gate}**، وهي في ${gatemap.floorLabel(hit.floor, 'ar')}. حدّدتها لك على الخريطة تحت هذه الرسالة.\n\nتحقّق من الرقم مرة أخرى على أقرب شاشة مغادرة، فالبوابة قد تتغيّر.`
+        : `Your gate is **${gate}**, on ${hit.floor}. I have pinned it on the map below this message.\n\nCheck the number once more on the nearest departure screen — gates can change.`;
+    } else if (gate) {
+      body = lang === 'ar'
+        ? `بوابتك **${gate}**. وضعت لك المطار على الخريطة تحت هذه الرسالة، لكن موقع البوابة بالضبط ليس عندي، فلن أخمّنه.\n\nبعد الجوازات اتبع لوحات «البوابات» المعلّقة في السقف حتى ترى الرقم ${gate}، وتحقّق منه على أقرب شاشة مغادرة.`
+        : `Your gate is **${gate}**. I have put the airport on the map below, but I do not have the exact position of that gate, so I will not guess it.\n\nAfter passport control, follow the overhead "Gates" signs until you see ${gate}, and check it on the nearest departure screen.`;
+    } else {
+      body = lang === 'ar'
+        ? 'لا أعرف رقم بوابتك بعد. هو مكتوب على بطاقة الصعود وعلى شاشات المغادرة.\n\nاكتب لي رقم البوابة أو رقم رحلتك، أو صوّر تذكرتك، وسأضعها لك على الخريطة.'
+        : 'I do not know your gate yet. It is printed on your boarding pass and shown on the departure screens.\n\nTell me the gate or your flight number, or send a photo of your ticket, and I will put it on the map.';
+    }
+    push(body);
+    if (announceEscalation) push(TEXT[lang].escalate);
+    return {
+      messages,
+      session,
+      meta: { stage: session.stage, stageKey: 'findgate', escalated,
+              escalationAnnounced: !!announceEscalation, intent: 'findgate',
+              lang, profile, airport: session.airport, gate: gate || null, exact: !!hit }
+    };
+  }
 
   // --- 4b. Answer a question before asking anything -------------------------
   // A traveller who writes "what is a terminal" is stuck, not confused about
@@ -703,8 +836,18 @@ function generateReply(state) {
   // Before onboarding, on purpose. Someone asking "where do I go" wants a
   // URL, not four questions first. A link is never wrong, so it needs no
   // personalisation.
+  if (intent === 'directions' && other) {
+    push(lang === 'ar'
+      ? `ليست عندي خريطة لمطار ${other.ar}. لوحات الإرشاد في المطار وشاشات المغادرة هي دليلك، ومكتب الاستعلامات أو أي موظف يدلّك على الطريق.`
+      : `I do not have a map of ${other.en} airport. The signs and departure screens there are your guide, and the information desk or any staff member can show you the way.`);
+    return {
+      messages, session,
+      meta: { stage: session.stage, stageKey: 'directions', escalated,
+              escalationAnnounced: !!announceEscalation, intent, lang, profile, otherAirport: other.code }
+    };
+  }
   if (intent === 'directions') {
-    if (!session.airport) session.airport = 'dmm';
+    assumeDammam(session);
     const L = DIRECTIONS_LINKS[lang] || DIRECTIONS_LINKS.en;
     push(L.intro);
     push(L.map);
@@ -728,13 +871,25 @@ function generateReply(state) {
   if (intent === 'flightcheck') {
     const hasCountdown = session.minutes != null || (session.boarding && session.flight);
     const reportsEvent = /(cancel|missed|miss my flight|final call|gate closed|ألغيت|الغيت|فاتت|فاتتني|النداء الأخير|ملغاة)/i.test(message);
+    if ((!hasCountdown || reportsEvent) && other) {
+      push(lang === 'ar'
+        ? `لا أستطيع قراءة شاشة مغادرة مطار ${other.ar}. انظر إلى أقرب شاشة مغادرة${session.flight ? ' وابحث عن رحلتك ' + session.flight : ''}، أو اسأل مكتب شركة الطيران. أخبرني بما تراه وسأقول لك ماذا تفعل.`
+        : `I cannot read the departure board at ${other.en} airport. Look at the nearest departure screen${session.flight ? ' for flight ' + session.flight : ''}, or ask your airline's desk. Tell me what it says and I will tell you what to do next.`);
+      if (weatherNote) push(weatherNote);
+      return {
+        messages, session,
+        meta: { stage: session.stage, stageKey: 'flightcheck', escalated,
+                escalationAnnounced: !!announceEscalation, intent, lang, profile, otherAirport: other.code }
+      };
+    }
     if (!hasCountdown || reportsEvent) {
-      if (!session.airport) session.airport = 'dmm';
+      assumeDammam(session);
     const L = DIRECTIONS_LINKS[lang] || DIRECTIONS_LINKS.en;
     push(L.checkIntro);
     push(L.departures);
     if (session.flight) push(L.checkFlight + session.flight);
     push(L.checkPlan);
+    if (weatherNote) push(weatherNote);
     return {
       messages,
       session,
@@ -882,6 +1037,8 @@ function generateReply(state) {
     if (note && !alreadySaid) push(note);
   }
 
+  if (weatherNote) push(weatherNote);
+
   // Concern acknowledged once, in the traveller's own words, without raising fear.
   if (session.concern === 'queue' && profile !== 'hurried') {
     push(lang === 'ar'
@@ -1003,6 +1160,7 @@ module.exports = {
   generateReply,
   detectLanguage,
   detectAirport,
+  detectOtherAirport,
   detectMinutes,
   detectBags,
   normalizeTicketFields,
