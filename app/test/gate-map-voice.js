@@ -90,11 +90,14 @@ test('unknown gate: asks for it, still shows the airport', () => {
   assert.ok(/do not know your gate/.test(text));
 });
 
-test('Jeddah has no official map link, so the card never points to one', () => {
+test('Jeddah has no official map link, so the card points at signs, not staff', () => {
   const j = gatemap.build('jed', '22', 'en');
   assert.strictEqual(j.officialMap, null);
-  assert.ok(!/airport's own map/.test(j.note) && /ask any staff/.test(j.note), j.note);
-  assert.ok(/اسأل أي موظف/.test(gatemap.build('jed', '22', 'ar').note));
+  // WAI-246 follow-up: "ask any staff" was replaced with a concrete direction.
+  assert.ok(!/airport's own map/.test(j.note), j.note);
+  assert.ok(/departure screen|Gates/i.test(j.note), j.note);
+  assert.ok(!/[Aa]sk any staff/.test(j.note), 'must not redirect to staff: ' + j.note);
+  assert.ok(!/اسأل أي موظف/.test(gatemap.build('jed', '22', 'ar').note), 'Arabic must not redirect either');
   assert.ok(/own map/.test(gatemap.build('dmm', '22', 'en').note));
 });
 

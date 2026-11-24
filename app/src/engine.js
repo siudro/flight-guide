@@ -133,7 +133,7 @@ function detectOtherAirport(message) {
 function otherAirportNote(o, lang) {
   return lang === 'ar'
     ? `ليست عندي معلومات خاصة بمطار ${o.ar} — أعرف فقط الدمام والرياض وجدة. سأرشدك بالخطوات العامة التي تنفع في أي مطار، أما البوابة وأي تغيير في رحلتك فشاشات المغادرة وموظفو المطار هناك هم مصدرك.`
-    : `I do not have information specific to ${o.en} airport — I only know Dammam, Riyadh and Jeddah. I will guide you with the general steps that work at any airport; for your gate and any change to your flight, the departure screens and the staff there are your source.`;
+    : `I do not have information specific to ${o.en} airport — I only know Dammam, Riyadh and Jeddah. I will guide you with the general steps that work at any airport; for your gate and any change to your flight, the departure screens are your source.`;
 }
 
 /** The app's default: Dammam, unless the traveller said they are elsewhere. */
@@ -256,6 +256,10 @@ function detectConcern(message) {
 
 // The airport's own pages. Handed over verbatim when someone asks the way:
 // a link they can tap beats any description we could write.
+// A cancellation or a missed flight is the one case where a person is
+// genuinely required — only the airline can rebook.
+const USER_SAYS_CANCELLED = /(cancel+ed|missing my flight|missed my flight|missed it|i missed|فاتت|فاتتني|ألغيت|الغيت|ملغاة|ملغا)/i;
+
 const DIRECTIONS_LINKS = {
   en: {
     intro: 'Here is the airport\'s own map, straight from King Fahd International. Open it on your phone:',
@@ -263,7 +267,10 @@ const DIRECTIONS_LINKS = {
     departures: 'Live departures (gates and delays): https://kfia.sa/ar/Flights#departures',
     checkIntro: 'If you think something has changed with your flight, this is the airport\'s own departure board — it is the most current answer there is:',
     checkFlight: 'Your flight on that board: ',
-    checkPlan: 'Look for your flight number. If it says delayed, final call or cancelled, tell me what it says and I will tell you what to do next.'
+    checkPlan: 'Look for your flight number. If it says delayed, final call or cancelled, tell me what it says and I will tell you what to do next.',
+    // A cancellation or a missed flight is the one case that genuinely needs a
+    // person: only the airline can rebook. Say it here, once, not everywhere.
+    checkIfBad: 'If it is cancelled or you have missed it, go to your airline\'s desk — only they can put you on another flight. Tell me and I will walk you there.'
   },
   ar: {
     intro: 'هذه خريطة المطار الرسمية مباشرة من مطار الملك فهد الدولي. افتحها على جهازك:',
@@ -271,7 +278,8 @@ const DIRECTIONS_LINKS = {
     departures: 'المغادرة المباشرة (البوابات والتأخير): https://kfia.sa/ar/Flights#departures',
     checkIntro: 'إذا كنت تعتقد أن شيئًا تغيّر في رحلتك، فهذه شاشة مغادرة المطار الرسمية — وهي أحدث جواب متاح:',
     checkFlight: 'رحلتك على هذه الشاشة: ',
-    checkPlan: 'ابحث عن رقم رحلتك. إن كانت مؤجّلة أو النداء الأخير أو ملغاة، أخبرني بما تراه وسأخبرك بما تفعله بعد ذلك.'
+    checkPlan: 'ابحث عن رقم رحلتك. إن كانت مؤجّلة أو النداء الأخير أو ملغاة، أخبرني بما تراه وسأخبرك بما تفعله بعد ذلك.',
+    checkIfBad: 'إن كانت ملغاة أو فاتتك، فتوجّه إلى كاونتر شركة الطيران — هم الوحيدون القادرون على حجزك على رحلة أخرى. أخبرني وأنا أمشي معك إلى هناك.'
   }
 };
 
@@ -472,7 +480,7 @@ const VOICE = {
       },
       close: (i) => {
         const lines = [
-          'Read it once, then do just that one thing. Tell me when you are through and I will give you the next step. If anything feels wrong, any staff member in uniform will help — that is what they are there for.',
+          'Read it once, then do just that one thing. Tell me when you are through and I will give you the next step. If anything feels unclear, just tell me — I will say it again in simpler words.',
           'One thing at a time — you do not need to think about the rest yet. Say "done" and I will take you on.',
           'Nothing here is complicated once you are standing at it. Tell me when it is finished.',
           'You are not behind. Say "done" when you are through and we will keep moving.',
@@ -496,7 +504,7 @@ const VOICE = {
       },
       close: (i) => {
         const lines = [
-          'اقرأها مرة واحدة، ثم نفّذ هذا الشيء الواحد فقط. أخبرني عندما تنتهي وسأعطيك الخطوة التالية. وإن شعرت بأي شيء غير طبيعي فتوجّه إلى أي موظف بالزي الرسمي.',
+          'اقرأها مرة واحدة، ثم نفّذ هذا الشيء الواحد فقط. أخبرني عندما تنتهي وسأعطيك الخطوة التالية. وإن لم يكن شيء واضحًا قل لي — سأعيده بكلمات أبسط.',
           'خطوة واحدة في كل مرة، لا داعي للتفكير في الباقي الآن. قل «تم» وسأكمل معك.',
           'لا شيء هنا صعب عندما تكون واقفًا عنده. أخبرني عندما تنتهي.',
           'أنت لست متأخرًا. قل «تم» عندما تنتهي وسنكمل.',
@@ -716,11 +724,11 @@ function generateReply(state) {
     if (other) {
       body = lang === 'ar'
         ? (gate
-          ? `بوابتك **${gate}**. ليست عندي خريطة لمطار ${other.ar}، فاتبع لوحات «البوابات» المعلّقة في السقف حتى ترى الرقم ${gate}، وتحقّق منه على أقرب شاشة مغادرة. إن لم تجده فاسأل أي موظف.`
-          : `ليست عندي خريطة لمطار ${other.ar}. رقم بوابتك مكتوب على بطاقة الصعود وعلى شاشات المغادرة، وأي موظف يدلّك عليها.`)
+          ? `بوابتك **${gate}**. ليست عندي خريطة لمطار ${other.ar}، فاتبع لوحات «البوابات» المعلّقة في السقف حتى ترى الرقم ${gate}، وتحقّق منه على أقرب شاشة مغادرة.`
+          : `ليست عندي خريطة لمطار ${other.ar}. رقم بوابتك مكتوب على بطاقة الصعود وعلى شاشات المغادرة — اتبع لوحات «البوابات».`)
         : (gate
-          ? `Your gate is **${gate}**. I do not have a map of ${other.en} airport, so follow the overhead "Gates" signs until you see ${gate}, and check it on the nearest departure screen. If you cannot find it, ask any staff member.`
-          : `I do not have a map of ${other.en} airport. Your gate is on your boarding pass and on the departure screens, and any staff member can point you to it.`);
+          ? `Your gate is **${gate}**. I do not have a map of ${other.en} airport, so follow the overhead "Gates" signs until you see ${gate}, and check it on the nearest departure screen.`
+          : `I do not have a map of ${other.en} airport. Your gate is on your boarding pass and on the departure screens — follow the overhead "Gates" signs.`);
     } else if (gate && hit) {
       body = lang === 'ar'
         ? `بوابتك **${gate}**، وهي في ${gatemap.floorLabel(hit.floor, 'ar')}. حدّدتها لك على الخريطة تحت هذه الرسالة.\n\nتحقّق من الرقم مرة أخرى على أقرب شاشة مغادرة، فالبوابة قد تتغيّر.`
@@ -838,8 +846,8 @@ function generateReply(state) {
   // personalisation.
   if (intent === 'directions' && other) {
     push(lang === 'ar'
-      ? `ليست عندي خريطة لمطار ${other.ar}. لوحات الإرشاد في المطار وشاشات المغادرة هي دليلك، ومكتب الاستعلامات أو أي موظف يدلّك على الطريق.`
-      : `I do not have a map of ${other.en} airport. The signs and departure screens there are your guide, and the information desk or any staff member can show you the way.`);
+      ? `ليست عندي خريطة لمطار ${other.ar}. لوحات الإرشاد في المطار وشاشات المغادرة هي دليلك — اتبعها.`
+      : `I do not have a map of ${other.en} airport. The signs and departure screens there are your guide — follow them.`);
     return {
       messages, session,
       meta: { stage: session.stage, stageKey: 'directions', escalated,
@@ -884,18 +892,19 @@ function generateReply(state) {
     }
     if (!hasCountdown || reportsEvent) {
       assumeDammam(session);
-    const L = DIRECTIONS_LINKS[lang] || DIRECTIONS_LINKS.en;
-    push(L.checkIntro);
-    push(L.departures);
-    if (session.flight) push(L.checkFlight + session.flight);
-    push(L.checkPlan);
-    if (weatherNote) push(weatherNote);
-    return {
-      messages,
-      session,
-      meta: { stage: session.stage, stageKey: 'flightcheck', escalated,
-              escalationAnnounced: !!announceEscalation, intent, lang, profile,
-              links: true, flight: session.flight || null }
+      const L = DIRECTIONS_LINKS[lang] || DIRECTIONS_LINKS.en;
+      push(L.checkIntro);
+      push(L.departures);
+      if (session.flight) push(L.checkFlight + session.flight);
+      push(L.checkPlan);
+      if (USER_SAYS_CANCELLED.test(message)) push(L.checkIfBad);
+      if (weatherNote) push(weatherNote);
+      return {
+        messages,
+        session,
+        meta: { stage: session.stage, stageKey: 'flightcheck', escalated,
+                escalationAnnounced: !!announceEscalation, intent, lang, profile,
+                links: true, flight: session.flight || null }
       };
     }
   }
