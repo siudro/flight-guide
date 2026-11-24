@@ -64,6 +64,14 @@ It **asks before advising**. Four onboarding questions — which airport, which 
 - **Adult, first international flight** — efficient, full detail
 - **Experienced / hurried** — fast, next action only, plus the one after
 
+**Where is my gate?** The answer comes with a map. At Riyadh the gate is pinned on the airport's own indoor map data; at Dammam and Jeddah the map shows the airport and the gate number (live from the Dammam departure board) with a link to the airport's own map — the app never draws a gate where it has not verified one.
+
+**Voice:** tap the microphone and speak, in Arabic or English. Cohere Transcribe turns it into text (set `COHERE_API_KEY`), and the reply is read back aloud by the phone's own voice.
+
+**Weather and alerts:** ask "will there be a sandstorm?" or "will my flight be delayed?" and the agent checks the forecast at both ends of the flight (Open-Meteo) — a heads-up, never a promise. Once it knows a Dammam flight, it watches the airport's live board and tells the traveller the moment the gate, time or status changes.
+
+**Show this to staff:** one tap opens a full-screen card in Arabic and English — "first flight, travelling alone, please help me get to my gate" with the flight, gate and boarding time — to hand to anyone in uniform.
+
 **Escalation:** under 60 minutes to boarding (adjustable in `/admin`), the reply leads with *find airport staff immediately*. Safe first, navigated second.
 
 ## Honesty about what is verified

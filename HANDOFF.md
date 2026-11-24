@@ -27,6 +27,56 @@ app/
 to say; the model only decides *how* to say it. A model failure always falls
 back to the deterministic reply. The traveller never gets a dead end.
 
+### Gate map and voice (added 2026-11)
+
+- **Gate map.** When the traveller asks where their gate is ("where is my gate",
+  "وين بوابتي", "gate 404 where is it") or reports a gate change with the new
+  number, `/api/chat` returns a `map` object and the chat draws it under the
+  reply (Leaflet + OpenStreetMap, loaded on first use). `src/gatemap.js`
+  decides. **Riyadh** gates are pinned exactly from `map/mapdata.json`.
+  **Dammam / Jeddah** have no gate coordinates, so the card shows the airport,
+  the gate number and the airport's own map link — never a guessed pin. For
+  Dammam the gate comes from the live kfia.sa feed when the flight is known.
+  The admin "map visible" switch hides these cards too.
+- **Voice.** The mic button records 16 kHz mono WAV in the browser (Cohere
+  accepts wav/flac/mp3/ogg, not the webm/mp4 MediaRecorder produces), posts it
+  to `/api/voice`, and the server calls Cohere's
+  `POST /v2/audio/transcriptions` with the UI language (`en`/`ar`). The text
+  is then sent as an ordinary chat message. The microphone needs HTTPS.
+- **Read aloud.** Replies are spoken with the browser's own voice (Web Speech
+  API) when "Read aloud" is on, and always after a voice message. No key.
+- **Weather heads-up.** A weather or delay question ("will there be a
+  sandstorm?", "هل في غبار؟", "will my flight be delayed?") fetches the
+  Open-Meteo forecast (free, no key for non-commercial use) for the departure
+  airport around departure time and the destination over the next hours, and
+  shows a weather card. Thunderstorms, fog, sand/dust storms, strong gusts,
+  heavy rain and snow are flagged. It never says a flight WILL be delayed —
+  every answer sends the traveller back to the departure board. Destination
+  comes from the live board, the ticket, or a city named in the message
+  (`src/weather.js` has the airport list).
+- **Flight-change alerts.** Once a Dammam flight number is known, the chat
+  polls `GET /api/watch/:sessionId` every 2 minutes while the page is open.
+  The server compares the live board with the last snapshot and the chat
+  announces gate changes, status changes (boarding, final call, cancelled)
+  and delays of 10+ minutes: red message, vibration, read aloud if on, a map
+  for a new gate, and a phone notification if the traveller allowed it
+  (`public/sw.js` exists only for that; it caches nothing).
+- **Show this to staff.** "Ask staff" in the top bar (and a button under every
+  urgent message) opens a full-screen card in Arabic and English: first
+  flight, travelling alone, please help me reach my gate, plus flight, gate,
+  boarding time, terminal and airport. Fixed text, never written by the model. After a cancellation it asks for the airline desk instead; at
+  final call it asks for help to hurry.
+- **Reload-safe.** On load the chat asks `/api/history/:sessionId` for the
+  stored conversation and redraws it (alerts stay red), refills the trip
+  card and resumes the flight watch. Phones reload background tabs often.
+- **Red means danger.** Only the "boarding is close, find staff" warning
+  and flight alerts are red; the server marks it per message (`urgent`).
+- **Other airports.** "I am at Abha / in Madinah / at Dubai airport" is
+  recognised (`OTHER_AIRPORTS` in `src/engine.js`). The traveller is told
+  once that the app only knows Dammam, Riyadh and Jeddah, and gets general
+  steps — never Dammam's map, links, live board or flight watch. Naming a
+  destination ("flying to Dubai") does not count.
+
 ---
 
 ## 2. Deploy in five steps
@@ -70,6 +120,12 @@ Then point the Okal subdomain at port **8080** and terminate TLS upstream.
 | `FG_STATUS_TTL_MS` | `90000` | Live departures cache window. |
 | `FG_STATUS_TIMEOUT_MS` | `12000` | Live feed timeout. |
 | `FG_MAX_CONVERSATIONS` | `200` | Rotating operator log. |
+| `COHERE_API_KEY` | — | Optional. Turns on voice messages (Cohere Transcribe). Without it the mic button is hidden. Server-side only. |
+| `COHERE_TRANSCRIBE_MODEL` | `cohere-transcribe-03-2026` | Cohere speech-to-text model. |
+| `VOICE_TIMEOUT_MS` | `20000` | Per-recording timeout before the traveller is asked to retry or type. |
+| `FG_WEATHER_TTL_MS` | `900000` | Forecast cache per airport (15 min). |
+| `FG_WEATHER_TIMEOUT_MS` | `8000` | Open-Meteo timeout; on failure the reply says the weather could not be checked. |
+| `FG_WATCH_DELAY_STEP` | `10` | Minimum delay change (minutes) worth an alert. |
 
 ---
 
@@ -116,6 +172,8 @@ first, then add it to `FEEDS` in `src/status.js`.
 | `GET /api/history/:sessionId` | stored transcript for a session |
 | `POST /api/chat` | one turn |
 | `POST /api/ticket` | ticket photo → extracted fields (vision) |
+| `POST /api/voice` | voice recording (16 kHz WAV, base64) → text, via Cohere Transcribe |
+| `GET /api/watch/:sessionId` | flight-change check for the traveller's Dammam flight (polled by the chat) |
 | `GET /admin` | operator panel (settings, key test, logs) |
 
 ---
