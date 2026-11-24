@@ -148,8 +148,8 @@ function build(airportCode, gate, lang) {
         : `Gate ${g} is pinned on the map, ${hit.floor}. Grey pins are the other gates.`;
     } else if (g) {
       card.note = L === 'ar'
-        ? `البوابة ${g} ليست في بيانات خريطتنا. هذه كل البوابات التي نعرف مواقعها — اتبع اللوحات أو اسأل موظفًا.`
-        : `Gate ${g} is not in our map data. These are all the gates we have positions for — follow the overhead signs or ask staff.`;
+        ? `البوابة ${g} ليست في بيانات خريطتنا. هذه كل البوابات التي نعرف مواقعها — اتبع لوحات «البوابات» وتحقّق من أقرب شاشة مغادرة.`
+        : `Gate ${g} is not in our map data. These are all the gates we have positions for — follow the overhead "Gates" signs and check the nearest departure screen.`;
     } else {
       card.note = L === 'ar'
         ? 'هذه بوابات الصعود في مطار الرياض. أخبرني رقم بوابتك وسأحدّدها لك.'
@@ -161,8 +161,8 @@ function build(airportCode, gate, lang) {
     card.pins.push({ lat: a.center[0], lon: a.center[1], kind: 'airport', label: a.short.en, labelAr: a.short.ar });
     if (g) {
       card.note = L === 'ar'
-        ? `بوابتك ${g}. مواقع البوابات داخل هذا المطار ليست على خريطتنا بعد، فلا أحدّد مكانًا لم أتحقق منه. بعد الجوازات اتبع لوحات «البوابات»${a.officialMap ? '، أو افتح خريطة المطار الرسمية' : '، أو اسأل أي موظف'}.`
-        : `Your gate is ${g}. Gate positions inside this airport are not on our map yet, so I will not pin a place I have not verified. After passport control, follow the overhead "Gates" signs${a.officialMap ? ', or open the airport\'s own map' : ', or ask any staff member'}.`;
+        ? `بوابتك ${g}. مواقع البوابات داخل هذا المطار ليست على خريطتنا بعد، فلا أحدّد مكانًا لم أتحقق منه. بعد الجوازات اتبع لوحات «البوابات»${a.officialMap ? '، أو افتح خريطة المطار الرسمية' : '، وتحقّق من أقرب شاشة مغادرة'}.`
+        : `Your gate is ${g}. Gate positions inside this airport are not on our map yet, so I will not pin a place I have not verified. After passport control, follow the overhead "Gates" signs${a.officialMap ? ', or open the airport\'s own map' : ', and check the nearest departure screen'}.`;
     } else {
       card.note = L === 'ar'
         ? 'رقم بوابتك على بطاقة الصعود وعلى شاشات المغادرة. أخبرني به أو صوّر تذكرتك.'
