@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flight Guide — First Gate, Alone</title>
+<meta name="description" content="Flight Guide walks a first-time international traveller through check-in, security, passport control and customs to the boarding gate.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+           stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 3 10.5 13.5M21 3l-7 18-3.5-7.5L3 10l18-7Z"/>
+      </svg>
+    </span>
+    <span class="brand-text">
+      <strong>Flight Guide</strong>
+      <span data-i18n="tagline">First international flight? Walk with me.</span>
+    </span>
+  </div>
+
+  <nav class="topbar-actions" aria-label="Controls">
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="seg-btn on">EN</button>
+      <button type="button" data-lang="ar" class="seg-btn">ع</button>
+    </div>
+    <a class="ghost-btn" id="airportLink" href="https://kfia.sa/ar/Guide/Passenger/airport-map"
+       target="_blank" rel="noopener" data-i18n="airportMapLink"
+       data-i18n-title="airportMapTitle" title="King Fahd International — official airport map">Official airport map ↗</a>
+    <!-- A full-screen card in Arabic AND English that the traveller can hand
+         to any member of staff: who they are, their flight, gate and time. -->
+    <button type="button" id="staffBtn" class="walk-btn staff-btn">
+      <span aria-hidden="true" class="speak-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="7" r="3.2"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg></span>
+      <span data-i18n="staffBtn">Ask staff</span>
+    </button>
+    <!-- Read replies aloud with the phone's own voice (Web Speech API).
+         Hidden by chat.js when the browser has no speech synthesis. -->
+    <button type="button" id="speakToggle" class="walk-btn speak-btn" aria-pressed="false" hidden>
+      <span aria-hidden="true" class="speak-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></span>
+      <span data-i18n="speakLabel">Read aloud</span>
+    </button>
+    <button type="button" id="walkingToggle" class="walk-btn" aria-pressed="false">
+      <span class="walk-dot" aria-hidden="true"></span>
+      <span data-i18n="driveMode">Walking mode</span>
+    </button>
+  </nav>
+</header>
+
+<main class="layout" id="layout">
+
+  <!-- First screen. The chat is hidden until a category is chosen, so the
+       choice cannot be missed or confused with the sidebar card. -->
+  <section class="welcome-screen" id="welcomeScreen" aria-labelledby="wsHeading">
+    <div class="ws-inner">
+      <h1 id="wsHeading" class="ws-heading" data-i18n="wsHeading">Who is travelling?</h1>
+      <p class="ws-lead" data-i18n="wsSub">I will talk to you differently depending on what you pick. You can change it later.</p>
+      <div class="ws-options" id="wsOptions" role="radiogroup" aria-labelledby="wsHeading"></div>
+      <p class="ws-foot" data-i18n="wsFoot">Flight Guide walks you from the airport door to your boarding gate.</p>
+    </div>
+  </section>
+
+  <!-- ---------------------------------------------------------------- -->
+  <aside class="sidebar" id="sidebar">
+    <section class="card" id="tripCard">
+      <h2 data-i18n="tripHeading">Your trip so far</h2>
+      <dl id="trip" class="trip"></dl>
+    </section>
+
+    <section class="card" id="profileCard">
+      <h2 data-i18n="profileHeading">How should I talk to you?</h2>
+      <p class="hint" data-i18n="profileHint">You can change this at any time.</p>
+      <div id="profiles" class="profile-list" role="radiogroup" aria-label="Communication profile"></div>
+    </section>
+
+    
+    <section class="card note" id="noteCard">
+      <p data-i18n="simNote">Live gates and delays come from Dammam airport directly. Riyadh and Jeddah are not connected yet. Always confirm on the departure screen, and staff are your fastest route for anything unexpected.</p>
+    </section>
+  </aside>
+
+  <!-- ---------------------------------------------------------------- -->
+  <section class="chat-panel" id="chatPanel">
+    <div id="messages" class="messages" aria-live="polite"></div>
+
+    <div id="quick" class="quick"></div>
+
+    <form id="composer" class="composer" autocomplete="off">
+      <label for="input" class="sr-only" data-i18n="inputLabel">Your message</label>
+      <!-- Ticket photo. capture="environment" opens the rear camera directly
+           on a phone; on desktop the browser falls back to a file picker.
+           The image is sent to OUR server, which holds the API key. -->
+      <input id="photo-input" class="sr-only" type="file" accept="image/*"
+             capture="environment" aria-label="Ticket photo" data-i18n-aria="photo">
+      <button type="button" id="photo-btn" class="attach" aria-label="Ticket photo"
+              data-i18n-aria="photo" data-i18n-title="photoTitle" title="Photo of your ticket">
+        <span aria-hidden="true"><svg viewBox="0 0 24 24" width="21" height="21" fill="none"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8.5h3l1.3-2h7.4l1.3 2h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1Z"/>
+          <circle cx="12" cy="13.2" r="3.4"/></svg></span>
+        <span class="attach-label" data-i18n="photo">Ticket photo</span>
+      </button>
+      <textarea id="input" rows="1" data-i18n-placeholder="placeholder"
+                placeholder="Ask me anything about getting to your gate…"></textarea>
+      <!-- Voice message. Recorded as 16 kHz WAV in the browser and turned
+           into text by Cohere Transcribe on OUR server (the key stays there).
+           Hidden by chat.js when the server has no COHERE_API_KEY. -->
+      <button type="button" id="mic-btn" class="attach mic" aria-pressed="false" hidden
+              aria-label="Voice message" data-i18n-aria="micLabel"
+              data-i18n-title="micTitle" title="Tap, speak, tap again to send">
+        <span aria-hidden="true" class="mic-ico"><svg viewBox="0 0 24 24" width="21" height="21" fill="none"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/></svg></span>
+        <span class="mic-time" aria-live="polite"></span>
+      </button>
+      <button type="submit" class="send" aria-label="Send" data-i18n-aria="send">
+        <span aria-hidden="true">→</span>
+      </button>
+    </form>
+
+    
+  </section>
+
+</main>
+
+<script src="/chat.js"></script>
+</body>
+</html>
