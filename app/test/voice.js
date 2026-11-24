@@ -125,6 +125,20 @@ test('the prompt tells the model the reply will be spoken aloud', () => {
   assert.ok(/contractions/i.test(t), 'it should ask for contractions — that is what makes speech sound human');
 });
 
+
+test('a voice the engine rejects cannot break the reply', () => {
+  // Found on a real device-style voice list: assigning a voice object the
+  // engine does not accept throws "Failed to set the 'voice' property", which
+  // aborted the whole reply handler — the traveller saw a network error even
+  // though the answer had arrived. Speech must never break the turn.
+  assert.ok(/try \{ u\.voice = v; \} catch/.test(src),
+    'assigning u.voice must be guarded');
+  assert.ok(/try \{ speech\.speak\(u\); \} catch/.test(src),
+    'speech.speak must be guarded');
+  assert.ok(/try \{ speakText\(/.test(src),
+    'the call site must be guarded too, so a throw cannot abort the handler');
+});
+
 console.log('');
 if (failed) { console.log(failed + ' failed, ' + passed + ' passed'); process.exit(1); }
 console.log(passed + ' passed, 0 failed — voice selection');
