@@ -32,6 +32,22 @@
     <a class="ghost-btn" id="airportLink" href="https://kfia.sa/ar/Guide/Passenger/airport-map"
        target="_blank" rel="noopener" data-i18n="airportMapLink"
        data-i18n-title="airportMapTitle" title="King Fahd International — official airport map">Official airport map ↗</a>
+    <!-- A full-screen card in Arabic AND English that the traveller can hand
+         to any member of staff: who they are, their flight, gate and time. -->
+    <button type="button" id="staffBtn" class="walk-btn staff-btn">
+      <span aria-hidden="true" class="speak-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="7" r="3.2"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg></span>
+      <span data-i18n="staffBtn">Ask staff</span>
+    </button>
+    <!-- Read replies aloud with the phone's own voice (Web Speech API).
+         Hidden by chat.js when the browser has no speech synthesis. -->
+    <button type="button" id="speakToggle" class="walk-btn speak-btn" aria-pressed="false" hidden>
+      <span aria-hidden="true" class="speak-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></span>
+      <span data-i18n="speakLabel">Read aloud</span>
+    </button>
     <button type="button" id="walkingToggle" class="walk-btn" aria-pressed="false">
       <span class="walk-dot" aria-hidden="true"></span>
       <span data-i18n="driveMode">Walking mode</span>
@@ -94,6 +110,17 @@
       </button>
       <textarea id="input" rows="1" data-i18n-placeholder="placeholder"
                 placeholder="Ask me anything about getting to your gate…"></textarea>
+      <!-- Voice message. Recorded as 16 kHz WAV in the browser and turned
+           into text by Cohere Transcribe on OUR server (the key stays there).
+           Hidden by chat.js when the server has no COHERE_API_KEY. -->
+      <button type="button" id="mic-btn" class="attach mic" aria-pressed="false" hidden
+              aria-label="Voice message" data-i18n-aria="micLabel"
+              data-i18n-title="micTitle" title="Tap, speak, tap again to send">
+        <span aria-hidden="true" class="mic-ico"><svg viewBox="0 0 24 24" width="21" height="21" fill="none"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/></svg></span>
+        <span class="mic-time" aria-live="polite"></span>
+      </button>
       <button type="submit" class="send" aria-label="Send" data-i18n-aria="send">
         <span aria-hidden="true">→</span>
       </button>

@@ -81,6 +81,7 @@
       ticketSkip: 'Skip - I will type it',
       driveMode: 'Walking mode',
       driveHint: 'Bigger text, one instruction at a time, screen kept awake.',
+      stepWord: 'Step',
       wsHeading: 'Who is travelling?',
       wsSub: 'I will talk to you differently depending on what you pick. You can change it later.',
       wsFoot: 'Flight Guide walks you from the airport door to your boarding gate.',
@@ -94,7 +95,30 @@
         adult: { name: 'Adult, first international flight', tone: 'Efficient · full detail' },
         hurried: { name: 'Experienced / hurried', tone: 'Direct · next action only' }
       },
-      quick: ['I am at Dammam', 'What is this airport like?', 'My gate changed', 'I am running late']
+      quick: ['I am at Dammam', 'Where is my gate?', 'My gate changed', 'I am running late'],
+      mapGate: 'Gate', mapYourGate: 'Your gate', mapOfficial: 'Airport\'s own map ↗',
+      mapDepartures: 'Live departures ↗', mapFull: 'Full map ↗', mapAirport: 'Airport',
+      mapUnavailable: 'The map could not load. The links below still work.',
+      micLabel: 'Voice message', micTitle: 'Tap, speak, then tap again to send',
+      micListening: 'Listening… tap the microphone again to send.',
+      micReading: 'Turning your voice into text…',
+      micDenied: 'I need permission to use the microphone. Allow it in your browser, or type instead.',
+      micUnsupported: 'This browser cannot record voice. Please type instead.',
+      micShort: 'That was too short to hear. Tap the microphone, speak, then tap it again.',
+      micNoSpeech: 'I could not hear any words. Try again, a little closer to the phone.',
+      micOff: 'Voice messages are not switched on here. Please type instead.',
+      micFailed: 'I could not turn that into text. Please try again or type it.',
+      speakLabel: 'Read aloud',
+      wTitle: 'Weather check', wDeparture: 'Departure', wArrival: 'Arrival',
+      wLevel: ['Nothing that usually slows flights', 'Worth watching', 'May cause delays'],
+      wSource: 'Forecast from Open-Meteo. Only the departure board says if a flight is delayed.',
+      watchIntro: 'I am now watching flight {f} on the Dammam departure board. If the gate, the time or the status changes, I will tell you here straight away — keep this page open.',
+      watchIntroGate: ' Right now it shows gate {g}.',
+      watchNotify: 'Also alert me with a phone notification',
+      watchNotifyOn: 'Phone notifications are on.',
+      watchNotifyNo: 'Notifications are blocked in this browser. I will still alert you here.',
+      notifTitle: 'Flight {f} changed',
+      staffBtn: 'Ask staff', staffShow: 'Show this to staff', staffClose: 'Close'
     },
     ar: {
       tagline: 'أول رحلة دولية؟ سأمشي معك خطوة بخطوة.',
@@ -122,6 +146,9 @@
       unset: '—',
       ticketFirstAr: 'عندك تذكرتك؟ الصورة أسرع - أقرأ منها البوابة والصالة والوقت في ثوانٍ.',
       ticketSkipAr: 'تخطَّ - سأكتبها بنفسي',
+      driveMode: 'وضع المشي',
+      driveHint: 'خط أكبر، تعليمة واحدة في كل مرة، والشاشة تبقى مضاءة.',
+      stepWord: 'الخطوة',
       wsHeading: 'من المسافر؟',
       wsSub: 'سأحدّثك بطريقة مختلفة حسب اختيارك. يمكنك تغييره لاحقًا.',
       wsFoot: 'Flight Guide يمشي معك من باب المطار إلى بوابة الصعود.',
@@ -135,7 +162,30 @@
         adult: { name: 'بالغ في أول رحلة دولية', tone: 'فعّال · بكل التفاصيل' },
         hurried: { name: 'خبير / مستعجل', tone: 'مباشر · الإجراء التالي فقط' }
       },
-      quick: ['أنا في الدمام', 'كيف هو هذا المطار؟', 'تغيّرت بوابتي', 'أنا متأخر']
+      quick: ['أنا في الدمام', 'وين بوابتي؟', 'تغيّرت بوابتي', 'أنا متأخر'],
+      mapGate: 'البوابة', mapYourGate: 'بوابتك', mapOfficial: 'خريطة المطار الرسمية ↗',
+      mapDepartures: 'المغادرة المباشرة ↗', mapFull: 'الخريطة الكاملة ↗', mapAirport: 'المطار',
+      mapUnavailable: 'تعذّر تحميل الخريطة. الروابط أدناه تعمل.',
+      micLabel: 'رسالة صوتية', micTitle: 'اضغط، تكلّم، ثم اضغط مرة ثانية للإرسال',
+      micListening: 'أسمعك… اضغط الميكروفون مرة ثانية للإرسال.',
+      micReading: 'أحوّل صوتك إلى نص…',
+      micDenied: 'أحتاج إذنًا لاستخدام الميكروفون. اسمح به في المتصفح، أو اكتب رسالتك.',
+      micUnsupported: 'هذا المتصفح لا يسجّل الصوت. اكتب رسالتك من فضلك.',
+      micShort: 'التسجيل قصير جدًا. اضغط الميكروفون، تكلّم، ثم اضغطه مرة ثانية.',
+      micNoSpeech: 'لم أسمع كلامًا. حاول مرة ثانية وقرّب الجوال منك.',
+      micOff: 'الرسائل الصوتية غير مفعّلة هنا. اكتب رسالتك من فضلك.',
+      micFailed: 'لم أستطع تحويل الصوت إلى نص. حاول مرة ثانية أو اكتب.',
+      speakLabel: 'قراءة بصوت',
+      wTitle: 'توقعات الطقس', wDeparture: 'المغادرة', wArrival: 'الوصول',
+      wLevel: ['لا شيء يعطّل الطيران عادةً', 'يستحق المتابعة', 'قد يسبب تأخيرًا'],
+      wSource: 'التوقعات من Open-Meteo. شاشة المغادرة وحدها تحدد تأخير الرحلة.',
+      watchIntro: 'أراقب الآن رحلتك {f} على شاشة المغادرة في مطار الدمام. إذا تغيّرت البوابة أو الوقت أو الحالة، سأخبرك هنا فورًا — أبقِ هذه الصفحة مفتوحة.',
+      watchIntroGate: ' البوابة الآن {g}.',
+      watchNotify: 'نبّهني أيضًا بإشعار على الجوال',
+      watchNotifyOn: 'إشعارات الجوال مفعّلة.',
+      watchNotifyNo: 'الإشعارات محظورة في هذا المتصفح. سأنبّهك هنا في المحادثة.',
+      notifTitle: 'تغيير في رحلة {f}',
+      staffBtn: 'اسأل موظف', staffShow: 'اعرض هذا على الموظف', staffClose: 'إغلاق'
     }
   };
 
@@ -475,8 +525,561 @@
     if (el) el.remove();
   }
 
+  // ------------------------------------------------------------------ map
+  // The server decides when a reply carries a map (src/gatemap.js) and sends
+  // a small payload: centre, zoom, pins, a note and the airport's own links.
+  // Leaflet is loaded only the first time a map is needed.
+  var leafletPromise = null;
+  function loadLeaflet() {
+    if (window.L) return Promise.resolve(window.L);
+    if (leafletPromise) return leafletPromise;
+    leafletPromise = new Promise(function (resolve, reject) {
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(css);
+      var js = document.createElement('script');
+      js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      js.onload = function () { window.L ? resolve(window.L) : reject(new Error('leaflet missing')); };
+      js.onerror = function () { leafletPromise = null; reject(new Error('leaflet failed to load')); };
+      document.head.appendChild(js);
+    });
+    return leafletPromise;
+  }
+
+  function addMapCard(card) {
+    if (!card || !card.center) return;
+    var el = document.createElement('div');
+    el.className = 'map-card' + (card.exact ? ' exact' : '');
+    el.setAttribute('dir', state.lang === 'ar' ? 'rtl' : 'ltr');
+
+    var title = card.gate
+      ? (card.exact ? t('mapYourGate') : t('mapGate')) + ' ' + card.gate + (card.floor ? ' · ' + card.floor : '')
+      : card.airportName;
+    var head = document.createElement('div');
+    head.className = 'map-head';
+    head.innerHTML = '<span class="map-pin" aria-hidden="true"></span><span class="map-title"></span>' +
+      '<span class="map-sub"></span>';
+    head.querySelector('.map-title').textContent = title;
+    head.querySelector('.map-sub').textContent = card.gate ? card.airportName : '';
+    el.appendChild(head);
+
+    // Leaflet's controls assume LTR; the canvas stays LTR on an Arabic page.
+    var canvas = document.createElement('div');
+    canvas.className = 'map-canvas';
+    canvas.setAttribute('dir', 'ltr');
+    canvas.setAttribute('role', 'img');
+    canvas.setAttribute('aria-label', title);
+    el.appendChild(canvas);
+
+    if (card.note) {
+      var note = document.createElement('p');
+      note.className = 'map-note';
+      note.setAttribute('dir', 'auto');
+      note.textContent = card.note;
+      el.appendChild(note);
+    }
+
+    var links = document.createElement('div');
+    links.className = 'map-links';
+    function link(href, label) {
+      if (!href) return;
+      var a = document.createElement('a');
+      a.href = href; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = label;
+      links.appendChild(a);
+    }
+    link(card.officialMap, t('mapOfficial'));
+    link(card.departures, t('mapDepartures'));
+    if (card.airport === 'ruh') link('/map', t('mapFull'));
+    el.appendChild(links);
+
+    messagesEl.appendChild(el);
+    scrollDown();
+
+    loadLeaflet().then(function (L) {
+      var map = L.map(canvas, { zoomControl: true, attributionControl: true, scrollWheelZoom: false })
+        .setView(card.center, card.zoom || 16);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+
+      var target = null;
+      (card.pins || []).forEach(function (p) {
+        var label = state.lang === 'ar' && p.labelAr ? p.labelAr : p.label;
+        if (p.kind === 'target') {
+          target = L.marker([p.lat, p.lon], {
+            icon: L.divIcon({ className: 'fg-target', html: '<span></span>', iconSize: [26, 26], iconAnchor: [13, 13] }),
+            zIndexOffset: 1000, title: label
+          }).addTo(map);
+          target.bindTooltip(card.gate, { permanent: true, direction: 'top', offset: [0, -12], className: 'fg-tip' });
+        } else if (p.kind === 'airport') {
+          L.circleMarker([p.lat, p.lon], {
+            radius: 11, color: '#fff', weight: 2.5, fillColor: '#0f2547', fillOpacity: .9
+          }).addTo(map).bindTooltip(label,
+            { permanent: true, direction: 'top', offset: [0, -10], className: 'fg-tip' });
+        } else {
+          L.circleMarker([p.lat, p.lon], {
+            radius: 4.5, color: '#fff', weight: 1, fillColor: '#8b96a3', fillOpacity: .85
+          }).addTo(map).bindPopup('<b>' + esc(label) + '</b><br>' + esc(p.floor || ''));
+        }
+      });
+      // The card was laid out before Leaflet measured it.
+      setTimeout(function () { map.invalidateSize(); if (target) map.setView(card.center, card.zoom); }, 60);
+      scrollDown();
+    }).catch(function () {
+      canvas.classList.add('failed');
+      canvas.textContent = t('mapUnavailable');
+    });
+  }
+
+  // ------------------------------------------------------------ read aloud
+  // The phone's own voice (Web Speech API): free, no key, works offline on
+  // most phones. On when the traveller presses "Read aloud"; a reply to a
+  // voice message is always read, because they may be walking.
+  var speech = window.speechSynthesis || null;
+  var speakBtn = $('#speakToggle');
+  var speakOn = store.local.get('fg.speak') === '1';
+
+  function setSpeak(on) {
+    speakOn = on;
+    store.local.set('fg.speak', on ? '1' : '0');
+    if (speakBtn) speakBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if (!on && speech) speech.cancel();
+  }
+
+  function unlockSpeech() {
+    // iOS only allows speech that a tap started; an empty utterance inside
+    // the tap unlocks the replies that arrive later.
+    if (!speech) return;
+    try { speech.speak(new SpeechSynthesisUtterance('')); } catch (_) {}
+  }
+
+  function pickVoice(lang) {
+    if (!speech) return null;
+    var voices = speech.getVoices() || [];
+    var want = lang === 'ar' ? 'ar' : 'en';
+    return voices.find(function (v) { return v.lang && v.lang.toLowerCase().indexOf(want === 'ar' ? 'ar-sa' : 'en-gb') === 0; })
+      || voices.find(function (v) { return v.lang && v.lang.toLowerCase().indexOf(want) === 0; })
+      || null;
+  }
+
+  function speakText(text, lang) {
+    if (!speech || !text) return;
+    var clean = String(text)
+      .replace(/https?:\/\/\S+/g, lang === 'ar' ? 'الرابط' : 'the link')
+      .replace(/[*_#`>]/g, '')
+      .replace(/\n{2,}/g, '. ')
+      .trim();
+    if (!clean) return;
+    speech.cancel();
+    var u = new SpeechSynthesisUtterance(clean);
+    u.lang = lang === 'ar' ? 'ar-SA' : 'en-GB';
+    var v = pickVoice(lang);
+    if (v) u.voice = v;
+    u.rate = lang === 'ar' ? 0.95 : 1;
+    speech.speak(u);
+  }
+
+  if (speech && speakBtn) {
+    speakBtn.hidden = false;
+    speakBtn.setAttribute('aria-pressed', speakOn ? 'true' : 'false');
+    speakBtn.addEventListener('click', function () {
+      unlockSpeech();
+      setSpeak(!speakOn);
+    });
+    // Chrome fills the voice list asynchronously.
+    try { speech.getVoices(); } catch (_) {}
+  }
+
+  // ------------------------------------------------------------ voice input
+  // Records raw audio and encodes a 16 kHz mono WAV in the browser. That
+  // format works everywhere and is on Cohere's list; MediaRecorder's webm/mp4
+  // are not. One minute is plenty for one question at an airport.
+  var micBtn = $('#mic-btn');
+  var micTime = micBtn ? micBtn.querySelector('.mic-time') : null;
+  var MAX_REC_SECONDS = 60;
+  var TARGET_RATE = 16000;
+  var rec = null;
+  var micBusy = false;
+
+  function micSupported() {
+    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia &&
+      (window.AudioContext || window.webkitAudioContext));
+  }
+
+  function downsample(buffers, inRate) {
+    var length = 0;
+    buffers.forEach(function (b) { length += b.length; });
+    var merged = new Float32Array(length);
+    var off = 0;
+    buffers.forEach(function (b) { merged.set(b, off); off += b.length; });
+    if (inRate === TARGET_RATE) return merged;
+    var ratio = inRate / TARGET_RATE;
+    var outLen = Math.floor(merged.length / ratio);
+    var out = new Float32Array(outLen);
+    for (var i = 0; i < outLen; i++) {
+      // Average the source samples this output sample covers (cheap low-pass).
+      var start = Math.floor(i * ratio), end = Math.min(Math.floor((i + 1) * ratio), merged.length);
+      var sum = 0, n = 0;
+      for (var j = start; j < end; j++) { sum += merged[j]; n++; }
+      out[i] = n ? sum / n : 0;
+    }
+    return out;
+  }
+
+  function encodeWav(samples, rate) {
+    var buf = new ArrayBuffer(44 + samples.length * 2);
+    var v = new DataView(buf);
+    function str(o, s) { for (var i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); }
+    str(0, 'RIFF'); v.setUint32(4, 36 + samples.length * 2, true); str(8, 'WAVE');
+    str(12, 'fmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+    str(36, 'data'); v.setUint32(40, samples.length * 2, true);
+    for (var i = 0, o = 44; i < samples.length; i++, o += 2) {
+      var x = Math.max(-1, Math.min(1, samples[i]));
+      v.setInt16(o, x < 0 ? x * 0x8000 : x * 0x7fff, true);
+    }
+    return new Blob([buf], { type: 'audio/wav' });
+  }
+
+  function blobToBase64(blob) {
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () { resolve(String(r.result).split(',')[1] || ''); };
+      r.onerror = function () { reject(r.error); };
+      r.readAsDataURL(blob);
+    });
+  }
+
+  function setMicState(on) {
+    if (!micBtn) return;
+    micBtn.classList.toggle('rec', on);
+    micBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if (micTime) micTime.textContent = '';
+    inputEl.placeholder = on ? t('micListening') : t('placeholder');
+  }
+
+  function startRecording() {
+    if (!micSupported()) { addBubble(t('micUnsupported'), 'bot'); return; }
+    if (speech) speech.cancel();          // do not record our own voice
+    unlockSpeech();
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    // Created inside the tap: Safari will not start audio otherwise.
+    var ctx = new Ctx();
+    rec = { ctx: ctx, chunks: [], stream: null, started: Date.now(), timer: null, proc: null, src: null };
+    var mine = rec;
+    setMicState(true);
+    navigator.mediaDevices.getUserMedia({
+      audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+    }).then(function (stream) {
+      if (rec !== mine) { stream.getTracks().forEach(function (tr) { tr.stop(); }); return; }
+      mine.stream = stream;
+      if (ctx.state === 'suspended' && ctx.resume) ctx.resume();
+      mine.src = ctx.createMediaStreamSource(stream);
+      mine.proc = ctx.createScriptProcessor(4096, 1, 1);
+      mine.proc.onaudioprocess = function (e) {
+        mine.chunks.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+      };
+      mine.src.connect(mine.proc);
+      mine.proc.connect(ctx.destination);   // the output is silence
+      mine.started = Date.now();
+      mine.timer = setInterval(function () {
+        var s = Math.floor((Date.now() - mine.started) / 1000);
+        if (micTime) micTime.textContent = '0:' + (s < 10 ? '0' : '') + s;
+        if (s >= MAX_REC_SECONDS) stopRecording(true);
+      }, 250);
+    }).catch(function (err) {
+      cleanupRecording(mine);
+      rec = null;
+      setMicState(false);
+      addBubble(err && err.name === 'NotAllowedError' ? t('micDenied') : t('micUnsupported'), 'bot');
+    });
+  }
+
+  function cleanupRecording(r) {
+    if (!r) return;
+    if (r.timer) clearInterval(r.timer);
+    try { if (r.src) r.src.disconnect(); } catch (_) {}
+    try { if (r.proc) r.proc.disconnect(); } catch (_) {}
+    if (r.stream) r.stream.getTracks().forEach(function (tr) { tr.stop(); });
+    try { r.ctx.close(); } catch (_) {}
+  }
+
+  function stopRecording(send_) {
+    var r = rec;
+    rec = null;
+    if (!r) return;
+    var rate = r.ctx.sampleRate;
+    var seconds = (Date.now() - r.started) / 1000;
+    cleanupRecording(r);
+    setMicState(false);
+    if (!send_) return;
+    if (seconds < 0.6 || !r.chunks.length) { addBubble(t('micShort'), 'bot'); return; }
+
+    var wav = encodeWav(downsample(r.chunks, rate), TARGET_RATE);
+    micBusy = true;
+    micBtn.disabled = true;
+    var pending = addBubble(t('micReading'), 'bot');
+    pending.classList.add('pending');
+    blobToBase64(wav)
+      .then(function (b64) {
+        return fetch('/api/voice', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ audio: b64, mime: 'audio/wav', lang: state.lang })
+        });
+      })
+      .then(function (res) { return res.json(); })
+      .then(function (body) {
+        pending.remove();
+        if (body && body.ok && body.text) {
+          send(body.text, { viaVoice: true });
+        } else {
+          var code = body && body.code;
+          addBubble(code === 'NOT_CONFIGURED' ? t('micOff')
+            : code === 'NO_SPEECH' ? t('micNoSpeech') : t('micFailed'), 'bot');
+        }
+      })
+      .catch(function () {
+        pending.remove();
+        addBubble(t('micFailed'), 'bot');
+      })
+      .finally(function () {
+        micBusy = false;
+        micBtn.disabled = false;
+      });
+  }
+
+  if (micBtn) {
+    micBtn.addEventListener('click', function () {
+      if (micBusy) return;
+      if (rec) { stopRecording(true); return; }
+      if (state.busy) return;
+      startRecording();
+    });
+  }
+
+  // --------------------------------------------------------------- weather
+  // Shown under a reply to a weather or delay question. The words come from
+  // the engine; this card only lays the forecast out at a glance.
+  function addWeatherCard(w) {
+    if (!w || !w.rows || !w.rows.length) return;
+    var el = document.createElement('div');
+    el.className = 'weather-card lvl-' + w.level;
+    el.setAttribute('dir', state.lang === 'ar' ? 'rtl' : 'ltr');
+    var levels = t('wLevel');
+    var html = '<div class="w-title">' + esc(t('wTitle')) + '</div>';
+    w.rows.forEach(function (r) {
+      var temp = r.tempMax != null
+        ? (r.tempMin !== r.tempMax ? r.tempMin + '–' + r.tempMax : r.tempMax) + '°C' : '';
+      html += '<div class="w-row lvl-' + r.level + '">' +
+        '<div class="w-place"><span class="w-role">' + esc(r.role === 'destination' ? t('wArrival') : t('wDeparture')) +
+        '</span><b>' + esc(r.name) + '</b>' + (temp ? '<span class="w-temp">' + esc(temp) + '</span>' : '') + '</div>' +
+        '<div class="w-verdict"><span class="w-chip">' + esc(levels[r.level] || '') + '</span>' +
+        (r.reasons && r.reasons.length ? '<span class="w-why">' + esc(r.reasons.join(' · ')) + '</span>' : '') +
+        '</div></div>';
+    });
+    html += '<div class="w-src">' + esc(t('wSource')) + '</div>';
+    el.innerHTML = html;
+    messagesEl.appendChild(el);
+    scrollDown();
+  }
+
+  // ------------------------------------------------------------ staff card
+  // Fixed text in both languages, never the model: a staff member may read
+  // Arabic or English, and the traveller may read neither well.
+  function boardClock() {
+    if (!state.trip.boardAt) return null;
+    var d = new Date(state.trip.boardAt);
+    return (d.getHours() < 10 ? '0' : '') + d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+  }
+
+  function openStaffCard() {
+    var old = document.getElementById('staffCard');
+    if (old) old.remove();
+    var tr = state.trip || {};
+    var code = tr.airportCode;
+    var names = code && AIRPORT_NAMES[code] ? AIRPORT_NAMES[code] : null;
+    var at = boardClock();
+    var soon = tr.boardAt && tr.boardAt - Date.now() < 45 * 60000;
+
+    var rows = [];
+    function row(en, ar, v) { if (v) rows.push('<div class="sc-row"><span class="sc-k">' + esc(en) + ' · <span dir="rtl">' + esc(ar) + '</span></span><span class="sc-v' + (String(v).length > 9 ? ' long' : '') + '" dir="ltr">' + esc(v) + '</span></div>'); }
+    row('Flight', 'الرحلة', tr.flight);
+    if (!tr.cancelled) row('Gate', 'البوابة', tr.gate || '?');
+    row('Boarding', 'الصعود', at);
+    row('Terminal', 'الصالة', tr.terminal);
+    row('Airport', 'المطار', names ? names.en : null);
+
+    // What to ask depends on what the board last said about the flight.
+    var wantAr, wantEn;
+    if (tr.cancelled) {
+      wantAr = '<b>رحلتي ألغيت.</b> أرجو أن تدلّني على مكتب شركة الطيران لأحجز رحلة أخرى.';
+      wantEn = '<b>My flight has been cancelled.</b> Please show me the way to my airline\'s desk so I can get another flight.';
+      soon = false;
+    } else if (tr.finalCall) {
+      wantAr = '<b>رحلتي في النداء الأخير.</b> أرجو مساعدتي للوصول إلى بوابتي بسرعة.';
+      wantEn = '<b>My flight is at final call.</b> Please help me get to my gate quickly.';
+      soon = false;
+    } else {
+      wantAr = esc(tr.gate ? 'أرجو مساعدتي للوصول إلى بوابتي.' : 'أرجو مساعدتي لمعرفة بوابتي والوصول إليها.');
+      wantEn = esc(tr.gate ? 'Please help me get to my gate.' : 'Please help me find my gate and get there.');
+    }
+
+    var el = document.createElement('div');
+    el.id = 'staffCard';
+    el.className = 'staff-card';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-modal', 'true');
+    el.setAttribute('aria-label', t('staffShow'));
+    el.innerHTML =
+      '<div class="sc-inner">' +
+        '<p class="sc-ar" dir="rtl" lang="ar">مرحبًا، هذه أول رحلة دولية لي وأنا مسافر وحدي. ' + wantAr +
+          (soon ? ' <b>رحلتي سيبدأ صعودها قريبًا.</b>' : '') + '</p>' +
+        '<p class="sc-en" dir="ltr" lang="en">Hello — this is my first international flight and I am travelling alone. ' + wantEn +
+          (soon ? ' <b>My flight is boarding soon.</b>' : '') + '</p>' +
+        '<div class="sc-rows">' + rows.join('') + '</div>' +
+        '<p class="sc-thanks"><span dir="rtl">شكرًا لك</span> · <span dir="ltr">Thank you</span></p>' +
+        '<button type="button" class="sc-close">' + esc(t('staffClose')) + ' ✕</button>' +
+      '</div>';
+    document.body.appendChild(el);
+    document.body.classList.add('staff-open');
+    var close = function () {
+      el.remove();
+      document.body.classList.remove('staff-open');
+      document.removeEventListener('keydown', onKey);
+    };
+    var onKey = function (e) { if (e.key === 'Escape') close(); };
+    el.querySelector('.sc-close').addEventListener('click', close);
+    document.addEventListener('keydown', onKey);
+    el.querySelector('.sc-close').focus();
+  }
+
+  function addStaffButton() {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'staff-inline';
+    b.textContent = t('staffShow') + ' ›';
+    b.addEventListener('click', openStaffCard);
+    messagesEl.appendChild(b);
+    scrollDown();
+  }
+
+  var staffBtn = $('#staffBtn');
+  if (staffBtn) staffBtn.addEventListener('click', openStaffCard);
+
+  // ----------------------------------------------------------- flight watch
+  // Once a Dammam flight number is known, poll the airport's live board
+  // through our server and say so the moment the gate, time or status
+  // changes — the traveller should not have to ask. Works while this page is
+  // open (walking mode keeps the screen awake).
+  var WATCH_MS = 120000;
+  var watchState = { flight: null, timer: null, last: 0, busy: false };
+
+  function fill(tpl, vals) {
+    return String(tpl).replace(/\{(\w)\}/g, function (_, k) { return vals[k] != null ? vals[k] : ''; });
+  }
+
+  function stopWatch() {
+    if (watchState.timer) clearInterval(watchState.timer);
+    watchState.timer = null;
+    watchState.flight = null;
+  }
+
+  function maybeStartWatch(sess) {
+    if (!sess || !sess.flight || !state.sessionId) return;
+    if (sess.airport && sess.airport !== 'dmm') { stopWatch(); return; }
+    if (watchState.flight === sess.flight && watchState.timer) return;
+    stopWatch();
+    watchState.flight = sess.flight;
+    pollWatch();
+    watchState.timer = setInterval(pollWatch, WATCH_MS);
+  }
+
+  function swRegistration() {
+    if (!('serviceWorker' in navigator)) return Promise.resolve(null);
+    return navigator.serviceWorker.register('/sw.js').then(function () {
+      return navigator.serviceWorker.ready;
+    }).catch(function () { return null; });
+  }
+
+  function notify(title, body) {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+    var opts = { body: body, icon: '/favicon.svg', tag: 'fg-flight', renotify: true, vibrate: [300, 150, 300] };
+    swRegistration().then(function (reg) {
+      if (reg && reg.showNotification) return reg.showNotification(title, opts);
+      try { new Notification(title, opts); } catch (_) { /* Android needs the service worker */ }
+    });
+  }
+
+  function addWatchIntro(f, serverText) {
+    // The server only sends the intro on the very first poll of a flight and
+    // keeps it in the transcript, so a reload shows it once, from history.
+    var text = serverText || (fill(t('watchIntro'), { f: f.number }) + (f.gate ? fill(t('watchIntroGate'), { g: f.gate }) : ''));
+    var bubble = addBubble(text, 'bot');
+    if ('Notification' in window && Notification.permission === 'default') {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bubble-action';
+      b.textContent = '🔔 ' + t('watchNotify');
+      b.addEventListener('click', function () {
+        Notification.requestPermission().then(function (perm) {
+          b.remove();
+          if (perm === 'granted') { swRegistration(); addBubble(t('watchNotifyOn'), 'bot'); }
+          else addBubble(t('watchNotifyNo'), 'bot');
+        });
+      });
+      bubble.appendChild(document.createElement('br'));
+      bubble.appendChild(b);
+    }
+  }
+
+  function noteStatus(st) {
+    if (!st) return;
+    state.trip.cancelled = /cancel/i.test(st);
+    state.trip.finalCall = !state.trip.cancelled && /final|last call|gate clos/i.test(st);
+  }
+
+  function alertChange(body) {
+    noteStatus(body.flight && body.flight.status);
+    addBubble(body.text, 'bot', { urgent: true });
+    if (body.map) addMapCard(body.map);
+    if (body.urgent || body.changes.some(function (c) { return c.kind === 'gate'; })) addStaffButton();
+    if (body.session && body.session.gate) { state.trip.gate = body.session.gate; renderTrip(); }
+    try { if (navigator.vibrate) navigator.vibrate([300, 150, 300, 150, 300]); } catch (_) {}
+    if (speech && speakOn) speakText(body.text, state.lang);
+    if (document.hidden) {
+      notify(fill(t('notifTitle'), { f: body.flight.number }), body.text.replace(/\*\*/g, '').split('\n\n').slice(1).join(' '));
+    }
+  }
+
+  function pollWatch() {
+    if (!state.sessionId || watchState.busy) return;
+    watchState.busy = true;
+    watchState.last = Date.now();
+    fetch('/api/watch/' + encodeURIComponent(state.sessionId) + '?lang=' + state.lang)
+      .then(function (r) { return r.json(); })
+      .then(function (body) {
+        if (!body || !body.ok) {
+          if (body && (body.code === 'NOT_SUPPORTED' || body.code === 'NO_FLIGHT' || body.code === 'NO_SESSION')) stopWatch();
+          return;    // NOT_FOUND / feed down: keep trying quietly
+        }
+        if (body.baseline) addWatchIntro(body.flight, body.intro);
+        if (body.text) alertChange(body);
+      })
+      .catch(function () { /* offline for a moment: next poll */ })
+      .finally(function () { watchState.busy = false; });
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && watchState.timer && Date.now() - watchState.last > 45000) pollWatch();
+  });
+
   // ------------------------------------------------------------------ chat
-  function send(message) {
+  function send(message, opts) {
+    opts = opts || {};
     anyTurn = true;
     if (state.busy) return;
     message = String(message || '').trim();
@@ -488,7 +1091,8 @@
     state.busy = true;
     formEl.querySelector('.send').disabled = true;
 
-    addBubble(message, 'user');
+    var userBubble = addBubble(message, 'user');
+    if (opts.viaVoice) userBubble.classList.add('voice');
     inputEl.value = '';
     autosize();
     showTyping();
@@ -521,12 +1125,25 @@
         var isDefinition = !!body.meta && body.meta.stageKey === 'explain';
 
         (body.messages || []).forEach(function (m) {
-          // Only the very first bubble of an escalated turn carries the red flag.
+          // Red is kept for the safety warning itself (the server marks it).
+          // Painting every reply red while boarding is near made a real alert
+          // impossible to tell apart from a weather answer.
           addBubble(m.text, 'bot', {
-            urgent: !!body.meta && body.meta.escalated,
+            urgent: m.urgent === true,
             definition: isDefinition
           });
         });
+
+        // "Where is my gate?" — the server attached a map to this turn.
+        if (body.map) addMapCard(body.map);
+        if (body.weather) addWeatherCard(body.weather);
+        // "Find staff now" replies come with the card to show them.
+        if (body.meta && body.meta.escalated && body.meta.escalationAnnounced) addStaffButton();
+
+        if (speech && (speakOn || opts.viaVoice)) {
+          var said = (body.messages || []).map(function (m) { return m.text; }).join('\n\n');
+          speakText(said, (body.meta && body.meta.lang) || state.lang);
+        }
 
         // Auto-follow the reply language, so an Arabic answer renders RTL even
         // if the toggle said English -- unless the traveller pinned a language
@@ -537,16 +1154,28 @@
           applyLanguage();
         }
 
+        var prevTrip = state.trip || {};
         state.trip = {
           stage: body.meta && body.meta.stageName ? body.meta.stageName
-               : (body.session && body.session.stage != null ? 'Step ' + (body.session.stage + 1) : null),
+               : (body.session && body.session.stage != null ? t('stepWord') + ' ' + (body.session.stage + 1) : null),
           airport: body.session && body.session.airport ? aix(body.session.airport) : null,
           terminal: body.session && body.session.terminal,
           minutes: body.session ? body.session.minutes : null,
           bags: body.session ? body.session.bags : null,
-          gate: body.session ? body.session.gate : null
+          gate: body.session ? body.session.gate : null,
+          flight: body.session ? body.session.flight : null,
+          airportCode: body.session ? body.session.airport : null,
+          boardAt: prevTrip.boardAt || null
         };
+        // Boarding as a clock time, fixed when the minutes were first given,
+        // so the staff card does not drift as the conversation goes on.
+        if (state.trip.minutes != null && state.trip.minutes !== prevTrip.minutes) {
+          state.trip.boardAt = Date.now() + state.trip.minutes * 60000;
+        }
+        state.trip.cancelled = prevTrip.cancelled; state.trip.finalCall = prevTrip.finalCall;
+        if (body.meta && body.meta.live) noteStatus(body.meta.live.status);
         renderTrip();
+        maybeStartWatch(body.session);
       })
       .catch(function (err) {
         hideTyping();
@@ -619,6 +1248,8 @@
     .then(function (s) {
       if (s) {
         state.profilesEnabled = s.profilesEnabled || state.profilesEnabled;
+        // The microphone appears only when this server can transcribe.
+        if (micBtn && s.voice && s.voice.enabled && micSupported()) micBtn.hidden = false;
         if (!state.profilesEnabled[state.profile]) {
           state.profile = ['nervous', 'adult', 'hurried'].find(function (p) {
             return state.profilesEnabled[p];
@@ -630,9 +1261,42 @@
     .finally(function () {
       applyLanguage();
       renderWelcomeScreen();
-      addBubble(t('greeting'), 'bot');
-      inputEl.focus();
+      restoreConversation().then(function (restored) {
+        if (!restored) addBubble(t('greeting'), 'bot');
+        inputEl.focus();
+      });
     });
+
+  // A phone reloads background tabs without asking, and a traveller may
+  // refresh by accident. The server keeps the conversation, so bring it back:
+  // the transcript, the trip card and the flight watch. Without this the
+  // alerts silently stopped until the traveller typed again.
+  function restoreConversation() {
+    if (!state.sessionId) return Promise.resolve(false);
+    return fetch('/api/history/' + encodeURIComponent(state.sessionId))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (h) {
+        if (!h || !h.ok || !h.history || !h.history.length) return false;
+        anyTurn = true;
+        h.history.forEach(function (m) {
+          if (!m || !m.content) return;
+          addBubble(m.content, m.role === 'user' ? 'user' : 'bot', { urgent: m.alert === true });
+        });
+        state.trip = {
+          stage: h.stage != null ? t('stepWord') + ' ' + (h.stage + 1) : null,
+          airport: h.airport ? aix(h.airport) : null,
+          airportCode: h.airport || null,
+          terminal: h.terminal, minutes: h.minutes, bags: h.bags, gate: h.gate,
+          flight: h.flight,
+          cancelled: /cancel/i.test(h.flightStatus || ''),
+          finalCall: /final|last call|gate clos/i.test(h.flightStatus || '')
+        };
+        renderTrip();
+        if (!h.otherAirport) maybeStartWatch({ flight: h.flight, airport: h.airport });
+        return true;
+      })
+      .catch(function () { return false; });
+  }
 })();
 
 
