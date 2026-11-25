@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Flight Guide — don't outsource the traveller to staff.
+ * Vibe Flight — don't outsource the traveller to staff.
  *
  * Reported 2026-11-24: "you told the user too much airport staff in every
  * reply don't do that."

@@ -1,5 +1,5 @@
 {
-  "name": "flight-guide",
+  "name": "vibe-flight",
   "version": "0.1.0",
   "private": true,
   "description": "Flight Guide \u2014 first international flight navigation prototype (rule-based, containerised)",

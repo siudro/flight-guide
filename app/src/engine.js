@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Flight Guide reply engine.
+ * Vibe Flight reply engine.
  *
  * THE AI-SWAP BOUNDARY. Everything that decides what the traveller is told
  * lives in this file. The UI and the HTTP layer never build a sentence

@@ -133,7 +133,7 @@ async function boot(settings, opts) {
   const skip = opts.skipTests === true;
 
   line('');
-  line('  Flight Guide — starting up');
+  line('  Vibe Flight — starting up');
   line('');
 
   line('  Running tests…');

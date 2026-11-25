@@ -98,5 +98,17 @@ okIf(/Never focus the composer on load/.test(jsS), 'the reason is documented');
 okIf((jsS.match(/inputEl\.focus\(\)/g) || []).length >= 3,
   'deliberate paths (chat button, category pick, after send) still focus');
 
+
+// The product was renamed to Vibe Flight. A half-rename reads as a bug, so
+// every surface the traveller sees must agree — and the old name must be gone.
+const promptText = require('../src/prompts').build({ lang: 'en', context: {} }).text;
+okIf(/<title>Vibe Flight/.test(htmlS), 'page title says Vibe Flight');
+okIf(/<strong>Vibe Flight<\/strong>/.test(htmlS), 'brand says Vibe Flight');
+okIf(/I am Vibe Flight/.test(jsS), 'the assistant introduces itself as Vibe Flight');
+okIf(/أنا Vibe Flight/.test(jsS), 'and does so in Arabic too');
+okIf(/You are Vibe Flight/.test(promptText), 'the system prompt uses the new name');
+okIf(!/Flight Guide/.test(htmlS) && !/Flight Guide/.test(jsS),
+  'no old name left in the page or chat script');
+
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);
