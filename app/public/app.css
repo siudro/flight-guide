@@ -927,3 +927,55 @@ body.staff-open { overflow: hidden; }
   /* 56px is comfortably above the 44px tap minimum. */
   .chat-launcher { inset-inline-end: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); }
 }
+
+/* ------------------------------------------------- composer swap (phone) --- */
+/* The traveller's sketch: text and voice take turns. Tapping the text box
+   grows it and shrinks the microphone; tapping the microphone grows it and
+   shrinks the text back. The send button stays put so the gesture is always
+   in the same place.
+   Only on a phone: on desktop there is room for everything at once. */
+@media (max-width: 560px) {
+  #photo-btn { transition: flex-basis .18s ease, width .18s ease; }
+
+  /* Text focused: the field takes the room, the microphone becomes an icon. */
+  #composer.fg-text #input { flex: 1 1 auto; }
+  #composer.fg-text #mic-btn {
+    flex: 0 0 40px;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    padding: 0;
+    overflow: hidden;
+  }
+  #composer.fg-text #mic-btn .mic-time { display: none; }
+
+  /* Voice mode: the field collapses to a sliver, the microphone takes over
+     and the button is labelled so the traveller knows it is recording. */
+  /* The field collapses but must stay tappable: it is one of the two ways
+     back to typing, and a zero-width, pointer-events:none input trapped the
+     traveller in voice mode. It keeps a narrow but real tap target. */
+  #composer.fg-voice #input {
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    padding-inline: 0;
+    text-indent: -9999px;      /* no text peeking out of the sliver */
+    opacity: 1;
+    color: transparent;
+    background: var(--surface-2);
+    cursor: pointer;
+  }
+  #composer.fg-voice #input::placeholder { color: transparent; }
+  #composer.fg-voice #mic-btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 650;
+  }
+  #composer.fg-voice #mic-btn .mic-label { display: inline; }
+}
+
+/* The microphone's own word, shown only when it has grown. */
+.mic-label { display: none; }

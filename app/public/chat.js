@@ -57,6 +57,7 @@
       tagline: 'First international flight? Walk with me.',
       optionsLabel: 'Options',
       chatLauncher: 'Chat',
+      micGrown: 'Speak',
       badgeGate: 'Gate',
       badgeMinutes: '{n} min to boarding',
       badgeFinalCall: 'Final call',
@@ -131,6 +132,7 @@
       tagline: 'أول رحلة دولية؟ سأمشي معك خطوة بخطوة.',
       optionsLabel: 'الخيارات',
       chatLauncher: 'المحادثة',
+      micGrown: 'تكلّم',
       badgeGate: 'البوابة',
       badgeMinutes: 'باقٍ {n} دقيقة',
       badgeFinalCall: 'النداء الأخير',
@@ -810,6 +812,65 @@
     // Chrome fills the voice list asynchronously.
     try { speech.getVoices(); } catch (_) {}
   }
+
+  // ---------------------------------------------------------- composer swap
+  // Text and voice take turns on a phone, as the traveller asked: tapping the
+  // text box grows it and shrinks the microphone; tapping the microphone
+  // grows it and gives the field back. Both stay reachable — this changes the
+  // proportions, it never hides a control.
+  (function initComposerSwap() {
+    var form = formEl;
+    var mic = $('#mic-btn');
+    if (!form || !inputEl) return;
+
+    function isPhone() {
+      return window.matchMedia && window.matchMedia('(max-width: 560px)').matches;
+    }
+
+    function setMode(mode) {
+      if (!isPhone()) { form.classList.remove('fg-text', 'fg-voice'); return; }
+      form.classList.toggle('fg-text', mode === 'text');
+      form.classList.toggle('fg-voice', mode === 'voice');
+      // The send button is NOT disabled in voice mode: it is the second way
+      // back to typing, and disabling it left the traveller stuck if they
+      // missed the narrow field. Pressing it simply returns to text.
+      var send = form.querySelector('.send');
+      if (send) send.setAttribute('data-voice', mode === 'voice' ? '1' : '0');
+    }
+
+    // Growing the field when it is tapped is the whole point of the gesture.
+    inputEl.addEventListener('focus', function () { setMode('text'); });
+    inputEl.addEventListener('click', function () { setMode('text'); });
+
+    // The send button doubles as "back to typing" while the microphone is grown.
+    var sendBtn = form.querySelector('.send');
+    if (sendBtn) {
+      sendBtn.addEventListener('click', function (e) {
+        if (form.classList.contains('fg-voice')) {
+          e.preventDefault();
+          e.stopPropagation();
+          setMode('text');
+          if (inputEl) inputEl.focus();
+        }
+      }, true);   // capture, so it runs before the form's submit handler
+    }
+
+    if (mic) {
+      // Run before the record handler so the grow happens on the same tap.
+      mic.addEventListener('pointerdown', function () { setMode('voice'); });
+      mic.addEventListener('click', function () {
+        setMode(mic.getAttribute('aria-pressed') === 'true' ? 'voice' : 'text');
+      });
+    }
+
+    // Turning the phone loses the narrow layout: show both again.
+    window.addEventListener('resize', function () {
+      if (!isPhone()) form.classList.remove('fg-text', 'fg-voice');
+    });
+
+    // Start in text mode so the common case is one tap away.
+    setMode('text');
+  })();
 
   // ------------------------------------------------------------ voice input
   // Records raw audio and encodes a 16 kHz mono WAV in the browser. That

@@ -74,5 +74,19 @@ okIf(/chatLauncher:/.test(jsS) && (jsS.match(/chatLauncher:/g) || []).length ===
 okIf(/btn\.hidden = !document\.body\.classList\.contains\('needs-profile'\)/.test(jsS),
   'launcher shows exactly when the chat is hidden');
 
+
+// Text and voice take turns on a phone (the traveller's second sketch).
+okIf(/fg-voice/.test(cssS) && /fg-text/.test(cssS), 'composer has text and voice modes');
+okIf(/initComposerSwap/.test(jsS), 'the swap is wired');
+okIf(/#composer\.fg-voice #input/.test(cssS), 'voice mode shrinks the text field');
+okIf(/#composer\.fg-text #mic-btn/.test(cssS), 'text mode shrinks the microphone');
+// A collapsed field must stay tappable or the traveller is stuck in voice mode.
+okIf(!/#composer\.fg-voice #input \{[^}]*pointer-events: none/.test(cssS),
+  'the collapsed field must remain tappable');
+okIf(/pointerdown', function \(\) \{ setMode\('voice'\)/.test(jsS),
+  'the microphone grows on pointerdown, before the record handler');
+okIf(/micGrown:/.test(jsS) && (jsS.match(/micGrown:/g) || []).length === 2,
+  'the grown microphone is labelled in both languages');
+
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);
