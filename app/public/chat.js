@@ -56,6 +56,7 @@
     en: {
       tagline: 'First international flight? Walk with me.',
       optionsLabel: 'Options',
+      chatLauncher: 'Chat',
       badgeGate: 'Gate',
       badgeMinutes: '{n} min to boarding',
       badgeFinalCall: 'Final call',
@@ -129,6 +130,7 @@
     ar: {
       tagline: 'أول رحلة دولية؟ سأمشي معك خطوة بخطوة.',
       optionsLabel: 'الخيارات',
+      chatLauncher: 'المحادثة',
       badgeGate: 'البوابة',
       badgeMinutes: 'باقٍ {n} دقيقة',
       badgeFinalCall: 'النداء الأخير',
@@ -517,12 +519,42 @@
   // A picker inside the transcript duplicated the sidebar card right beside
   // it, so opening the link looked unchanged. This is a separate step that
   // hides the chat, so the choice cannot be missed or mistaken for the old one.
+  // The round chat button. It jumps to the conversation, choosing a sensible
+  // default category if none was picked yet — someone who taps "chat" wants to
+  // talk, not to fill in a form first.
+  function renderChatLauncher() {
+    var btn = document.getElementById('chatLauncher');
+    if (!btn) return;
+    // The button exists to REACH the conversation. While the category screen
+    // is up the chat is hidden, so the button is the only way in — show it.
+    // Once the chat (and its composer) is on screen, the traveller can already
+    // type, so a floating bubble would only cover the page beneath it.
+    btn.hidden = !document.body.classList.contains('needs-profile');
+  }
+
+  function openChat() {
+    if (document.body.classList.contains('needs-profile')) {
+      if (!state.profile) state.profile = 'nervous';
+      state.profileChosen = true;
+      store.local.set('fg.profileChosen', '1');
+      store.local.set('fg.profile', state.profile);
+      if (typeof renderProfiles === 'function') renderProfiles();
+      renderWelcomeScreen();
+    }
+    var panel = document.getElementById('chatPanel');
+    if (panel && panel.scrollIntoView) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (inputEl) inputEl.focus();
+  }
+
   function renderWelcomeScreen() {
     var host = document.getElementById('wsOptions');
     if (!host) return;
     var body = document.body;
     var hasChosen = state.profileChosen === true || state.explicitProfile === true;
     body.classList.toggle('needs-profile', !hasChosen);
+    if (typeof renderChatLauncher === 'function') renderChatLauncher();
 
     var copy = t('profiles');
     host.innerHTML = '';
@@ -1326,6 +1358,14 @@
       }
     });
   });
+
+  // ------------------------------------------------------------------ chat button
+  (function initChatLauncher() {
+    var btn = document.getElementById('chatLauncher');
+    if (!btn) return;
+    btn.addEventListener('click', openChat);
+    renderChatLauncher();
+  })();
 
   // ------------------------------------------------------------------ options
   // On a phone the top bar can only hold the brand, the language toggle and
