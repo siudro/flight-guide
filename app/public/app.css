@@ -449,17 +449,80 @@ body.walking-mode .skip { display: none; }
 }
 
 @media (max-width: 560px) {
-  .topbar { padding: 10px 14px; gap: 10px; }
-  .brand-text span { display: none; }
+  /* --- top bar: one compact row -------------------------------------
+     Four controls plus the brand used to wrap onto three rows and eat
+     117px of an 844px screen. Everything that is not essential to the
+     first minute is now an icon, and "Walking mode" keeps its dot only. */
+  .topbar { padding: 8px 12px; gap: 8px; flex-wrap: nowrap; }
+  .topbar-actions { flex-wrap: nowrap; }   /* its own wrap was the 2nd row */
+  .brand { flex: 0 0 auto; min-width: 0; }
+  .brand-text span { display: none; }      /* tagline: no room on a phone */
+  .brand-text { min-width: 0; }
+  .brand-text strong { white-space: nowrap; font-size: 14.5px; }
+  .brand-mark { width: 34px; height: 34px; flex-basis: 34px; }
+  .topbar-actions { gap: 5px; }
+  .seg { padding: 2px; }
+  .seg-btn { min-height: 40px; min-width: 38px; padding-inline: 9px; font-size: 13px; }
+  .walk-btn { padding: 0; width: 40px; height: 40px; min-width: 40px; }
+  .walk-btn svg { width: 15px; height: 15px; }
   .ghost-btn { display: none; }
+  .topbar-actions { gap: 6px; margin-inline-start: auto; }
+  .walk-btn { padding: 8px; min-width: 44px; min-height: 44px; justify-content: center; }
+  /* Inside the menu every item is labelled so it can be read; only the
+     controls that remain in the bar itself are icon-only. */
+  .options-menu [data-i18n],
+  .options-menu .walk-label { display: inline !important; }
+
   .bubble { max-width: 88%; }
-  .quick { padding-inline: 14px; }
-  .composer { padding: 10px 14px 14px; }
-  /* Touch targets: 44px is the minimum reliable tap area. The attach and send
-     buttons were smaller than that, so taps on a phone missed them. */
-  .composer .send { width: 46px; height: 46px; flex-basis: 46px; }
-  .attach { min-height: 46px; }
-  .quick button { min-height: 44px; padding: 10px 16px; }
+
+  /* --- quick replies: one swipeable row, not four stacked rows ------
+     They took 212px of the screen. A horizontal strip keeps them
+     reachable without pushing the conversation out of view. */
+  .quick {
+    padding: 0 12px 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .quick::-webkit-scrollbar { display: none; }
+  .quick button {
+    min-height: 44px; padding: 10px 14px;
+    flex: 0 0 auto;              /* never shrink; scroll instead */
+    white-space: nowrap;
+  }
+
+  /* --- composer: mic | pic | text | send ---------------------------- */
+  .composer {
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    gap: 8px;
+    align-items: center;
+  }
+  .composer textarea {
+    order: 3;
+    flex: 1 1 auto;
+    min-width: 0;                /* let it shrink instead of clipping text */
+    height: 46px; min-height: 46px; max-height: 38vh;
+    padding: 11px 14px;
+    line-height: 22px;           /* 1 line of text fits exactly in 46px */
+    font-size: 16px;             /* keeps iOS from zooming on focus */
+  }
+  /* The microphone first, then the camera, as drawn. It stays hidden when the
+     browser has no recording support — the app sets [hidden] for that. */
+  #mic-btn { order: 1; flex: 0 0 auto; }
+  #mic-btn:not([hidden]) { display: inline-flex !important; }
+  #mic-btn[hidden] { display: none !important; }
+  #photo-btn { order: 2; flex: 0 0 auto; }
+  .composer .send { order: 4; flex: 0 0 auto; width: 46px; height: 46px; flex-basis: 46px; }
+
+  .attach {
+    min-height: 46px; min-width: 46px;
+    justify-content: center; padding: 0 12px;
+  }
+  /* On a phone the icon is enough; the words live in the aria-label. */
+  .attach-label { display: none; }
+
   .seg-btn { min-height: 40px; min-width: 44px; }
 }
 
@@ -731,3 +794,39 @@ body.staff-open { overflow: hidden; }
 /* Read aloud is a toggle. With the label hidden on a phone, the pressed state
    is the only cue that it is on. */
 .speak-btn[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+/* ------------------------------------------------------- options menu --- */
+/* Desktop shows every control inline; the Options button is phone-only. */
+.options-btn { display: none; }
+.options-menu { display: contents; }
+
+@media (max-width: 560px) {
+  body.needs-profile .options-btn { display: none; }
+  .options-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0 12px; height: 40px; min-width: 40px;
+    border-radius: 999px; cursor: pointer;
+    border: 1.5px solid var(--line); background: var(--surface); color: var(--ink-2);
+    font: inherit; font-size: 13px; font-weight: 600;
+  }
+  .options-btn .options-text { display: none; }   /* icon only: the bar is tight */
+  .options-btn[aria-expanded="true"] { border-color: var(--navy); color: var(--navy); background: var(--navy-soft); }
+
+  /* Collapsed by default: the secondary controls drop out of the bar. */
+  .options-menu {
+    display: none;
+    position: absolute; inset-inline-end: 12px; top: calc(100% - 4px);
+    z-index: 60; min-width: 220px;
+    padding: 8px; gap: 6px;
+    flex-direction: column; align-items: stretch;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; box-shadow: var(--shadow-1);
+  }
+  .options-menu.open { display: flex; }
+  .options-menu .walk-btn, .options-menu .ghost-btn, .options-menu .staff-btn {
+    display: flex; width: 100%; justify-content: flex-start;
+    min-height: 46px; padding: 0 14px; border-radius: 10px;
+  }
+  .options-menu .options-text, .options-menu [data-i18n], .options-menu .walk-label { display: inline; }
+  .topbar { position: sticky; }   /* keep the menu anchored to the bar */
+}
