@@ -88,5 +88,15 @@ okIf(/pointerdown', function \(\) \{ setMode\('voice'\)/.test(jsS),
 okIf(/micGrown:/.test(jsS) && (jsS.match(/micGrown:/g) || []).length === 2,
   'the grown microphone is labelled in both languages');
 
+
+// The composer must not steal focus on load: on a phone that raises the
+// keyboard before the traveller has chosen to type, covering the conversation.
+const bootBlock = jsS.slice(jsS.indexOf('restoreConversation().then'));
+const bootFocus = bootBlock.slice(0, 400).match(/inputEl\.focus\(\)/);
+okIf(!bootFocus, 'no focus() in the load sequence');
+okIf(/Never focus the composer on load/.test(jsS), 'the reason is documented');
+okIf((jsS.match(/inputEl\.focus\(\)/g) || []).length >= 3,
+  'deliberate paths (chat button, category pick, after send) still focus');
+
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);
