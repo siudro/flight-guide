@@ -55,6 +55,7 @@
   var STRINGS = {
     en: {
       tagline: 'First international flight? Walk with me.',
+      optionsLabel: 'Options',
       airportMapLink: 'Official airport map ↗',
       airportMapTitle: 'King Fahd International — the airport\'s own map page',
       adminLink: 'Control panel',
@@ -64,6 +65,7 @@
       simNote: 'Live gates and delays come from Dammam airport directly. Riyadh and Jeddah are not connected yet. Always confirm on the departure screen, and staff are your fastest route for anything unexpected.',
       inputLabel: 'Your message',
       placeholder: 'Ask me anything about getting to your gate…',
+      placeholderShort: 'Ask me anything…',
       send: 'Send',
       photo: 'Photo of your ticket',
       photoTitle: 'Take a photo of your ticket and I will read it.',
@@ -122,6 +124,7 @@
     },
     ar: {
       tagline: 'أول رحلة دولية؟ سأمشي معك خطوة بخطوة.',
+      optionsLabel: 'الخيارات',
       airportMapLink: 'خريطة المطار الرسمية ↗',
       airportMapTitle: 'مطار الملك فهد الدولي — صفحة الخريطة الرسمية للمطار',
       adminLink: 'لوحة التحكم',
@@ -131,6 +134,7 @@
       simNote: 'البوابة والتأخير في مطار الدمام تُقرأ مباشرة من المطار. الرياض وجدة غير مربوطتين بعد. تحقّق دائمًا من شاشة المغادرة، وموظف المطار هو أسرع حل لأي أمر غير متوقع.',
       inputLabel: 'رسالتك',
       placeholder: 'اسألني أي شيء عن الوصول إلى بوابتك…',
+      placeholderShort: 'اسألني أي شيء…',
       send: 'إرسال',
       photo: 'صورة من تذكرتك',
       photoTitle: 'صوّر تذكرتك وسأقرأها لك.',
@@ -202,7 +206,11 @@
       if (typeof v === 'string') el.textContent = v;
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
-      el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+      var key = el.getAttribute('data-i18n-placeholder');
+      // A phone gives the field roughly 220px, so the full sentence would be
+      // cut off. Use the short form there and keep the fuller one on desktop.
+      var narrow = window.matchMedia && window.matchMedia('(max-width: 560px)').matches;
+      el.placeholder = (narrow && t(key + 'Short')) || t(key);
     });
     document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
       el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
@@ -1280,6 +1288,35 @@
       }
     });
   });
+
+  // ------------------------------------------------------------------ options
+  // On a phone the top bar can only hold the brand, the language toggle and
+  // one more control. Everything secondary lives behind Options.
+  (function initOptions() {
+    var btn = document.getElementById('optionsBtn');
+    var menu = document.getElementById('optionsMenu');
+    if (!btn || !menu) return;
+    function close() {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    // Tapping anywhere else, or choosing something, closes it.
+    document.addEventListener('click', function (e) {
+      if (!menu.contains(e.target) && e.target !== btn) close();
+    });
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('button, a')) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+  })();
 
   // ------------------------------------------------------------------ boot
   // Pull the live settings so a disabled profile is respected in the UI
