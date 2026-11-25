@@ -834,3 +834,67 @@ body.staff-open { overflow: hidden; }
   .options-menu .options-text, .options-menu [data-i18n], .options-menu .walk-label { display: inline; }
   .topbar { position: sticky; }   /* keep the menu anchored to the bar */
 }
+
+/* ------------------------------------------- الخيارات row (phone only) --- */
+/* The traveller's sketch puts الخيارات on its own labelled row under the
+   brand. The button is a direct child of <header> (not of .topbar-actions,
+   which must not wrap), so it can be a full-width row of its own. The header
+   becomes a column on a phone; the top bar keeps its single row. */
+@media (max-width: 560px) {
+  header.topbar { flex-direction: column; align-items: stretch; gap: 6px; }
+  header.topbar > .brand,
+  header.topbar > .topbar-actions { width: 100%; }
+  header.topbar > .topbar-actions { justify-content: flex-end; }
+
+  .options-btn {
+    display: flex;
+    width: 100%;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 14px;
+    border-radius: 9px;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .options-btn .options-text { display: inline; }
+  .options-btn[aria-expanded="true"] { border-color: var(--navy); color: var(--navy); background: var(--navy-soft); }
+  /* Nothing to configure before a category is chosen. */
+  body.needs-profile .options-btn { display: none; }
+}
+
+/* ------------------------------------------------------------- الشارة --- */
+/* The traveller's live state at the top of a phone screen: gate, countdown
+   or warning. Hidden until there is something true to show. */
+.fg-badge {
+  display: none;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  padding: 9px 14px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-size: 13.5px;
+  font-weight: 650;
+  color: var(--ink);
+  line-height: 1.35;
+}
+.fg-badge.show { display: flex; }
+.fg-badge-dot {
+  width: 9px; height: 9px; flex: 0 0 9px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.fg-badge.warn { border-color: #e6b3ac; background: #fdf3f1; }
+.fg-badge.warn .fg-badge-dot { background: var(--critical); }
+.fg-badge.warn .fg-badge-text { color: #7a1611; }
+.fg-badge-text { min-width: 0; }
+
+@media (max-width: 560px) {
+  /* Above the chat, below the options row: the first thing read after the
+     brand, without taking a whole row of its own. */
+  .fg-badge { margin: 0 12px 8px; }
+}

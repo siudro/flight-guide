@@ -30,16 +30,6 @@
       <button type="button" data-lang="ar" class="seg-btn">ع</button>
     </div>
 
-    <!-- Options (الخيارات): on a phone the secondary controls live behind this
-         button so the bar stays one row. On desktop it is never shown. -->
-    <button type="button" id="optionsBtn" class="walk-btn options-btn"
-            aria-expanded="false" aria-controls="optionsMenu"
-            aria-label="Options" data-i18n-aria="optionsLabel" data-i18n-title="optionsLabel">
-      <span aria-hidden="true" class="speak-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
-      <span class="options-text" data-i18n="optionsLabel">Options</span>
-    </button>
     <div class="options-menu" id="optionsMenu" hidden>
     <a class="ghost-btn" id="airportLink" href="https://kfia.sa/ar/Guide/Passenger/airport-map"
        target="_blank" rel="noopener" data-i18n="airportMapLink"
@@ -67,9 +57,27 @@
     </button>
     </div>
   </nav>
+
+    <!-- Options (الخيارات): on a phone the secondary controls live behind this
+         button so the bar stays one row. On desktop it is never shown. -->
+    <button type="button" id="optionsBtn" class="walk-btn options-btn"
+            aria-expanded="false" aria-controls="optionsMenu"
+            aria-label="Options" data-i18n-aria="optionsLabel" data-i18n-title="optionsLabel">
+      <span aria-hidden="true" class="speak-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
+      <span class="options-text" data-i18n="optionsLabel">Options</span>
+    </button>
 </header>
 
 <main class="layout" id="layout">
+
+  <!-- الشارة — the traveller's live state, visible at a glance on a phone.
+       Empty until the app knows the flight, gate or countdown. -->
+  <div class="fg-badge" id="gateBadge" hidden>
+    <span class="fg-badge-dot" aria-hidden="true"></span>
+    <span class="fg-badge-text" id="gateBadgeText"></span>
+  </div>
 
   <!-- First screen. The chat is hidden until a category is chosen, so the
        choice cannot be missed or confused with the sidebar card. -->

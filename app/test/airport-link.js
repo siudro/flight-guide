@@ -43,5 +43,23 @@ okIf(/profileChosen/.test(js), 'the choice is remembered across visits');
 okIf(!/function addWelcome\(/.test(js), 'the duplicate in-transcript picker is gone');
 okIf(/wsHeading:/.test(js) && (js.match(/wsHeading:/g) || []).length === 2, 'wsHeading exists in en and ar');
 
+
+// The traveller's sketch: الخيارات on its own labelled row, الشارة showing
+// live state, then the chat.
+const htmlS = fs.readFileSync(path.join(__dirname, '../public/index.html'), 'utf8');
+const jsS = fs.readFileSync(path.join(__dirname, '../public/chat.js'), 'utf8');
+const cssS = fs.readFileSync(path.join(__dirname, '../public/app.css'), 'utf8');
+
+okIf(/id="gateBadge"/.test(htmlS), 'الشارة element exists');
+okIf(/function renderBadge/.test(jsS), 'renderBadge() exists');
+okIf((jsS.match(/renderBadge\(\)/g) || []).length >= 3, 'badge re-renders with the trip');
+okIf(/badgeGate:/.test(cssS) === false && (jsS.match(/badgeGate:/g) || []).length === 2,
+  'badge strings exist in en and ar');
+okIf(/\.fg-badge\.show/.test(cssS), 'badge has a visible state');
+okIf(/body\.needs-profile \.options-btn/.test(cssS), 'options hidden on the first screen');
+okIf(/header\.topbar > \.topbar-actions/.test(cssS), 'options row is laid out above the chat');
+okIf(/options-text\} \{ display: inline/.test(cssS) || /options-text \{ display: inline/.test(cssS),
+  'الخيارات is a word, not only an icon');
+
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);

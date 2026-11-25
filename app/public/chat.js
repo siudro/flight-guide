@@ -56,6 +56,10 @@
     en: {
       tagline: 'First international flight? Walk with me.',
       optionsLabel: 'Options',
+      badgeGate: 'Gate',
+      badgeMinutes: '{n} min to boarding',
+      badgeFinalCall: 'Final call',
+      badgeCancelled: 'Flight cancelled',
       airportMapLink: 'Official airport map ↗',
       airportMapTitle: 'King Fahd International — the airport\'s own map page',
       adminLink: 'Control panel',
@@ -125,6 +129,10 @@
     ar: {
       tagline: 'أول رحلة دولية؟ سأمشي معك خطوة بخطوة.',
       optionsLabel: 'الخيارات',
+      badgeGate: 'البوابة',
+      badgeMinutes: 'باقٍ {n} دقيقة',
+      badgeFinalCall: 'النداء الأخير',
+      badgeCancelled: 'الرحلة ملغاة',
       airportMapLink: 'خريطة المطار الرسمية ↗',
       airportMapTitle: 'مطار الملك فهد الدولي — صفحة الخريطة الرسمية للمطار',
       adminLink: 'لوحة التحكم',
@@ -225,6 +233,7 @@
 
     renderProfiles();
     renderTrip();
+    renderBadge();
     renderQuick();
     if (typeof renderWelcomeScreen === 'function') renderWelcomeScreen();
   }
@@ -274,6 +283,34 @@
              '<dd class="' + (unset ? 'unset' : (hot ? 'hot' : '')) + '">' +
              esc(String(r[1])) + '</dd></div>';
     }).join('');
+  }
+
+  // الشارة — one line of live state at the top of a phone screen.
+  // Shows the most urgent true thing: a gate change or final call first, then
+  // the countdown, then the gate, then the stage. Nothing invented.
+  function renderBadge() {
+    var el = document.getElementById('gateBadge');
+    var txt = document.getElementById('gateBadgeText');
+    if (!el || !txt) return;
+    var trip = state.trip || {};
+    var parts = [];
+    var warn = false;
+
+    if (trip.finalCall) { parts.push(t('badgeFinalCall')); warn = true; }
+    else if (trip.cancelled) { parts.push(t('badgeCancelled')); warn = true; }
+
+    if (trip.gate) parts.push(t('badgeGate') + ' ' + trip.gate);
+    if (trip.minutes != null) {
+      parts.push(t('badgeMinutes').replace('{n}', String(trip.minutes)));
+      if (trip.minutes <= 20) warn = true;
+    }
+    if (!parts.length && trip.stage) parts.push(trip.stage);
+
+    if (!parts.length) { el.hidden = true; el.classList.remove('show', 'warn'); return; }
+    txt.textContent = parts.join('  ·  ');
+    el.hidden = false;
+    el.classList.add('show');
+    el.classList.toggle('warn', warn);
   }
 
   function renderQuick() {
@@ -1225,6 +1262,7 @@
         state.trip.cancelled = prevTrip.cancelled; state.trip.finalCall = prevTrip.finalCall;
         if (body.meta && body.meta.live) noteStatus(body.meta.live.status);
         renderTrip();
+        renderBadge();
         maybeStartWatch(body.session);
       })
       .catch(function (err) {
