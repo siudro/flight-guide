@@ -689,9 +689,13 @@ body.walking-mode .map-note { font-size: 16.5px; }
 .speak-ico { display: inline-flex; }
 
 @media (max-width: 560px) {
-  /* Four controls share the composer on a phone: keep the text box wide. */
-  .composer { gap: 7px; padding-inline: 12px; }
-  .composer .attach { padding: 12px 11px; }
+  /* Four controls share 390px: every pixel taken by a button is a pixel the
+     text field loses, and the placeholder clips. Fixed 44px buttons, 6px gaps
+     and 10px edge padding leave the field the widest it can be. */
+  .composer { gap: 6px; padding-inline: 10px; }
+  .composer .attach,
+  #photo-btn { padding: 0; width: 44px; min-width: 44px; flex: 0 0 44px;
+               justify-content: center; }
   .composer textarea { padding-inline: 12px; }
   /* Icon-only on a phone to save the text box's width, but it must still be
      tappable (44px) and must still announce itself to a screen reader. */
