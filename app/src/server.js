@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Flight Guide — HTTP layer.
+ * Vibe Flight — HTTP layer.
  *
  * Deliberately dependency-free: Node's built-in `http` module only. That keeps
  * the final image tiny (no node_modules), removes any supply-chain surface, and
@@ -422,14 +422,14 @@ async function handle(req, res) {
     const esc = (t) => String(t || '')
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const rows = turns.map((m, i) => {
-      const who = m.role === 'user' ? 'Traveller' : 'Flight Guide';
+      const who = m.role === 'user' ? 'Traveller' : 'Vibe Flight';
       const cls = m.role === 'user' ? 'u' : 'b';
       return '<div class="t"><div class="who">' + (i + 1) + '  ' + who + '</div>' +
              '<div class="msg ' + cls + '" dir="auto">' + esc(m.content) + '</div></div>';
     }).join('');
     const html = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">' +
       '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-      '<title>Flight Guide — conversation record</title><style>' +
+      '<title>Vibe Flight — conversation record</title><style>' +
       'body{font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;' +
       'max-width:760px;margin:0 auto;padding:32px 20px 80px;color:#18211f;background:#f6f3ee}' +
       'h1{color:#0f2547;font-size:22px;margin:0 0 4px}' +
@@ -441,13 +441,13 @@ async function handle(req, res) {
       '.msg.u{background:#0f2547;color:#fff;border-start-end-radius:5px}' +
       'footer{margin-top:34px;color:#667570;font-size:12px;border-top:1px solid #ddd3c2;padding-top:14px}' +
       '</style></head><body>' +
-      '<h1>Flight Guide — conversation record</h1>' +
+      '<h1>Vibe Flight — conversation record</h1>' +
       '<div class="sub">' + turns.length + ' exchanged messages' +
       (stored.flight ? ' &middot; flight ' + esc(stored.flight) : '') +
       (stored.airport ? ' &middot; ' + esc(String(stored.airport).toUpperCase()) : '') +
       '</div>' + rows +
       '<footer>Recorded against the deployed build at flight-guide-production.up.railway.app. ' +
-      'Flight Guide is a WAICY 2026 LLM &amp; AI Agent track submission.</footer>' +
+      'Vibe Flight is a WAICY 2026 LLM &amp; AI Agent track submission.</footer>' +
       '</body></html>';
     return sendHtml(res, 200, html);
   }
@@ -984,7 +984,7 @@ async function start() {
   });
 
   server.listen(PORT, HOST, () => {
-    console.log('  Flight Guide is running.');
+    console.log('  Vibe Flight is running.');
     console.log('');
     console.log('  Open this in your browser:   http://localhost:' + PORT);
     console.log('');

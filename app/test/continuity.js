@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Flight Guide — conversation continuity tests.
+ * Vibe Flight — conversation continuity tests.
  *
  * These exist because of a real failure reported on 2026-11-23. The traveller
  * photographed a boarding pass, the app rendered a tidy card, and then:

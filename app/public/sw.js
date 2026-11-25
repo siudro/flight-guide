@@ -1,4 +1,4 @@
-/* Flight Guide — service worker.
+/* Vibe Flight — service worker.
  *
  * Exists for one job: showing "your gate changed" as a phone notification.
  * Android Chrome only allows notifications through a service worker. It does

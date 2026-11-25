@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Flight Guide — engine tests.
+ * Vibe Flight — engine tests.
  *
  * Plain Node, no test framework (the app has no dependencies, so neither do
  * its tests). Run with: npm test  /  node test/run.js

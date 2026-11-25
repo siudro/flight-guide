@@ -1,4 +1,4 @@
-/* Flight Guide — control panel logic. Talks only to /api/settings and /api/conversations. */
+/* Vibe Flight — control panel logic. Talks only to /api/settings and /api/conversations. */
 
 (function () {
   'use strict';

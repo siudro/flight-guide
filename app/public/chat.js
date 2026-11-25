@@ -1,4 +1,4 @@
-/* Flight Guide — passenger chat UI. No framework, no build step. */
+/* Vibe Flight — passenger chat UI. No framework, no build step. */
 
 (function () {
   'use strict';
@@ -92,10 +92,10 @@
       stepWord: 'Step',
       wsHeading: 'Who is travelling?',
       wsSub: 'I will talk to you differently depending on what you pick. You can change it later.',
-      wsFoot: 'Flight Guide walks you from the airport door to your boarding gate.',
+      wsFoot: 'Vibe Flight walks you from the airport door to your boarding gate.',
       wsPick: 'Continue',
       welcomeHint: 'Pick the one that fits. I will talk to you differently because of it, and you can change it any time.',
-      greeting: 'Hello. I am Flight Guide, and I will stay with you from the terminal door to your boarding gate.\n\nI will not give you directions until I know four things, because the wrong route is worse than no route. It will take you under a minute.',
+      greeting: 'Hello. I am Vibe Flight, and I will stay with you from the terminal door to your boarding gate.\n\nI will not give you directions until I know four things, because the wrong route is worse than no route. It will take you under a minute.',
       errorNetwork: 'I could not reach the app just now. Check your connection and send again — nothing you typed is lost.',
       errorEmpty: 'Write something first, then send.',
       profiles: {
@@ -167,10 +167,10 @@
       stepWord: 'الخطوة',
       wsHeading: 'من المسافر؟',
       wsSub: 'سأحدّثك بطريقة مختلفة حسب اختيارك. يمكنك تغييره لاحقًا.',
-      wsFoot: 'Flight Guide يمشي معك من باب المطار إلى بوابة الصعود.',
+      wsFoot: 'Vibe Flight يمشي معك من باب المطار إلى بوابة الصعود.',
       wsPick: 'متابعة',
       welcomeHint: 'اختر الأنسب لك. سأحدّثك بطريقة مختلفة بناءً عليه، ويمكنك تغييره في أي وقت.',
-      greeting: 'مرحبًا. أنا Flight Guide، وسأبقى معك من باب صالة المغادرة إلى بوابة الصعود.\n\nلن أعطيك أي إرشاد قبل أن أعرف أربعة أمور، لأن المسار الخاطئ أسوأ من لا مسار. لن يستغرق الأمر دقيقة.',
+      greeting: 'مرحبًا. أنا Vibe Flight، وسأبقى معك من باب صالة المغادرة إلى بوابة الصعود.\n\nلن أعطيك أي إرشاد قبل أن أعرف أربعة أمور، لأن المسار الخاطئ أسوأ من لا مسار. لن يستغرق الأمر دقيقة.',
       errorNetwork: 'لم أستطع الوصول إلى التطبيق الآن. تحقّق من الاتصال ثم أرسل مرة أخرى، فما كتبته لم يُفقد.',
       errorEmpty: 'اكتب رسالتك أولًا ثم أرسل.',
       profiles: {

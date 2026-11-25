@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Flight Guide — spoken voice selection.
+ * Vibe Flight — spoken voice selection.
  *
  * The traveller asked for a US English male voice, conversational in tone.
  * Browser voice lists differ by device, so the selector scores candidates
