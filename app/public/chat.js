@@ -1481,7 +1481,11 @@
       renderWelcomeScreen();
       restoreConversation().then(function (restored) {
         if (!restored) addBubble(t('greeting'), 'bot');
-        inputEl.focus();
+        // Never focus the composer on load. On a phone that raises the
+        // keyboard before the traveller has decided to type — it covers the
+        // conversation and looks like the app is demanding input. Focus is
+        // only given when the traveller taps the field, the chat button or
+        // a quick reply.
       });
     });
 
