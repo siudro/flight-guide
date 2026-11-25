@@ -898,3 +898,32 @@ body.staff-open { overflow: hidden; }
      brand, without taking a whole row of its own. */
   .fg-badge { margin: 0 12px 8px; }
 }
+
+/* ------------------------------------------------------ chat launcher --- */
+/* The round speech-bubble button from the traveller's sketch. It opens the
+   conversation from anywhere, and is the only way past the category screen
+   if someone just wants to talk. */
+.chat-launcher {
+  position: fixed;
+  inset-inline-end: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--navy);
+  box-shadow: 0 6px 20px rgba(16, 24, 40, .16);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .15s ease, border-color .15s;
+}
+.chat-launcher:hover { border-color: var(--navy); }
+.chat-launcher:active { transform: scale(.96); }
+.chat-launcher[hidden] { display: none; }
+.chat-launcher svg { display: block; }
+@media (max-width: 560px) {
+  /* 56px is comfortably above the 44px tap minimum. */
+  .chat-launcher { inset-inline-end: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); }
+}

@@ -61,5 +61,18 @@ okIf(/header\.topbar > \.topbar-actions/.test(cssS), 'options row is laid out ab
 okIf(/options-text\} \{ display: inline/.test(cssS) || /options-text \{ display: inline/.test(cssS),
   'الخيارات is a word, not only an icon');
 
+
+// The chat bubble button from the sketch: the way into the conversation.
+okIf(/id="chatLauncher"/.test(htmlS), 'chat launcher exists');
+okIf(/chat-launcher \{/.test(cssS), 'launcher is styled');
+okIf(/border-radius: 50%/.test(cssS), 'launcher is round, as drawn');
+okIf(/56px/.test(cssS), 'launcher meets the 56px touch target');
+okIf(/function openChat/.test(jsS), 'openChat() exists');
+okIf(/chatLauncher:/.test(jsS) && (jsS.match(/chatLauncher:/g) || []).length === 2,
+  'launcher label exists in en and ar');
+// It must be reachable from the category screen, where the chat is hidden.
+okIf(/btn\.hidden = !document\.body\.classList\.contains\('needs-profile'\)/.test(jsS),
+  'launcher shows exactly when the chat is hidden');
+
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);
