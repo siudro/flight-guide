@@ -39,7 +39,7 @@ async function snapshot() {
   try {
     console.log('fetching live departures:', FEED);
     const res = await fetch(FEED, {
-      headers: { 'User-Agent': 'FlightGuide-build/1.0', Accept: 'application/json' },
+      headers: { 'User-Agent': 'VibeFlight-build/1.0', Accept: 'application/json' },
       signal: AbortSignal.timeout(20000)
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);

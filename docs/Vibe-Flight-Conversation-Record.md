@@ -1,6 +1,6 @@
-# Flight Guide — Full Conversation Record
+# Vibe Flight — Full Conversation Record
 
-Complete transcript of the Flight Guide build, reconstructed from all 17 threads in issue WAI-199.
+Complete transcript of the Vibe Flight build, reconstructed from all 17 threads in issue WAI-199.
 
 - **Messages:** 127
 - **Threads:** 17
@@ -10,13 +10,13 @@ Complete transcript of the Flight Guide build, reconstructed from all 17 threads
 
 ---
 
-## Thread 1 — Built the containerised Flight Guide app. Every acceptance criterion passes when I run the…
+## Thread 1 — Built the containerised Vibe Flight app. Every acceptance criterion passes when I run the…
 
 *Started 2026-11-14 13:02 UTC · 1 message(s)*
 
 **WAICY Helper** · _2026-11-14 13:02_
 
-Built the containerised Flight Guide app. Every acceptance criterion passes when I run the app — **but I could not run `docker build` in this environment**, and you need to know why before trusting the image.
+Built the containerised Vibe Flight app. Every acceptance criterion passes when I run the app — **but I could not run `docker build` in this environment**, and you need to know why before trusting the image.
 
 ## The one thing I could not verify
 
@@ -216,7 +216,7 @@ WERE DO I TRY THE COMAND
   http://localhost:8080
   ```
   
-  You should see the Flight Guide chat. If it loads, your build works and the whole app is live on your machine.
+  You should see the Vibe Flight chat. If it loads, your build works and the whole app is live on your machine.
   
   ---
   
@@ -430,7 +430,7 @@ WERE DO I TRY THE COMAND
   http://localhost:8080
   ```
   
-  You should see the Flight Guide chat.
+  You should see the Vibe Flight chat.
   
   ## Why not just click the ▶ play button?
   
@@ -514,7 +514,7 @@ WERE DO I TRY THE COMAND
   http://localhost:3000
   ```
   
-  You should see the Flight Guide chat.
+  You should see the Vibe Flight chat.
   
   ## Why the numbers are different
   
@@ -1469,7 +1469,7 @@ THIS IS THE MAP TO AIRPORT MAP ALRIYADH
   شغّلته في متصفح حقيقي من جديد:
   
   ```
-  ✓ العنوان: Flight Guide — Your First International Flight
+  ✓ العنوان: Vibe Flight — Your First International Flight
   ✓ الخريطة ظاهرة، و٩١ علامة مرسومة عليها
   ✓ مربع الكتابة موجود
   ✓ كتبت: hi ← Dammam ← Terminal 1 ← 2 hours
@@ -1727,7 +1727,7 @@ _(+1 attachment(s))_
   
   ## وش شفت في صورتك
   
-  **١. الخريطة كانت تغطي نافذة الترحيب.** تشوف "Welcom��� to Flight Guide" والأسئلة — والخريطة طالعة **فوقها**. مستحيل تختار.
+  **١. الخريطة كانت تغطي نافذة الترحيب.** تشوف "Welcom��� to Vibe Flight" والأسئلة — والخريطة طالعة **فوقها**. مستحيل تختار.
   
   **السبب:** Leaflet (مكتبة الخريطة) تستخدم `z-index` من ٤٠٠ إلى ١٠٠٠ لنافذة التحكم. ونافذة الترحيب كانت `100` — يعني أقل منهم. فالخريطة ترسم فوقها.
   
@@ -1901,7 +1901,7 @@ _(+1 attachment(s))_
   
   ## الشي الوحيد اللي يبقى إنجليزي — وهذا مقصود
   
-  **اسم التطبيق `Flight Guide`** يبقى إنجليزي. هو اسم علامة، مثل «McDonald's» ما تترجم. لو تبي تغيّره لاسم عربي — قول لي وأسويه.
+  **اسم التطبيق `Vibe Flight`** يبقى إنجليزي. هو اسم علامة، مثل «McDonald's» ما تترجم. لو تبي تغيّره لاسم عربي — قول لي وأسويه.
   
   كمان **الصور الجوية** فيها كتابة إنجليزية (أسماء المحلات الرسمية على المبنى) — هذي مو من عندي، هي جزء من صورة المطار.
   
@@ -1965,7 +1965,7 @@ _(+1 attachment(s))_
   
   ## تنين اشياء بتضل نجليزية — وكذة صح
   
-  **١. `Flight Guide`** — سم العلامة، ما يترجم (زي McDonald's).
+  **١. `Vibe Flight`** — سم العلامة، ما يترجم (زي McDonald's).
   **٢. الكتوبة على الصور الجوية** — هذي جزء من صورة المطار نفسها، موس من عندي.
   
   لو تبغى سم عربي للتطبيق — قول لي ونبدلو.
@@ -8691,7 +8691,7 @@ whats going n start new process
   
   ## الموضوع
   
-  بناء **Flight Guide** — تطبيق ويب يرشد المسافر في أول رحلة دولية له، من باب المطار إلى بوابة الصعود، على ثلاث مطارات: الدمام والرياض وجدة. عربي وإنجليزي.
+  بناء **Vibe Flight** — تطبيق ويب يرشد المسافر في أول رحلة دولية له، من باب المطار إلى بوابة الصعود، على ثلاث مطارات: الدمام والرياض وجدة. عربي وإنجليزي.
   
   المهمة الأساسية (WAI-199): **صورة Docker** تشتغل، مع خريطة، ومحادثة، وثلاثة أساليب تواصل، ولوحة تحكم. الموعد النهائي ٢٣ نوفمبر ٢٠٢٦.
   

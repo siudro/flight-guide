@@ -109,7 +109,7 @@ async function getJson(url) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(url, { signal: ctrl.signal, headers: { Accept: 'application/json', 'User-Agent': 'FlightGuide/1.0' } });
+    const res = await fetch(url, { signal: ctrl.signal, headers: { Accept: 'application/json', 'User-Agent': 'VibeFlight/1.0' } });
     if (!res.ok) return { ok: false, code: 'HTTP_' + res.status };
     return { ok: true, json: await res.json() };
   } catch (err) {

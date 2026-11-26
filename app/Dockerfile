@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # =============================================================================
-# Flight Guide — multi-stage build
+# Vibe Flight — multi-stage build
 #
 # Stage 1 (`deps`) exists to run `npm ci` for a future version of the app that
 # grows dependencies. Today the app has none, so it also validates package.json

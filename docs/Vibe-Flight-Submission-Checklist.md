@@ -1,4 +1,4 @@
-# Flight Guide — Submission Checklist
+# Vibe Flight — Submission Checklist
 
 **Track:** LLM & AI Agent (theme: AI as a Service)
 **Team:** yoyo.sheco · mosa3dalsayyar · nassir
@@ -134,8 +134,8 @@ Legend: `[x]` done and verified · `[ ]` not done · `[!]` blocked or at risk
 ## Packaging
 
 - [ ] Assemble **one PDF**
-- [ ] Name it exactly `LLM_FlightGuide.pdf` (or your final project name)
-- [ ] Drive folder named `LLM_ProjectName` — the LLM track has **no** Middle/High subfolder
+- [ ] Name it exactly `LLM_VibeFlight.pdf` (or your final project name)
+- [ ] Drive folder named `LLM_VibeFlight` — the LLM track has **no** Middle/High subfolder
 - [ ] Folder placed directly in the LLM parent folder
 - [ ] Sharing set so the **WAICY judging team** can open it
 - [ ] Open the final folder in a logged-out window and click every link

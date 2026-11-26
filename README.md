@@ -1,4 +1,4 @@
-# Flight Guide ✈️ — First Gate, Alone
+# Vibe Flight ✈️ — First Gate, Alone
 
 WAICY 2026 · **LLM & AI Agent** track · Theme: *AI as a Service*
 Project: `LLM_Middle_Air_Transportation`
@@ -13,7 +13,7 @@ What connects the users is not age: it is **having nobody to ask**.
 
 | Path | What it is |
 |---|---|
-| `app/` | **The running build** — the containerised Flight Guide web app. Chat, interactive airport map, profile selector, Arabic/English toggle, admin control panel. Start here. |
+| `app/` | **The running build** — the containerised Vibe Flight web app. Chat, interactive airport map, profile selector, Arabic/English toggle, admin control panel. Start here. |
 | `design/` | The agent's written design: system prompt, the three airport skills, the three user profiles. This is the scored artifact. |
 | `docs/testing/` | Screenshots from the five real user tests, including the documented Arabic/English language bug and its two fixes. |
 
@@ -89,7 +89,7 @@ One tested airport is worth more than three untested claims.
 
 Not handled, by design: rebooking, refunds, baggage claims, ticket prices, visa or immigration advice, tourism recommendations. It is not a general travel advisor.
 
-Where an airline's unaccompanied-minor service applies, Flight Guide works **alongside** it and defers to airline and airport staff. It does not replace or contradict those services.
+Where an airline's unaccompanied-minor service applies, Vibe Flight works **alongside** it and defers to airline and airport staff. It does not replace or contradict those services.
 
 ---
 
