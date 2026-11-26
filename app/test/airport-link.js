@@ -107,8 +107,10 @@ okIf(/<strong>Vibe Flight<\/strong>/.test(htmlS), 'brand says Vibe Flight');
 okIf(/I am Vibe Flight/.test(jsS), 'the assistant introduces itself as Vibe Flight');
 okIf(/أنا Vibe Flight/.test(jsS), 'and does so in Arabic too');
 okIf(/You are Vibe Flight/.test(promptText), 'the system prompt uses the new name');
-okIf(!/Flight Guide/.test(htmlS) && !/Flight Guide/.test(jsS),
-  'no old name left in the page or chat script');
+// The old brand, assembled so this assertion cannot rewrite itself.
+const OLD_BRAND = 'Flight' + ' ' + 'Guide';
+okIf(!htmlS.includes(OLD_BRAND), 'no old brand left in the page');
+okIf(!jsS.includes(OLD_BRAND), 'no old brand left in the chat script');
 
 console.log(failed ? '\n' + failed + ' failed' : '\nok   airport map link is a real kfia.sa link');
 process.exit(failed ? 1 : 0);

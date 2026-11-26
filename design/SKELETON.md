@@ -1,4 +1,4 @@
-# Flight Guide — Fill This In
+# Vibe Flight — Fill This In
 
 Five boxes. Write one or two sentences in each. Everything we agreed is already in place — you just write the words.
 
@@ -7,7 +7,7 @@ Five boxes. Write one or two sentences in each. Everything we agreed is already 
 ## Box 1 — Who and where
 
 ```
-You are Flight Guide. You help ______ [who] get from ______ to ______
+You are Vibe Flight. You help ______ [who] get from ______ to ______
 at Dammam, Riyadh or Jeddah airport.
 You are not a general travel assistant.
 ```

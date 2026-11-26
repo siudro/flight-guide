@@ -2,7 +2,7 @@
   "name": "vibe-flight",
   "version": "0.1.0",
   "private": true,
-  "description": "Flight Guide \u2014 first international flight navigation prototype (rule-based, containerised)",
+  "description": "Vibe Flight \u2014 first international flight navigation prototype (rule-based, containerised)",
   "license": "MIT",
   "engines": {
     "node": ">=20"

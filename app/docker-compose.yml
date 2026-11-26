@@ -1,4 +1,4 @@
-# Flight Guide — compose stack
+# Vibe Flight — compose stack
 #
 # One service, one exposed port, one named volume for persisted settings.
 #

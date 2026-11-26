@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Flight Guide — Conversation Record</title>
+<title>Vibe Flight — Conversation Record</title>
 <style>
 :root{--bg:#f7f4ef;--panel:#fff;--panel2:#f1ece3;--line:#e0d8ca;--ink:#1b2624;--dim:#4a5a55;--accent:#0f6b63}
 *{box-sizing:border-box}
@@ -28,15 +28,15 @@ li{margin:2px 0}
 [id]{scroll-margin-top:20px}
 </style></head><body><div class="wrap">
 <div class="header">
-<h1>Flight Guide — Full Conversation Record</h1>
-<p>Complete transcript of the Flight Guide build, reconstructed verbatim from every thread in the source issue.</p>
+<h1>Vibe Flight — Full Conversation Record</h1>
+<p>Complete transcript of the Vibe Flight build, reconstructed verbatim from every thread in the source issue.</p>
 <div class="stats">
 <div class="stat"><b>127</b><span>Messages</span></div>
 <div class="stat"><b>17</b><span>Threads</span></div>
 <div class="stat"><b>14–18 Nov</b><span>2026</span></div>
 <div class="stat"><b>WAI-199</b><span>Source issue</span></div>
 </div></div>
-<p>Complete transcript of the Flight Guide build, reconstructed from all 17 threads in issue WAI-199.</p>
+<p>Complete transcript of the Vibe Flight build, reconstructed from all 17 threads in issue WAI-199.</p>
 <ul>
 <li><strong>Messages:</strong> 127</li>
 <li><strong>Threads:</strong> 17</li>
@@ -44,10 +44,10 @@ li{margin:2px 0}
 <li><strong>Span:</strong> 2026-11-14 → 2026-11-18</li>
 <li><strong>Generated:</strong> 2026-11-19 12:37 UTC</li>
 </ul>
-</section><section class="thread"><h2>Thread 1 — Built the containerised Flight Guide app. Every acceptance criterion passes when I run the…</h2>
+</section><section class="thread"><h2>Thread 1 — Built the containerised Vibe Flight app. Every acceptance criterion passes when I run the…</h2>
 <p class="meta">Started 2026-11-14 13:02 UTC · 1 message(s)</p>
 <p><strong>WAICY Helper</strong> · <em>2026-11-14 13:02</em></p>
-<p>Built the containerised Flight Guide app. Every acceptance criterion passes when I run the app — <strong>but I could not run <code>docker build</code> in this environment</strong>, and you need to know why before trusting the image.</p>
+<p>Built the containerised Vibe Flight app. Every acceptance criterion passes when I run the app — <strong>but I could not run <code>docker build</code> in this environment</strong>, and you need to know why before trusting the image.</p>
 </section><section class="thread"><h2>The one thing I could not verify</h2>
 <p><code>docker</code> here is Podman 5.4.2, and <strong>its <code>buildah</code> binary is missing from the image</strong>. Any <code>RUN</code> step dies with <code>error stat()ing intended root directory .../mnt/rootfs</code>. I proved it is not my Dockerfile with a two-line control case:</p>
 <pre>
@@ -173,7 +173,7 @@ admin edit            -&gt; securityText=ADMIN-EDITED SECURITY TEXT, /map hidden
 <pre>
   http://localhost:8080
 </pre>
-<p class="reply">You should see the Flight Guide chat. If it loads, your build works and the whole app is live on your machine.</p>
+<p class="reply">You should see the Vibe Flight chat. If it loads, your build works and the whole app is live on your machine.</p>
 </section><section class="thread"><h2>If <code>docker</code> is not recognised</h2>
 <p class="reply">That means Docker is not installed, or the terminal was opened before installing it.</p>
 <ul>
@@ -299,7 +299,7 @@ admin edit            -&gt; securityText=ADMIN-EDITED SECURITY TEXT, /map hidden
 <pre>
   http://localhost:8080
 </pre>
-<p class="reply">You should see the Flight Guide chat.</p>
+<p class="reply">You should see the Vibe Flight chat.</p>
 </section><section class="thread"><h2>Why not just click the ▶ play button?</h2>
 <p class="reply">You can — but you must set two things first, or the app opens on a blank page:</p>
 <p class="reply">1. <strong>Port</strong> — type <code>8080</code> in the &quot;Host port&quot; box. This is the important one.</p>
@@ -351,7 +351,7 @@ admin edit            -&gt; securityText=ADMIN-EDITED SECURITY TEXT, /map hidden
 <pre>
   http://localhost:3000
 </pre>
-<p class="reply">You should see the Flight Guide chat.</p>
+<p class="reply">You should see the Vibe Flight chat.</p>
 </section><section class="thread"><h2>Why the numbers are different</h2>
 <p class="reply"><code>-p 3000:8080</code> means:</p>
 <p class="reply">| | Meaning |</p>
@@ -923,7 +923,7 @@ admin edit            -&gt; securityText=ADMIN-EDITED SECURITY TEXT, /map hidden
 </section><section class="thread"><h2>تحققت منه الآن، قبل ما أرسله لك</h2>
 <p class="reply">شغّلته في متصفح حقيقي من جديد:</p>
 <pre>
-  ✓ العنوان: Flight Guide — Your First International Flight
+  ✓ العنوان: Vibe Flight — Your First International Flight
   ✓ الخريطة ظاهرة، و٩١ علامة مرسومة عليها
   ✓ مربع الكتابة موجود
   ✓ كتبت: hi ← Dammam ← Terminal 1 ← 2 hours
@@ -1084,7 +1084,7 @@ admin edit            -&gt; securityText=ADMIN-EDITED SECURITY TEXT, /map hidden
 <p class="reply">تأكدت. الـ 403 <strong>راح خلاص</strong> — الصورة اللي أرسلتها توري الخريطة شغالة بصور فضا حقيقية، مو مربعات سوداء.</p>
 <p class="reply">بس في الحقيقة كان في <strong>مشكلتين ثانيتين</strong> في صورتك، وصلحتهم.</p>
 </section><section class="thread"><h2>وش شفت في صورتك</h2>
-<p class="reply"><strong>١. الخريطة كانت تغطي نافذة الترحيب.</strong> تشوف &quot;Welcom��� to Flight Guide&quot; والأسئلة — والخريطة طالعة <strong>فوقها</strong>. مستحيل تختار.</p>
+<p class="reply"><strong>١. الخريطة كانت تغطي نافذة الترحيب.</strong> تشوف &quot;Welcom��� to Vibe Flight&quot; والأسئلة — والخريطة طالعة <strong>فوقها</strong>. مستحيل تختار.</p>
 <p class="reply"><strong>السبب:</strong> Leaflet (مكتبة الخريطة) تستخدم <code>z-index</code> من ٤٠٠ إلى ١٠٠٠ لنافذة التحكم. ونافذة الترحيب كانت <code>100</code> — يعني أقل منهم. فالخريطة ترسم فوقها.</p>
 <p class="reply"><strong>الحل:</strong> رفعت نافذة الترحيب إلى <code>9000</code>. صارت فوق كل شي.</p>
 <p class="reply"><strong>٢. الصفحة كانت ضيقة وعلى اليسار.</strong> المحتوى محدود بـ ٩٢٠ بكسل، فالخريطة صغيرة وفيها فراغ كبير على اليمين.</p>
@@ -1190,7 +1190,7 @@ admin edit            -&gt; securityText=ADMIN-EDITED SECURITY TEXT, /map hidden
   ✓ ٣٠/٣٠ اختبار ناجح
 </pre>
 </section><section class="thread"><h2>الشي الوحيد اللي يبقى إنجليزي — وهذا مقصود</h2>
-<p class="reply"><strong>اسم التطبيق <code>Flight Guide</code></strong> يبقى إنجليزي. هو اسم علامة، مثل «McDonald&#x27;s» ما تترجم. لو تبي تغيّره لاسم عربي — قول لي وأسويه.</p>
+<p class="reply"><strong>اسم التطبيق <code>Vibe Flight</code></strong> يبقى إنجليزي. هو اسم علامة، مثل «McDonald&#x27;s» ما تترجم. لو تبي تغيّره لاسم عربي — قول لي وأسويه.</p>
 <p class="reply">كمان <strong>الصور الجوية</strong> فيها كتابة إنجليزية (أسماء المحلات الرسمية على المبنى) — هذي مو من عندي، هي جزء من صورة المطار.</p>
 <p class="reply">نزّل الملف الجديد، واضغط <code>Ctrl + F5</code> بعد ما تفتحه (تحديث قوي) عشان ما تطلع لك نسخة قديمة من الكاش.</p>
 <p class="reply">جرّبه وقل لي.</p>
@@ -1231,7 +1231,7 @@ admin edit            -&gt; securityText=ADMIN-EDITED SECURITY TEXT, /map hidden
   ✓ ٣٠/٣٠ اختيار ناجح
 </pre>
 </section><section class="thread"><h2>تنين اشياء بتضل نجليزية — وكذة صح</h2>
-<p class="reply"><strong>١. <code>Flight Guide</code></strong> — سم العلامة، ما يترجم (زي McDonald&#x27;s).</p>
+<p class="reply"><strong>١. <code>Vibe Flight</code></strong> — سم العلامة، ما يترجم (زي McDonald&#x27;s).</p>
 <p class="reply"><strong>٢. الكتوبة على الصور الجوية</strong> — هذي جزء من صورة المطار نفسها، موس من عندي.</p>
 <p class="reply">لو تبغى سم عربي للتطبيق — قول لي ونبدلو.</p>
 <p class="reply">نزّل الملّف, و<code>Ctrl + F5</code> باش ما تجيك نسخة قديمة من الكاش. جرّب: فتح, ختار <code>ع</code>, وكتب رسالة.</p>
@@ -4704,7 +4704,7 @@ admin edit            -&gt; securityText=ADMIN-EDITED SECURITY TEXT, /map hidden
 <p class="reply">سامع ابغاك ترسل لي الوصف للشات هذه و بس لا ترسل اي شيئ غيره حتى لو احتاجه</p>
 <p class="reply"><strong>WAICY Helper</strong> · <em>2026-11-18 14:21</em></p>
 </section><section class="thread"><h2>الموضوع</h2>
-<p class="reply">بناء <strong>Flight Guide</strong> — تطبيق ويب يرشد المسافر في أول رحلة دولية له، من باب المطار إلى بوابة الصعود، على ثلاث مطارات: الدمام والرياض وجدة. عربي وإنجليزي.</p>
+<p class="reply">بناء <strong>Vibe Flight</strong> — تطبيق ويب يرشد المسافر في أول رحلة دولية له، من باب المطار إلى بوابة الصعود، على ثلاث مطارات: الدمام والرياض وجدة. عربي وإنجليزي.</p>
 <p class="reply">المهمة الأساسية (WAI-199): <strong>صورة Docker</strong> تشتغل، مع خريطة، ومحادثة، وثلاثة أساليب تواصل، ولوحة تحكم. الموعد النهائي ٢٣ نوفمبر ٢٠٢٦.</p>
 </section><section class="thread"><h2>ما تم إنجازه</h2>
 <p class="reply"><strong>١. تطبيق Docker — مكتمل</strong></p>

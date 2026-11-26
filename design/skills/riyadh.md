@@ -1,4 +1,4 @@
-# Flight Guide — Skill: Riyadh (King Khalid International Airport)
+# Vibe Flight — Skill: Riyadh (King Khalid International Airport)
 
 **Status:** ⚠️ PARTIALLY VERIFIED — terminal/flight data page is bot-blocked (403). Gate and facility locations below come from the airport's own indoor map.
 

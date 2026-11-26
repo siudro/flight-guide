@@ -53,7 +53,7 @@ async function fetchJson(url, timeoutMs) {
     const res = await fetch(url, {
       signal: controller.signal,
       headers: {
-        'User-Agent': 'FlightGuide/1.0 (first-time-traveller assistant)',
+        'User-Agent': 'VibeFlight/1.0 (first-time-traveller assistant)',
         Accept: 'application/json'
       }
     });

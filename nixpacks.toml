@@ -1,4 +1,4 @@
-# Railway / Nixpacks build for Flight Guide.
+# Railway / Nixpacks build for Vibe Flight.
 #
 # railway.json pins the Dockerfile builder. This is the fallback: if Railway
 # ignores railway.json (older service type, or a cached builder decision),
