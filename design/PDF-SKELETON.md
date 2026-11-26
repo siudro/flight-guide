@@ -1,4 +1,4 @@
-# Flight Guide — WAICY 2026 Submission
+# Vibe Flight — WAICY 2026 Submission
 ## LLM & AI Agent Track
 
 **Team:** yoyo.sheco · mosa3dalsayyar · nassir
@@ -10,7 +10,7 @@
 
 **Status: DRAFTED — copy from the project description, then edit into your own voice.**
 
-Flight Guide is an AI agent that helps a traveller taking their first international flight with nobody to guide them. It walks them through check-in, security, passport control and customs, and on to their boarding gate — at Dammam (KFIA), Riyadh (KKIA) or Jeddah (KAIA) — in Arabic or English.
+Vibe Flight is an AI agent that helps a traveller taking their first international flight with nobody to guide them. It walks them through check-in, security, passport control and customs, and on to their boarding gate — at Dammam (KFIA), Riyadh (KKIA) or Jeddah (KAIA) — in Arabic or English.
 
 The problem it addresses: a first international flight alone is a chain of procedures nobody has explained. The signs are in a language the traveller may not read, and there is nobody to ask.
 
@@ -70,7 +70,7 @@ Suggested flow:
 
 ## 5. Iterative AI Design Process
 
-**Status: WRITTEN — copy [`docs/Flight-Guide-Iteration-Log.md`](../docs/Flight-Guide-Iteration-Log.md) in, then edit into your own voice.**
+**Status: WRITTEN — copy [`docs/Vibe-Flight-Iteration-Log.md`](../docs/Vibe-Flight-Iteration-Log.md) in, then edit into your own voice.**
 
 Structure: **Idea → Advisor Design → Testing → Error Analysis → Improvement.** The log is already in that order and already carries the four screenshots inline.
 
@@ -80,7 +80,7 @@ Structure: **Idea → Advisor Design → Testing → Error Analysis → Improvem
 | "I don't read English well" | Replied in English ✗ → fixed, retested ✓ |
 | Hurried, 70 min | Right tone and facts, three steps at once ⚠ |
 
-**Include all four screenshots, including the failures.** `docs/Flight-Guide-Iteration-Log.md` embeds them in place.
+**Include all four screenshots, including the failures.** `docs/Vibe-Flight-Iteration-Log.md` embeds them in place.
 
 > Before pasting: the third fix is logged as *applied but not retested*. Keep that wording — it is more credible than claiming a verification that did not happen. If you retest it before 23 Nov, update the table and add the screenshot.
 

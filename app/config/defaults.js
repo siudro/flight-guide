@@ -107,8 +107,8 @@ const AIRPORTS = {
     verified: 'full',
     // Dammam is the case verified end to end.
     specifics: {
-      en: 'Dammam is the airport Flight Guide has verified end to end.',
-      ar: 'الدمام هي المطار الذي تحقّقت منه Flight Guide من البداية إلى النهاية.'
+      en: 'Dammam is the airport Vibe Flight has verified end to end.',
+      ar: 'الدمام هي المطار الذي تحقّقت منه Vibe Flight من البداية إلى النهاية.'
     },
     unverifiedNote: null
   },

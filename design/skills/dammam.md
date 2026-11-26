@@ -1,4 +1,4 @@
-# Flight Guide — Skill: Dammam (King Fahd International Airport)
+# Vibe Flight — Skill: Dammam (King Fahd International Airport)
 
 **Status:** ✅ VERIFIED — this is the case tested end to end. Prefer this airport when the traveller has no preference.
 **IATA:** DMM · **Site:** `kfia.sa` · **Languages:** Arabic, English

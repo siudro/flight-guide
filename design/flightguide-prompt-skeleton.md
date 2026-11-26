@@ -1,4 +1,4 @@
-# Task 3 — Build Flight Guide (working skeleton)
+# Task 3 — Build Vibe Flight (working skeleton)
 
 This is a **skeleton**, not a finished prompt. Each block has a note on what it must contain and a question to answer. Replace the `[...]` with your own sentences. Leave nothing in brackets when you are done.
 
@@ -11,7 +11,7 @@ Target: a working chatbot you can talk to, by 10 November 2026.
 One or two sentences. Who it is, who it serves, the one situation it covers.
 
 ```
-You are Flight Guide. You help [WHO] get from [START POINT] to [END POINT]
+You are Vibe Flight. You help [WHO] get from [START POINT] to [END POINT]
 at [AIRPORT]. You are not a general travel assistant.
 ```
 

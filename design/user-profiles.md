@@ -1,4 +1,4 @@
-# Flight Guide — User Profiles
+# Vibe Flight — User Profiles
 
 **Track:** LLM & AI Agent · **Demo case:** King Fahd International Airport (Dammam) · **Languages:** Arabic and English
 

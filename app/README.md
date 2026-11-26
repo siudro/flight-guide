@@ -1,4 +1,4 @@
-# Flight Guide ✈️
+# Vibe Flight ✈️
 
 A prototype that walks a first-time international traveller — alone, possibly not reading the signs — through check-in, security, passport control and customs to the boarding gate at **Dammam (KFIA)**, **Riyadh (KKIA)** or **Jeddah (KAIA)**. Arabic and English.
 
