@@ -1,10 +1,10 @@
-# Flight Guide — Iterative AI Design Process
+# Vibe Flight — Iterative AI Design Process
 
 **WAICY 2026 · LLM & AI Agent track · Theme: AI as a Service**
 **Team:** yoyo.sheco · mosa3dalsayyar · nassir
 **Structure:** Idea → Advisor Design → Testing → Error Analysis → Improvement
 
-We built Flight Guide's instructions the way you would brief a person. Then we used them, on real journeys, and changed the brief when a reply went wrong.
+We built Vibe Flight's instructions the way you would brief a person. Then we used them, on real journeys, and changed the brief when a reply went wrong.
 
 This document is that record — including the replies that were wrong. Every failure is kept on purpose. A failure we deleted is a failure we could not learn from, and a judge cannot see a fix without seeing the thing it fixed.
 
@@ -34,7 +34,7 @@ So we deliberately did not build a general travel advisor. We narrowed three tim
 
 ## 2. Advisor Design
 
-This is the instruction set the agent runs on: [`design/flight-guide-system-prompt.md`](../design/flight-guide-system-prompt.md). It is what every test below is judged against, and every change in §5 is a change *to this*.
+This is the instruction set the agent runs on: [`design/vibe-flight-system-prompt.md`](../design/vibe-flight-system-prompt.md). It is what every test below is judged against, and every change in §5 is a change *to this*.
 
 ### 2.1 Ask before advising
 
@@ -219,7 +219,7 @@ All screenshots are in [`docs/testing/`](testing/) and are unedited.
 
 **Related material:**
 
-- Prompt and the three airport skills: [`design/flight-guide-system-prompt.md`](../design/flight-guide-system-prompt.md)
+- Prompt and the three airport skills: [`design/vibe-flight-system-prompt.md`](../design/vibe-flight-system-prompt.md)
 - The three user profiles: [`design/user-profiles.md`](../design/user-profiles.md)
 - Full build conversation record: [`docs/Flight-Guide-Conversation-Record.md`](Flight-Guide-Conversation-Record.md)
 

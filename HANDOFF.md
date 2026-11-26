@@ -1,4 +1,4 @@
-# Flight Guide — deployment handoff
+# Vibe Flight — deployment handoff
 
 **Audience:** the Okal developer deploying this agent to an Okal subdomain.
 **State:** runs locally, all 39 tests pass, live AI and live airport data verified on 2026-11-22.

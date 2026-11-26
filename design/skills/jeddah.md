@@ -1,4 +1,4 @@
-# Flight Guide — Skill: Jeddah (King Abdulaziz International Airport)
+# Vibe Flight — Skill: Jeddah (King Abdulaziz International Airport)
 
 **Status:** ❌ NOT VERIFIED — the departures page (`kaia.sa`) returns 403 to automated access. This file contains the general procedure only. No gate numbers, floor locations, or terminal details have been confirmed.
 
